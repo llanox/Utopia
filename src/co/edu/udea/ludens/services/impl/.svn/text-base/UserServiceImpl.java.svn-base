@@ -1,0 +1,48 @@
+package co.edu.udea.ludens.services.impl;
+
+import java.util.HashMap;
+
+import org.apache.log4j.Logger;
+
+import co.edu.udea.ludens.domain.Game;
+import co.edu.udea.ludens.domain.User;
+import co.edu.udea.ludens.enums.EnumUserRole;
+import co.edu.udea.ludens.services.UserService;
+import co.edu.udea.ludens.test.FakeData;
+import co.edu.udea.ludens.web.restful.controller.ElementController;
+
+public class UserServiceImpl implements UserService {
+
+	private HashMap<String,User> fakeUsers = new HashMap<String,User>();
+
+	
+	public UserServiceImpl() {
+		FakeData.loadAll();
+	}
+
+
+
+	public User getUser(String login, String password) {
+		
+		
+		User user = FakeData.users.get(login);
+		
+		if(user==null){			
+			return null;
+		}
+		
+		
+		if(user.getPassword().equalsIgnoreCase(password)){
+			return user;
+		
+		}
+		
+		return null;
+	}
+	
+	public Game getGame(User user){
+		
+		return FakeData.games.get("JuegoPrueba");
+	}
+
+}

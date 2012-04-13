@@ -1,0 +1,15 @@
+package co.edu.udea.ludens.services;
+
+import java.util.List;
+
+import co.edu.udea.ludens.util.MessageEvent;
+import co.edu.udea.ludens.util.MessageListener;
+
+public interface MessagesCentralService extends MessageListener {
+	
+	
+	public List<MessageEvent> getLastNMessageEventByPlayer(int n, String login);
+	
+	
+	
+    }

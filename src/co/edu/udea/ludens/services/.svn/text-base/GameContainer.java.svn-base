@@ -1,0 +1,34 @@
+package co.edu.udea.ludens.services;
+
+import java.util.HashMap;
+
+import co.edu.udea.ludens.domain.Game;
+import co.edu.udea.ludens.util.IncrementableStuffListener;
+import co.edu.udea.ludens.util.MessageListener;
+import co.edu.udea.ludens.util.TradeListener;
+import co.edu.udea.ludens.util.UnexpectedEventListener;
+import co.edu.udea.ludens.web.TradeController;
+import co.edu.udea.ludens.web.UnexpectedEventController;
+
+public interface GameContainer {
+
+	public void bootStrapping();
+
+	public void suscribeMessageListener(MessageListener listener, String gameName,String userName);
+
+	public void setServiceLocator(ServiceLocator serviceLocator);
+
+	public void executeGlobalProduction();
+
+	public HashMap<String, GameProcess> getGameProcesses();
+
+	public TradeProcess getTrader(String gameName);
+
+	public void suscribeTradeListener(TradeListener listener, String name);
+
+	public void suscribeUnexpectedEventListener(
+			UnexpectedEventListener listener, String name);
+
+	public void restartGame();
+
+}

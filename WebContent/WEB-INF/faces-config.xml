@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+
+  <application>
+  <view-handler>com.icesoft.faces.facelets.D2DFaceletViewHandler</view-handler>
+    	<el-resolver>
+    		org.springframework.web.jsf.el.SpringBeanFacesELResolver
+    	</el-resolver>
+  	</application>
+
+
+	<managed-bean>
+		<managed-bean-name>authenticationController</managed-bean-name>
+		<managed-bean-class>co.edu.udea.ludens.web.AuthenticationController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>gameContainerService</property-name>
+			<value>#{gameContainerService}</value>
+		</managed-property>
+		
+		 <managed-property>
+			<property-name>gameService</property-name>
+			<value>#{gameService}</value>
+		</managed-property>	
+		
+		 <managed-property>
+			<property-name>playerService</property-name>
+			<value>#{playerService}</value>
+		</managed-property>	
+		
+		<managed-property>
+			<property-name>incrementableService</property-name>
+			<value>#{incrementableService}</value>
+		</managed-property>
+		
+		
+	    <managed-property>
+			<property-name>userSession</property-name>
+			<value>#{userSession}</value>
+		</managed-property>	
+		
+		<managed-property>
+			<property-name>userService</property-name>
+			<value>#{userService}</value>
+		</managed-property>
+			
+		<managed-property>
+			<property-name>talkerChat</property-name>
+			<value>#{talkerChat}</value>
+		</managed-property>
+		
+		<managed-property>
+			<property-name>ludensListenersName</property-name>
+			<property-class>java.util.ArrayList</property-class>
+			  <list-entries>
+  		 		<value>boardController</value>
+   				<value>messagesBean</value>
+   				<value>reportController</value>
+   				<value>tradeController</value>
+   				<value>eventController</value>   				
+  			 </list-entries>
+		</managed-property>
+		
+	</managed-bean>
+	
+	
+	
+    <managed-bean>
+		<managed-bean-name>eventController</managed-bean-name>
+		<managed-bean-class>co.edu.udea.ludens.web.UnexpectedEventController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		
+		<managed-property>
+			<property-name>messagesBean</property-name>
+			<value>#{messagesBean}</value>
+		</managed-property>		
+		
+		<managed-property>
+			<property-name>userSession</property-name>
+			<value>#{userSession}</value>
+		</managed-property>
+		
+	</managed-bean>
+	
+	
+
+
+<!-- 	<managed-bean> -->
+<!-- 		<managed-bean-name>gameContainerService</managed-bean-name> -->
+<!-- 		<managed-bean-class>co.edu.udea.ludens.services.impl.GameContainerServiceImpl</managed-bean-class> -->
+<!-- 		<managed-bean-scope>application</managed-bean-scope> -->
+
+		
+		
+		
+		
+<!-- 		<managed-property> -->
+<!-- 			<property-name>messagesCentralService</property-name> -->
+<!-- 			<value>#{messagesCentralService}</value> -->
+<!-- 		</managed-property> -->
+		
+<!-- 		<managed-property> -->
+<!-- 			<property-name>processHolderService</property-name> -->
+<!-- 			<value>#{processHolderService}</value> -->
+<!-- 		</managed-property> -->
+		
+		
+<!-- 	    <managed-property> -->
+<!-- 			<property-name>serviceLocator</property-name> -->
+<!-- 			<value>#{serviceLocator}</value> -->
+<!-- 		</managed-property> -->
+	    
+		
+
+<!-- 	</managed-bean> -->
+
+
+	<managed-bean>
+		<managed-bean-name>userSession</managed-bean-name>
+		<managed-bean-class>co.edu.udea.ludens.web.UserSessionBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>boardBean</managed-bean-name>
+		<managed-bean-class>co.edu.udea.ludens.web.BoardController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>userSession</property-name>
+			<value>#{userSession}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>messagesBean</property-name>
+			<value>#{messagesBean}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>tradeController</managed-bean-name>
+		<managed-bean-class>co.edu.udea.ludens.web.TradeController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>userSession</property-name>
+			<value>#{userSession}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>messagesBean</property-name>
+			<value>#{messagesBean}</value>
+		</managed-property>
+
+		<managed-property>
+			<property-name>elementService</property-name>
+			<value>#{elementService}</value>
+		</managed-property>
+	    
+	    <managed-property>
+			<property-name>processHolderService</property-name>
+			<value>#{processHolderService}</value>
+		</managed-property>
+
+
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>messagesBean</managed-bean-name>
+		<managed-bean-class>co.edu.udea.ludens.web.MessagesBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<navigation-rule>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>director</from-outcome>
+			<to-view-id>/director.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	
+
+ <managed-bean>
+ 	<managed-bean-name>ludensUtilBean</managed-bean-name>
+ 	<managed-bean-class>co.edu.udea.ludens.util.LudensUtilBean</managed-bean-class>
+ 	<managed-bean-scope>application</managed-bean-scope>
+ </managed-bean>
+ 
+ <managed-bean>
+ 	<managed-bean-name>settingUpController</managed-bean-name>
+ 	<managed-bean-class>co.edu.udea.ludens.web.SettingUpController</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+ 	
+ 	<managed-property>
+	 <property-name>systemContainer</property-name>
+		<property-class></property-class>
+		<value>#{systemContainer}</value>
+	</managed-property>
+	
+	<managed-property>
+			<property-name>messagesBean</property-name>
+			<value>#{messagesBean}</value>
+	</managed-property>	
+	
+ </managed-bean>
+ 
+ <managed-bean>
+ 	<managed-bean-name>reportController</managed-bean-name>
+ 	<managed-bean-class>co.edu.udea.ludens.web.ReportController</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>    
+		
+		<managed-property>
+			<property-name>userSession</property-name>
+			<value>#{userSession}</value>
+		</managed-property>
+		
+		<managed-property>
+			<property-name>playerService</property-name>
+			<value>#{playerService}</value>
+		</managed-property>
+		
+ </managed-bean>
+
+
+
+
+ 
+ <managed-bean>
+ 	<managed-bean-name>userController</managed-bean-name>
+ 	<managed-bean-class>co.edu.udea.ludens.web.UserController</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+ 	
+ 	<managed-property>
+			<property-name>userService</property-name>
+			<value>#{userService}</value>
+	</managed-property>
+	
+ </managed-bean>
+ 
+ <managed-bean>
+ 	<managed-bean-name>gameController</managed-bean-name>
+ 	<managed-bean-class>co.edu.udea.ludens.web.GameController</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+ 	 	<managed-property>
+			<property-name>gameService</property-name>
+			<value>#{gameService}</value>
+	</managed-property>
+ </managed-bean>
+ 
+ 
+ <managed-bean>
+ 	<managed-bean-name>incrementableController</managed-bean-name>
+ 	<managed-bean-class>co.edu.udea.ludens.web.IncrementableController</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+ 	<managed-property>
+			<property-name>incrementableService</property-name>
+			<value>#{incrementableService}</value>
+	</managed-property>
+ 	<managed-property>
+ 		<property-name>gameController</property-name>
+ 		<property-class></property-class>
+ 		<value>#{gameController}</value>
+ 	</managed-property>
+ </managed-bean>
+ 
+ 
+ 
+ 
+ 
+ <managed-bean>
+ 	<managed-bean-name>playerController</managed-bean-name>
+ 	<managed-bean-class>co.edu.udea.ludens.web.PlayerController</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+ 	
+ 		<managed-property>
+			<property-name>userService</property-name>
+			<value>#{userService}</value>
+		</managed-property>
+		
+		<managed-property>
+			<property-name>gameService</property-name>
+			<value>#{gameService}</value>
+		</managed-property>
+		
+			<managed-property>
+			<property-name>playerService</property-name>
+			<value>#{playerService}</value>
+		</managed-property>
+		
+	<managed-property>
+ 		<property-name>gameController</property-name>
+ 		<property-class></property-class>
+ 		<value>#{gameController}</value>
+ 	</managed-property>
+		
+ </managed-bean>
+ 
+ 
+
+<!-- Chat Beans -->
+
+ <managed-bean>
+  <managed-bean-name>talkerChat</managed-bean-name>
+  <managed-bean-class>com.llanox.chat.presentation.ChatTalkerController</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+   <property-name>chatManager</property-name>
+   <value>#{chatManager}</value>
+  </managed-property>  
+
+ </managed-bean>
+ 
+ 
+
+ 
+  <managed-bean>
+  <managed-bean-name>chatHistory</managed-bean-name>
+  <managed-bean-class>com.llanox.chat.presentation.ChatHistoryController</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+   <property-name>chatService</property-name>
+   <value>#{chatService}</value>
+  </managed-property>
+ </managed-bean>
+ 
+ <managed-bean>
+  <managed-bean-name>chatManager</managed-bean-name>
+  <managed-bean-class>com.llanox.chat.services.ChatManager</managed-bean-class>
+  <managed-bean-scope>application</managed-bean-scope>
+   
+  <managed-property>
+   <property-name>chatDAO</property-name>
+   <value>#{chatDAO}</value>
+  </managed-property>
+  
+  <managed-property>
+   <property-name>chatUserDAO</property-name>
+   <value>#{chatUserDAO}</value>
+  </managed-property>
+  
+    <managed-property>
+   <property-name>chatMessageDAO</property-name>
+   <value>#{chatMessageDAO}</value>
+  </managed-property>
+  
+ </managed-bean>
+ 
+ <managed-bean>
+  <managed-bean-name>chatService</managed-bean-name>
+  <managed-bean-class>com.llanox.chat.services.ChatService</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+   
+  <managed-property>
+   <property-name>chatDAO</property-name>
+   <value>#{chatDAO}</value>
+  </managed-property>
+  
+  </managed-bean>
+ 
+ <managed-bean>
+  <managed-bean-name>chatDAO</managed-bean-name>
+  <managed-bean-class>com.llanox.chat.persistence.dao.ChatDAO</managed-bean-class>
+  <managed-bean-scope>application</managed-bean-scope>
+ </managed-bean>
+ 
+ <managed-bean>
+  <managed-bean-name>chatUserDAO</managed-bean-name>
+  <managed-bean-class>com.llanox.chat.persistence.dao.ChatUserDAO</managed-bean-class>
+  <managed-bean-scope>application</managed-bean-scope>
+ </managed-bean>
+ 
+ <managed-bean>
+  <managed-bean-name>chatMessageDAO</managed-bean-name>
+  <managed-bean-class>com.llanox.chat.persistence.dao.ChatMessageDAO</managed-bean-class>
+  <managed-bean-scope>application</managed-bean-scope>
+ </managed-bean>
+
+
+</faces-config>

@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/uto/!svn/ver/49/trunk/Utopo/src/co/edu/udea/ludens/util
+END
+InterchangeListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/uto/!svn/ver/2/trunk/Utopo/src/co/edu/udea/ludens/util/InterchangeListener.java
+END
+ProducingBehaviour.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/uto/!svn/ver/65/trunk/Utopo/src/co/edu/udea/ludens/util/ProducingBehaviour.java
+END
+IncrementableStuffListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/uto/!svn/ver/2/trunk/Utopo/src/co/edu/udea/ludens/util/IncrementableStuffListener.java
+END
+InterchangeEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/uto/!svn/ver/2/trunk/Utopo/src/co/edu/udea/ludens/util/InterchangeEvent.java
+END
+UnexpectedEventListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/uto/!svn/ver/20/trunk/Utopo/src/co/edu/udea/ludens/util/UnexpectedEventListener.java
+END
+MessageListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/uto/!svn/ver/2/trunk/Utopo/src/co/edu/udea/ludens/util/MessageListener.java
+END
+FacesUtilBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/uto/!svn/ver/49/trunk/Utopo/src/co/edu/udea/ludens/util/FacesUtilBean.java
+END
+TradeListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/uto/!svn/ver/2/trunk/Utopo/src/co/edu/udea/ludens/util/TradeListener.java
+END
+ProducerUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/uto/!svn/ver/49/trunk/Utopo/src/co/edu/udea/ludens/util/ProducerUtil.java
+END
+MessageEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/uto/!svn/ver/9/trunk/Utopo/src/co/edu/udea/ludens/util/MessageEvent.java
+END
+IncrementableEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/uto/!svn/ver/9/trunk/Utopo/src/co/edu/udea/ludens/util/IncrementableEvent.java
+END

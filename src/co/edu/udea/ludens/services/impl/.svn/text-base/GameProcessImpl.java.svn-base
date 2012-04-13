@@ -1,0 +1,166 @@
+package co.edu.udea.ludens.services.impl;
+
+
+import java.util.HashMap;
+
+import org.apache.log4j.Logger;
+import org.springframework.scheduling.annotation.Async;
+
+import co.edu.udea.ludens.domain.Game;
+import co.edu.udea.ludens.domain.Player;
+import co.edu.udea.ludens.services.ElementProcess;
+import co.edu.udea.ludens.services.EventProcess;
+import co.edu.udea.ludens.services.GameProcess;
+import co.edu.udea.ludens.services.ServiceLocator;
+import co.edu.udea.ludens.services.TradeProcess;
+import co.edu.udea.ludens.util.ProducerUtil;
+
+
+
+
+public class GameProcessImpl  implements GameProcess  {
+
+	private static Logger logger = Logger.getLogger(GameProcessImpl.class);
+	private HashMap<String,ElementProcess> mapElementProcess = new HashMap<String,ElementProcess> ();
+	private TradeProcess tradeProcess;
+	private EventProcess eventProcess;
+	
+	
+	private Game game;
+	private ServiceLocator serviceLocator;
+	
+
+
+
+	@Override
+	@Async
+	public void produceElements() {
+		
+	
+		
+		for( ElementProcess process : mapElementProcess.values()){
+			Player player = process.getPlayer();
+			
+			boolean meet = ProducerUtil.meetReqToGettingStart(player);
+			
+			if(meet){
+		    logger.info("********** Producing elements ********");
+			process.produceElements();
+			
+			}  			
+		}
+
+		
+	}
+
+
+
+
+
+
+
+
+	@Override
+	public void startGame() {
+
+		
+	}
+
+
+
+
+	@Override
+	public void stopGame() {
+	
+		
+	}
+
+
+
+
+	@Override
+	public void setGame(Game game) {
+		this.game = game;
+		
+		if(game!=null){
+			
+			HashMap<String,Player> players = game.getPlayers();			
+			Player player;
+			
+			for(Object key :players.keySet()){
+				player = players.get(key);
+				ElementProcess elementProcess =  serviceLocator.createElementProcess();
+				elementProcess.setPlayer(player);
+				
+				mapElementProcess.put(player.getUser().getLogin(), elementProcess);
+				
+				tradeProcess = serviceLocator.createTradeProcess();
+				tradeProcess.setGame(game);			
+				
+			}
+			setEventProcess(serviceLocator.createEventProcess());
+			getEventProcess().setGame(game);
+			
+			
+		}
+		
+	}
+
+	@Override
+	public ElementProcess getElementProcess(String userName) {
+
+		return mapElementProcess.get(userName);
+	}
+
+	@Override
+	public Game getGame() {
+		return game;
+	}
+
+
+	public void setTradeProcess(TradeProcess tradeProcess) {
+		this.tradeProcess = tradeProcess;
+	}
+
+
+
+
+	public TradeProcess getTradeProcess() {
+		return tradeProcess;
+	}
+
+
+
+
+	public void setServiceLocator(ServiceLocator serviceLocator) {
+		this.serviceLocator = serviceLocator;
+	}
+
+
+
+
+
+
+
+
+	public void setEventProcess(EventProcess eventProcess) {
+		this.eventProcess = eventProcess;
+	}
+
+
+
+
+
+
+
+
+	public EventProcess getEventProcess() {
+		return eventProcess;
+	}
+
+
+
+
+
+
+}

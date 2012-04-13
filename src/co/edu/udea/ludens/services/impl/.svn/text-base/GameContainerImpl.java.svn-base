@@ -1,0 +1,152 @@
+package co.edu.udea.ludens.services.impl;
+
+
+
+
+import java.util.HashMap;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import co.edu.udea.ludens.domain.Game;
+
+import co.edu.udea.ludens.services.ElementProcess;
+import co.edu.udea.ludens.services.EventProcess;
+import co.edu.udea.ludens.services.GameContainer;
+import co.edu.udea.ludens.services.GameProcess;
+import co.edu.udea.ludens.services.MessagesCentralService;
+import co.edu.udea.ludens.services.ServiceLocator;
+import co.edu.udea.ludens.services.TradeProcess;
+import co.edu.udea.ludens.test.FakeData;
+import co.edu.udea.ludens.util.IncrementableStuffListener;
+import co.edu.udea.ludens.util.MessageListener;
+import co.edu.udea.ludens.util.ProducerUtil;
+import co.edu.udea.ludens.util.TradeListener;
+import co.edu.udea.ludens.util.UnexpectedEventListener;
+
+import org.apache.log4j.Logger;
+
+
+
+
+
+@Service
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
+public class GameContainerImpl implements GameContainer {
+
+	private HashMap<String, GameProcess> gameProcesses = new HashMap<String, GameProcess>();		
+	private Logger logger = Logger.getLogger(getClass());
+	private ServiceLocator serviceLocator;
+	
+	
+	@Autowired
+	MessagesCentralService messagesCentralService;	
+
+
+	@Override
+	public void bootStrapping() {
+
+		restartGame();
+
+	}
+
+
+	public void restartGame() {
+		FakeData.loadAll();
+		// Retrive active games
+		HashMap<String,Game> games = FakeData.games;
+
+	
+        Game game;
+        
+		for (Object key : games.keySet()) {
+             
+		    game = games.get(key);
+			GameProcess process = serviceLocator.createGameProcess();
+			process.setGame(game);
+			process.startGame();
+			gameProcesses.put(game.getName(), process);		
+			
+		
+
+
+		}
+	}
+
+
+    @Scheduled(fixedDelay = ProducerUtil.PRODUCTION_PERIOD_MILSEC)
+	public void executeGlobalProduction() {
+        
+		for (GameProcess p : gameProcesses.values()) {		
+					p.produceElements();
+			
+		}
+
+	}
+
+
+
+
+
+
+	@Override
+	public void setServiceLocator(ServiceLocator serviceLocator) {
+		this.serviceLocator = serviceLocator;
+
+	}
+
+
+
+	@Override
+	public HashMap<String, GameProcess> getGameProcesses() {	
+		return gameProcesses;
+	}
+
+
+
+	@Override
+	public TradeProcess getTrader(String gameName) {
+		GameProcess gameProcess = gameProcesses.get(gameName);
+		TradeProcess tradeProcess = gameProcess.getTradeProcess();
+		return tradeProcess;
+	}
+
+	@Override
+	public void suscribeMessageListener(MessageListener listener, String gameName, String userName) {
+
+		GameProcess gameProcess = gameProcesses.get(gameName);		
+		ElementProcess elementProcess = gameProcess.getElementProcess(userName);
+		elementProcess.initElements();
+	    elementProcess.addMessageListener(listener);
+	    elementProcess.addMessageListener(messagesCentralService);
+
+	}
+	
+	@Override
+	public void suscribeTradeListener(TradeListener listener, String gameName) {
+	
+	       TradeProcess tradeProcess = getTrader(gameName);
+		   tradeProcess.addTradeListener(listener);	
+		   tradeProcess.addMessageListener(listener);
+		   tradeProcess.addMessageListener(messagesCentralService);
+	}
+
+
+	@Override
+	public void suscribeUnexpectedEventListener(UnexpectedEventListener listener, String gameName) {
+		
+		GameProcess gameProcess = gameProcesses.get(gameName);		
+		EventProcess eventProcess = gameProcess.getEventProcess();
+		eventProcess.addUnexpectedEventListener(listener);
+		eventProcess.addMessageListener(messagesCentralService);
+	    
+		
+	}
+	
+
+
+}

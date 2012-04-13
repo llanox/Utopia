@@ -1,0 +1,120 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+<head>
+<title>Utopia Game</title>
+
+<link rel="stylesheet" href="sheriff_data/screen.css" type="text/css"
+	media="screen, projection" />
+<link rel="stylesheet" href="sheriff_data/print.css" type="text/css"
+	media="print" />
+<link rel="stylesheet" href="sheriff_data/theme.css" type="text/css"
+	media="screen, projection" />
+<ice:outputStyle href="xmlhttp/css/rime/rime.css" />
+
+<!-- BY DEFAULT THE GREEN THEME IS LOADED. TO CHANGE SKIN, UNCOMMENT ONE OF THE STYLESHEET REFERENCES BELOW -->
+
+<!-- THEME SELECTION -->
+
+<!--        	<link rel="stylesheet" href="css/blue.css" type="text/css" media="screen, projection" />-->
+<!--        <link rel="stylesheet" href="css/brown.css" type="text/css" media="screen, projection" />-->
+<link rel="stylesheet" href="sheriff_data/grey.css" type="text/css"
+	media="screen, projection" />
+
+<!-- / THEME SELECTION -->
+
+<!--[if IE]><link rel="stylesheet" href="css/frame/ie.css" type="text/css" media="screen, projection"><![endif]-->
+
+
+
+<link rel="stylesheet" type="text/css" href="sheriff_data/style.css" />
+<link rel="stylesheet" type="text/css" href="sheriff_data/style_002.css" />
+<link rel="stylesheet" type="text/css" href="sheriff_data/facebox.css" />
+
+<!--        [if lt IE 9]>-->
+<!--        <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta3)/IE9.js"></script>-->
+<!--        <![endif]-->
+
+</head>
+
+<body>
+
+
+<ice:form>
+
+
+	<div id="main">
+
+	<div class="container_12">
+	<div id="info">
+	<ul>
+		<li class="lastlink"><ice:commandLink id="linkLogOut" value="Salir" action="#{authenticationController.logOutAction}" /></li>
+	</ul>
+	Bienvenido a Utopia <strong> #{ludensUtilBean.softwareVersion} </strong>!! <strong><em><a href="#"> #{userSession.user.name} (#{userSession.user.login}) </a></em></strong>
+	</div>
+
+
+  <div id="mid">
+    
+               
+               
+                        <ul class="tabs">
+                    
+                                <li >                                
+                                <ice:commandLink inmediate="true"  id="linkTab1" value="Mapa" actionListener="#{authenticationController.changeTab}">
+                                   <f:attribute name="tabName" value="mapView"/>                                  
+                                </ice:commandLink>
+                                </li>
+                                                                  
+                                <li ><ice:commandLink  inmediate="true"   id="linkTab2" value="Comercio" actionListener="#{authenticationController.changeTab}">
+                                  <f:attribute name="tabName" value="tradeView"/>                                  
+                                </ice:commandLink>
+                                </li>
+                              
+                                
+                                <li ><ice:commandLink  inmediate="true"   id="linkTab3" value="Estadísticas" actionListener="#{authenticationController.changeTab}">
+                                  <f:attribute name="tabName" value="statisticsView"/>                                  
+                                </ice:commandLink>
+                                </li>
+                                
+         
+                        </ul>
+                        
+                           <div style="clear: both;"></div> 
+                      
+                           <div id="wrap" style="text-align: left;margin: 0px auto;padding: 0px;	border:0;width: 100%;" >
+                              <ui:include src="#{userSession.actualTab}"/>
+                           </div>               
+                        
+      
+                            
+                               
+                                      
+                         
+                        
+            
+        </div><!-- mid -->
+
+
+	<div style="clear: both;"></div>
+
+	</div>
+	<!-- 12 --></div>
+	<!-- main -->
+
+	<div id="footer">
+	<div class="container_12"></div>
+	<!-- 12 --></div>
+	
+</ice:form>
+
+
+	<!-- footer -->
+</body>
+
+
+
+
+</ui:composition>

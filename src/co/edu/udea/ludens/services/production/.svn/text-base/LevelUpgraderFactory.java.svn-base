@@ -1,0 +1,26 @@
+package co.edu.udea.ludens.services.production;
+
+import co.edu.udea.ludens.domain.Element;
+import co.edu.udea.ludens.enums.EnumElementType;
+
+public class LevelUpgraderFactory {
+	
+	
+	
+	public static LevelUpgraderStrategy createLevelUpgrader(Element el){
+		
+		if(EnumElementType.FACTOR == el.getType()){
+			
+			return new FactorLevelUpgrader();
+			
+		}else if(EnumElementType.MATERIAL == el.getType()){
+			
+			return new MaterialLevelUpgrader();
+			
+		}
+		
+		
+		return null;
+	}
+
+}

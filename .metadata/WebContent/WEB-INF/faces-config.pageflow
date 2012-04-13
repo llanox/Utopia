@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13287855226760" configfile="/Utopia/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="338" y="178" id="pf13288496051350" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" outlinks="pf13288496051361" inlinks="pf13312913436450" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="director.xhtml" x="554" y="178" id="pf13288496051362" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13288496051361" path="/director.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="178" id="pf13312913436461" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf13312913436450" path="*"/>
+  <links id="pf13288496051361" target="pf13288496051362" source="pf13288496051350" outcome="director"/>
+  <links id="pf13312913436450" target="pf13288496051350" source="pf13312913436461" outcome="login"/>
+</pageflow:Pageflow>

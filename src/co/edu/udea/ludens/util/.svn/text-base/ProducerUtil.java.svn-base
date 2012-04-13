@@ -1,0 +1,149 @@
+package co.edu.udea.ludens.util;
+
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import co.edu.udea.ludens.domain.Element;
+import co.edu.udea.ludens.domain.LevelConstraint;
+import co.edu.udea.ludens.domain.Player;
+import co.edu.udea.ludens.enums.EnumMsgs;
+import co.edu.udea.ludens.exceptions.LudensException;
+
+public class ProducerUtil {
+
+	public static final int LEVEL_TO_GETTING_START = 1;
+	public static final int POPULATION_DEFAULT_LEVEL = 1;
+	public static final int PRODUCTION_PERIOD_MILSEC = 300* 1000;
+	public static final int POPULATION_N = PRODUCTION_PERIOD_MILSEC;
+	public static final int EVENT_HAPPENING_PERIOD_MILSEC = PRODUCTION_PERIOD_MILSEC * 5;
+	public static final String SOFTWARE_VERSION="1.11.6.13";
+
+	
+	public static final Logger logger = Logger.getLogger(ProducerUtil.class);
+
+	public  static Double calculateExpGrowth(int p0, double lambda,	int n) {
+		
+		logger.info("Calculating exp ..");
+
+		double lambdaD = lambda / 100;
+
+		logger.info("LambdaD .." + lambdaD);
+
+		Double result = p0 * Math.exp(lambdaD * n);
+		
+		logger.info("result .." + result);
+
+		return result;
+	}
+	
+	
+
+
+	public synchronized static boolean meetReqToGettingStart(Player player) {
+
+		HashMap<String, Element> elements = new HashMap<String, Element>();
+
+		elements.putAll(player.getCommunity().getMaterials());
+		elements.putAll(player.getCommunity().getDevelopmentFactors());
+
+		boolean elementsOk = isHigherThanRequired(elements);
+
+		return elementsOk;
+	}
+
+	public synchronized static boolean isHigherThanRequired(
+			HashMap<String, Element> factors) {
+
+		for (Object key : factors.keySet()) {
+
+			Element el = factors.get(key);
+			Integer level = el.getLevel();
+
+			if (level >= LEVEL_TO_GETTING_START) {
+				logger.info("level " + level + " element " + el.getName()
+						+ " quantity " + el.getQuantity());
+				return true;
+			}
+
+		}
+
+		return false;
+	}
+
+	public synchronized static void addStartTimePlayer(Player player) {
+		Calendar cal = Calendar.getInstance();
+		Long time =player.getStartTime();
+
+		if (time == null) {
+			time = cal.getTimeInMillis();
+			player.setStartTime(time);
+		}
+	}
+
+	public synchronized static Integer calculateTimeN(Player player) {
+		Calendar cal = Calendar.getInstance();
+		Long actualTime = cal.getTimeInMillis();
+		Long time = player.getStartTime();
+		long result = 0;
+		int n = 0;
+
+		logger.info("Time " + time);
+
+		if (time != null) {
+			result = actualTime - time;
+			double nd = (result / POPULATION_N);
+			n = (int) nd;
+			logger.info(" result " + result + " n " + n + " nd " + nd);
+		}
+
+		return n;
+	}
+
+	public static void checkOutResources(List<LevelConstraint> levelResources,Element element, Player player) throws LudensException {
+
+		boolean checked = true;
+		StringBuffer bf = new StringBuffer();
+
+		for (LevelConstraint pk : levelResources) {
+
+			Integer neededQuantity = pk.getQuantity();
+			String resourceName = pk.getElementName();
+			Element resource = player.getCommunity().getMaterials()
+					.get(resourceName);
+
+			int compare = resource.getQuantity().compareTo(neededQuantity);
+
+			if (!(compare >= 0)) {
+				checked = false;
+				bf.append(resource.getName()).append(", ");
+			}
+
+		}
+
+		if (!checked) {
+			throw new LudensException(EnumMsgs.INSUFFICIENT_RESOURCE, bf,
+					element.getName(), (element.getLevel() + 1));
+		}
+
+	}
+	
+	
+
+
+	public static void updateUpgradingDelay(Element element) {
+		
+			
+		int lambda = element.getLevelIncrementDelayRate();
+		int n = element.getLevel()+1;
+		int p0 = element.getInitialUpgradingTime();
+		
+		Integer delayTime = (int)(calculateExpGrowth(p0,lambda,n)+0);
+	    	
+		element.setActualUpgradingTime(delayTime);
+		
+	}
+
+}

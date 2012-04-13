@@ -1,0 +1,95 @@
+package co.edu.udea.ludens.services.impl;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import co.edu.udea.ludens.domain.Player;
+import co.edu.udea.ludens.services.ElementService;
+import co.edu.udea.ludens.services.MessagesCentralService;
+import co.edu.udea.ludens.services.PlayerService;
+import co.edu.udea.ludens.test.FakeData;
+import co.edu.udea.ludens.util.MessageEvent;
+
+@Service
+public class MessagesCentralServiceImpl implements MessagesCentralService {
+
+	private static Logger logger = Logger.getLogger(MessagesCentralServiceImpl.class);
+	private static final int MAX_STORED_MESSAGES = 160000;
+
+	@Autowired
+	PlayerService playerService;
+
+	@Override
+	public void notifyMsg(MessageEvent event) {
+
+		Player player = event.getAffectedPlayer();
+
+		logger.info("menssage " + event.getMsg() + " messageType "
+				+ event.getMsgType());
+
+		if (player != null) {
+			
+
+			List<MessageEvent> messages = player.getEvents();
+
+			if (messages == null) {
+				messages = new ArrayList<MessageEvent>();
+				player.setEvents(messages);
+			}
+
+
+			logger.info("Adding private message "+player.getUser().getLogin()+" "+event.getMsg());
+			messages.add(0, event);
+			
+
+		} else {
+
+			HashMap<String, Player> players = FakeData.players;
+			
+			
+			for (Object key : players.keySet()) {
+				
+				Player pler = players.get(key);
+				List<MessageEvent> publicMessages = pler.getEvents();
+				
+				if(publicMessages==null)
+					publicMessages = new ArrayList<MessageEvent>();
+				
+
+				
+				publicMessages.add(0, event);
+				
+						
+				pler.setEvents(publicMessages);
+			}
+		}
+
+	}
+
+	@Override
+	public List<MessageEvent> getLastNMessageEventByPlayer(int n, String login) {
+
+		List<MessageEvent> events = new ArrayList<MessageEvent>();
+
+		if (n <= 0)
+			return events;
+		
+        logger.info("returnin data");
+		events = FakeData.players.get(login).getEvents();
+
+//		if (events != null && events.size() >= n)
+//			events = events.subList(0, n);
+//		else
+//			events = new ArrayList<MessageEvent>();
+
+		return events;
+	}
+
+
+
+}

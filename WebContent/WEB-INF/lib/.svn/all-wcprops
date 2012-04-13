@@ -1,0 +1,479 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/uto/!svn/ver/9/trunk/Utopo/WebContent/WEB-INF/lib
+END
+commons-beanutils.jar
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/commons-beanutils.jar
+END
+cglib-nodep-2.1_3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/cglib-nodep-2.1_3.jar
+END
+jxl.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/jxl.jar
+END
+org.springframework.expression.jar
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.expression.jar
+END
+slf4j-log4j12-1.6.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/slf4j-log4j12-1.6.0.jar
+END
+antlr-2.7.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/antlr-2.7.6.jar
+END
+commons-logging-1.1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/commons-logging-1.1.1.jar
+END
+xstream-1.3.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/xstream-1.3.1.jar
+END
+org.springframework.web.jar
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.web.jar
+END
+izChat_1.2..jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/izChat_1.2..jar
+END
+commons-attributes-compiler.jar
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/commons-attributes-compiler.jar
+END
+jsf-api-1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/jsf-api-1.2.jar
+END
+jaxen-1.1-beta-7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/jaxen-1.1-beta-7.jar
+END
+org.springframework.transaction.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.transaction.jar
+END
+c3p0-0.9.2-pre1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/c3p0-0.9.2-pre1.jar
+END
+org.springframework.web.portlet.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.web.portlet.jar
+END
+wyswyg-appbase.jar
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/wyswyg-appbase.jar
+END
+asm.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/asm.jar
+END
+backport-util-concurrent.jar
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/backport-util-concurrent.jar
+END
+jstl.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/uto/!svn/ver/9/trunk/Utopo/WebContent/WEB-INF/lib/jstl.jar
+END
+commons-fileupload.jar
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/commons-fileupload.jar
+END
+icefaces-comps.jar
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/icefaces-comps.jar
+END
+org.springframework.jdbc.jar
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.jdbc.jar
+END
+jdbc2_0-stdext.jar
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/jdbc2_0-stdext.jar
+END
+org.springframework.orm.jar
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.orm.jar
+END
+org.springframework.instrument.tomcat.jar
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.instrument.tomcat.jar
+END
+org.springframework.web.struts.jar
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.web.struts.jar
+END
+jsf-api.jar
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/jsf-api.jar
+END
+icefaces.jar
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/icefaces.jar
+END
+jaxb-impl.jar
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/uto/!svn/ver/9/trunk/Utopo/WebContent/WEB-INF/lib/jaxb-impl.jar
+END
+xml-apis.jar
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/xml-apis.jar
+END
+commons-pool-1.5.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/commons-pool-1.5.4.jar
+END
+servlet-api.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/servlet-api.jar
+END
+jsp-api.jar
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/jsp-api.jar
+END
+org.springframework.asm.jar
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.asm.jar
+END
+hibernate-validator.jar
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/hibernate-validator.jar
+END
+icefaces-facelets.jar
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/icefaces-facelets.jar
+END
+jsf-impl-1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/jsf-impl-1.2.jar
+END
+commons-dbcp-1.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/commons-dbcp-1.3.jar
+END
+org.springframework.test.jar
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.test.jar
+END
+org.springframework.aop.jar
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.aop.jar
+END
+org.springframework.beans.jar
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.beans.jar
+END
+el-ri.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/el-ri.jar
+END
+db4o-8.0.184.15484-all-java5.jar
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/uto/!svn/ver/50/trunk/Utopo/WebContent/WEB-INF/lib/db4o-8.0.184.15484-all-java5.jar
+END
+slf4j-api-1.6.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/slf4j-api-1.6.0.jar
+END
+mchange-commons-0.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/mchange-commons-0.2.jar
+END
+persistence.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/persistence.jar
+END
+hibernate3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/hibernate3.jar
+END
+org.springframework.core.jar
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.core.jar
+END
+dom4j-1.6.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/dom4j-1.6.1.jar
+END
+jboss-archive-browsing.jar
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/jboss-archive-browsing.jar
+END
+commons-attributes-api.jar
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/commons-attributes-api.jar
+END
+hibernate-annotations.jar
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/hibernate-annotations.jar
+END
+jaas.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/jaas.jar
+END
+org.springframework.context.support.jar
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.context.support.jar
+END
+org.springframework.jms.jar
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.jms.jar
+END
+ehcache-1.2.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/ehcache-1.2.3.jar
+END
+org.springframework.instrument.jar
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.instrument.jar
+END
+jaxb-api.jar
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/uto/!svn/ver/9/trunk/Utopo/WebContent/WEB-INF/lib/jaxb-api.jar
+END
+hibernate-entitymanager.jar
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/hibernate-entitymanager.jar
+END
+commons-collections.jar
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/commons-collections.jar
+END
+jsf-impl.jar
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/jsf-impl.jar
+END
+log4j-1.2.15.jar
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/log4j-1.2.15.jar
+END
+org.springframework.aspects.jar
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.aspects.jar
+END
+commons-digester.jar
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/commons-digester.jar
+END
+aopalliance.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/aopalliance.jar
+END
+icefaces-composite-comps.jar
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/icefaces-composite-comps.jar
+END
+org.springframework.oxm.jar
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.oxm.jar
+END
+xerces-2.6.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/xerces-2.6.2.jar
+END
+standard.jar
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/uto/!svn/ver/9/trunk/Utopo/WebContent/WEB-INF/lib/standard.jar
+END
+jta-1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/jta-1.1.jar
+END
+hibernate-commons-annotations.jar
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/hibernate-commons-annotations.jar
+END
+org.springframework.web.servlet.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.web.servlet.jar
+END
+krysalis-jCharts-1.0.0-alpha-1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/krysalis-jCharts-1.0.0-alpha-1.jar
+END
+ejb3-persistence.jar
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/ejb3-persistence.jar
+END
+javassist.jar
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/javassist.jar
+END
+org.springframework.context.jar
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/org.springframework.context.jar
+END
+cglib-2.1.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/cglib-2.1.3.jar
+END
+asm-attrs.jar
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/uto/!svn/ver/2/trunk/Utopo/WebContent/WEB-INF/lib/asm-attrs.jar
+END

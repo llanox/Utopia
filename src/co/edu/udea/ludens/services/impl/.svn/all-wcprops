@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/uto/!svn/ver/49/trunk/Utopo/src/co/edu/udea/ludens/services/impl
+END
+GameContainerImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/uto/!svn/ver/54/trunk/Utopo/src/co/edu/udea/ludens/services/impl/GameContainerImpl.java
+END
+AuthenticationServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/uto/!svn/ver/54/trunk/Utopo/src/co/edu/udea/ludens/services/impl/AuthenticationServiceImpl.java
+END
+GameProcessImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/uto/!svn/ver/49/trunk/Utopo/src/co/edu/udea/ludens/services/impl/GameProcessImpl.java
+END
+MessagesCentralServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/uto/!svn/ver/54/trunk/Utopo/src/co/edu/udea/ludens/services/impl/MessagesCentralServiceImpl.java
+END
+ProductionServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/uto/!svn/ver/54/trunk/Utopo/src/co/edu/udea/ludens/services/impl/ProductionServiceImpl.java
+END
+TradeProcessImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/uto/!svn/ver/54/trunk/Utopo/src/co/edu/udea/ludens/services/impl/TradeProcessImpl.java
+END
+UserServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/uto/!svn/ver/35/trunk/Utopo/src/co/edu/udea/ludens/services/impl/UserServiceImpl.java
+END
+ElementServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/uto/!svn/ver/35/trunk/Utopo/src/co/edu/udea/ludens/services/impl/ElementServiceImpl.java
+END
+EventProcessImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/uto/!svn/ver/49/trunk/Utopo/src/co/edu/udea/ludens/services/impl/EventProcessImpl.java
+END
+PlayerServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/uto/!svn/ver/35/trunk/Utopo/src/co/edu/udea/ludens/services/impl/PlayerServiceImpl.java
+END
+ElementProcessImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/uto/!svn/ver/54/trunk/Utopo/src/co/edu/udea/ludens/services/impl/ElementProcessImpl.java
+END

@@ -1,0 +1,126 @@
+package co.edu.udea.ludens.services.impl;
+
+import java.util.HashMap;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import co.edu.udea.ludens.domain.Element;
+import co.edu.udea.ludens.domain.Player;
+import co.edu.udea.ludens.domain.Population;
+import co.edu.udea.ludens.enums.EnumElementType;
+import co.edu.udea.ludens.services.ElementProcess;
+import co.edu.udea.ludens.services.ElementService;
+import co.edu.udea.ludens.services.GameContainer;
+import co.edu.udea.ludens.services.GameProcess;
+import co.edu.udea.ludens.services.MessagesCentralService;
+import co.edu.udea.ludens.test.FakeData;
+import co.edu.udea.ludens.util.MessageEvent;
+
+
+@Service
+public class ElementServiceImpl implements ElementService {
+
+	
+	@Autowired
+	GameContainer gameContainer;	
+	
+
+	
+	@Override
+	public Set<Element> getAllElements(EnumElementType elementType) {
+		Set<Element> elements = new HashSet<Element>();
+		HashMap<String, Element> mapElements = new HashMap<String, Element>();
+
+		if (elementType == EnumElementType.MATERIAL)
+			mapElements = FakeData.getDefaultMaterials();
+
+		if (elementType == EnumElementType.FACTOR)
+			mapElements = FakeData.getDefaultDevelopmentFactors();
+
+		for (Object key : mapElements.keySet()) {
+			elements.add(mapElements.get(key));
+		}
+
+		return elements;
+	}
+
+	@Override
+	public Set<Element> getAllElements(String idUser) {
+
+		Set<Element> elements = new HashSet<Element>();
+		HashMap<String, Element> mapElements = new HashMap<String, Element>();
+
+		mapElements = FakeData.getDefaultMaterials();
+
+		for (Object key : mapElements.keySet()) {
+			elements.add(mapElements.get(key));
+		}
+
+		mapElements = FakeData.getDefaultDevelopmentFactors();
+
+		for (Object key : mapElements.keySet()) {
+			elements.add(mapElements.get(key));
+		}
+		
+		
+	
+
+		return elements;
+	}
+
+	@Override
+	public Set<Element> getFactors(String login) {
+		Set<Element> elements = new HashSet<Element>();     
+		Player player = FakeData.players.get(login);
+		HashMap<String, Element> mapElements = player.getCommunity().getDevelopmentFactors();
+		
+		for (Object key : mapElements.keySet()) {
+			elements.add(mapElements.get(key));
+		}
+		
+		     
+		return elements;
+	}
+
+	@Override
+	public Set<Element> getMaterials(String login) {
+		Set<Element> elements = new HashSet<Element>();     
+		Player player = FakeData.players.get(login);
+		HashMap<String, Element> mapElements = player.getCommunity().getMaterials();
+		
+		for (Object key : mapElements.keySet()) {
+			elements.add(mapElements.get(key));
+		}
+		
+		     
+		return elements;
+	}
+
+	@Override
+	public MessageEvent upLevel(String login, String elementName) {
+		
+	
+		GameProcess gameProcess = gameContainer.getGameProcesses().get("JuegoPrueba");
+		System.out.println("game process: "+gameProcess);
+		
+		ElementProcess elementProcess = gameProcess.getElementProcess(login);
+		MessageEvent event = elementProcess.upLevel(elementName);
+		
+		
+		return event;
+	}
+
+	@Override
+	public Population getPopulation(String login) {
+	
+		Player player = FakeData.players.get(login);
+		Population population = player.getCommunity().getPopulation();
+		
+		return population;
+	}
+
+}

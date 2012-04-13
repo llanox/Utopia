@@ -1,0 +1,11 @@
+package co.edu.udea.ludens.dao;
+
+import java.util.List;
+
+import co.edu.udea.ludens.domain.Game;
+
+public interface GameDAO {
+
+	
+	public List<Game> findAllByStatus(String status);
+}

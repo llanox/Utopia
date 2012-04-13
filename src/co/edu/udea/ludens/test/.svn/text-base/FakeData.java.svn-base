@@ -1,0 +1,680 @@
+package co.edu.udea.ludens.test;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.log4j.Logger;
+
+import co.edu.udea.ludens.domain.Community;
+import co.edu.udea.ludens.domain.Element;
+import co.edu.udea.ludens.domain.Game;
+import co.edu.udea.ludens.domain.LevelConstraint;
+import co.edu.udea.ludens.domain.Player;
+import co.edu.udea.ludens.domain.Population;
+import co.edu.udea.ludens.domain.UnexpectedEvent;
+import co.edu.udea.ludens.domain.User;
+import co.edu.udea.ludens.enums.EnumElementType;
+import co.edu.udea.ludens.enums.EnumGameStatus;
+import co.edu.udea.ludens.enums.EnumMetric;
+import co.edu.udea.ludens.enums.EnumUserRole;
+
+public class FakeData {
+
+	public static HashMap<String, Element> elements = new HashMap<String, Element>();
+	public static Logger logger = Logger.getLogger(FakeData.class);
+	public static HashMap<String, User> users = new HashMap<String, User>();
+	public static HashMap<String, Game> games = new HashMap<String, Game>();
+	public static HashMap<String, Player> players = new HashMap<String, Player>();
+	public static List<UnexpectedEvent> events = new ArrayList<UnexpectedEvent>();
+	public static HashMap<String, String> urls = new HashMap<String, String>();
+	
+	
+	public static HashMap<String, HashSet<LevelConstraint>> elementContraints = new HashMap<String, HashSet<LevelConstraint>>();
+	
+	
+	public static Integer elementId=0;
+	public static Integer userId=0;
+	public static Integer lvConstraintID=0;
+	public static Integer unexpectedEventId=0;
+	
+
+	public static void loadAll() {
+		
+		loadUsers();
+		loadGames();
+		loadUnexpectedEvents();
+	}
+	
+	public static void addUnexpectedEvent(String elementName,EnumMetric metric,String msg,Integer quantity,boolean goodEvent){
+		
+		UnexpectedEvent uvt = null;
+	
+
+		lvConstraintID++;
+		unexpectedEventId++;
+		
+		uvt = new UnexpectedEvent();
+	
+
+		uvt.setId(unexpectedEventId+"");
+		uvt.setMetric(metric);
+		uvt.setMessage(msg);
+		uvt.setGoodEvent(goodEvent);
+		uvt.setElementName(elementName);
+		uvt.setQuantity(quantity);
+
+		events.add(uvt);
+		
+		
+		
+	}
+
+	private static List<UnexpectedEvent> loadUnexpectedEvents() {
+
+		addUnexpectedEvent("Agua",EnumMetric.PERCENTAGE,"El Tsunami ha hecho que ciudadanos Japoneses tengan una crisis por falta de agua potable, por lo que a forma de donacion  les daras un porcentaje de tu inventario de agua.",20,false);
+		addUnexpectedEvent("Madera",EnumMetric.PERCENTAGE,"Una oleada invernal, con fuertes vientos, ha hecho que los bosques sembrados para extraer madera, queden destrozados, esto reduce parte de tu inventario",25,false);
+		addUnexpectedEvent("Educacion",EnumMetric.PERCENTAGE,"Se incrementa en un 20% la cobertura educativa",20,true);
+		addUnexpectedEvent("Hierro",EnumMetric.PERCENTAGE,"Su producción de hierro se incrementa un 33%",33,true);		
+		addUnexpectedEvent("Alimento",EnumMetric.PERCENTAGE,"su producción de alimentos se incrementa un 33%.",33,true);		
+		addUnexpectedEvent("Barro",EnumMetric.PERCENTAGE,"Su producción de barro se incrementa un 33%.",33,true);		
+		addUnexpectedEvent("Alimento",EnumMetric.PERCENTAGE,"La mejora de tu infraestructura vial ayuda a mejorar el inventario de alimentos en tu comunidad, aumenta esta en un 10%",10,true);		
+		addUnexpectedEvent("Educacion",EnumMetric.PERCENTAGE,"Se le ha otrogado un subsidio para la educación, aumenta un 13%.",13,true);		
+		addUnexpectedEvent("Salud",EnumMetric.PERCENTAGE,"Se le otorga a tu comunidad  un premio por buen planeamineto ante desastres naturales, se aumenta tu nivel de cobertura de salud ",20,true);
+		addUnexpectedEvent("Barro",EnumMetric.PERCENTAGE,"Felicidades tiene producción extra de barro (5%)",5,true);		
+		addUnexpectedEvent("Madera",EnumMetric.PERCENTAGE,"La ola invernal a ocasionado un derrumbe y tu recursos madereros se disminuyen en un 33%",33,false);		
+		addUnexpectedEvent("Hierro",EnumMetric.PERCENTAGE,"Se presento un derrumbe en la mina y en esta jugada pierdes el 10% del hierro.",10,false);		
+		addUnexpectedEvent("Alimento",EnumMetric.PERCENTAGE,"El invierno a ocasionado la perdida del 33% de tus cosechas.",33,false);		
+		addUnexpectedEvent("Salud",EnumMetric.PERCENTAGE,"Por falta de mantenimiento El hospital de tu aldea se queda sin equipos por un mes.La cobertura disminuye en un 5%",5,false);
+		addUnexpectedEvent("Salud",EnumMetric.PERCENTAGE,"La fuga de cerebros ocasiona que todos los servicios medicos especializados sean alquilados a otra aldea.Decremento de 10% en cobertura.",10,false);
+		addUnexpectedEvent("Salud",EnumMetric.PERCENTAGE,"En el centro educativo de tu ciudad ha habido una intoxicación masiva.Decremento la cobertura de salud en un 15%.",15,false);
+		addUnexpectedEvent("Madera",EnumMetric.PERCENTAGE,"Gran parte de tu reserva natural ha sufrido un incendio. La madera se reduce un 25%.",25,true);
+		//addUnexpectedEvent("Poblacion",EnumMetric.PERCENTAGE,"Por falta de medidas preventivas se presenta una pandemia en tu aldea y muere el 20% de la población",20,false);		
+		addUnexpectedEvent("Agua",EnumMetric.PERCENTAGE,"El agua potable en tu ciudad está escaseando.Disminuye en un 20%",20,false);
+		
+	
+				
+
+		return events;
+
+	}
+	
+	public static void addUser(String login,String name,String passw, String role){
+		userId++;
+		User user = null;
+		user = new User();
+
+		user.setId(userId+"");
+		user.setLogin(login);
+		user.setName(name);
+		user.setPassword(passw);
+		user.setRole(role);
+
+		users.put(user.getLogin(), user);
+		
+	}
+
+	public static void loadUsers() {
+
+		if (users == null || users.isEmpty()) {
+
+					
+			addUser("diegoo","Diego Ospina","ludens",EnumUserRole.PLAYER.toString());
+			addUser("andrea","Andrea Quiroz","ludens",EnumUserRole.PLAYER.toString());
+			addUser("diegoc","Diego Castro","ludens",EnumUserRole.PLAYER.toString());
+			addUser("sebastian","Sebastian Jaen","ludens",EnumUserRole.PLAYER.toString());
+			addUser("samuel","Samuel Duque","ludens",EnumUserRole.PLAYER.toString());
+			addUser("gabo","Juan Gabriel Gutierrez","ludens",EnumUserRole.PLAYER.toString());
+			addUser("coco","Diego Pelaez","ludens",EnumUserRole.PLAYER.toString());
+			addUser("admin","El que manda","admin",EnumUserRole.ADMIN.toString());
+
+		}
+
+	}
+
+	public static void loadGames() {
+
+		if (games == null || games.isEmpty()) {
+
+			Game game = new Game();
+			game.setName("JuegoPrueba");
+			game.setDuration(45);
+			game.setTimePeriod(10);
+			game.setStartTime(Calendar.getInstance().getTime());
+			game.setStatus(EnumGameStatus.NO_STARTED.toString());
+			loadPlayers();
+			game.setPlayers(players);
+			game.setUnexpectedEvents(loadUnexpectedEvents());
+			games.put(game.getName(), game);
+
+		}
+
+	}
+
+	public static void loadPlayers() {
+
+		if (players != null || players.isEmpty()) {
+
+			Player player = null;
+			User user = null;
+			Community community = null;
+			Integer idCount = 0;
+			for (Object key : users.keySet()) {
+
+				player = new Player();
+				user = users.get(key);
+
+				community = new Community();
+				community.setPopulation(getDefaultPopulation());
+				community.setMaterials(getDefaultMaterials());
+				community.setDevelopmentFactors(getDefaultDevelopmentFactors());
+
+				player.setCommunity(community);
+				player.setUser(user);
+				player.setStartTime(0l);
+
+				idCount++;
+				player.setId(idCount.toString());
+
+				players.put(player.getUser().getLogin(), player);
+
+			}
+
+		}
+
+	}
+	
+	
+	public static void addElement(EnumElementType type,Integer level,String name,Integer quantity,Integer p0,String imageUrl,HashMap<String,Element> materialsOrFactors,Integer productionIncrementRate,Integer initialUpgradingTime, Integer levelIncrementDelayRate){
+		elementId++;
+		Element inc = null;
+		inc = new Element();
+		inc.setId(elementId+"");
+		inc.setLevel(level);
+		inc.setName(name);
+		inc.setQuantity(quantity);
+		inc.setImageUrl(imageUrl);
+		inc.setProductionIncrementRate(productionIncrementRate);
+		inc.setInitialValue(p0);
+		inc.setInitialUpgradingTime(initialUpgradingTime);
+		inc.setLevelIncrementDelayRate(levelIncrementDelayRate);
+		inc.setType(type);
+		
+
+		elements.put(inc.getName(), inc);
+		materialsOrFactors.put(inc.getName(), inc);
+		
+	}
+
+	
+	
+	
+	public static void addConstraint(String elementName,Integer level,String restrictedElement,Integer quantity){
+		
+		Element element = elements.get(elementName);
+		LevelConstraint lvConstraint;
+		
+		if(element==null)
+		    return;	
+		
+		HashMap<String, List<LevelConstraint>> lvctrs  = element.getLevelConstraints();
+		
+		if(lvctrs==null){			
+			lvctrs = new HashMap<String, List<LevelConstraint>>();
+			element.setLevelconstraints(lvctrs);		
+		}
+		
+		List<LevelConstraint> lvctr = lvctrs.get(level+"");	
+		
+		if(lvctr==null){		
+			lvctr = new ArrayList<LevelConstraint>();
+			lvctrs.put(level+"",lvctr);
+		}
+		
+	
+		lvConstraintID++;
+		lvConstraint = new LevelConstraint();
+		lvConstraint.setId(lvConstraintID+"");
+		lvConstraint.setQuantity(quantity);
+		lvConstraint.setElementName(restrictedElement);		
+		lvctr.add(lvConstraint);		
+	}
+	
+	
+	public static void addIncrement(String elementName,Integer level,Integer quantity){
+	
+		Element element = elements.get(elementName);
+		LevelConstraint lvConstraint;
+		
+		if(element==null)
+		     return;	
+		
+		
+		
+		HashMap<String, List<LevelConstraint>> lvctrs  = element.getLevelIncrements();
+		
+		if(lvctrs==null){			
+			lvctrs = new HashMap<String, List<LevelConstraint>>();
+			element.setLevelconstraints(lvctrs);
+		
+		}
+		
+
+
+		List<LevelConstraint> lvctr = lvctrs.get(level);
+		
+		
+		
+		if(lvctr==null){
+		
+			lvctr = new ArrayList<LevelConstraint>();
+			lvctrs.put(level+"",lvctr);
+		}
+		
+	
+		lvConstraintID++;
+		lvConstraint = new LevelConstraint();
+		lvConstraint.setId(lvConstraintID+"");
+		lvConstraint.setQuantity(quantity);
+		lvConstraint.setElementName(elementName);
+		
+		lvctr.add(lvConstraint);
+		
+		
+		
+	}
+	
+	
+	
+	
+	public static HashMap<String, Element> getDefaultMaterials() {
+
+		HashMap<String, Element> materials = new HashMap<String, Element>();
+
+		addElement(EnumElementType.MATERIAL,0,"Agua",180,180,"./sensation_data/water.png",materials,8,60,3);
+		addElement(EnumElementType.MATERIAL,0,"Hierro",174,174,"./sensation_data/iron.png",materials,8,60,3);
+		addElement(EnumElementType.MATERIAL,0,"Alimento",168,168,"./sensation_data/food.png",materials,8,60,3);
+		addElement(EnumElementType.MATERIAL,0,"Madera",174,174,"./sensation_data/wood.png",materials,8,60,3);
+		addElement(EnumElementType.MATERIAL,0,"Barro",192,192,"./sensation_data/mud.png",materials,8,60,3);
+	
+        //Element , nivel, cantidad necesitada
+		addConstraint("Madera",1,"Madera",50);
+		addConstraint("Madera",2,"Madera",83);
+		addConstraint("Madera",3,"Madera",140);
+		addConstraint("Madera",4,"Madera",234);
+		addConstraint("Madera",5,"Madera",391);
+		
+		addConstraint("Madera",1,"Barro",40);
+		addConstraint("Madera",2,"Barro",67);
+		addConstraint("Madera",3,"Barro",112);
+		addConstraint("Madera",4,"Barro",187);
+		addConstraint("Madera",5,"Barro",312);
+		
+		addConstraint("Madera",1,"Hierro",60);
+		addConstraint("Madera",2,"Hierro",100);
+		addConstraint("Madera",3,"Hierro",168);
+		addConstraint("Madera",4,"Hierro",280);
+		addConstraint("Madera",5,"Hierro",469);
+		
+		
+		addConstraint("Madera",1,"Alimento",60);
+		addConstraint("Madera",2,"Alimento",100);
+		addConstraint("Madera",3,"Alimento",168);
+		addConstraint("Madera",4,"Alimento",280);
+		addConstraint("Madera",5,"Alimento",469);
+		
+		addConstraint("Madera",1,"Agua",96);
+		addConstraint("Madera",2,"Agua",162);
+		addConstraint("Madera",3,"Agua",270);
+		addConstraint("Madera",4,"Agua",452);
+		addConstraint("Madera",5,"Agua",756);
+		
+		
+		addConstraint("Barro",1,"Madera",50);
+		addConstraint("Barro",2,"Madera",83);
+		addConstraint("Barro",3,"Madera",140);
+		addConstraint("Barro",4,"Madera",234);
+		addConstraint("Barro",5,"Madera",391);
+		
+		addConstraint("Barro",1,"Barro",50);
+		addConstraint("Barro",2,"Barro",83);
+		addConstraint("Barro",3,"Barro",140);
+		addConstraint("Barro",4,"Barro",234);
+		addConstraint("Barro",5,"Barro",391);
+		
+		addConstraint("Barro",1,"Hierro",70);
+		addConstraint("Barro",2,"Hierro",117);
+		addConstraint("Barro",3,"Hierro",196);
+		addConstraint("Barro",4,"Hierro",327);
+		addConstraint("Barro",5,"Hierro",547);
+		
+		
+		addConstraint("Barro",1,"Alimento",40);
+		addConstraint("Barro",2,"Alimento",67);
+		addConstraint("Barro",3,"Alimento",112);
+		addConstraint("Barro",4,"Alimento",187);
+		addConstraint("Barro",5,"Alimento",312);
+		
+		
+		addConstraint("Barro",1,"Agua",86);
+		addConstraint("Barro",2,"Agua",145);
+		addConstraint("Barro",3,"Agua",242);
+		addConstraint("Barro",4,"Agua",405);
+		addConstraint("Barro",5,"Agua",678);
+		
+		addConstraint("Hierro",1,"Madera",80);
+		addConstraint("Hierro",2,"Madera",134);
+		addConstraint("Hierro",3,"Madera",224);
+		addConstraint("Hierro",4,"Madera",374);
+		addConstraint("Hierro",5,"Madera",625);
+		
+		addConstraint("Hierro",1,"Barro",120);
+		addConstraint("Hierro",2,"Barro",201);
+		addConstraint("Hierro",3,"Barro",336);
+		addConstraint("Hierro",4,"Barro",561);
+		addConstraint("Hierro",5,"Barro",938);
+		
+		addConstraint("Hierro",1,"Hierro",50);
+		addConstraint("Hierro",2,"Hierro",83);
+		addConstraint("Hierro",3,"Hierro",140);
+		addConstraint("Hierro",4,"Hierro",234);
+		addConstraint("Hierro",5,"Hierro",391);
+		
+		addConstraint("Hierro",1,"Alimento",60);
+		addConstraint("Hierro",2,"Alimento",100);
+		addConstraint("Hierro",3,"Alimento",168);
+		addConstraint("Hierro",4,"Alimento",280);
+		addConstraint("Hierro",5,"Alimento",469);
+		
+		addConstraint("Hierro",1,"Agua",70);
+		addConstraint("Hierro",2,"Agua",117);
+		addConstraint("Hierro",3,"Agua",196);
+		addConstraint("Hierro",4,"Agua",327);
+		addConstraint("Hierro",5,"Agua",547);
+		
+		addConstraint("Alimento",1,"Madera",70);
+		addConstraint("Alimento",2,"Madera",117);
+		addConstraint("Alimento",3,"Madera",196);
+		addConstraint("Alimento",4,"Madera",327);
+		addConstraint("Alimento",5,"Madera",547);
+		
+		addConstraint("Alimento",1,"Barro",100);
+		addConstraint("Alimento",2,"Barro",167);
+		addConstraint("Alimento",3,"Barro",280);
+		addConstraint("Alimento",4,"Barro",468);
+		addConstraint("Alimento",5,"Barro",782);
+		
+		addConstraint("Alimento",1,"Hierro",60);
+		addConstraint("Alimento",2,"Hierro",100);
+		addConstraint("Alimento",3,"Hierro",168);
+		addConstraint("Alimento",4,"Hierro",280);
+		addConstraint("Alimento",5,"Hierro",469);
+		
+		addConstraint("Alimento",1,"Alimento",50);
+		addConstraint("Alimento",2,"Alimento",83);
+		addConstraint("Alimento",3,"Alimento",140);
+		addConstraint("Alimento",4,"Alimento",234);
+		addConstraint("Alimento",5,"Alimento",391);
+		
+		addConstraint("Alimento",1,"Agua",80);
+		addConstraint("Alimento",2,"Agua",134);
+		addConstraint("Alimento",3,"Agua",224);
+		addConstraint("Alimento",4,"Agua",374);
+		addConstraint("Alimento",5,"Agua",625);
+		
+		addConstraint("Agua",1,"Madera",70);
+		addConstraint("Agua",2,"Madera",117);
+		addConstraint("Agua",3,"Madera",196);
+		addConstraint("Agua",4,"Madera",327);
+		addConstraint("Agua",5,"Madera",547);
+		
+		addConstraint("Agua",1,"Barro",100);
+		addConstraint("Agua",2,"Barro",167);
+		addConstraint("Agua",3,"Barro",280);
+		addConstraint("Agua",4,"Barro",468);
+		addConstraint("Agua",5,"Barro",782);
+		
+		addConstraint("Agua",1,"Hierro",70);
+		addConstraint("Agua",2,"Hierro",117);
+		addConstraint("Agua",3,"Hierro",196);
+		addConstraint("Agua",4,"Hierro",327);
+		addConstraint("Agua",5,"Hierro",547);
+		
+		addConstraint("Agua",1,"Alimento",40);
+		addConstraint("Agua",2,"Alimento",67);
+		addConstraint("Agua",3,"Alimento",112);
+		addConstraint("Agua",4,"Alimento",187);
+		addConstraint("Agua",5,"Alimento",312);
+
+		addConstraint("Agua",1,"Agua",40);
+		addConstraint("Agua",2,"Agua",67);
+		addConstraint("Agua",3,"Agua",112);
+		addConstraint("Agua",4,"Agua",187);
+		addConstraint("Agua",5,"Agua",312);
+		
+		// Increments
+		
+		
+		addIncrement("Madera",1,259);
+		addIncrement("Madera",2,387);
+		addIncrement("Madera",3,577);
+		addIncrement("Madera",4,861);
+		addIncrement("Madera",5,1285);
+		
+		addIncrement("Barro",1,286);
+		addIncrement("Barro",2,427);
+		addIncrement("Barro",3,637);
+		addIncrement("Barro",4,950);
+		addIncrement("Barro",5,1418);
+		
+		addIncrement("Hierro",1,259);
+		addIncrement("Hierro",2,387);
+		addIncrement("Hierro",3,577);
+		addIncrement("Hierro",4,861);
+		addIncrement("Hierro",5,1285);
+		
+		addIncrement("Alimento",1,250);
+		addIncrement("Alimento",2,373);
+		addIncrement("Alimento",3,557);
+		addIncrement("Alimento",4,832);
+		addIncrement("Alimento",5,1241);
+		
+		addIncrement("Agua",1,268);
+		addIncrement("Agua",2,400);
+		addIncrement("Agua",3,597);
+		addIncrement("Agua",4,891);
+		addIncrement("Agua",5,1330);
+		
+
+
+		return materials;
+	}
+
+	public static HashMap<String, Element> getDefaultDevelopmentFactors() {
+
+		HashMap<String, Element> factors = new HashMap<String, Element>();
+
+
+		addElement(EnumElementType.FACTOR,0,"Salud",90,90,"./sensation_data/health1.png",factors,1,100,3);
+		addElement(EnumElementType.FACTOR,0,"Educacion",72,72,"./sensation_data/education.png",factors,1,100,3);
+		addElement(EnumElementType.FACTOR,0,"Industria",78,78,"./sensation_data/factory.png",factors,1,100,3);
+		addElement(EnumElementType.FACTOR,0,"Desarrollo Urbano",90,90,"./sensation_data/construction.png",factors,1,100,3);
+		
+	
+	     //Element , nivel, cantidad necesitada
+		addConstraint("Salud",1,"Madera",70);
+		addConstraint("Salud",2,"Madera",117);
+		addConstraint("Salud",3,"Madera",196);
+		addConstraint("Salud",4,"Madera",327);
+		addConstraint("Salud",5,"Madera",547);
+		
+		addConstraint("Salud",1,"Barro",90);
+		addConstraint("Salud",2,"Barro",150);
+		addConstraint("Salud",3,"Barro",252);
+		addConstraint("Salud",4,"Barro",421);
+		addConstraint("Salud",5,"Barro",704);
+		
+		addConstraint("Salud",1,"Hierro",70);
+		addConstraint("Salud",2,"Hierro",117);
+		addConstraint("Salud",3,"Hierro",196);
+		addConstraint("Salud",4,"Hierro",327);
+		addConstraint("Salud",5,"Hierro",547);
+		
+		addConstraint("Salud",1,"Alimento",20);
+		addConstraint("Salud",2,"Alimento",33);
+		addConstraint("Salud",3,"Alimento",56);
+		addConstraint("Salud",4,"Alimento",93);
+		addConstraint("Salud",5,"Alimento",156);
+		
+		addConstraint("Salud",1,"Agua",60);
+		addConstraint("Salud",2,"Agua",100);
+		addConstraint("Salud",3,"Agua",168);
+		addConstraint("Salud",4,"Agua",280);
+		addConstraint("Salud",5,"Agua",469);
+		
+		addConstraint("Educacion",1,"Madera",100);
+		addConstraint("Educacion",2,"Madera",167);
+		addConstraint("Educacion",3,"Madera",280);
+		addConstraint("Educacion",4,"Madera",468);
+		addConstraint("Educacion",5,"Madera",782);
+		
+		addConstraint("Educacion",1,"Barro",80);
+		addConstraint("Educacion",2,"Barro",134);
+		addConstraint("Educacion",3,"Barro",224);
+		addConstraint("Educacion",4,"Barro",374);
+		addConstraint("Educacion",5,"Barro",625);
+		
+		addConstraint("Educacion",1,"Hierro",30);
+		addConstraint("Educacion",2,"Hierro",50);
+		addConstraint("Educacion",3,"Hierro",84);
+		addConstraint("Educacion",4,"Hierro",140);
+		addConstraint("Educacion",5,"Hierro",234);
+		
+		addConstraint("Educacion",1,"Alimento",60);
+		addConstraint("Educacion",2,"Alimento",100);
+		addConstraint("Educacion",3,"Alimento",168);
+		addConstraint("Educacion",4,"Alimento",280);
+		addConstraint("Educacion",5,"Alimento",469);
+		
+		addConstraint("Educacion",1,"Agua",70);
+		addConstraint("Educacion",2,"Agua",117);
+		addConstraint("Educacion",3,"Agua",196);
+		addConstraint("Educacion",4,"Agua",327);
+		addConstraint("Educacion",5,"Agua",547);
+		
+		addConstraint("Industria",1,"Madera",80);
+		addConstraint("Industria",2,"Madera",134);
+		addConstraint("Industria",3,"Madera",224);
+		addConstraint("Industria",4,"Madera",374);
+		addConstraint("Industria",5,"Madera",625);
+		
+		
+		addConstraint("Industria",1,"Barro",40);
+		addConstraint("Industria",2,"Barro",67);
+		addConstraint("Industria",3,"Barro",112);
+		addConstraint("Industria",4,"Barro",187);
+		addConstraint("Industria",5,"Barro",312);
+		
+		addConstraint("Industria",1,"Hierro",80);
+		addConstraint("Industria",2,"Hierro",134);
+		addConstraint("Industria",3,"Hierro",224);
+		addConstraint("Industria",4,"Hierro",374);
+		addConstraint("Industria",5,"Hierro",625);
+		
+		addConstraint("Industria",1,"Alimento",50);
+		addConstraint("Industria",2,"Alimento",83);
+		addConstraint("Industria",3,"Alimento",140);
+		addConstraint("Industria",4,"Alimento",234);
+		addConstraint("Industria",5,"Alimento",391);
+		
+		addConstraint("Industria",1,"Agua",80);
+		addConstraint("Industria",2,"Agua",134);
+		addConstraint("Industria",3,"Agua",224);
+		addConstraint("Industria",4,"Agua",374);
+		addConstraint("Industria",5,"Agua",625);
+		
+		addConstraint("Desarrollo Urbano",1,"Madera",40);
+		addConstraint("Desarrollo Urbano",2,"Madera",67);
+		addConstraint("Desarrollo Urbano",3,"Madera",112);
+		addConstraint("Desarrollo Urbano",4,"Madera",187);
+		addConstraint("Desarrollo Urbano",5,"Madera",312);
+		
+		addConstraint("Desarrollo Urbano",1,"Barro",100);
+		addConstraint("Desarrollo Urbano",2,"Barro",167);
+		addConstraint("Desarrollo Urbano",3,"Barro",280);
+		addConstraint("Desarrollo Urbano",4,"Barro",480);
+		addConstraint("Desarrollo Urbano",5,"Barro",782);
+		
+		addConstraint("Desarrollo Urbano",1,"Hierro",50);
+		addConstraint("Desarrollo Urbano",2,"Hierro",83);
+		addConstraint("Desarrollo Urbano",3,"Hierro",140);
+		addConstraint("Desarrollo Urbano",4,"Hierro",234);
+		addConstraint("Desarrollo Urbano",5,"Hierro",391);
+		
+		addConstraint("Desarrollo Urbano",1,"Alimento",60);
+		addConstraint("Desarrollo Urbano",2,"Alimento",100);
+		addConstraint("Desarrollo Urbano",3,"Alimento",168);
+		addConstraint("Desarrollo Urbano",4,"Alimento",280);
+		addConstraint("Desarrollo Urbano",5,"Alimento",469);
+		
+		addConstraint("Desarrollo Urbano",1,"Agua",60);
+		addConstraint("Desarrollo Urbano",2,"Agua",100);
+		addConstraint("Desarrollo Urbano",3,"Agua",168);
+		addConstraint("Desarrollo Urbano",4,"Agua",280);
+		addConstraint("Desarrollo Urbano",5,"Agua",469);
+
+
+		//Increments
+		
+		addIncrement("Salud",1,134);
+		addIncrement("Salud",2,200);
+		addIncrement("Salud",3,298);
+		addIncrement("Salud",4,445);
+		addIncrement("Salud",5,665);
+		
+		addIncrement("Educacion",1,107);
+		addIncrement("Educacion",2,160);
+		addIncrement("Educacion",3,239);
+		addIncrement("Educacion",4,356);
+		addIncrement("Educacion",5,532);
+		
+		
+		addIncrement("Industria",1,116);
+		addIncrement("Industria",2,173);
+		addIncrement("Industria",3,258);
+		addIncrement("Industria",4,386);
+		addIncrement("Industria",5,576);
+
+		addIncrement("Desarrollo Urbano",1,134);
+		addIncrement("Desarrollo Urbano",2,200);
+		addIncrement("Desarrollo Urbano",3,298);
+		addIncrement("Desarrollo Urbano",4,445);
+		addIncrement("Desarrollo Urbano",5,665);
+		
+		
+		
+
+		return factors;
+	}
+
+	private static Population getDefaultPopulation() {
+
+		Population incr = new Population();
+
+		incr.setId("23");
+		incr.setName("Poblacion");
+		incr.setImageUrl("./sensation_data/people.png");
+		incr.setQuantity(100);
+		incr.setProductionIncrementRate(12);
+		incr.setLevelIncrementDelayRate(1);
+		incr.setInitialValue(100);
+
+		incr.setBusyPeople(0);
+
+		return incr;
+	}
+
+}

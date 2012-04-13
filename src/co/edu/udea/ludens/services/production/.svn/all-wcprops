@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/uto/!svn/ver/49/trunk/Utopo/src/co/edu/udea/ludens/services/production
+END
+LevelUpgraderFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/uto/!svn/ver/54/trunk/Utopo/src/co/edu/udea/ludens/services/production/LevelUpgraderFactory.java
+END
+PopulationProducer.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/uto/!svn/ver/14/trunk/Utopo/src/co/edu/udea/ludens/services/production/PopulationProducer.java
+END
+FactorProducerWithGrowthRate.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/uto/!svn/ver/54/trunk/Utopo/src/co/edu/udea/ludens/services/production/FactorProducerWithGrowthRate.java
+END
+LevelUpgraderStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/uto/!svn/ver/54/trunk/Utopo/src/co/edu/udea/ludens/services/production/LevelUpgraderStrategy.java
+END
+PopulationProducerWithGrowthRate.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/uto/!svn/ver/54/trunk/Utopo/src/co/edu/udea/ludens/services/production/PopulationProducerWithGrowthRate.java
+END
+FactorLevelUpgrader.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/uto/!svn/ver/54/trunk/Utopo/src/co/edu/udea/ludens/services/production/FactorLevelUpgrader.java
+END
+MaterialProducer.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/uto/!svn/ver/9/trunk/Utopo/src/co/edu/udea/ludens/services/production/MaterialProducer.java
+END
+ProductProducerFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/uto/!svn/ver/49/trunk/Utopo/src/co/edu/udea/ludens/services/production/ProductProducerFactory.java
+END
+ProducerFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/uto/!svn/ver/54/trunk/Utopo/src/co/edu/udea/ludens/services/production/ProducerFactory.java
+END
+MaterialProducerWithGrowthRate.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/uto/!svn/ver/54/trunk/Utopo/src/co/edu/udea/ludens/services/production/MaterialProducerWithGrowthRate.java
+END
+ProducerStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/uto/!svn/ver/2/trunk/Utopo/src/co/edu/udea/ludens/services/production/ProducerStrategy.java
+END
+MaterialLevelUpgrader.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/uto/!svn/ver/54/trunk/Utopo/src/co/edu/udea/ludens/services/production/MaterialLevelUpgrader.java
+END
+FactorProducer.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/uto/!svn/ver/9/trunk/Utopo/src/co/edu/udea/ludens/services/production/FactorProducer.java
+END

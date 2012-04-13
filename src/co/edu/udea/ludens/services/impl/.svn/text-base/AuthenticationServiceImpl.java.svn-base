@@ -1,0 +1,149 @@
+package co.edu.udea.ludens.services.impl;
+
+import java.util.Calendar;
+
+
+import org.apache.log4j.Logger;
+
+import com.icesoft.faces.async.render.SessionRenderer;
+import co.edu.udea.ludens.domain.Game;
+import co.edu.udea.ludens.domain.User;
+import co.edu.udea.ludens.enums.EnumUserRole;
+import co.edu.udea.ludens.exceptions.LudensException;
+import co.edu.udea.ludens.services.AuthenticationService;
+import co.edu.udea.ludens.services.GameContainer;
+import co.edu.udea.ludens.services.UserService;
+import co.edu.udea.ludens.test.FakeData;
+import co.edu.udea.ludens.web.BoardController;
+import co.edu.udea.ludens.web.ReportController;
+import co.edu.udea.ludens.web.TradeController;
+import co.edu.udea.ludens.web.UnexpectedEventController;
+import co.edu.udea.ludens.web.UserSessionBean;
+
+public class AuthenticationServiceImpl implements AuthenticationService {
+
+	private UserSessionBean userSession;
+	private BoardController boardController;
+	private ReportController reportController;
+	private TradeController tradeController;
+	private UnexpectedEventController eventController;
+	private GameContainer gameContainer;
+	private UserService userService;	
+	private Logger logger = Logger.getLogger(getClass());
+	
+	
+	public AuthenticationServiceImpl() {		
+		FakeData.loadAll();
+		
+		
+	}
+
+	public String validate(String usuario, String password)	throws LudensException {
+
+	String result =null;
+
+		User user = userService.getUser(usuario, password);
+				
+	
+		
+
+		if (user != null) {			
+			
+			
+			Game  game = FakeData.games.get("JuegoPrueba");
+			
+			userSession.setUser(user);
+			String role = user.getRole();
+			userSession.setStartTime(Calendar.getInstance().getTime());			
+			userSession.setActualGame(game.getName());
+		
+			
+			if(EnumUserRole.PLAYER.toString().equalsIgnoreCase(role)){
+				gameContainer.suscribeMessageListener(boardController, game.getName(), user.getLogin());
+				gameContainer.suscribeMessageListener(reportController, game.getName(), user.getLogin());
+				gameContainer.suscribeTradeListener(tradeController,game.getName());
+				gameContainer.suscribeUnexpectedEventListener(getEventController(),game.getName());				
+				SessionRenderer.addCurrentSession(user.getLogin());	
+				reportController.loadDataReport();
+			}
+			
+			result = "director";
+		 
+
+		} else {
+
+			throw new LudensException("El nombre de usuario o el password es incorrecto");
+
+		}
+		
+		
+		
+		return result;
+
+	}
+
+
+
+
+	public void setUserSession(UserSessionBean userSession) {
+		this.userSession = userSession;
+
+	}
+
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+		
+	}
+
+	public void setBoardBean(BoardController boardBean) {
+		this.boardController = boardBean;
+	}
+
+	public BoardController getBoardBean() {
+		return boardController;
+	}
+
+	public void setGameContainer(GameContainer gameContainer) {
+		this.gameContainer = gameContainer;
+	}
+
+	public GameContainer getGameContainer() {
+		return gameContainer;
+	}
+
+	public void setTradeController(TradeController tradeController) {
+		this.tradeController = tradeController;
+	}
+
+	public TradeController getTradeController() {
+		return tradeController;
+	}
+
+	@Override
+	public void signOut() {
+	
+		User user = userSession.getUser();
+		
+		if(user!=null)
+		SessionRenderer.removeCurrentSession(user.getLogin());
+		
+	}
+
+	public void setEventController(UnexpectedEventController eventController) {
+		this.eventController = eventController;
+	}
+
+	public UnexpectedEventController getEventController() {
+		return eventController;
+	}
+
+	public ReportController getReportController() {
+		return reportController;
+	}
+
+	public void setReportController(ReportController reportController) {
+		this.reportController = reportController;
+	}
+
+}

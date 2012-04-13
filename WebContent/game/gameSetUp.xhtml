@@ -1,0 +1,209 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:ice-cc="http://www.icesoft.com/icefaces-composite-comps">
+
+<head>
+
+<ice:outputStyle href="../xmlhttp/css/rime/rime.css" id="outputStyle1" />
+
+</head>
+<body>
+
+<ice:form>
+
+ 	<h4 id="title_maps"
+		style="color: #222222; background-color: #f5b604; -moz-border-radius: 5px 5px 5px 5px; border: 2px solid #f5b604; width: 100%">Juego
+	
+	</h4>
+  
+ <ice:panelGrid id="pnlGame" width="100%" rendered="#{!gameController.settingGame and !playerController.settingPlayers}" >
+ 
+ <ice:commandButton  id="btnNewGame" actionListener="#{gameController.newGame}" rendered="#{!gameController.editingGame}" style="top: 90%; position: relative" value="Nuevo Juego"/>
+ <ice:panelGrid id="pnlNewGame" rendered="#{gameController.editingGame}"  border="0" width="100%"> 
+ 
+ <ice:panelGrid  columns="2" border="0" width="60%"> 
+ 
+ <ice:outputLabel   id="lblGameName" value="Nombre del juego:"/>
+ <ice:inputText style="width:200px;" id="iptGameName"  value="#{gameController.actualGame.name}"/>
+ 
+ </ice:panelGrid>
+ 
+ <ice:panelGrid  columns="3" border="0" width="50%"> 
+  
+ <ice:outputLabel   id="lblDurationTime" value="Duracion del juego:"/>
+ <ice:inputText style="width:40px;" id="iptDurationTime1"  value="#{gameController.duration}"/>
+ 
+ <!-- NO cambiar el id. Se usa en el controller -->
+ <ice:selectOneMenu style="width:70px;border:1px solid #AAAAAA" id="somGameDuration" 	valueChangeListener="#{gameController.changeTimeUnit}" partialSubmit="true" value="#{gameController.durationUnit}">
+	<f:selectItems id="slctGameDuration"	value="#{gameController.units}" />
+ </ice:selectOneMenu>
+ 
+
+ 
+ <ice:outputLabel  id="lblProductionTime" value="Tiempo de producción"/>
+ <ice:inputText style="width:40px;"  id="iptProductionTime"  value="#{gameController.productionTime}"/>
+  
+  <!-- NO cambiar el id. Se usa en el controller -->
+ <ice:selectOneMenu style="width:70px;border:1px solid #AAAAAA"  valueChangeListener="#{gameController.changeTimeUnit}" id="somProductionTime" 	partialSubmit="true" value="#{gameController.productionTimeUnit}">
+	<f:selectItems id="slctResource"	value="#{gameController.units}" />
+ </ice:selectOneMenu>
+
+ </ice:panelGrid>
+  
+ <ice:panelGrid  columns="6" border="0" width="50%"> 
+ 
+ <ice:outputLabel id="lblEventsTime" value="Tiempo de ocurrencia de eventos"/>
+ 
+
+ <ice:outputLabel  value="entre "/>
+ <ice:inputText style="width:40px;"  id="iptUpperLimit"  value="#{gameController.lowerThreshold}"/>
+ <ice:outputLabel  value="y "/>
+ <ice:inputText style="width:40px;"  id="iptLowerLimit"  value="#{gameController.upperThreshold}"/>
+  
+
+  <!-- NO cambiar el id. Se usa en el controller -->
+ <ice:selectOneMenu style="width:70px;border:1px solid #AAAAAA" id="somEnventTime" 	valueChangeListener="#{gameController.changeTimeUnit}" partialSubmit="true" value="#{gameController.thresholdEventsUnit}">
+	<f:selectItems id="slctEventTime"	value="#{gameController.units}" />
+ </ice:selectOneMenu>
+ 
+ </ice:panelGrid>
+ 
+  <ice:panelGrid columns="2" border="0">
+  
+     <ice:commandButton  id="btnSaveGame" actionListener="#{gameController.saveGame}"  style="top: 90%; position: relative" value="Guardar "/> 
+     <ice:commandButton  id="btnCancelGame" actionListener="#{gameController.cancelEditing}"  style="top: 90%; position: relative" value="Cancelar "/>
+  
+ </ice:panelGrid>
+
+ 
+ </ice:panelGrid>
+ 
+
+ 
+ 
+  <ice:dataTable binding="#{gameController.gamesTable}" rendered="#{!gameController.editingGame}" headerClass="icelist-header" id="gamesTable" rowClasses="rowClass1,rowClass2" rows="20"  value="#{gameController.games}" var="game" width="80%">
+
+ <ice:column>
+
+ <f:facet name="header">
+  
+ <ice:outputText  value="Nombre"/>
+ 
+ </f:facet> 
+ <ice:outputText style="text-align:center " value="#{game.name}"/>
+
+ </ice:column>
+
+ <ice:column> 
+ <f:facet name="header">
+ 
+  <ice:panelGrid columns="2" border="0">
+ <ice:outputText  value="Duración"/>
+ 
+ <!-- No cambiar id. Este se usa en el controller -->
+  <ice:selectOneMenu id="somGameDurationTable" valueChangeListener="#{gameController.changeTimeUnit}" style="width:70px;border:1px solid #AAAAAA"  	partialSubmit="true" value="#{gameController.durationUnit}">
+	<f:selectItems id="slctGameDuration"	value="#{gameController.units}" />
+ </ice:selectOneMenu>
+ 
+ 
+  </ice:panelGrid>
+  
+ </f:facet>
+
+ <ice:outputText style="text-align:center " value="#{game.duration/gameController.durationUnitDivider}"/>
+ </ice:column>
+
+ <ice:column >
+ <f:facet name="header">
+ <ice:outputText  value="Hora de Inicio"/>
+ </f:facet> 
+ <ice:outputText style="width: 150px" value="#{game.startTime}"/>
+ </ice:column>
+
+ <ice:column>
+ <f:facet name="header"> 
+ <ice:outputText  value="Estado"/>
+ </f:facet> 
+ <ice:outputText style="text-align:center" value="#{game.status.status}"/> 
+ </ice:column>
+ 
+
+ 
+  <ice:column>
+ <f:facet name="header"> 
+ <ice:outputText  value="Acciones"/>
+ </f:facet> 
+ <ice:panelGrid columns="4">
+    <ice:commandButton  id="btnEdit" actionListener="#{gameController.editGame}" style="top: 90%; position: relative" value="Editar"/> 
+    <ice:commandButton  id="btnSettingUp" actionListener="#{incrementableController.settingUpGame}" style="top: 90%; position: relative" value="Factores y Recursos"/>
+    <ice:commandButton  id="btnPlayers" actionListener="#{playerController.settingPlayers}" style="top: 90%; position: relative" value="Jugadores"/>
+    <ice:commandButton  id="btnDelete" actionListener="#{gameController.deleteGame}"  style="top: 90%;position: relative" value="Eliminar "/>
+ </ice:panelGrid>
+ 
+ </ice:column>
+
+</ice:dataTable>
+
+<div style="width:500px; margin: 0 auto;" >
+                                        <ice:dataPaginator rendered="#{!gameController.editingGame}" for="gamesTable" id="dataPaginator2" paginatorMaxPages="15"
+                                             rowsCountVar="rowsCount"
+            								 displayedRowsCountVar="displayedRowsCount"
+            								 firstRowIndexVar="firstRowIndex"
+            								 lastRowIndexVar="lastRowIndex"
+            								 pageCountVar="pageCount"
+                                             pageIndexVar="pageIndex"                                     
+                                        
+                                        >
+                                        
+                                        <ice:outputFormat
+                						styleClass="standard"	value="{0} juegos en total, mostrando tan solo {1} en esta página. Página {4} / {5}.">
+            							<f:param value="#{rowsCount}"/>
+            							<f:param value="#{displayedRowsCount}"/>
+            							<f:param value="#{firstRowIndex}"/>
+            							<f:param value="#{lastRowIndex}"/>
+            							<f:param value="#{pageIndex}"/>
+            							<f:param value="#{pageCount}"/>
+        								</ice:outputFormat>
+                                        
+                                        <f:facet name="first">
+                                            <ice:graphicImage id="graphicImage7" url="../xmlhttp/css/rime/css-images/arrow-first.gif"/>
+                                        </f:facet>
+                                        <f:facet name="last">
+                                            <ice:graphicImage id="graphicImage8" url="../xmlhttp/css/rime/css-images/arrow-last.gif"/>
+                                        </f:facet>
+                                        <f:facet name="previous">
+                                            <ice:graphicImage id="graphicImage9" url="../xmlhttp/css/rime/css-images/arrow-previous.gif"/>
+                                        </f:facet>
+                                        <f:facet name="next">
+                                            <ice:graphicImage id="graphicImage10" url="../xmlhttp/css/rime/css-images/arrow-next.gif"/>
+                                        </f:facet>
+                                        <f:facet name="fastforward">
+                                            <ice:graphicImage id="graphicImage11" url="../xmlhttp/css/rime/css-images/arrow-ff.gif"/>
+                                        </f:facet>
+                                        <f:facet name="fastrewind">
+                                            <ice:graphicImage id="graphicImage12" url="../xmlhttp/css/rime/css-images/arrow-fr.gif"/>
+                                        </f:facet>
+                                    </ice:dataPaginator>
+                                     </div>
+                                     
+ </ice:panelGrid>					
+ 
+   <ui:include src="./elements.xhtml" />
+ 
+
+   <ui:include src="./players.xhtml" />
+ 
+ 
+ 
+ </ice:form>
+ 
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+    xmlns:ice-cc="http://www.icesoft.com/icefaces-composite-comps">
+	
+	<head>
+	
+          <ice:outputStyle href="../xmlhttp/css/rime/rime.css" id="outputStyle1" />   
+	     <ice:outputStyle href="../xmlhttp/css/game/game.css" id="outputStyle2" /> 
+	</head>
+	<body>
+                
+                       
+                        <div id="resources_div" >                
+                
+                    	                    
+                               
+                             <div id="panelResources"  style="width:100%" >                      
+                               
+                               <h4 id="title_resources" style="color:#222222;background-color:#C0DEED;-moz-border-radius:5px 5px 5px 5px;border:2px solid #C0DEED;width:100%" > Recursos </h4>
+                               
+     								<!-- 3 --> 
+    				           
+                            </div>  
+                           
+                        	  
+
+                                     
+						</div>     
+               		    
+               		    <div style="clear:both"></div>
+               		                  		     	                     				
+                   		 <div id="factors_div" >  	         				
+                   		     
+                   		     
+                   		       
+                   		      <div id="panelFactors" style="width:100%" >  
+                   		      
+                   		       <h4 id="title_tactors" style="color:#222222;background-color:#a0c90a;-moz-border-radius:5px 5px 5px 5px;border:2px solid #a0c90a;" > Factores </h4>	   
+                   		       
+                              <!-- 2 --> 
+				                 			               
+				           </div>                 
+                			                
+	                      </div>
+	                     
+	                      <div style="clear:both"></div>
+	                      
+	                    
+	                      
+	                          
+	                     
+	                      
+	                       <div style="clear:both"></div>
+	                      
+	                       <h4 id="title_population" style="color:#222222;background-color:#007fc9;-moz-border-radius:5px 5px 5px 5px;border:2px solid #007fc9;width:100%" > Población </h4> 
+	                      
+	
+				   			
+			
+				
+</body>
+ </html>

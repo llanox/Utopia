@@ -1,0 +1,83 @@
+package co.edu.udea.ludens.util;
+
+import java.util.Calendar;
+import java.util.EventObject;
+
+import co.edu.udea.ludens.domain.Player;
+import co.edu.udea.ludens.enums.EnumMsgType;
+import co.edu.udea.ludens.enums.EnumMsgs;
+
+public class MessageEvent extends EventObject {
+
+	private String msg;
+	private Long id;
+	private EnumMsgType msgType;
+	private Player affectedPlayer;
+	
+	
+	public MessageEvent(Object source) {
+		super(source);
+		
+	}
+	
+	public MessageEvent(Object source,  EnumMsgType msgType,String msg) {
+		super(source);
+		this.setMsg(msg);
+	    this.msgType = msgType;
+	    this.id = Calendar.getInstance().getTimeInMillis();
+	}
+	
+	public MessageEvent(Object source,  EnumMsgs enumMsg) {
+		super(source);
+		this.msg = enumMsg.getMsg();
+	    this.msgType = enumMsg.getMsgType();
+	    this.id = Calendar.getInstance().getTimeInMillis();
+	}
+	
+	public MessageEvent(Object source,  EnumMsgs enumMsg, Object... parameters) {
+		super(source);
+		this.msg = String.format(enumMsg.getMsg(), parameters);
+	    this.msgType = enumMsg.getMsgType();
+	    this.id = Calendar.getInstance().getTimeInMillis();
+	   
+	}
+	
+	
+	
+	
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsgType(EnumMsgType msgType) {
+		this.msgType = msgType;
+	}
+
+	public EnumMsgType getMsgType() {
+		return msgType;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setAffectedPlayer(Player affectedPlayer) {
+		this.affectedPlayer = affectedPlayer;
+	}
+
+	public Player getAffectedPlayer() {
+		return affectedPlayer;
+	}
+
+
+
+}

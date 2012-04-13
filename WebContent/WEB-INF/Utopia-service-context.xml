@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/aop
+      http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+      http://www.springframework.org/schema/tx
+      http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+      http://www.springframework.org/schema/context 
+      http://www.springframework.org/schema/context/spring-context-3.0.xsd
+      http://www.springframework.org/schema/task
+      http://www.springframework.org/schema/task/spring-task-3.0.xsd      
+      http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+      http://www.springframework.org/schema/jee ">
+
+	<context:annotation-config />
+	<context:component-scan base-package="co.edu.udea.ludens.domain"/>   
+	<context:component-scan base-package="co.edu.udea.ludens.services.impl"/> 
+	<context:component-scan base-package="co.edu.udea.ludens.scheduling"/> 
+	<context:component-scan base-package="co.edu.udea.ludens.dao"/> 
+	<context:component-scan base-package="co.edu.udea.ludens.test"/> 
+
+    
+    <task:annotation-driven/>
+    
+      <!-- Add JPA support -->
+  <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+     <property name="loadTimeWeaver">
+     <bean class= "org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
+      </property>
+  </bean>
+ 
+   <!-- Add Transaction support -->
+  <bean id="myTxManager"  class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emf"/>
+  </bean>
+ 
+   <!-- Use @Transaction annotations for managing transactions -->
+  <tx:annotation-driven transaction-manager="myTxManager" />
+ 
+
+ 
+
+
+    <!-- Warning!! that bean name HAS BEEN hardcoded in ConstantsLudens file -->
+    <bean name="firstRunConfiguration" class="co.edu.udea.ludens.services.impl.FirstRunConfigurationImpl"
+		scope="singleton"  >
+	</bean>
+	
+
+
+	<bean name="serviceLocator" class="co.edu.udea.ludens.services.ServiceLocator"
+		scope="prototype">
+		<lookup-method name="getElementProcess" bean="elementProcess" />
+		<lookup-method name="getGameProcess" bean="gameProcess" />
+		<lookup-method name="getTradeProcess" bean="tradeProcess" />
+		<lookup-method name="getEventProcess" bean="eventProcess" />
+		<lookup-method name="getSimpleTriggerBean" bean="simpleTriggerBean" />
+
+	</bean>
+
+   <bean id="scheduleFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"></bean>
+   
+   <bean name="jobDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
+      <property name="jobClass" value="co.edu.udea.ludens.scheduling.UtopiaExecutor"/>
+   </bean>
+
+   <bean id="simpleTriggerBean" class="org.springframework.scheduling.quartz.SimpleTriggerBean"></bean>
+
+    <bean name="userDao" class="co.edu.udea.ludens.dao.UserDAOImpl"	>				
+  
+	</bean>
+	
+	 <bean name="gameDao" class="co.edu.udea.ludens.dao.GameDAOImpl" >
+				
+	</bean>
+	
+    <bean name="playerDao" class="co.edu.udea.ludens.dao.PlayerDAOImpl" >
+    		
+	</bean>
+
+    <bean name="incrementableDao" class="co.edu.udea.ludens.dao.IncrementableDAOImpl">
+    		
+	</bean>
+	
+	<bean name="incrementableConstraintDao" class="co.edu.udea.ludens.dao.IncrementableConstraintDAOImpl">
+    		
+	</bean>
+	
+	<bean name="elementDao" class="co.edu.udea.ludens.dao.ElementDAOImpl" >
+	
+	</bean>
+		
+	<bean name="eventProcess" class="co.edu.udea.ludens.services.impl.EventProcessImpl"	scope="prototype">
+	</bean>
+
+	<bean name="elementProcess" class="co.edu.udea.ludens.services.impl.ElementProcessImpl"	scope="prototype" />
+
+	<bean name="gameProcess" class="co.edu.udea.ludens.services.impl.GameProcessImpl"	scope="prototype">
+		<property name="serviceLocator" ref="serviceLocator" />
+	</bean>
+
+	<bean name="userService" class="co.edu.udea.ludens.services.impl.UserServiceImpl">
+	</bean>
+	
+	<bean name="gameService" class="co.edu.udea.ludens.services.impl.GameServiceImpl">
+	</bean>
+
+	<bean name="playerService" class="co.edu.udea.ludens.services.impl.PlayerServiceImpl">
+	</bean>
+
+
+	<bean name="tradeProcess" class="co.edu.udea.ludens.services.impl.TradeProcessImpl"
+		scope="prototype">	
+	</bean>
+
+	<bean name="elementService" class="co.edu.udea.ludens.services.impl.ElementServiceImpl">
+	</bean>
+	
+	
+	
+	<bean name="incrementableService" class="co.edu.udea.ludens.services.impl.IncrementableServiceImpl">
+	</bean>
+	
+	
+
+
+
+</beans>

@@ -1,0 +1,147 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:ice-cc="http://www.icesoft.com/icefaces-composite-comps">
+
+<head>
+
+<ice:outputStyle href="../xmlhttp/css/rime/rime.css" id="outputStyle1" />
+
+</head>
+<body>
+
+<ice:form>
+ 	<h4 id="title_maps"
+		style="color: #222222; background-color: #f5b604; -moz-border-radius: 5px 5px 5px 5px; border: 2px solid #f5b604; width: 100%">Usuarios
+	</h4>
+ 
+ <ice:commandButton  id="btnNewUser" actionListener="#{userController.newUser}" rendered="#{!userController.editingUser}" style="top: 90%; position: relative" value="Nuevo Usuario"/> 
+ <ice:panelGrid id="pnlEditUser" rendered="#{userController.editingUser}" width="100%" >
+ 
+ <ice:panelGrid   columns="2" border="0" width="50%"> 
+
+ <ice:outputLabel   id="lblName" value="Nombre:"/>
+ <ice:inputText style="width:250px;" id="iptName"  value="#{userController.actualUser.name}"/>
+ 
+ <ice:outputLabel  id="lblLogin" value="Login:"/>
+ <ice:inputText style="width:100px;"  id="iptLogin"  value="#{userController.actualUser.login}"/>
+ 
+ <ice:outputLabel  id="lblEmail" value="Email:"/>
+ <ice:inputText style="width:250px;"  id="iptEmail"  value="#{userController.actualUser.email}"/>
+ 
+ <ice:outputLabel  id="lblRole" value="Role:"/>
+ <ice:selectOneMenu style="width:120px;border:1px solid #AAAAAA"
+						id="somRoles"
+						value="#{userController.actualUser.role}" partialSubmit="true">
+						<f:selectItems id="slctResource" value="#{userController.roles}" />
+</ice:selectOneMenu>
+ 
+ <ice:outputLabel  id="lblPassw" value="Password:"/>
+ <ice:inputSecret style="width:100px;"  id="iptPassw"  value="#{userController.actualUser.password}"/>
+ 
+  <ice:outputLabel  id="lblRepeatPassw" value="Repetir Password:"/>
+ <ice:inputSecret style="width:100px;"  id="iptRepeatPassw"  value="#{userController.repeatedPassword}"/>
+
+ 
+ </ice:panelGrid>
+ 
+  <ice:panelGrid   columns="2" border="0" width="20%"> 
+	<ice:commandButton  id="btnSave" actionListener="#{userController.saveUser}" style="top: 90%; position: relative" inmediate="true" value="Guardar "/> 
+ 	<ice:commandButton  id="btnCancel" actionListener="#{userController.cancelEditing}" style="top: 90%; position: relative" inmediate="true" value="Cancelar "/>
+  </ice:panelGrid>
+
+
+ </ice:panelGrid>
+
+ <ice:dataTable binding="#{userController.tableUsers}" rendered="#{!userController.editingUser}" headerClass="icelist-header" id="tableUsers" rowClasses="rowClass1,rowClass2" rows="20"  value="#{userController.users}" var="user" width="100%">
+
+ <ice:column>
+
+ <f:facet name="header">
+ <ice:outputText  value="Nombre"/>
+ </f:facet> 
+ <ice:outputText style="text-align:center " value="#{user.name}"/>
+
+ </ice:column>
+
+ <ice:column> 
+ <f:facet name="header">
+ <ice:outputText  value="Login"/>
+ </f:facet>
+ <ice:outputText style="text-align:center " value="#{user.login}"/>
+ </ice:column>
+
+ <ice:column>
+ <f:facet name="header">
+ <ice:outputText  value="Email"/>
+ </f:facet> 
+ <ice:outputText style="width: 300px" value="#{user.email}"/>
+ </ice:column>
+
+ <ice:column>
+ <f:facet name="header"> 
+ <ice:outputText  value="Role"/>
+ </f:facet> 
+ <ice:outputText style="text-align:center" value="#{user.role.roleName}"/> 
+ </ice:column>
+ 
+  <ice:column>
+ <f:facet name="header"> 
+ <ice:outputText  value="Acciones"/>
+ </f:facet> 
+    <ice:commandButton  id="btnEdit" actionListener="#{userController.editUser}" style="top: 90%; position: relative" value="Editar"/> 
+     <ice:commandButton  id="btnDelete" actionListener="#{userController.deleteUser}" style="top: 90%; position: relative" value="Eliminar"/>
+ 	
+ </ice:column>
+
+</ice:dataTable>
+
+<div style="width:500px; margin: 0 auto;" >
+                                        <ice:dataPaginator rendered="#{!userController.editingUser}" for="tableUsers" id="dataPaginator2" paginatorMaxPages="15"
+                                             rowsCountVar="rowsCount"
+            								 displayedRowsCountVar="displayedRowsCount"
+            								 firstRowIndexVar="firstRowIndex"
+            								 lastRowIndexVar="lastRowIndex"
+            								 pageCountVar="pageCount"
+                                             pageIndexVar="pageIndex"                                     
+                                        
+                                        >
+                                        
+                                        <ice:outputFormat
+                						styleClass="standard"	value="{0} usuarios en total, mostrando tan solo {1} en esta página. Página {4} / {5}.">
+            							<f:param value="#{rowsCount}"/>
+            							<f:param value="#{displayedRowsCount}"/>
+            							<f:param value="#{firstRowIndex}"/>
+            							<f:param value="#{lastRowIndex}"/>
+            							<f:param value="#{pageIndex}"/>
+            							<f:param value="#{pageCount}"/>
+        								</ice:outputFormat>
+                                        
+                                        <f:facet name="first">
+                                            <ice:graphicImage id="graphicImage7" url="../xmlhttp/css/rime/css-images/arrow-first.gif"/>
+                                        </f:facet>
+                                        <f:facet name="last">
+                                            <ice:graphicImage id="graphicImage8" url="../xmlhttp/css/rime/css-images/arrow-last.gif"/>
+                                        </f:facet>
+                                        <f:facet name="previous">
+                                            <ice:graphicImage id="graphicImage9" url="../xmlhttp/css/rime/css-images/arrow-previous.gif"/>
+                                        </f:facet>
+                                        <f:facet name="next">
+                                            <ice:graphicImage id="graphicImage10" url="../xmlhttp/css/rime/css-images/arrow-next.gif"/>
+                                        </f:facet>
+                                        <f:facet name="fastforward">
+                                            <ice:graphicImage id="graphicImage11" url="../xmlhttp/css/rime/css-images/arrow-ff.gif"/>
+                                        </f:facet>
+                                        <f:facet name="fastrewind">
+                                            <ice:graphicImage id="graphicImage12" url="../xmlhttp/css/rime/css-images/arrow-fr.gif"/>
+                                        </f:facet>
+                                    </ice:dataPaginator>
+                                    
+                                   </div>
+</ice:form>
+
+</body>
+</html>
