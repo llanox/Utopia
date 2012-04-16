@@ -43,7 +43,7 @@ public class ObjectDBDAO implements DBDAO {
 			logger.info("saving new object "+o);
 			em.persist(o);
 		}else{			
-			logger.info("merging old object ");
+			logger.info("merging old object "+o);
 			em.merge(o);
 		}
 		

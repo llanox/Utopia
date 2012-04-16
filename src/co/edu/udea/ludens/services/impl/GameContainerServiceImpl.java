@@ -141,6 +141,9 @@ public class GameContainerServiceImpl implements GameContainerService {
 		
 		if (game.getStatus() == EnumGameStatus.NO_STARTED) {
 
+			logger.debug("starting game ");
+			game.setStatus(EnumGameStatus.STARTED);
+			game.setStartTime(new Date());			
 			GameProcess process = serviceLocator.createGameProcess();
 			process.setGame(game);
 			process.startGame();
@@ -150,8 +153,10 @@ public class GameContainerServiceImpl implements GameContainerService {
 		}
 
 		if (game.getStatus() == EnumGameStatus.STARTED) {
-			GameProcess process = null;
-		
+			
+			logger.debug("restarting game ");
+			
+			GameProcess process = null;		
 			
 			process = (GameProcess) processHolderService.findProcessById(GameProcess.class, game.getName());
 

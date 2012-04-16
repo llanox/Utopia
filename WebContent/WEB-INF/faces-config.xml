@@ -264,6 +264,11 @@
 			<property-name>incrementableService</property-name>
 			<value>#{incrementableService}</value>
 	</managed-property>
+	 	<managed-property>
+			<property-name>gameService</property-name>
+			<value>#{gameService}</value>
+	</managed-property>
+	
  	<managed-property>
  		<property-name>gameController</property-name>
  		<property-class></property-class>

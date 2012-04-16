@@ -32,7 +32,7 @@ public class Player  implements Updateable {
 	private boolean producing;	
 	private HashMap<String, Element> developmentFactors;
 	private HashMap<String, Element> materials ;
-	private Element population = new Element();
+	private Element population;
 
 	
 

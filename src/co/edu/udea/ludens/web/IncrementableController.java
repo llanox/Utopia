@@ -14,6 +14,7 @@ import co.edu.udea.ludens.domain.IncrementableConstraint;
 import co.edu.udea.ludens.enums.EnumElementType;
 import co.edu.udea.ludens.exceptions.LudensException;
 import co.edu.udea.ludens.services.ElementService;
+import co.edu.udea.ludens.services.GameService;
 import co.edu.udea.ludens.services.IncrementableService;
 import co.edu.udea.ludens.util.UpdateableView;
 
@@ -51,6 +52,7 @@ public class IncrementableController implements UpdateableView{
 
 	private IncrementableService incrementableService;
 	private ElementService elementService;
+	private GameService gameService;
 
 	@PostConstruct
 	public void loadIncrementables() {
@@ -130,8 +132,10 @@ public class IncrementableController implements UpdateableView{
 		
 		
 		logger.info("Incrementable type to save: "+ actualIncrementable.getType());
-		actualIncrementable.setGame(gameController.getActualGame());
-		incrementableService.save(actualIncrementable);
+
+		incrementableService.save(actualIncrementable);		
+		gameController.getActualGame().getDefaultIncrementables().add(actualIncrementable);		
+		gameService.save(gameController.getActualGame());
 		
 		actualIncrementable = new Incrementable();
 		loadIncrementables();
@@ -462,6 +466,19 @@ public class IncrementableController implements UpdateableView{
 	 */
 	public String getConstraintMaterial() {
 		return constraintMaterial;
+	}
+
+
+
+
+
+
+
+
+
+
+	public void setGameService(GameService gameService) {
+		this.gameService = gameService;
 	}
 
 

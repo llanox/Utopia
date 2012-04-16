@@ -1,8 +1,6 @@
 package co.edu.udea.ludens.services;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import co.edu.udea.ludens.domain.Player;
 

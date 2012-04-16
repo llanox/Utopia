@@ -31,7 +31,7 @@ public class Incrementable implements Updateable {
 	private int productionIncrementRate;	
 	private int initialValue;
 	private long initialUpgradingTime;
-	@ManyToOne(cascade = {CascadeType.MERGE}) 
+	@ManyToOne(fetch=FetchType.EAGER,cascade = {CascadeType.MERGE}) 
 	private Game game;
 
 	@OneToMany(fetch=FetchType.EAGER,mappedBy="restrictedIncrementable",cascade = { CascadeType.MERGE}) 

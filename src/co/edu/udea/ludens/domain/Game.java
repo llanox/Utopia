@@ -34,13 +34,13 @@ public class Game implements Updateable {
 
 
 	
-	@OneToMany(fetch=FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
+	@OneToMany(orphanRemoval=true,fetch=FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
 	private List<Player> players = new ArrayList<Player>();
 
-	@OneToMany(fetch=FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
+	@OneToMany(orphanRemoval=true,fetch=FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
 	private List<UnexpectedEvent> unexpectedEvents = new ArrayList<UnexpectedEvent>();	
    
-	@OneToMany(fetch=FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
+	@OneToMany(orphanRemoval=true,fetch=FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
 	private List<Incrementable> defaultIncrementables = new ArrayList<Incrementable>();
 
 	

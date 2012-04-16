@@ -20,15 +20,16 @@ public class GameDAOImpl extends ObjectDBDAO implements GameDAO {
 	}
 
 	public Game findGameByUserName(String userName) {
+		
 		throw new RuntimeException("Función No implementada");
 	}
 
 	@Override
 	public Game findGameByName(String gameName) {
-
+  
 		Game game = null;
-		String sql="Select g from Game g Where g.name like '%"+gameName+"'";
-		TypedQuery<Game> q2 = em.createQuery(sql, Game.class);
+		String jpql="Select g from Game g Where g.name like '%"+gameName+"'";
+		TypedQuery<Game> q2 = em.createQuery(jpql, Game.class);
 		List<Game> games = q2.getResultList();
 		
 		if(games!=null && !games.isEmpty())

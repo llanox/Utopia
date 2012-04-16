@@ -2,6 +2,7 @@ package co.edu.udea.ludens.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -17,7 +18,7 @@ public class IncrementableConstraint implements Updateable {
 	private Long id;
 	private Integer level;	
 	private String elementName;
-	@ManyToOne(cascade=CascadeType.MERGE) 
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.MERGE) 
 	private Incrementable restrictedIncrementable;
 	private int initialValue;
 	private int incrementRate;

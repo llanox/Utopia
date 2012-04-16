@@ -78,13 +78,7 @@ public class GameProcessImpl  implements GameProcess  {
 		gameService.generateUnexpectedEvents(game);
 		elementService.createElementsForEachPlayer(game);
 	    game.setStatus(EnumGameStatus.STARTED);
-		game.setStartTime(new Date());
-
-		String name = game.getName();
-		game.setName(name + "Started" + System.currentTimeMillis());
-		gameService.save(game);
-		
-				
+		game.setStartTime(new Date());		
 		createAdditionalProcesses();
 	
 	}

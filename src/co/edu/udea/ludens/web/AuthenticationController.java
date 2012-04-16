@@ -2,6 +2,7 @@ package co.edu.udea.ludens.web;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import co.edu.udea.ludens.domain.Game;
 import co.edu.udea.ludens.domain.Incrementable;
 import co.edu.udea.ludens.domain.Player;
 import co.edu.udea.ludens.domain.User;
+import co.edu.udea.ludens.enums.EnumGameStatus;
 import co.edu.udea.ludens.enums.EnumUserRole;
 import co.edu.udea.ludens.exceptions.LudensException;
 import co.edu.udea.ludens.services.GameContainerService;
@@ -37,11 +39,7 @@ public class AuthenticationController {
 	private static final String DIRECTOR_PAGE = "director";
 	//Controllers
 	
-//	private UserSessionBean userSession;
-//	private BoardController boardController;
-//	private ReportController reportController;
-//	private TradeController tradeController;
-//	private UnexpectedEventController eventController;
+
 	
 	private List<String> ludensListenersName = new ArrayList<String>();
 	private List<LudensListener> ludensListeners = new ArrayList<LudensListener>();
@@ -87,7 +85,8 @@ public class AuthenticationController {
 	
 	@PostConstruct
 	public void subscribingListeners(){
-		for(String name : ludensListenersName){
+		
+		for(String name : ludensListenersName){			
 			
 			if(name==null)
 				continue;
@@ -141,18 +140,18 @@ public class AuthenticationController {
 				
 				
 				userSession.setActualGame(game.getName());
+//				List<Incrementable> incrementables = incrementableService.getAllIncrementablesGame(game.getName());
+//				game.setDefaultIncrementables(incrementables);
+//				
+//				List<Player> players = playerService.findAllPlayersByGameName(true,game.getName());
+//                game.setPlayers(players);
+//				
 
-				List<Incrementable> incrementables = incrementableService.getAllIncrementablesGame(game.getName());
-				game.setDefaultIncrementables(incrementables);
-				
-				List<Player> players = playerService.findAllPlayersByGameName(true,game.getName());
-                game.setPlayers(players);
-				
-
+               
+               
+               
                 gameContainerService.startGame(game);
-                
                 gameService.save(game);
-                
                 gameContainerService.suscribeListeners(userSession,ludensListeners);
 
 			

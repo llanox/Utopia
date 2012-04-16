@@ -26,7 +26,7 @@ public interface ElementProcess extends Process{
 	public void setPlayer(Player player);
 	public Player getPlayer();
 	
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = false)
+
 	//@Async
 	public void produceElements();
 	

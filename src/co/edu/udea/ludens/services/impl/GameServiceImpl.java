@@ -73,12 +73,10 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public Game findByUserLogin(String userName) {	
-		Player player =  playerDao.findPlayerByUserName(userName);
-		logger.info("Player "+player );
-		logger.debug("Game for player: "+player.getGame().getName());
 		
-		
+		Player player = playerDao.findPlayerByUserName(userName);		
 		Game game = player.getGame();
+		
 		return game;
 	}
 
@@ -286,7 +284,7 @@ public class GameServiceImpl implements GameService {
     			}
     			
     			if(counter < ALEAST_N_MATERIALS){
-    				throw new InvalidNumberOfMaterialsException("Se debe tener al menos "+ALEAST_N_MATERIALS+" materiales definidos en el juego");
+    				throw new InvalidNumberOfMaterialsException("Se tiene "+counter+" materiales y se debe tener al menos "+ALEAST_N_MATERIALS+" materiales definidos en el juego");
     			}
     		}
               	
