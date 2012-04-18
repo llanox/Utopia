@@ -1,6 +1,6 @@
 #!/bin/bash
-desktopProject=/media/Data/DropBox/Dropbox/Projects/Desktop/Ludens
-webProject=/media/Data/DropBox/Dropbox/Projects/Web/Utopia
+desktopProject=../Ludens
+webProject=../../../Utopia/Web
 echo "Cambiando de dir"
 cd $desktopProject/Test/
 
