@@ -155,6 +155,8 @@ class LevelConstraintsContainer {
 
     public void updateElements(List<Object> elements, EnumDataType dataType) {
 
+        if(elements == null)
+            return;
 
         for (Object o : elements) {
             Element el = (Element) o;
