@@ -1,0 +1,4 @@
+keytool -genkey -alias ludens2012 -keystore ludens2012 
+password:ludens2012
+
+jarsigner -keystore ezrad2012 -signedjar ezInstall.jar ezInstallTmp.jar ezrad
