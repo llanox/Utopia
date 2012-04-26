@@ -112,7 +112,8 @@ public class ElementProcessImpl implements ElementProcess {
 		logger.info("population ---");
 		elementsBeans = producer.produce(population, this);
 		notifyEvent(elementsBeans, EnumEventType.POPULATION_PRODUCTION);
-
+		
+        
 		producer = ProducerFactory.createProducer(EnumElementType.MATERIAL);
 		logger.info("materials ---");
 		elementsBeans = producer.produce(materials, this);

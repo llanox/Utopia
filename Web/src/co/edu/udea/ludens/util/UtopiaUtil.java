@@ -43,6 +43,8 @@ public class UtopiaUtil {
 		logger.info("LambdaD .." + lambdaD);
 
 		Double result = p0 * Math.exp(lambdaD * n);
+		
+		logger.info(p0+"*E^("+lambdaD+"*"+n+")");
 
 		logger.info("result .." + result);
 
@@ -193,7 +195,7 @@ public class UtopiaUtil {
 
 		double capacity = element.getQuantity();
 		double population = player.getPopulation().getQuantity();
-		int coverage = (int) ((population * capacity) / 100);
+		int coverage = (int) ((capacity/population)*100);
 
 		logger.info("Coverage: " + coverage + " element " + element.getIncrementable()+ " population " + population + " capacity " + capacity);
 

@@ -16,6 +16,8 @@ public class FactorProducerWithGrowthRate implements ProducerStrategy {
 	
 	Logger logger = Logger.getLogger(FactorProducerWithGrowthRate.class);
 	
+
+	
 	@Override
 	public List<ElementBean> produce(Object supplies,ElementProcess process) {
 		HashMap<String, Element> elements = (HashMap<String, Element>) supplies;
@@ -27,8 +29,28 @@ public class FactorProducerWithGrowthRate implements ProducerStrategy {
 
 			Element element = elements.get(key);
 			Player player = process.getPlayer();
+	
 			
+			Integer n = element.getLevel();
+			Integer lambda = element.getProductionIncrementRate();
+			Integer p0= element.getIncrementable().getInitialValue();			
+			double increment=0.0;
+		    
+		
+			
+			logger.info("level :"+n+" lambda: "+lambda+" p0 "+p0);			
+			increment = UtopiaUtil.calculateExpGrowth(p0, lambda, n);				
+			element.setCalculatedValue((int)(0+increment));					
+			Integer result = (int) (element.getQuantity() + increment);
+			
+			
+			logger.info("P0 "+p0+" Increment "+increment+"  "+element.getIncrementable().getName()+" result "+result);
+			
+		    
+		    element.setQuantity(result);
 
+			
+			
 		    UtopiaUtil.calculateCoverage(element, player);
 			
 	 
