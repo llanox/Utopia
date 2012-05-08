@@ -1,12 +1,12 @@
 package co.edu.udea.ludens.services;
 
 import co.edu.udea.ludens.domain.Game;
-import co.edu.udea.ludens.scheduling.UtopiaTask;
 
 
 
 
-public interface GameProcess extends UtopiaTask, Process  {
+
+public interface GameProcess extends  Process  {
 	
 	public void setGame(Game game);
 	public Game getGame();	

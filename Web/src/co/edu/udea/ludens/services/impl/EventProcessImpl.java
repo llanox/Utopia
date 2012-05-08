@@ -14,7 +14,7 @@ import co.edu.udea.ludens.domain.MessageEvent;
 import co.edu.udea.ludens.domain.Player;
 import co.edu.udea.ludens.domain.UnexpectedEvent;
 import co.edu.udea.ludens.enums.EnumMsgs;
-import co.edu.udea.ludens.scheduling.UtopiaTask;
+import co.edu.udea.ludens.scheduling.Worker;
 import co.edu.udea.ludens.services.EventProcess;
 import co.edu.udea.ludens.services.PlayerService;
 import co.edu.udea.ludens.util.MessageListener;
@@ -22,7 +22,7 @@ import co.edu.udea.ludens.util.UnexpectedEventListener;
 import co.edu.udea.ludens.util.UtopiaUtil;
 
 
-public class EventProcessImpl implements EventProcess, UtopiaTask {
+public class EventProcessImpl implements EventProcess{
 
 	private Game game;
 	private static final String EVENT_PROCESS="eventProcess";
@@ -180,16 +180,12 @@ public class EventProcessImpl implements EventProcess, UtopiaTask {
 	}
 
 
-	public void doWork() {
-		eventHappening();
-		
-	}
-
-	@Override
+	
 	public String getId() {
 		// TODO Auto-generated method stub
 		return EVENT_PROCESS+"_"+game.getName();
 	}
+
 
 
 

@@ -196,7 +196,7 @@ public class GameProcessImpl  implements GameProcess  {
 
 
 
-	@Override
+
 	public void doWork() {
 		produceElements(); 		
 	}
@@ -208,7 +208,7 @@ public class GameProcessImpl  implements GameProcess  {
 
 
 
-	@Override
+
 	public String getId() {
 
 		return GAME_PROCESS+"_"+game.getName();
