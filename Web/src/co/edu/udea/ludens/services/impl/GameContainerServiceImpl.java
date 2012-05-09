@@ -14,6 +14,7 @@ import co.edu.udea.ludens.domain.User;
 import co.edu.udea.ludens.enums.EnumEventType;
 import co.edu.udea.ludens.enums.EnumGameStatus;
 import co.edu.udea.ludens.exceptions.LudensException;
+import co.edu.udea.ludens.scheduling.UtopiaProcessor;
 import co.edu.udea.ludens.services.ElementProcess;
 import co.edu.udea.ludens.services.ElementService;
 import co.edu.udea.ludens.services.EventProcess;
@@ -48,6 +49,9 @@ public class GameContainerServiceImpl implements GameContainerService {
 	
 	@Autowired
 	private GameService gameService;	
+	
+	@Autowired
+	private UtopiaProcessor utopiaProcessor;	
 	
 	
 

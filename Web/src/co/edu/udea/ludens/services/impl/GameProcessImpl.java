@@ -34,8 +34,10 @@ public class GameProcessImpl  implements GameProcess  {
 	
 	private Game game;
 	private ServiceLocator serviceLocator;
+	
 	@Autowired
 	private GameService gameService;	
+	
 	@Autowired
 	private ElementService elementService;
 

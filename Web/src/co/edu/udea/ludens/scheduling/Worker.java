@@ -4,10 +4,11 @@ import org.springframework.stereotype.Component;
 
 
 @Component("syncWorker")
-public interface Worker {
+public interface Worker extends Runnable {
 	
-	public void work();
+	public void run();
 
+	public void work();
 
 	public long thresholdTime();
 
