@@ -70,7 +70,7 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 	    List<Player> players= new ArrayList<Player>();
 		Class clazz = Player.class;
 	
-		String SQL ="SELECT o FROM " + clazz.getName()+ " o  WHERE o.game.name "+" LIKE '%"+ gameName + "' AND o.user.participatingInGame.toString() "+" LIKE '%"+ participatingInGame + "'";
+		String SQL ="SELECT o FROM " + clazz.getName()+ " o JOIN FETCH o.materials WHERE o.game.name "+" LIKE '%"+ gameName + "' AND o.user.participatingInGame.toString() "+" LIKE '%"+ participatingInGame + "'";
 		
 		CriteriaQuery<Object> query = em.getCriteriaBuilder().createQuery();
 		TypedQuery<Player> q2 = em.createQuery(SQL, clazz);

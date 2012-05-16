@@ -57,9 +57,13 @@ public class UtopiaUtil {
 
 		elements.putAll(player.getMaterials());
 		elements.putAll(player.getDevelopmentFactors());
+		
+		System.out.println("Elements "+elements.size());
 
 		boolean elementsOk = isHigherThanRequired(elements);
-
+		System.out.println("Elements OK? "+elementsOk);
+		
+		
 		return elementsOk;
 	}
 

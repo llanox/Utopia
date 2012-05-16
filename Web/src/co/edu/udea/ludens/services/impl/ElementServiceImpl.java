@@ -252,15 +252,27 @@ public class ElementServiceImpl implements ElementService {
 	}
 
 	@Override
-	public Set<Element> getAllElementsByPlayer(EnumElementType material,String login) {
+	public Set<Element> getAllElementsByPlayer(EnumElementType type,String login) {
 		
 		Set<Element> elements  = new HashSet<Element>();
 		
 		Player player = playerDao.findPlayerByUserName(login);
+		HashMap<String,Element> hashMap = new HashMap<String,Element>();
 		
-		for(Object key: player.getMaterials().keySet()){			
-			elements.add(player.getMaterials().get(key));
+		
+		if(EnumElementType.MATERIAL == type){
+			hashMap = player.getMaterials();
 		}
+		
+		if(EnumElementType.FACTOR == type){			
+			hashMap = player.getDevelopmentFactors();			
+		}
+		
+		for(Object key: hashMap.keySet()){			
+		elements.add(hashMap.get(key));
+	    }
+	
+	
 		
 		return elements;
 	}

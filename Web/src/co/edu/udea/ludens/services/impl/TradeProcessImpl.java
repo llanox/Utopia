@@ -419,14 +419,6 @@ public class TradeProcessImpl implements TradeProcess {
 
 
 
-	
-
-
-	
-
-
-
-
 
 	
 }

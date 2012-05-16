@@ -14,7 +14,6 @@ import co.edu.udea.ludens.domain.MessageEvent;
 import co.edu.udea.ludens.domain.Player;
 import co.edu.udea.ludens.domain.UnexpectedEvent;
 import co.edu.udea.ludens.enums.EnumMsgs;
-import co.edu.udea.ludens.scheduling.Worker;
 import co.edu.udea.ludens.services.EventProcess;
 import co.edu.udea.ludens.services.PlayerService;
 import co.edu.udea.ludens.util.MessageListener;
@@ -187,10 +186,6 @@ public class EventProcessImpl implements EventProcess{
 	}
 
 
-
-
-	
-	
 	
 	
 	

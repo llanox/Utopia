@@ -6,7 +6,7 @@ import co.edu.udea.ludens.domain.Game;
 
 
 
-public interface GameProcess extends  Process  {
+public interface GameProcess  extends  Process  {
 	
 	public void setGame(Game game);
 	public Game getGame();	

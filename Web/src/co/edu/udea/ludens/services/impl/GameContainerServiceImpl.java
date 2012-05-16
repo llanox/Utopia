@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
 
 import co.edu.udea.ludens.domain.Game;
@@ -14,9 +15,8 @@ import co.edu.udea.ludens.domain.User;
 import co.edu.udea.ludens.enums.EnumEventType;
 import co.edu.udea.ludens.enums.EnumGameStatus;
 import co.edu.udea.ludens.exceptions.LudensException;
-import co.edu.udea.ludens.scheduling.UtopiaProcessor;
+import co.edu.udea.ludens.scheduling.MaterialsProductionTask;
 import co.edu.udea.ludens.services.ElementProcess;
-import co.edu.udea.ludens.services.ElementService;
 import co.edu.udea.ludens.services.EventProcess;
 import co.edu.udea.ludens.services.GameContainerService;
 import co.edu.udea.ludens.services.GameProcess;
@@ -51,7 +51,7 @@ public class GameContainerServiceImpl implements GameContainerService {
 	private GameService gameService;	
 	
 	@Autowired
-	private UtopiaProcessor utopiaProcessor;	
+	private TaskScheduler productionScheduler;	
 	
 	
 
@@ -148,10 +148,7 @@ public class GameContainerServiceImpl implements GameContainerService {
 			logger.debug("starting game ");
 			game.setStatus(EnumGameStatus.STARTED);
 			game.setStartTime(new Date());			
-			GameProcess process = serviceLocator.createGameProcess();
-			process.setGame(game);
-			process.startGame();
-			processHolderService.putProcess(game.getId().toString(), process);
+			creatingGameProcess(game);
 
 			return;
 		}
@@ -167,12 +164,7 @@ public class GameContainerServiceImpl implements GameContainerService {
 			if (process != null)
 				return;//
 
-			logger.debug("Service Locator " + serviceLocator);
-			process = serviceLocator.createGameProcess();
-
-			process.setGame(game);
-			process.startGame();
-			processHolderService.putProcess(game.getId().toString(), process);
+			creatingGameProcess(game);
 
 			return;
 		}
@@ -182,6 +174,17 @@ public class GameContainerServiceImpl implements GameContainerService {
 
 		}
 
+	}
+
+	private void creatingGameProcess(Game game) {
+		GameProcess process = serviceLocator.createGameProcess();
+		process.setGame(game);
+		process.startGame();
+		processHolderService.putProcess(game.getId().toString(), process);
+		logger.info("Production time "+game.getProductionTime());
+		MaterialsProductionTask materialsProductionTask = new MaterialsProductionTask(process);
+		productionScheduler.scheduleAtFixedRate(materialsProductionTask,new Date(),game.getProductionTime());
+		
 	}
 
 	@Override
