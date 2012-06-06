@@ -20,6 +20,7 @@ public interface IncrementableService {
 	public List<IncrementableConstraint> getAllConstraints();
 	public List<IncrementableConstraint> getAllConstraints(String name, String name2);
 	public void createResourceConstraints(Incrementable actualIncrementable) throws LudensException;
+	public void deleteResourceConstraints(Incrementable actualIncrementable) throws LudensException;
 	
 
 }

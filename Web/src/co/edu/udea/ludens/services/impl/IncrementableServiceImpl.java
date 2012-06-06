@@ -178,6 +178,26 @@ public class IncrementableServiceImpl implements IncrementableService {
 		return incrementableConstraintDao;
 	}
 
+	@Override
+	public void deleteResourceConstraints(Incrementable actualIncrementable) throws LudensException {
+	
+		if(actualIncrementable.getGame()==null)
+			throw new LudensException("No fue definido un juego para el actual incrementable");
+		
+		
+					
+
+    	for(IncrementableConstraint constraint: actualIncrementable.getConstraints()){
+			
+             logger.info("Deleting constraint for "+constraint.getElementName());            
+		    	incrementableConstraintDao.delete(constraint);
+		
+			
+		}
+    	    
+		
+	}
+
 
 
 }

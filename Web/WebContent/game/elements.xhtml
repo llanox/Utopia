@@ -173,13 +173,31 @@
 			</ice:panelGrid>
 
 
-			<ice:panelGrid id="pnlTableElements"
-				rendered="#{!incrementableController.editingElement}">
+			<ice:panelGrid id="pnlTableElements" 	rendered="#{!incrementableController.editingElement}">
 
-				<ice:commandButton id="btnNewElement"
+				<div>
+				<ice:commandButton id="btnNewElement" 
+				    disabled="#{incrementableController.settingUpConstraints}"
 					actionListener="#{incrementableController.newIncrementable}"
 					style="top: 90%; position: relative" value="Nuevo Elemento" />
-
+				
+				<ice:commandButton id="btnSetUpConstraints"
+				    rendered="#{!incrementableController.settingUpConstraints}"
+					actionListener="#{incrementableController.setupConstraints}"
+					style="top: 90%; position: relative" value="Establecer Restricciones">
+					
+					<f:setPropertyActionListener target="#{incrementableController.action}" value="action_setupconstraints" />
+				</ice:commandButton>	
+							
+					<ice:commandButton id="btnDeleteAllConstraints"
+					rendered="#{incrementableController.settingUpConstraints}"
+					actionListener="#{incrementableController.setupConstraints}"
+					style="top: 90%; position: relative" value="Limpiar Restricciones" >
+					<f:setPropertyActionListener target="#{incrementableController.action}" value="action_deleteallconstraints" />
+					</ice:commandButton>
+					
+				</div>
+				
 				<ice:dataTable
 					binding="#{incrementableController.incrementablesTable}"
 					headerClass="icelist-header" id="incrementablesTable"

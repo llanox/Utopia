@@ -2,9 +2,11 @@ package co.edu.udea.ludens.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.component.UIData;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
@@ -30,7 +32,8 @@ public class IncrementableController implements UpdateableView{
    
 	private boolean listingElements = true;
 	private boolean editingElement=false;
-	private boolean addingIncrementableImage=false;
+	private boolean addingIncrementableImage=false;	
+	private boolean settingUpConstraints=false;
 
 
 	private UIData incrementablesTable;
@@ -53,6 +56,18 @@ public class IncrementableController implements UpdateableView{
 	private IncrementableService incrementableService;
 	private ElementService elementService;
 	private GameService gameService;
+	
+	private String  action;
+
+	
+
+
+
+
+
+
+
+
 
 	@PostConstruct
 	public void loadIncrementables() {
@@ -112,19 +127,20 @@ public class IncrementableController implements UpdateableView{
     loadIncrementables();
 
 	}
-	
-	public void addConstraint(javax.faces.event.ActionEvent event) throws LudensException{
-		
-		logger.info("adding constraint....");
-		
-		IncrementableConstraint constraint = new IncrementableConstraint();
-		constraint.setRestrictedIncrementable(actualIncrementable);		
-		actualIncrementable.getConstraints().add(constraint);
-		incrementableService.save(actualIncrementable);
-		
-		incrementableService.createResourceConstraints(actualIncrementable);
-	
-	}
+
+//TODO Borrar no se usa	
+//	public void addConstraint(javax.faces.event.ActionEvent event) throws LudensException{
+//		
+//		logger.info("adding constraint....");
+//		
+//		IncrementableConstraint constraint = new IncrementableConstraint();
+//		constraint.setRestrictedIncrementable(actualIncrementable);		
+//		actualIncrementable.getConstraints().add(constraint);
+//		incrementableService.save(actualIncrementable);
+//		
+//		incrementableService.createResourceConstraints(actualIncrementable);
+//	
+//	}
 
 
 	public void saveIncrementable(javax.faces.event.ActionEvent event) {
@@ -147,11 +163,44 @@ public class IncrementableController implements UpdateableView{
 		actualIncrementable = new Incrementable();
 		actualIncrementable.setType(EnumElementType.MATERIAL);
 		actualIncrementable.setGame(gameController.getActualGame());
+				
 		
-		logger.info("new incrementable");
-	
-		incrementableService.createResourceConstraints(actualIncrementable);
 	}
+	
+	
+	public void setupConstraints(javax.faces.event.ActionEvent event) throws LudensException {
+		
+	        
+        logger.debug("action  .."+action);
+        incrementables = incrementableService.getAllIncrementablesGame(gameController.getActualGame().getName());
+        
+		if("action_setupconstraints".equalsIgnoreCase(action)){		
+			logger.debug("creating constraints ..");			
+			
+			for(Incrementable incr: incrementables){
+			incrementableService.createResourceConstraints(incr);
+			
+			}
+			settingUpConstraints = true;
+			
+		}	
+		
+		if("action_deleteallconstraints".equalsIgnoreCase(action)){
+			
+			logger.debug("Deleting constraints ..");
+			
+			for(Incrementable incr: incrementables){
+				incrementableService.deleteResourceConstraints(incr);
+		    }
+			
+			settingUpConstraints=false;
+		
+		}
+	
+		loadIncrementables();
+	}
+	
+	
 
 	public void editingIncrementable(javax.faces.event.ActionEvent event) throws LudensException {
 		editingElement = true;
@@ -161,7 +210,7 @@ public class IncrementableController implements UpdateableView{
 		logger.info("Selected " + actualIncrementable.getName());
 
 
-		incrementableService.createResourceConstraints(actualIncrementable);
+
 	}
 	
 	
@@ -226,15 +275,11 @@ public class IncrementableController implements UpdateableView{
 
 
 	public void changeType(ValueChangeEvent vce) {
-		logger.info("changeType ");
-		logger.info("Old value " + vce.getOldValue());
-		logger.info("New value " + vce.getNewValue());	
-
+	
 			if (vce.getNewValue()!=null) {
 				EnumElementType type = EnumElementType.getElementType(vce.getNewValue().toString());
 				logger.info("Setting type " + type);
-				actualIncrementable.setType(type);
-				
+				actualIncrementable.setType(type);				
 			
 			}
 
@@ -482,6 +527,35 @@ public class IncrementableController implements UpdateableView{
 	}
 
 
+
+
+
+
+
+
+
+
+	public void setSettingUpConstraints(boolean settingUpConstraints) {
+		this.settingUpConstraints = settingUpConstraints;
+	}
+
+
+
+
+
+
+
+
+
+
+	public boolean isSettingUpConstraints() {
+		return settingUpConstraints;
+	}
+
+
+	public void setAction(String action) {
+		this.action = action;
+	}
 
 
 	
