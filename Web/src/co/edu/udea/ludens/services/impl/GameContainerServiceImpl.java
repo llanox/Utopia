@@ -147,43 +147,56 @@ public class GameContainerServiceImpl implements GameContainerService {
 
 			logger.debug("starting game ");
 			game.setStatus(EnumGameStatus.STARTED);
-			game.setStartTime(new Date());			
-			creatingGameProcess(game);
-
-			return;
+				
+		
 		}
 
-		if (game.getStatus() == EnumGameStatus.STARTED) {
+		if (game.getStatus() == EnumGameStatus.STARTED || game.getStatus() == EnumGameStatus.PAUSED) {
 			
-			logger.debug("restarting game ");
-			
-			GameProcess process = null;		
-			
-			process = (GameProcess) processHolderService.findProcessById(GameProcess.class, game.getName());
-
-			if (process != null)
-				return;//
-
-			creatingGameProcess(game);
-
-			return;
+			logger.debug("restarting game ");      
+			game.setStatus(EnumGameStatus.STARTED);
+					
 		}
 
 		if (game.getStatus() == EnumGameStatus.FINISHED) {
 			throw new LudensException("GAME OVER :-(");
 
 		}
+		
+		
+		GameProcess gameProcess = startGameProcess(game);
+		createTasksSchedule(game, gameProcess);
 
 	}
 
-	private void creatingGameProcess(Game game) {
-		GameProcess process = serviceLocator.createGameProcess();
+
+
+	private void createTasksSchedule(Game game, GameProcess gameProcess) {
+		
+		
+		logger.debug("Production time "+game.getProductionTime());
+		MaterialsProductionTask materialsProductionTask = new MaterialsProductionTask(gameProcess);
+		productionScheduler.scheduleAtFixedRate(materialsProductionTask,game.getProductionTime());
+	}
+
+	private GameProcess startGameProcess(Game game) {
+		
+		
+		GameProcess process = null;		
+		
+		process = (GameProcess) processHolderService.findProcessById(GameProcess.class, game.getName());
+
+		if (process != null)
+			return process;
+		
+		
+		process = serviceLocator.createGameProcess();
+		processHolderService.putProcess(game.getId().toString(), process);
+	
 		process.setGame(game);
 		process.startGame();
-		processHolderService.putProcess(game.getId().toString(), process);
-		logger.info("Production time "+game.getProductionTime());
-		MaterialsProductionTask materialsProductionTask = new MaterialsProductionTask(process);
-		productionScheduler.scheduleAtFixedRate(materialsProductionTask,new Date(),game.getProductionTime());
+		
+		return process;
 		
 	}
 

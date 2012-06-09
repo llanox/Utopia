@@ -27,7 +27,7 @@
  <ice:panelGrid style="width:90%" columns="3">         
          
          <ice:outputText style="width: 300px" value=" Jugador "/>
-          <ice:selectOneMenu style="width:100px;border:1px solid #AAAAAA" value="#{playerController.loginActualUser}" id="somUsuarios" valueChangeListener="#{playerController.choosePlayer}" 	partialSubmit="true"  >
+          <ice:selectOneMenu style="width:100px;border:1px solid #AAAAAA" value="#{playerController.loginActualUser}" id="somUsuarios" partialSubmit="true"  >
 			<f:selectItems id="slctUsers"	value="#{playerController.availableUsers}" />
  		  </ice:selectOneMenu> 		  
  		 <ice:commandButton  id="btnAddPlayerToGame" actionListener="#{playerController.addPlayer}"  style="top: 90%; position: relative" value="Unir al Juego"/>

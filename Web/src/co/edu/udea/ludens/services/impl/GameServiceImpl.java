@@ -375,13 +375,6 @@ public class GameServiceImpl implements GameService {
 			
 		}
 		
-//		logger.debug("Saving game... "+game);
-//		
-//		gameDao.saveOrUpdate(game);
-		
-		
-		
-		
 	}
 
 
@@ -394,9 +387,7 @@ public class GameServiceImpl implements GameService {
 		player.getUser().setParticipatingInGame(true);		
 		player.setGame(game);		
 		playerDao.saveOrUpdate(player);	
-		
-
-
+	
 	}
 
 

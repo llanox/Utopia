@@ -17,29 +17,29 @@ public class IncrementableDAOImpl extends ObjectDBDAO implements IncrementableDA
 	private Logger logger = Logger.getLogger(getClass());	
 	
 
-	@Override
-	public Object saveOrUpdate(Object o) {
-	 
-		logger.info("Saving or updating incrementable");
-		
-	 Incrementable incr = (Incrementable) o;	
-	 logger.info("merging game");
-	 em.merge(incr.getGame());
-	 
-	     
-	 if(incr.getId()!=null){	 
-		 logger.info("merging incrementable");
-		 em.merge(incr);	 
-	 }else{
-		 
-		 em.persist(incr);
-		 logger.info("persisting incrementable");
-	 }
-	
-	 em.flush();
-	 
-	 return o;
-	}
+//	@Override
+//	public Object saveOrUpdate(Object o) {
+//	 
+//		logger.info("Saving or updating incrementable");
+//		
+//	 Incrementable incr = (Incrementable) o;	
+//	 logger.info("merging game");
+//	 em.merge(incr.getGame());
+//	 
+//	     
+//	 if(incr.getId()!=null){	 
+//		 logger.info("merging incrementable");
+//		 em.merge(incr);	 
+//	 }else{
+//		 
+//		 em.persist(incr);
+//		 logger.info("persisting incrementable");
+//	 }
+//	
+//	 em.flush();
+//	 
+//	 return o;
+//	}
 
 
 

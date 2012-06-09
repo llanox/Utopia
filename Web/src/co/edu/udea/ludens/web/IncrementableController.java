@@ -2,11 +2,9 @@ package co.edu.udea.ludens.web;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.component.UIData;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
@@ -59,15 +57,6 @@ public class IncrementableController implements UpdateableView{
 	
 	private String  action;
 
-	
-
-
-
-
-
-
-
-
 
 	@PostConstruct
 	public void loadIncrementables() {
@@ -83,22 +72,19 @@ public class IncrementableController implements UpdateableView{
 
 		incrementables = incrementableService.getAllIncrementablesGame(gameController.getActualGame().getName());
 		
-		for(Incrementable incr :incrementables){
-			
-			logger.info("Incrementable image: "+incr.getImageUrl());
-			
+		if(incrementables!=null && !incrementables.isEmpty()){			
+			Incrementable incr = incrementables.get(0);				
+			if(incr.getConstraints()!= null && !incr.getConstraints().isEmpty() ){
+				settingUpConstraints=true;
+				return;
+			}
 		}
+		
+	
 
 
 	}
 	
-
-	
-
-
-
-
-
 
 
 	public void addImageIncrementable(javax.faces.event.ActionEvent event) {
@@ -128,19 +114,7 @@ public class IncrementableController implements UpdateableView{
 
 	}
 
-//TODO Borrar no se usa	
-//	public void addConstraint(javax.faces.event.ActionEvent event) throws LudensException{
-//		
-//		logger.info("adding constraint....");
-//		
-//		IncrementableConstraint constraint = new IncrementableConstraint();
-//		constraint.setRestrictedIncrementable(actualIncrementable);		
-//		actualIncrementable.getConstraints().add(constraint);
-//		incrementableService.save(actualIncrementable);
-//		
-//		incrementableService.createResourceConstraints(actualIncrementable);
-//	
-//	}
+
 
 
 	public void saveIncrementable(javax.faces.event.ActionEvent event) {
@@ -173,6 +147,13 @@ public class IncrementableController implements UpdateableView{
 	        
         logger.debug("action  .."+action);
         incrementables = incrementableService.getAllIncrementablesGame(gameController.getActualGame().getName());
+        int i =0;
+        for(Incrementable incr:incrementables){
+        	i++;
+        	logger.debug(i+" Incrementable "+incr.getName());
+        	
+        }
+        
         
 		if("action_setupconstraints".equalsIgnoreCase(action)){		
 			logger.debug("creating constraints ..");			
@@ -360,8 +341,6 @@ public class IncrementableController implements UpdateableView{
 		return incrementableService;
 	}
 
-
-
 	
 
 	/**
@@ -389,17 +368,12 @@ public class IncrementableController implements UpdateableView{
 		this.gameController = gameController;
 	}
 
-
 	/**
 	 * @return the gameController
 	 */
 	public GameController getGameController() {
 		return gameController;
 	}
-
-
-
-
 
 
 	public boolean isListingElements() {

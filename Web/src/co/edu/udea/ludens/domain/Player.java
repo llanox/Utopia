@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.jdo.annotations.Unique;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -22,10 +23,11 @@ public class Player  implements Updateable {
 	@Id @GeneratedValue
     private long id;	
 	
+	@Unique
 	@OneToOne(fetch=FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private User user;
 	
-	@ManyToOne(fetch=FetchType.EAGER,cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
+	@ManyToOne(fetch=FetchType.EAGER,cascade = {CascadeType.MERGE}) 
 	private Game game;
 	
 	private long startTime=0;

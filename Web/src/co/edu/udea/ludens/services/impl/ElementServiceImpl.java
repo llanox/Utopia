@@ -227,7 +227,7 @@ public class ElementServiceImpl implements ElementService {
 		element.setQuantity(inc.getInitialValue());
 		element.setCalculatedValue(0);
 		element.setActualUpgradingTime(inc.getInitialUpgradingTime());
-	
+	    element.setPlayer(pa);
 		element.setProductionIncrementRate(inc.getProductionIncrementRate());
 		
 
@@ -256,20 +256,10 @@ public class ElementServiceImpl implements ElementService {
 		
 		Set<Element> elements  = new HashSet<Element>();
 		
-		Player player = playerDao.findPlayerByUserName(login);
-		HashMap<String,Element> hashMap = new HashMap<String,Element>();
-		
-		
-		if(EnumElementType.MATERIAL == type){
-			hashMap = player.getMaterials();
-		}
-		
-		if(EnumElementType.FACTOR == type){			
-			hashMap = player.getDevelopmentFactors();			
-		}
-		
-		for(Object key: hashMap.keySet()){			
-		elements.add(hashMap.get(key));
+	    List<Element> elementsByType = elementDao.findElementByType(type, login);
+	    
+	    for(Element el:elementsByType){	    	
+	    	elements.add(el);	    	
 	    }
 	
 	

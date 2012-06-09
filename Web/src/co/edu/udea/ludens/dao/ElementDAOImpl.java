@@ -23,10 +23,9 @@ public class ElementDAOImpl extends ObjectDBDAO implements ElementDAO{
 	}
 
 	@Override
-	public List<Element> findElementByType(EnumElementType type,
-			String login) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Element> findElementByType(EnumElementType type,String login) {
+		List<Element> elements = (List<Element>) findObjectByAttribute(Element.class, "incrementable.type", type,"player.user.login",login);		
+		return elements;
 	}
 	
 	

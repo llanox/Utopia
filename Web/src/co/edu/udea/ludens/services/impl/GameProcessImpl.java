@@ -1,11 +1,13 @@
 package co.edu.udea.ludens.services.impl;
 
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,24 +57,18 @@ public class GameProcessImpl  implements GameProcess   {
 
 	public void produceElements() {
 		
-		 logger.info("********** Producing elements ********");
-		 
-		 logger.info("********** Element Porcess ******** size: "+mapElementProcess.size());
-		
+        logger.info("********** Producing elements ********");	 
+	
 		for( ElementProcess process : mapElementProcess.values()){
 			Player player = process.getPlayer();
 			
-			logger.info("********** Process each element ********");
-			
+			logger.info("********** Process each element ********");			
 			boolean meet = meetReqToGettingStart(player);
 			
-			if(meet){
-		   
-			process.produceElements();
-			
+			if(meet){				
+			process.produceElements();			
 			}else{
-				logger.info("********** didn't meet requirements ********");
-				
+				logger.info("********** didn't meet requirements ********");				
 			}  			
 		}
 
@@ -83,13 +79,16 @@ public class GameProcessImpl  implements GameProcess   {
 
 		Set<Element> elements  =  new HashSet<Element>();
 		
-		logger.debug("materials player "+player.getMaterials().size());
-
 		Set<Element> materials = elementService.getAllElementsByPlayer(EnumElementType.MATERIAL, player.getUser().getLogin());
 		elements.addAll(materials);
 		
+        logger.debug("Materials "+materials.size());
+		
+		
 		Set<Element> factors = elementService.getAllElementsByPlayer(EnumElementType.FACTOR, player.getUser().getLogin());
 		elements.addAll(factors);
+		
+		logger.debug("Factors "+factors.size());
 		
 		System.out.println("Elements "+elements.size());
 
@@ -132,14 +131,27 @@ public class GameProcessImpl  implements GameProcess   {
 		gameService.meetRequirements(game);
 		gameService.generateUnexpectedEvents(game);
 		elementService.createElementsForEachPlayer(game);
-	    game.setStatus(EnumGameStatus.STARTED);
-		game.setStartTime(new Date());		
+		calculateStartAndFinishTime(game);
 		createAdditionalProcesses();
 	
 	}
 
 
 
+
+	private void calculateStartAndFinishTime(Game game) {
+		
+		Calendar cal = Calendar.getInstance();
+		game.setStartTime(cal.getTime());		
+		
+
+		int seconds = (int) TimeUnit.MILLISECONDS.toSeconds(game.getDuration());
+		cal.add(Calendar.SECOND, seconds);		
+		game.setEndTime(cal.getTime());
+		
+		gameService.save(game);
+	
+	}
 
 	@Override
 	public void stopGame() {

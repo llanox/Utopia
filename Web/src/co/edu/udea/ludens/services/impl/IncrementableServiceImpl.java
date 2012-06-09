@@ -1,6 +1,5 @@
 package co.edu.udea.ludens.services.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -10,9 +9,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.udea.ludens.dao.GameDAO;
-import co.edu.udea.ludens.dao.IncrementableDAO;
 import co.edu.udea.ludens.dao.IncrementableConstraintDAO;
-import co.edu.udea.ludens.domain.Game;
+import co.edu.udea.ludens.dao.IncrementableDAO;
 import co.edu.udea.ludens.domain.Incrementable;
 import co.edu.udea.ludens.domain.IncrementableConstraint;
 import co.edu.udea.ludens.enums.EnumElementType;
@@ -133,17 +131,18 @@ public class IncrementableServiceImpl implements IncrementableService {
 		List<Incrementable> materials = getAllIncrementablesGame(actualIncrementable.getGame().getName(),EnumElementType.MATERIAL);
 		
 		logger.info("total materials "+materials.size());
-    	logger.info(" incrementable "+actualIncrementable);
-    	logger.info(" game ... "+actualIncrementable.getGame());
-    	logger.info("constraints size "+actualIncrementable.getConstraints().size());
+    	logger.info(" incrementable "+actualIncrementable.getName());
+    	logger.info(" game ... "+actualIncrementable.getGame().getName());
+    	logger.info(" Constraints size "+actualIncrementable.getConstraints().size());
 	
+    	
     	for(Incrementable incr:materials){
-			
+    		
             if(contains(actualIncrementable.getConstraints(),incr)){
                   	continue;
             }	
   
-            logger.info("Creando constraint "+incr.getName());
+            logger.info("Creando constraint "+incr.getName()+" for "+actualIncrementable.getName());
             
 			IncrementableConstraint constraint = new IncrementableConstraint();
 			constraint.setElementName(incr.getName());

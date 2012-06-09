@@ -71,7 +71,7 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 		Class clazz = Player.class;
 	
 		String SQL ="SELECT o FROM " + clazz.getName()+ " o JOIN FETCH o.materials WHERE o.game.name "+" LIKE '%"+ gameName + "' AND o.user.participatingInGame.toString() "+" LIKE '%"+ participatingInGame + "'";
-		
+	    logger.info(SQL);
 		CriteriaQuery<Object> query = em.getCriteriaBuilder().createQuery();
 		TypedQuery<Player> q2 = em.createQuery(SQL, clazz);
 		players = q2.getResultList();
@@ -80,12 +80,12 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 	
 
 	
-	@Override
-	public Object saveOrUpdate(Object o) {
-        logger.info("Saving player instance ");
-        Player player = (Player) o;
-        Game game =null;
-        User user = null;
+//	@Override
+//	public Object saveOrUpdate(Object o) {
+//        logger.info("Saving player instance ");
+//        Player player = (Player) o;
+//        Game game =null;
+//        User user = null;
         
 //        if(player.getGame()!=null && player.getGame().getId()!=null){
 //        	game = em.find(Game.class, player.getGame().getId());
@@ -99,17 +99,17 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 //            player.setUser(user);	
 //        }
        
-        em.merge(player.getGame());
-        em.merge(player.getUser());
-        
-        if(player.getId()!=null)
-        em.merge(player);		
-        else
-        em.persist(player);
-        
-		em.flush();
-		
-		return player;
-	}
+//        em.merge(player.getGame());
+//        em.merge(player.getUser());
+//        
+//        if(player.getId()!=null)
+//        em.merge(player);		
+//        else
+//        em.persist(player);
+//        
+//		em.flush();
+//		
+//		return player;
+//	}
 
 }

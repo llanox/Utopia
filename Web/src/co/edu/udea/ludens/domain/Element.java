@@ -23,6 +23,7 @@ public class Element implements Updateable  {
 	private List<Integer> changeEvents = new ArrayList<Integer>();
 	private Incrementable incrementable= new Incrementable();;
 	private long actualUpgradingTime;
+	private Player player;
 	
 
 
@@ -223,6 +224,16 @@ public class Element implements Updateable  {
 	 */
 	public long getActualUpgradingTime() {
 		return actualUpgradingTime;
+	}
+
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+
+	public Player getPlayer() {
+		return player;
 	}
 
 }

@@ -31,28 +31,24 @@ public class PlayerController implements UpdateableView{
 	private List<Player> selectedPlayers= new ArrayList<Player> ();
 	private List<SelectItem> availableUsers;
 	private String loginActualUser;
-	private Logger logger = Logger.getLogger(getClass());
-	
+	private Logger logger = Logger.getLogger(getClass());	
 	
 	
 	public void settingPlayers(javax.faces.event.ActionEvent event) {		
 		gameController.settingUpPlayers(event);
-		settingPlayers = true;
-		
-		
+		settingPlayers = true;		
 		updatingUsersAndPlayers();
-		
-		
-
 	}
 	
     @PostConstruct
 	private void updatingUsersAndPlayers() {
+    	
     	logger.debug(" Updating Player List");
 		List<User> availableUsersList = userService.findUserByRole(false,EnumUserRole.PLAYER);
 		selectedPlayers = playerService.findAllPlayersByGameName(true,gameController.getActualGame().getName());
 		logger.debug(" Updating Player List "+selectedPlayers.size());
 	    fillAvailableUsers(availableUsersList);
+	    
 	}
 	
 	public void removePlayer(javax.faces.event.ActionEvent event) {		
@@ -82,26 +78,24 @@ public class PlayerController implements UpdateableView{
 		Game game = gameController.getActualGame();
 		User user = userService.findUser(loginActualUser);
 		player.setUser(user);
+		user.setParticipatingInGame(true);
+	
 		
-		gameService.addPlayer(game, player);		
+		playerService.save(player);
+		
+		if(game.getPlayers()==null){
+			game.setPlayers(new ArrayList<Player>());
+		}
+		
+		game.getPlayers().add(player);
+		
+		gameService.save(game);
+				
 		selectedPlayers.add(player);
 		updatingUsersAndPlayers();
 	}
 
 
-		
-	
-	
-	
-	public void choosePlayer(ValueChangeEvent event){
-		logger.info("UI Component Id "+event.getComponent().getId()+" new value "+event.getNewValue());
-		String idComponent = event.getComponent().getId();
-		
-		
-	}
-	
-	
-	
 	
 	private void fillAvailableUsers(List<User> availableUsersList) {
 		availableUsers = new ArrayList<SelectItem>();

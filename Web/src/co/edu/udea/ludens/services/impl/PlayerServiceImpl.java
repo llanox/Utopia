@@ -74,7 +74,8 @@ public class PlayerServiceImpl implements PlayerService {
 	@Transactional( propagation = Propagation.REQUIRES_NEW,readOnly = false )
 	public Player save(Player player) {		
 		
-		player = (Player) playerDao.saveOrUpdate(player);			
+		playerDao.saveOrUpdate(player);		
+		
 		return player;
 	}
 
