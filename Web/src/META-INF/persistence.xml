@@ -17,8 +17,8 @@
       <class>co.edu.udea.ludens.domain.IncrementableConstraint</class>
    <properties>
       <property name="javax.persistence.jdbc.url" value="$objectdb/db/utopiaDB.odb"/>
-      <property name="javax.persistence.jdbc.user" value="admin"/>
-      <property name="javax.persistence.jdbc.password" value="admin"/>
+      <property name="javax.persistence.jdbc.user" value="admin4"/>
+      <property name="javax.persistence.jdbc.password" value="admin4"/>
     </properties>   
   </persistence-unit>
 
