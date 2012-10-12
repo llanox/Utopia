@@ -1,239 +1,141 @@
 package co.edu.udea.ludens.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-
-
+import javax.persistence.*;
 
 @Entity
-public class Element implements Updateable  {
-	
-	
-    @Id @GeneratedValue
+@Table(name = "elements")
+public class Element implements Serializable, Updateable {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private Long id;
-	private int calculatedValue;	
-	private int level;
-	private int quantity;
-	private List<Integer> changeEvents = new ArrayList<Integer>();
-	private Incrementable incrementable= new Incrementable();;
-	private long actualUpgradingTime;
-	private Player player;
-	
+    @Column(name = "calculated_value")
+    private int calculatedValue;
+    @Column(name = "progress_level")
+    private int progressLevel;
+    @Column(name = "quantity")
+    private int quantity;
+    @Column(name = "actual_upgrading_time")
+    private long actualUpgradingTime;
+    @ManyToOne
+    private Incrementable incrementable;
+    @Transient
+    private List<Integer> changeEvents = new ArrayList();
+    @OneToMany(mappedBy = "constrainedElement")
+    private List<IncrementableConstraint> levelConstraints;
+    @OneToMany(mappedBy = "constrainedElement")
+    private List<IncrementableConstraint> levelIncrements;
+    @ManyToOne
+    private Player player;
 
+    public Element() {
+    }
 
+    @Override
+    public Long getId() {
 
+        return (this.id);
+    }
 
-	public Element() {
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	}
+    public int getCalculatedValue() {
 
+        return (this.calculatedValue);
+    }
 
-	private HashMap<String, List<IncrementableConstraint>> levelIncrements  = new HashMap<String, List<IncrementableConstraint>>();
-	private HashMap<String, List<IncrementableConstraint>> levelConstraints = new HashMap<String, List<IncrementableConstraint>>();
+    public void setCalculatedValue(int calculatedValue) {
+        this.calculatedValue = calculatedValue;
+    }
 
+    public int getProgressLevel() {
 
+        return (this.progressLevel);
+    }
 
+    public void setProgressLevel(int progressLevel) {
+        this.progressLevel = progressLevel;
+    }
 
-	@Override
-	public Long getId() {
-		return id;
-	}
+    public int getQuantity() {
 
+        return (this.quantity);
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
+    public long getActualUpgradingTime() {
 
-	public void setLevelIncrements(HashMap<String, List<IncrementableConstraint>> levelIncrements) {
-	
-		this.levelIncrements = levelIncrements;
-	}
+        return (this.actualUpgradingTime);
+    }
 
-	
-	public HashMap<String, List<IncrementableConstraint>> getLevelIncrements() {		
-		
-		return levelIncrements;
-	}
+    public void setActualUpgradingTime(long actualUpgradingTime) {
+        this.actualUpgradingTime = actualUpgradingTime;
+    }
 
-	
-	public void setLevelconstraints(HashMap<String, List<IncrementableConstraint>> levelConstraints) {
-	
-		this.levelConstraints = new HashMap<String, List<IncrementableConstraint>>(levelConstraints);
-	}
+    public Incrementable getIncrementable() {
 
-	
-	public HashMap<String, List<IncrementableConstraint>> getLevelConstraints() {
-	
-		return levelConstraints;
-	}
+        return (this.incrementable);
+    }
 
+    public void setIncrementable(Incrementable incrementable) {
+        this.incrementable = incrementable;
+    }
 
+    public List<Integer> getChangeEvents() {
 
-	public void copy(Element that) {
+        return (this.changeEvents);
+    }
 
-		setLevelIncrements(new HashMap<String, List<IncrementableConstraint>>(that.getLevelIncrements()));
-		setLevelconstraints(new HashMap<String, List<IncrementableConstraint>>(that.getLevelConstraints()));
+    public void setChangeEvents(List<Integer> changeEvents) {
+        this.changeEvents = changeEvents;
+    }
 
-	}
+    public List<IncrementableConstraint> getLevelConstraints() {
 
+        return (this.levelConstraints);
+    }
 
+    public void setLevelConstraints(List<IncrementableConstraint> levelConstraints) {
+        this.levelConstraints = levelConstraints;
+    }
 
+    public List<IncrementableConstraint> getLevelIncrements() {
 
+        return (this.levelIncrements);
+    }
 
-
-
-	public int getLevel() {
-		return level;
-	}
-
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-
-	public int getLevelIncrementDelayRate() {
-	
-		return incrementable.getLevelIncrementDelayRate();
-	}
-
-
-	public int getProductionIncrementRate() {
-		
-		return incrementable.getProductionIncrementRate();
-		
-	}
-
-
-
-
-
-
-	public int getCalculatedValue() {
-		return calculatedValue;
-	}
-
-
-
-
-
-	public List<Integer> getChangeEvents() {
-		return changeEvents;
-	}
-
-
-	public Incrementable getIncrementable() {
-		return incrementable;
-	}
-
-
-	public void setLevel(int level) {
-		
-		this.level = level;
-	}
-
-
-	public void setQuantity(int quantity) {
-		
-		this.quantity = quantity;
-	}
-
-
-	public void setLevelIncrementDelayRate(int levelIncrementDelayRate) {
-
-		this.incrementable.setLevelIncrementDelayRate(levelIncrementDelayRate);
-	}
-
-
-	public void setProductionIncrementRate(int productionIncrementRate) {		
-		
-		this.incrementable.setProductionIncrementRate(productionIncrementRate);
-	}
-
-
-//	public void setInitialValue(int initialValue) {
-//	
-//		this.initialValue = initialValue;
-//	}
-
-
-	public void setInitialUpgradingTime(int initialUpgradingTime) {
-		
-		this.incrementable.setInitialUpgradingTime(initialUpgradingTime);
-	}
-
-
-	public void setCalculatedValue(int calculatedValue) {
-		
-		this.calculatedValue = calculatedValue;
-	}
-
-
-
-
-
-	public void setChangeEvents(List<Integer> changeEvents) {
-	
-		this.changeEvents = changeEvents;
-	}
-
-
-	public void setIncrementable(Incrementable incrementable) {
-	
-		this.incrementable = incrementable;
-	}
-
-
-	public void setLevelConstraints(HashMap<String, List<IncrementableConstraint>> levelConstraints) {
-	
-		this.levelConstraints = new HashMap<String, List<IncrementableConstraint>>(levelConstraints);
-	}
-
-
-	@Override
-	public void updateWith(Object o) {
-		Element newElement = (Element) o;
-		this.calculatedValue = newElement.calculatedValue;
-//	    this.initialValue = newElement.initialValue;
-	    this.level = newElement.level;
-	    this.quantity = newElement.quantity;
-	    this.changeEvents = newElement.changeEvents;
-	    this.incrementable = newElement.incrementable;
-	    this.actualUpgradingTime = newElement.actualUpgradingTime;
-
-	}
-
-
-	/**
-	 * @param actualUpgradingTime the actualUpgradingTime to set
-	 */
-	public void setActualUpgradingTime(long actualUpgradingTime) {
-		this.actualUpgradingTime = actualUpgradingTime;
-	}
-
-
-	/**
-	 * @return the actualUpgradingTime
-	 */
-	public long getActualUpgradingTime() {
-		return actualUpgradingTime;
-	}
-
-
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
-
-
-	public Player getPlayer() {
-		return player;
-	}
-
+    public void setLevelIncrements(List<IncrementableConstraint> levelIncrements) {
+        this.levelIncrements = levelIncrements;
+    }
+
+    public Player getPlayer() {
+
+        return (this.player);
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    @Override
+    public void updateWith(Object o) {
+        Element newElement = (Element) o;
+
+        this.calculatedValue = newElement.calculatedValue;
+        //this.initialValue = newElement.initialValue;
+        this.progressLevel = newElement.progressLevel;
+        this.quantity = newElement.quantity;
+        this.changeEvents = newElement.changeEvents;
+        this.incrementable = newElement.incrementable;
+        this.actualUpgradingTime = newElement.actualUpgradingTime;
+    }
 }

@@ -13,86 +13,85 @@ import co.edu.udea.ludens.util.UtopiaUtil;
 
 public class FactorLevelUpgrader implements LevelUpgraderStrategy {
 	public int UPGRADING_LEVEL_DURATION = 30;// seconds
-	private static Logger logger = Logger.getLogger(FactorLevelUpgrader.class);	
-	
+	private static Logger logger = Logger.getLogger(FactorLevelUpgrader.class);
+
 	@Override
 	public void upLevel(Element element, Player player) throws LudensException {
-        boolean error = false;	
-		Integer actualLevel = element.getLevel();		
+		boolean error = false;
+		Integer actualLevel = element.getLevel();
 		Integer newLevel = actualLevel + 1;
-		List<IncrementableConstraint> ctrs = element.getLevelConstraints().get(newLevel + "");
-		
-		// if didn't find resources constraints for this level then throw an exception
-		if (ctrs == null) {	
-			throw new LudensException(EnumMsgs.CANT_UP_LEVEL,element.getIncrementable().getName(), newLevel);
+		List<IncrementableConstraint> ctrs = element.getLevelConstraints().get(
+				newLevel + "");
+
+		// if didn't find resources constraints for this level then throw an
+		// exception
+		if (ctrs == null) {
+			throw new LudensException(EnumMsgs.CANT_UP_LEVEL, element
+					.getIncrementable().getName(), newLevel);
 		}
-		
-		//  we check out resources in order to know if we have enough to up the level
-		UtopiaUtil.checkOutResources(ctrs, element,player);
 
-		//Here, we decrement each resource consumed to up to the next level
+		// we check out resources in order to know if we have enough to up the
+		// level
+		UtopiaUtil.checkOutResources(ctrs, element, player);
+
+		// Here, we decrement each resource consumed to up to the next level
 		for (IncrementableConstraint pk : ctrs) {
-
 			Integer neededQuantity = pk.getQuantity();
 			String resourceName = pk.getElementName();
 			Element resource = player.getMaterials().get(resourceName);
 			Integer quantity = resource.getQuantity() - neededQuantity;
 			resource.setQuantity(quantity);
-		}		
-
+		}
 		UtopiaUtil.addStartTimePlayer(player);
-		
-		  try {   		   
-			   logger.info("Esperando "+element.getActualUpgradingTime()+" segundos para subir nivel");;
-			   player.setProducing(true);
-			   Thread.sleep(element.getActualUpgradingTime()*1000);
-			   logger.info("Listo!! subir nivel de "+element.getIncrementable().getName());		
+
+		try {
+			logger.info("Esperando " + element.getActualUpgradingTime()
+					+ " segundos para subir nivel");
+
+			player.setProducing(true);
+			Thread.sleep(element.getActualUpgradingTime() * 1000);
+			logger.info("Listo!! subir nivel de "
+					+ element.getIncrementable().getName());
 		} catch (InterruptedException e) {
 			logger.info("Error subiendo nivel", e);
 			error = true;
 		}
-		   
-		   incrementCapacity(element);
-		   
-		   UtopiaUtil.calculateCoverage(element, player);
-	   
-	       if(!error){
-		   element.setLevel(newLevel);
-		   UtopiaUtil.updateUpgradingDelay(element);
-		   player.setProducing(false);
-	       }
 
+		incrementCapacity(element);
+
+		UtopiaUtil.calculateCoverage(element, player);
+
+		if (!error) {
+			element.setLevel(newLevel);
+			UtopiaUtil.updateUpgradingDelay(element);
+			player.setProducing(false);
+		}
 	}
-
-
 
 	private void incrementCapacity(Element element) {
 		Integer n = element.getLevel();
 		Integer lambda = element.getProductionIncrementRate();
-		Integer p0= element.getIncrementable().getInitialValue();
-		double increment=0.0;
-	    
-	
-		
-		logger.info("Incrementando capacidad factor "+n+" lambda "+lambda+" p0 "+p0);
-	
-		increment = UtopiaUtil.calculateExpGrowth(p0, lambda, n);		
-			
-					
-		
-		Integer result = (int) (element.getQuantity()+ increment);
-		
-		
-		logger.info("P0 "+p0+" Increment "+increment+"  "+element.getIncrementable().getName()+" result "+result);
-		logger.info(element.getIncrementable().getName()+" Antes de eventos " +result);
-		for(Integer change: element.getChangeEvents()){			
+		Integer p0 = element.getIncrementable().getInitialValue();
+		double increment = 0.0;
+
+		logger.info("Incrementando capacidad factor " + n + " lambda " + lambda
+				+ " p0 " + p0);
+
+		increment = UtopiaUtil.calculateExpGrowth(p0, lambda, n);
+
+		Integer result = (int) (element.getQuantity() + increment);
+
+		logger.info("P0 " + p0 + " Increment " + increment + "  "
+				+ element.getIncrementable().getName() + " result " + result);
+		logger.info(element.getIncrementable().getName() + " Antes de eventos "
+				+ result);
+		for (Integer change : element.getChangeEvents()) {
 			result = result + change;
 		}
-		
-		logger.info(element.getIncrementable().getName()+" despues de eventos " +result);
-	  
-	    element.setQuantity(result);
-		
-	}
 
+		logger.info(element.getIncrementable().getName()
+				+ " despues de eventos " + result);
+
+		element.setQuantity(result);
+	}
 }

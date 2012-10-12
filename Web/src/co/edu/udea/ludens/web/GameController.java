@@ -11,16 +11,13 @@ import javax.faces.model.SelectItem;
 import common.Logger;
 
 import co.edu.udea.ludens.domain.Game;
-import co.edu.udea.ludens.domain.User;
-import co.edu.udea.ludens.enums.EnumGameStatus;
 import co.edu.udea.ludens.services.GameService;
 import co.edu.udea.ludens.util.UpdateableView;
 import co.edu.udea.ludens.util.UtopiaUtil;
 import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
 
-public class GameController implements UpdateableView{
+public class GameController implements UpdateableView {
 
-	
 	private Game actualGame = new Game();
 	private GameService gameService;
 	private List<SelectItem> units;
@@ -32,7 +29,7 @@ public class GameController implements UpdateableView{
 	private long duration = 0;
 	private long lowerThreshold = 0;
 	private long upperThreshold = 0;
-	
+
 	private long durationUnitDivider = 1000;
 	private long productionUnitDivider = 1000;
 	private long lowerThresholdUnitDivider = 1000;
@@ -54,7 +51,7 @@ public class GameController implements UpdateableView{
 	private static final String RECURSOS_LABEL = "Materiales";
 	private static final String POBLACION_LABEL = "Población";
 	private static final String EVENTS_LABEL = "Eventos";
-	
+
 	private Logger logger = Logger.getLogger(GameController.class);
 
 	private String[] unitsNames = { SEGS, MINS, HRS, DAYS };
@@ -63,6 +60,7 @@ public class GameController implements UpdateableView{
 
 	public List<SelectItem> getUnits() {
 		units = UtopiaUtil.getItems(unitsNames);
+
 		return units;
 	}
 
@@ -70,15 +68,16 @@ public class GameController implements UpdateableView{
 	public void loadData() {
 		games = gameService.findAllGames();
 		logger.info("Retreaving all games ...");
-		for(Game game: games){
-			logger.info("Game ..."+game.getName()+"  date "+game.getStartTime());
+		for (Game game : games) {
+			logger.info("Game ..." + game.getName() + "  date "
+					+ game.getStartTime());
 		}
-
 	}
 
 	public void newGame(javax.faces.event.ActionEvent event) {
 		editingGame = true;
 		actualGame = new Game();
+
 		clearTemporalValues();
 	}
 
@@ -101,8 +100,6 @@ public class GameController implements UpdateableView{
 		result = getMilsec(productionTimeUnit, productionTime);
 
 		actualGame.setProductionTime(result);
-		
-
 
 		gameService.save(actualGame);
 		actualGame = new Game();
@@ -147,69 +144,51 @@ public class GameController implements UpdateableView{
 		return 0;
 	}
 
-
-
 	public void settingUpGame(javax.faces.event.ActionEvent event) {
-
 		settingGame = true;
 		int selectedRowIndex = gamesTable.getRowIndex();
 		actualGame = games.get(selectedRowIndex);
-		logger.info("selected game "+actualGame.getName());
-		transformToActualUnits();
-		
+		logger.info("selected game " + actualGame.getName());
 
+		transformToActualUnits();
 	}
-	
-	
-	public void settingUpPlayers(javax.faces.event.ActionEvent event){
+
+	public void settingUpPlayers(javax.faces.event.ActionEvent event) {
 		int selectedRowIndex = gamesTable.getRowIndex();
 		actualGame = games.get(selectedRowIndex);
-		logger.info("selected game "+actualGame.getName());
-		
+		logger.info("selected game " + actualGame.getName());
 	}
 
 	public void listGames(javax.faces.event.ActionEvent event) {
 		settingGame = false;
 		games = gameService.findAllGames();
-
 	}
 
-public void changeTimeUnit(ValueChangeEvent event){
-     
-	logger.info("UI Component Id "+event.getComponent().getId()+" new value "+event.getNewValue());
-	String idComponent = event.getComponent().getId();
-	String unit = event.getNewValue().toString();
-	
-	
-	
-	if(idComponent.startsWith("somGameDuration")){
-		this.durationUnit = unit;
-		
-		
-	}
-	
-	if(idComponent.startsWith("somProductionTime")){
-		this.productionTimeUnit = unit;	
-	
-	}
-	
-	if(idComponent.startsWith("somEnventTime")){
-		this.thresholdEventsUnit = unit;	
-	}
-	
-	
-	
-	
-	
-	transformToActualUnits();
-	
-}
+	public void changeTimeUnit(ValueChangeEvent event) {
+		logger.info("UI Component Id " + event.getComponent().getId()
+				+ " new value " + event.getNewValue());
 
+		String idComponent = event.getComponent().getId();
+		String unit = event.getNewValue().toString();
+
+		if (idComponent.startsWith("somGameDuration")) {
+			this.durationUnit = unit;
+		}
+
+		if (idComponent.startsWith("somProductionTime")) {
+			this.productionTimeUnit = unit;
+		}
+
+		if (idComponent.startsWith("somEnventTime")) {
+			this.thresholdEventsUnit = unit;
+		}
+
+		transformToActualUnits();
+	}
 
 	private long calculateUnitDivider(String unit) {
-
 		long result = 1;
-		
+
 		if (unit == null)
 			return 1;
 
@@ -219,23 +198,22 @@ public void changeTimeUnit(ValueChangeEvent event){
 		}
 
 		if (MINS.equalsIgnoreCase(unit)) {
-			result = 1000*60;
+			result = 1000 * 60;
 			return result;
 		}
 
 		if (HRS.equalsIgnoreCase(unit)) {
-			result = 1000*60*60;
+			result = 1000 * 60 * 60;
 			return result;
 		}
 
 		if (DAYS.equalsIgnoreCase(unit)) {
-			result = 1000*60*60*24;
+			result = 1000 * 60 * 60 * 24;
 			return result;
 		}
-		
-		
-	return result;
-}
+
+		return result;
+	}
 
 	public void editGame(javax.faces.event.ActionEvent event) {
 		editingGame = true;
@@ -243,20 +221,19 @@ public void changeTimeUnit(ValueChangeEvent event){
 		actualGame = games.get(selectedRowIndex);
 
 		transformToActualUnits();
-		
 	}
 
 	private void transformToActualUnits() {
-		
-		durationUnitDivider = calculateUnitDivider(durationUnit);		
-		productionUnitDivider = calculateUnitDivider(productionTimeUnit);		
+		durationUnitDivider = calculateUnitDivider(durationUnit);
+		productionUnitDivider = calculateUnitDivider(productionTimeUnit);
 		upperThresholdUnitDivider = lowerThresholdUnitDivider = calculateUnitDivider(thresholdEventsUnit);
 
-		
-		duration = actualGame.getDuration()/durationUnitDivider;
-		lowerThreshold = actualGame.getLowerThreshold()/productionUnitDivider;
-		upperThreshold = actualGame.getUpperThreshold()/upperThresholdUnitDivider;		
-		productionTime = actualGame.getProductionTime()/upperThresholdUnitDivider;
+		duration = actualGame.getDuration() / durationUnitDivider;
+		lowerThreshold = actualGame.getLowerThreshold() / productionUnitDivider;
+		upperThreshold = actualGame.getUpperThreshold()
+				/ upperThresholdUnitDivider;
+		productionTime = actualGame.getProductionTime()
+				/ upperThresholdUnitDivider;
 	}
 
 	public void deleteGame(javax.faces.event.ActionEvent event) {
@@ -266,7 +243,6 @@ public void changeTimeUnit(ValueChangeEvent event){
 		gameService.delete(actualGame);
 		actualGame = new Game();
 		games = gameService.findAllGames();
-
 	}
 
 	public void cancelEditing(javax.faces.event.ActionEvent event) {
@@ -286,11 +262,13 @@ public void changeTimeUnit(ValueChangeEvent event){
 	 * @return the actualGame
 	 */
 	public Game getActualGame() {
-		return actualGame;
+
+		return (this.actualGame);
 	}
 
 	public String[] getUnitsNames() {
-		return unitsNames;
+
+		return (this.unitsNames);
 	}
 
 	public void setUnitsNames(String[] unitsNames) {
@@ -313,7 +291,8 @@ public void changeTimeUnit(ValueChangeEvent event){
 	 * @return the editingGame
 	 */
 	public boolean isEditingGame() {
-		return editingGame;
+
+		return (this.editingGame);
 	}
 
 	/**
@@ -328,7 +307,8 @@ public void changeTimeUnit(ValueChangeEvent event){
 	 * @return the gamesTable
 	 */
 	public UIData getGamesTable() {
-		return gamesTable;
+
+		return (this.gamesTable);
 	}
 
 	/**
@@ -343,7 +323,8 @@ public void changeTimeUnit(ValueChangeEvent event){
 	 * @return the games
 	 */
 	public List<Game> getGames() {
-		return games;
+
+		return (this.games);
 	}
 
 	/**
@@ -358,7 +339,8 @@ public void changeTimeUnit(ValueChangeEvent event){
 	 * @return the gameService
 	 */
 	public GameService getGameService() {
-		return gameService;
+
+		return (this.gameService);
 	}
 
 	/**
@@ -373,7 +355,8 @@ public void changeTimeUnit(ValueChangeEvent event){
 	 * @return the settingGame
 	 */
 	public boolean isSettingGame() {
-		return settingGame;
+
+		return (this.settingGame);
 	}
 
 	/**
@@ -389,6 +372,7 @@ public void changeTimeUnit(ValueChangeEvent event){
 	 */
 	public List<SelectItem> getConfigurables() {
 		configurables = UtopiaUtil.getItems(configurableThings);
+
 		return configurables;
 	}
 
@@ -404,7 +388,8 @@ public void changeTimeUnit(ValueChangeEvent event){
 	 * @return the productionTime
 	 */
 	public long getProductionTime() {
-		return productionTime;
+
+		return (this.productionTime);
 	}
 
 	/**
@@ -419,7 +404,8 @@ public void changeTimeUnit(ValueChangeEvent event){
 	 * @return the duration
 	 */
 	public long getDuration() {
-		return duration;
+
+		return (this.duration);
 	}
 
 	/**
@@ -434,7 +420,8 @@ public void changeTimeUnit(ValueChangeEvent event){
 	 * @return the durationUnit
 	 */
 	public String getDurationUnit() {
-		return durationUnit;
+
+		return (this.durationUnit);
 	}
 
 	/**
@@ -449,7 +436,8 @@ public void changeTimeUnit(ValueChangeEvent event){
 	 * @return the productionTimeUnit
 	 */
 	public String getProductionTimeUnit() {
-		return productionTimeUnit;
+
+		return (this.productionTimeUnit);
 	}
 
 	/**
@@ -464,7 +452,8 @@ public void changeTimeUnit(ValueChangeEvent event){
 	 * @return the thresholdEventsUnit
 	 */
 	public String getThresholdEventsUnit() {
-		return thresholdEventsUnit;
+
+		return (this.thresholdEventsUnit);
 	}
 
 	/**
@@ -479,7 +468,8 @@ public void changeTimeUnit(ValueChangeEvent event){
 	 * @return the lowerThreshold
 	 */
 	public long getLowerThreshold() {
-		return lowerThreshold;
+
+		return (this.lowerThreshold);
 	}
 
 	/**
@@ -494,23 +484,28 @@ public void changeTimeUnit(ValueChangeEvent event){
 	 * @return the upperThreshold
 	 */
 	public long getUpperThreshold() {
-		return upperThreshold;
+
+		return (this.upperThreshold);
 	}
 
 	public long getDurationUnitDivider() {
-		return durationUnitDivider;
+
+		return (this.durationUnitDivider);
 	}
 
 	public long getProductionUnitDivider() {
-		return productionUnitDivider;
+
+		return (this.productionUnitDivider);
 	}
 
 	public long getLowerThresholdUnitDivider() {
-		return lowerThresholdUnitDivider;
+
+		return (this.lowerThresholdUnitDivider);
 	}
 
 	public long getUpperThresholdUnitDivider() {
-		return upperThresholdUnitDivider;
+
+		return (this.upperThresholdUnitDivider);
 	}
 
 	public void setDurationUnitDivider(long durationUnitDivider) {
@@ -529,14 +524,10 @@ public void changeTimeUnit(ValueChangeEvent event){
 		this.upperThresholdUnitDivider = upperThresholdUnitDivider;
 	}
 
-
-
 	@Override
 	public void update() {
-		logger.info("Updating gamecontroller");		
-		this.loadData();
-		
-		
-	}
+		logger.info("Updating gamecontroller");
 
+		this.loadData();
+	}
 }

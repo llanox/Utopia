@@ -6,38 +6,31 @@ import co.edu.udea.ludens.domain.MessageEvent;
 import co.edu.udea.ludens.domain.User;
 import co.edu.udea.ludens.util.UnexpectedEventListener;
 
-public class UnexpectedEventController implements UnexpectedEventListener{
+public class UnexpectedEventController implements UnexpectedEventListener {
 
-	
 	private MessagesBean messagesBean;
 	private UserSessionBean userSession;
-	
-	
-	
-	
 
 	public void setMessagesBean(MessagesBean messagesBean) {
 		this.messagesBean = messagesBean;
 	}
 
 	public MessagesBean getMessagesBean() {
-		return messagesBean;
+
+		return (this.messagesBean);
 	}
 
 	@Override
 	public void eventHappenning(MessageEvent event) {
-		
-	 User player = event.getAffectedPlayer().getUser();
-	 String loginName = player.getLogin();
-	 String sessionLogin = userSession.getUser().getLogin();
-	 
-	 if(loginName.equalsIgnoreCase(sessionLogin)){
-	         
-			messagesBean.notifyMsg(event);			
-			SessionRenderer.render(userSession.getUser().getLogin());
+		User player = event.getAffectedPlayer().getUser();
+		String loginName = player.getLogin();
+		String sessionLogin = userSession.getUser().getLogin();
 
-	 }		
-		
+		if (loginName.equalsIgnoreCase(sessionLogin)) {
+
+			messagesBean.notifyMsg(event);
+			SessionRenderer.render(userSession.getUser().getLogin());
+		}
 	}
 
 	public void setUserSession(UserSessionBean userSession) {
@@ -45,12 +38,7 @@ public class UnexpectedEventController implements UnexpectedEventListener{
 	}
 
 	public UserSessionBean getUserSession() {
-		return userSession;
+
+		return (this.userSession);
 	}
-
-
-
-
-	
-	
 }

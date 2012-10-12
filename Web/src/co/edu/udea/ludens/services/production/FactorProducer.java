@@ -20,38 +20,28 @@ public class FactorProducer implements ProducerStrategy {
 
 	@Override
 	public List<ElementBean> produce(Object supplies, ElementProcess process) {
-
 		HashMap<String, Element> elements = (HashMap<String, Element>) supplies;
 		List<ElementBean> elementBeans = new ArrayList<ElementBean>();
-
-
 
 		for (Object key : elements.keySet()) {
 
 			Element element = elements.get(key);
 			Integer level = element.getLevel();
-			
-			
-			HashMap<String, List<IncrementableConstraint>> d = element.getLevelIncrements();
-			
-			
-			List<IncrementableConstraint> levelIncrements =d.get(level+"");
-			
-		
-			
-		
-			
+
+			HashMap<String, List<IncrementableConstraint>> d = element
+					.getLevelIncrements();
+
+			List<IncrementableConstraint> levelIncrements = d.get(level + "");
+
 			Integer production = element.getQuantity();
-			
-			if(levelIncrements!=null){
-              
+
+			if (levelIncrements != null) {
 				IncrementableConstraint increment = levelIncrements.get(0);
-				
-				if(increment !=null){
+
+				if (increment != null) {
 					production = increment.getQuantity();
 					element.setQuantity(production);
 				}
-			
 			}
 
 			ElementBean bean = new ElementBean();
@@ -59,10 +49,8 @@ public class FactorProducer implements ProducerStrategy {
 			bean.setProduction(production);
 			bean.setProcess(process);
 			elementBeans.add(bean);
-
 		}
 
 		return elementBeans;
 	}
-
 }

@@ -5,9 +5,6 @@ import java.util.List;
 import co.edu.udea.ludens.domain.Player;
 
 public interface PlayerService {
-	
-	
-	
 
 	public Player findPlayer(String senderName);
 
@@ -19,8 +16,6 @@ public interface PlayerService {
 
 	public List<Player> findAllPlayers();
 
-	public List<Player> findAllPlayersByGameName(boolean participatingInGame, String name);
-
-
-
+	public List<Player> findAllPlayersByGameName(boolean participatingInGame,
+			String name);
 }

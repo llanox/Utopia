@@ -1,197 +1,120 @@
 package co.edu.udea.ludens.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
 import javax.jdo.annotations.Unique;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
-
-
+import javax.persistence.*;
 
 @Entity
-public class Player  implements Updateable {
-	
-	@Id @GeneratedValue
-    private long id;	
-	
-	@Unique
-	@OneToOne(fetch=FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private User user;
-	
-	@ManyToOne(fetch=FetchType.EAGER,cascade = {CascadeType.MERGE}) 
-	private Game game;
-	
-	private long startTime=0;
-	private boolean producing;	
-	private HashMap<String, Element> developmentFactors;
-	private HashMap<String, Element> materials ;
-	private Element population;
+@Table(name = "players")
+public class Player implements Serializable, Updateable {
 
-	
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    private long id;
+    @Unique
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private User user;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+    private Game game;
+    @Column(name = "start_time")
+    private long startTime;
+    @Column(name = "producing")
+    private boolean producing;
+    @Column(name = "elements")
+    @OneToMany(mappedBy = "player")
+    private List<Element> elements;
+    @OneToMany
+    @OrderColumn(name = "order")
+    @JoinColumn(name = "player_id", nullable = false)
+    private List<MessageEvent> events = new ArrayList();
 
-	private List<MessageEvent> events = new ArrayList<MessageEvent>();
+    public void setId(long id) {
+        this.id = id;
+    }
 
+    @Override
+    public Long getId() {
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
+        return (this.id);
+    }
 
-	@Override
-	public Long getId() {
-		return id;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
+    public User getUser() {
 
-	/**
-	 * @generated
-	 */
-	public void setUser(User user) {
-	
-		this.user = user;
-	}
+        return (this.user);
+    }
 
-	/**
-	 * @generated
-	 */
-	public User getUser() {
-	
-		return user;
-	}
+    public Player() {
+  
+    }
 
-	/**
-	 * @generated
-	 */
-	public Player() {
-		
-		developmentFactors = new HashMap<String,Element>();
-		materials = new HashMap<String,Element>();
-		
-	}
+    /**
+     * @return the elements
+     */
+    public List<Element> getElements() {
+        return elements;
+    }
 
+    /**
+     * @param elements the elements to set
+     */
+    public void setElements(List<Element> elements) {
+        this.elements = elements;
+    }
 
+    public List<MessageEvent> getEvents() {
 
+        return (this.events);
+    }
 
-	
+    public void setEvents(List<MessageEvent> events) {
+        this.events = events;
+    }
 
+    public void setProducing(boolean producing) {
+        this.producing = producing;
+    }
 
-	public List<MessageEvent> getEvents() {
-	
-		return events;
-	}
+    public boolean isProducing() {
 
-	public void setEvents(List<MessageEvent> events) {
-	
-		this.events = events;
-	}
+        return (this.producing);
+    }
 
-	
+    public void setStartTime(Long startTime) {
+        this.startTime = startTime;
+    }
 
-	public void setProducing(boolean producing) {
+    public Long getStartTime() {
 
-		this.producing = producing;
-	}
+        return (this.startTime);
+    }
 
-	public boolean isProducing() {
-	
-		return producing;
-	}
+    @Override
+    public void updateWith(Object o) {
+        Player player = (Player) o;
 
-	public void setStartTime(Long startTime) {
-	
-		this.startTime = startTime;
-	}
-
-	public Long getStartTime() {
-
-		return startTime;
-	}
-
-	@Override
-	public void updateWith(Object o) {
-		Player player = (Player) o;
-		
-	
         this.user = player.user;
         this.startTime = player.startTime;
         this.producing = player.producing;
         this.events = player.events;
+    }
 
-		
-	}
+    public void setGame(Game game) {
+        this.game = game;
+    }
 
-	/**
-	 * @param game the game to set
-	 */
-	public void setGame(Game game) {
-		this.game = game;
-	}
+    public Game getGame() {
 
-	/**
-	 * @return the game
-	 */
-	public Game getGame() {
-		return game;
-	}
+        return (this.game);
+    }
 
-	/**
-	 * @param developmentFactors the developmentFactors to set
-	 */
-	public void setDevelopmentFactors(HashMap<String, Element> developmentFactors) {
-		
-		this.developmentFactors = developmentFactors;
-	}
-
-
-
-	/**
-	 * @param materials the materials to set
-	 */
-	public void setMaterials(HashMap<String, Element> materials) {
-		this.materials = materials;
-	}
-
-	/**
-	 * @return the materials
-	 */
-	public HashMap<String, Element> getMaterials() {
-		return materials;
-	}
-
-
-	/**
-	 * @param population the population to set
-	 */
-	public void setPopulation(Element population) {
-		this.population = population;
-	}
-
-	public HashMap<String, Element> getDevelopmentFactors() {
-
-		return developmentFactors;
-	}
-
-	public Element getPopulation() {
-		return population;
-	}
-
-	public void setStartTime(long startTime) {
-		this.startTime = startTime;
-	}
-
-
-
-
-
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
 }

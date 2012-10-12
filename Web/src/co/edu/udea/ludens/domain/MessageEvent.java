@@ -1,277 +1,239 @@
 package co.edu.udea.ludens.domain;
 
-
-import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-
 import co.edu.udea.ludens.enums.EnumEventType;
 import co.edu.udea.ludens.enums.EnumMsgType;
 import co.edu.udea.ludens.enums.EnumMsgs;
-
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.*;
 
 @Entity
-public class MessageEvent  implements Comparable<MessageEvent>, Updateable{
-
-	@Id @GeneratedValue
-	private Long id;
-	private String msg;
-	private EnumMsgType msgType;
-	private EnumEventType eventType;
-	private String affectedElement1;
-	private String affectedElement2;
-	private String element1Value;
-	private String element2Value;
-	private String executorName;
-	private String receiverName;
-
-	@Transient
-	private Object source;
-	
-	private String gameName;
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date exactDate;
-	
-	private long gameElapsedTime;	
-	private Player affectedPlayer;
-	
-	public MessageEvent() {
-				
-	}
-	
-	public MessageEvent(Object source) {
-		this.setSource(source);
-		
-	}
-	
-	public MessageEvent(Object source,  EnumMsgType msgType,String msg,long id) {
-		this.setSource(source);
-		this.setMsg(msg);
-	    this.msgType = msgType;
-	    this.id = id;
-	}
-	
-	public MessageEvent(Object source,  EnumMsgs enumMsg,long id) {
-		this.setSource(source);
-		this.msg = enumMsg.getMsg();
-	    this.msgType = enumMsg.getMsgType();
-	    this.id = id;
-	}
-	
-	public MessageEvent(Object source, long id, EnumMsgs enumMsg, Object... parameters) {
-		this.setSource(source);
-		this.msg = String.format(enumMsg.getMsg(), parameters);
-	    this.msgType = enumMsg.getMsgType();
-	    this.id = id;
-	   
-	}
-	
-	
-	
-	
-
-	public void setMsg(String msg) {
-
-		this.msg = msg;
-	}
-
-	public String getMsg() {
-
-		return msg;
-	}
-
-	public void setMsgType(EnumMsgType msgType) {
-
-		this.msgType = msgType;
-	}
-
-	public EnumMsgType getMsgType() {
-	
-		return msgType;
-	}
-
-
-
-	@Override
-	public Long getId() {
-
-		return id;
-	}
-
-	public void setAffectedPlayer(Player affectedPlayer) {
-
-		this.affectedPlayer = affectedPlayer;
-	}
+@Table(name = "messages_events")
+public class MessageEvent implements Comparable<MessageEvent>, Serializable,
+        Updateable {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "msg")
+    private String msg;
+    @Column(name = "msg_type")
+    private EnumMsgType msgType;
+    @Column(name = "event_type")
+    private EnumEventType eventType;
+    @Column(name = "affected_element_1")
+    private String affectedElement1;
+    @Column(name = "affected_element_2")
+    private String affectedElement2;
+    @Column(name = "element_1_value")
+    private String element1Value;
+    @Column(name = "element_2_value")
+    private String element2Value;
+    @Column(name = "executor_name")
+    private String executorName;
+    @Column(name = "receiver_name")
+    private String receiverName;
+    @Transient
+    private Object source;
+    @Column(name = "game_name")
+    private String gameName;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "exact_date")
+    private Date exactDate;
+    @Column(name = "game_elapsed_time")
+    private long gameElapsedTime;
+    @ManyToOne
+    @JoinColumn(name = "player_id", insertable = false, updatable = false, nullable = false)
+    private Player affectedPlayer;
+
+    public MessageEvent() {
+    }
+
+    public MessageEvent(Object source) {
+        this.source = source;
+    }
+
+    public MessageEvent(Object source, EnumMsgType msgType, String msg, long id) {
+        this.source = source;
+        this.msg = msg;
+        this.msgType = msgType;
+        this.id = id;
+    }
+
+    public MessageEvent(Object source, EnumMsgs enumMsg, long id) {
+        this.source = source;
+        this.msg = enumMsg.getMsg();
+        this.msgType = enumMsg.getMsgType();
+        this.id = id;
+    }
+
+    public MessageEvent(Object source, long id, EnumMsgs enumMsg, Object... parameters) {
+        this.source = source;
+        this.msg = String.format(enumMsg.getMsg(), parameters);
+        this.msgType = enumMsg.getMsgType();
+        this.id = id;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public String getMsg() {
+
+        return (this.msg);
+    }
+
+    public void setMsgType(EnumMsgType msgType) {
+        this.msgType = msgType;
+    }
+
+    public EnumMsgType getMsgType() {
+
+        return (this.msgType);
+    }
+
+    @Override
+    public Long getId() {
+
+        return (this.id);
+    }
+
+    public void setAffectedPlayer(Player affectedPlayer) {
+        this.affectedPlayer = affectedPlayer;
+    }
+
+    public Player getAffectedPlayer() {
 
-	public Player getAffectedPlayer() {
-	
-		return affectedPlayer;
-	}
+        return (this.affectedPlayer);
+    }
 
-	/**
-	 * @param eventType the eventType to set
-	 */
-	public void setEventType(EnumEventType eventType) {
-		
-		this.eventType = eventType;
-	}
+    public void setEventType(EnumEventType eventType) {
+        this.eventType = eventType;
+    }
 
-	/**
-	 * @return the eventType
-	 */
-	public EnumEventType getEventType() {
-	
-		return eventType;
-	}
+    public EnumEventType getEventType() {
 
-	public String getAffectedElement1() {
+        return (this.eventType);
+    }
 
-		return affectedElement1;
-	}
+    public String getAffectedElement1() {
 
-	public void setAffectedElement1(String affectedElement1) {
+        return (this.affectedElement1);
+    }
 
-		this.affectedElement1 = affectedElement1;
-	}
+    public void setAffectedElement1(String affectedElement1) {
+        this.affectedElement1 = affectedElement1;
+    }
 
-	public String getAffectedElement2() {
-	
-		return affectedElement2;
-	}
+    public String getAffectedElement2() {
 
-	public void setAffectedElement2(String affectedElement2) {
+        return (this.affectedElement2);
+    }
 
-		this.affectedElement2 = affectedElement2;
-	}
+    public void setAffectedElement2(String affectedElement2) {
+        this.affectedElement2 = affectedElement2;
+    }
 
-	public String getElement1Value() {
+    public String getElement1Value() {
 
-		return element1Value;
-	}
+        return (this.element1Value);
+    }
 
-	public void setElement1Value(String element1Value) {
+    public void setElement1Value(String element1Value) {
+        this.element1Value = element1Value;
+    }
 
-		this.element1Value = element1Value;
-	}
+    public String getElement2Value() {
 
-	public String getElement2Value() {
+        return (this.element2Value);
+    }
 
-		return element2Value;
-	}
+    public void setElement2Value(String element2Value) {
+        this.element2Value = element2Value;
+    }
 
-	public void setElement2Value(String element2Value) {
+    public String getExecutorName() {
 
-		this.element2Value = element2Value;
-	}
+        return (this.executorName);
+    }
 
-	public String getExecutorName() {
+    public void setExecutorName(String executorName) {
+        this.executorName = executorName;
+    }
 
-		return executorName;
-	}
+    public String getReceiverName() {
 
-	public void setExecutorName(String executorName) {
-	
-		this.executorName = executorName;
-	}
+        return (this.receiverName);
+    }
 
-	public String getReceiverName() {
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
 
-		return receiverName;
-	}
+    public Date getExactDate() {
 
-	public void setReceiverName(String receiverName) {
+        return (this.exactDate);
+    }
 
-		this.receiverName = receiverName;
-	}
+    public void setExactDate(Date exactDate) {
+        this.exactDate = exactDate;
+    }
 
-	public Date getExactDate() {
+    public long getGameElapsedTime() {
 
-		return exactDate;
-	}
+        return (this.gameElapsedTime);
+    }
 
-	public void setExactDate(Date exactDate) {
+    public void setGameElapsedTime(long gameElapsedTime) {
+        this.gameElapsedTime = gameElapsedTime;
+    }
 
-		this.exactDate = exactDate;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public long getGameElapsedTime() {
+    @Override
+    public int compareTo(MessageEvent o) {
+        long result = this.id - o.getId();
 
-		return gameElapsedTime;
-	}
+        return (int) result;
+    }
 
-	public void setGameElapsedTime(long gameElapsedTime) {
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
+    }
 
-		this.gameElapsedTime = gameElapsedTime;
-	}
+    public String getGameName() {
 
-	public void setId(Long id) {
+        return (this.gameName);
+    }
 
-		this.id = id;
-	}
+    @Override
+    public void updateWith(Object o) {
+        MessageEvent event = (MessageEvent) o;
 
+        this.msg = event.msg;
+        this.msgType = event.msgType;
+        this.eventType = event.eventType;
+        this.affectedElement1 = event.affectedElement1;
+        this.affectedElement2 = event.affectedElement2;
+        this.element1Value = event.element1Value;
+        this.element2Value = event.element2Value;
+        this.executorName = event.executorName;
+        this.receiverName = event.receiverName;
+        this.gameName = event.gameName;
+        this.exactDate = event.exactDate;
+        this.gameElapsedTime = event.gameElapsedTime;
+        this.affectedPlayer = event.affectedPlayer;
+    }
 
+    public Object getSource() {
 
-	@Override
-	public int compareTo(MessageEvent o) {
-        long result = this.id - o.getId(); 
+        return (this.source);
+    }
 
-		return (int) result;
-	}
-
-	/**
-	 * @param gameName the gameName to set
-	 */
-	public void setGameName(String gameName) {
-
-		this.gameName = gameName;
-	}
-
-	/**
-	 * @return the gameName
-	 */
-	public String getGameName() {
-
-		return gameName;
-	}
-
-	@Override
-	public void updateWith(Object o) {
-	    MessageEvent event = (MessageEvent) o;
-	    
-	    this.msg = event.msg;
-	    this.msgType = event.msgType;
-	    this.eventType = event.eventType;
-	    this.affectedElement1 = event.affectedElement1;
-	    this.affectedElement2 = event.affectedElement2;
-	    this.element1Value = event.element1Value;
-	    this.element2Value = event.element2Value;
-	    this.executorName = event.executorName;
-	    this.receiverName = event.receiverName;
-	    this.gameName = event.gameName;
-	    this.exactDate = event.exactDate;
-	    this.gameElapsedTime = event.gameElapsedTime;
-	    this.affectedPlayer = event.affectedPlayer;
-		
-		
-	}
-
-	public Object getSource() {
-		return source;
-	}
-
-	public void setSource(Object source) {
-		this.source = source;
-	}
-
-
-
-
-
-
+    public void setSource(Object source) {
+        this.source = source;
+    }
 }

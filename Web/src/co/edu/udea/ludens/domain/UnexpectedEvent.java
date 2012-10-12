@@ -1,105 +1,106 @@
 package co.edu.udea.ludens.domain;
 
-import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import co.edu.udea.ludens.enums.EnumMetric;
-
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.*;
 
 @Entity
-public class UnexpectedEvent implements Updateable {
+@Table(name = "unexpected_events")
+public class UnexpectedEvent implements Serializable, Updateable {
 
-	@Id @GeneratedValue
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private Long id;
-	private EnumMetric  metric;
-	 @Temporal(TemporalType.TIMESTAMP)
-	private Date happeningTime;
-	private String elementName;
-	private Integer quantity;
-	private String message;
-	private boolean goodEvent;
-	
-	
-	
-	public UnexpectedEvent() {
-	
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-	@Override
-	public Long getId() {
-		return id;
-	}
-	public void setMetric(EnumMetric metric) {
+    @Column(name = "metric")
+    private EnumMetric metric;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "happening_time")
+    private Date happeningTime;
+    @Column(name = "element_name")
+    private String elementName;
+    private Integer quantity;
+    private String message;
+    @Column(name = "good_event")
+    private boolean goodEvent;
 
-		this.metric = metric;
-	}
-	public EnumMetric getMetric() {
-		return metric;
-	}
-	public void setHappeningTime(Date happeningTime) {
-		
-		this.happeningTime = happeningTime;
-	}
-	public Date getHappeningTime() {
+    public UnexpectedEvent() {
+    }
 
-		return happeningTime;
-	}
-	public void setGoodEvent(boolean goodEvent) {
-		this.goodEvent = goodEvent;
-	}
-	public boolean isGoodEvent() {
-	
-		return goodEvent;
-	}
-	public void setMessage(String message) {
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-		this.message = message;
-	}
-	public String getMessage() {
-	
-		return message;
-	}
-	public void setElementName(String elementName) {
+    @Override
+    public Long getId() {
 
-		this.elementName = elementName;
-	}
-	public String getElementName() {
+        return (this.id);
+    }
 
-		return elementName;
-	}
-	public void setQuantity(Integer quantity) {
-	
-		this.quantity = quantity;
-	}
-	public Integer getQuantity() {
-		
-		return quantity;
-	}
-	@Override
-	public void updateWith(Object o) {
-		
-		UnexpectedEvent event = (UnexpectedEvent) o;
-		this.metric = event.metric;
-		this.happeningTime = event.happeningTime;
+    public void setMetric(EnumMetric metric) {
+        this.metric = metric;
+    }
+
+    public EnumMetric getMetric() {
+
+        return (this.metric);
+    }
+
+    public void setHappeningTime(Date happeningTime) {
+        this.happeningTime = happeningTime;
+    }
+
+    public Date getHappeningTime() {
+
+        return (this.happeningTime);
+    }
+
+    public void setGoodEvent(boolean goodEvent) {
+        this.goodEvent = goodEvent;
+    }
+
+    public boolean isGoodEvent() {
+
+        return (this.goodEvent);
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+
+        return (this.message);
+    }
+
+    public void setElementName(String elementName) {
+        this.elementName = elementName;
+    }
+
+    public String getElementName() {
+
+        return (this.elementName);
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Integer getQuantity() {
+
+        return (this.quantity);
+    }
+
+    @Override
+    public void updateWith(Object o) {
+        UnexpectedEvent event = (UnexpectedEvent) o;
+
+        this.metric = event.metric;
+        this.happeningTime = event.happeningTime;
         this.elementName = event.elementName;
         this.quantity = event.quantity;
         this.message = event.message;
-        this.goodEvent = event.goodEvent;    
-		
-	}
-	
-
-	
-	
-	
+        this.goodEvent = event.goodEvent;
+    }
 }

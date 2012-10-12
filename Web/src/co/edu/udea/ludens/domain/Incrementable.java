@@ -1,200 +1,157 @@
 package co.edu.udea.ludens.domain;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
 import co.edu.udea.ludens.enums.EnumElementType;
 import co.edu.udea.ludens.util.ConstantsLudens;
-
-
-
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
 
 @Entity
-public class Incrementable implements Updateable {
+@Table(name = "incrementables")
+public class Incrementable implements Serializable, Updateable {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
-   	private String name;
-	private String description;	
-	private String imageUrl = ConstantsLudens.NO_IMAGE_FILE;
-	private EnumElementType type;
-	private int levelIncrementDelayRate;
-	private int productionIncrementRate;	
-	private int initialValue;
-	private long initialUpgradingTime;
-	@ManyToOne(fetch=FetchType.EAGER,cascade = {CascadeType.MERGE}) 
-	private Game game;
+    @Column(name = "initial_upgrading_time")
+    private long initialUpgradingTime;
+    @Column(name = "initial_value")
+    private int initialValue;
+    @Column(name = "level_increment_delay_rate")
+    private int levelIncrementDelayRate;
+    @Column(name = "production_increment_rate")
+    private int productionIncrementRate;
+    @Column(name = "type")
+    private EnumElementType type;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+    private Game game;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restrictedIncrementable", cascade = {CascadeType.MERGE})
+    @Column(name = "constraints")
+    private List<IncrementableConstraint> constraints = new ArrayList();
+    @Column(name = "description")
+    private String description;
+    @Column(name = "image_url")
+    private String imageUrl = ConstantsLudens.NO_IMAGE_FILE;
+    @Column(name = "name")
+    private String name;
 
-	@OneToMany(fetch=FetchType.EAGER,mappedBy="restrictedIncrementable",cascade = { CascadeType.MERGE}) 
-	private List<IncrementableConstraint> constraints = new ArrayList<IncrementableConstraint>();
-	
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	
+    public Incrementable() {
+    }
 
-	public Incrementable() {
-		
-	}
+    @Override
+    public Long getId() {
+        
+        return (this.id);
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public long getInitialUpgradingTime() {
+        
+        return (this.initialUpgradingTime);
+    }
 
-	@Override
-	public Long getId() {
-		return id;
-	}
+    public void setInitialUpgradingTime(long initialUpgradingTime) {
+        this.initialUpgradingTime = initialUpgradingTime;
+    }
 
-	public void setName(String name) {
+    public int getInitialValue() {
+        
+        return (this.initialValue);
+    }
 
-		this.name = name;
-	}
+    public void setInitialValue(int initialValue) {
+        this.initialValue = initialValue;
+    }
 
-	public String getName() {
-	
-		return this.name;
-	}
+    public int getLevelIncrementDelayRate() {
+        
+        return (this.levelIncrementDelayRate);
+    }
 
-	public void setDescription(String description) {
-		
-		this.description = description;
-	}
+    public void setLevelIncrementDelayRate(int levelIncrementDelayRate) {
+        this.levelIncrementDelayRate = levelIncrementDelayRate;
+    }
 
-	public String getDescription() {
+    public int getProductionIncrementRate() {
+        
+        return (this.productionIncrementRate);
+    }
 
-		return this.description;
-	}
+    public void setProductionIncrementRate(int productionIncrementRate) {
+        this.productionIncrementRate = productionIncrementRate;
+    }
 
-	public void setImageUrl(String imageUrl) {
+    public EnumElementType getType() {
+        
+        return (this.type);
+    }
 
-		this.imageUrl = imageUrl;
-	}
+    public void setType(EnumElementType type) {
+        this.type = type;
+    }
 
-	public String getImageUrl() {
+    public Game getGame() {
+        
+        return (this.game);
+    }
 
-		return this.imageUrl;
-	}
+    public void setGame(Game game) {
+        this.game = game;
+    }
 
+    public List<IncrementableConstraint> getConstraints() {
+        
+        return (this.constraints);
+    }
 
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(EnumElementType type) {
-	
-		this.type = type;
-	}
+    public void setConstraints(List<IncrementableConstraint> constraints) {
+        this.constraints = constraints;
+    }
 
+    public String getDescription() {
+        
+        return (this.description);
+    }
 
-	/**
-	 * @return the type
-	 */
-	public EnumElementType getType() {
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-		return type;
-	}
+    public String getImageUrl() {
+        
+        return (this.imageUrl);
+    }
 
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
-	public int getLevelIncrementDelayRate() {
-		return levelIncrementDelayRate;
-	}
+    public String getName() {
+        
+        return (this.name);
+    }
 
-	public int getProductionIncrementRate() {
-		return productionIncrementRate;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public long getInitialUpgradingTime() {
-		return initialUpgradingTime;
-	}
+    @Override
+    public void updateWith(Object o) {
+        Incrementable inc = (Incrementable) o;
 
-
-
-	public void setLevelIncrementDelayRate(int levelIncrementDelayRate) {
-
-		this.levelIncrementDelayRate = levelIncrementDelayRate;
-	}
-
-	public void setProductionIncrementRate(int productionIncrementRate) {
-	
-		this.productionIncrementRate = productionIncrementRate;
-	}
-
-	public void setInitialUpgradingTime(long initialUpgradingTime) {
-	
-		this.initialUpgradingTime = initialUpgradingTime;
-	}
-
-
-
-
-	/**
-	 * @param initialValue the initialValue to set
-	 */
-	public void setInitialValue(int initialValue) {
-		this.initialValue = initialValue;
-	}
-
-	/**
-	 * @return the initialValue
-	 */
-	public int getInitialValue() {
-		return initialValue;
-	}
-
-
-
-	/**
-	 * @param constraints the constraints to set
-	 */
-	public void setConstraints(List<IncrementableConstraint> constraints) {
-		this.constraints = constraints;
-	}
-
-	/**
-	 * @return the constraints
-	 */
-	public List<IncrementableConstraint> getConstraints() {
-		return constraints;
-	}
-
-	public Game getGame() {
-		return game;
-	}
-
-	public void setGame(Game game) {
-		this.game = game;
-	}
-
-	@Override
-	public void updateWith(Object o) {
-	
-		Incrementable inc = (Incrementable) o;
-		
-		this.name = inc.name;
-		this.description =inc.description;
-		this.imageUrl = inc.imageUrl;
-		this.type = inc.type;
-		this.levelIncrementDelayRate = inc.levelIncrementDelayRate;
-		this.productionIncrementRate = inc.productionIncrementRate;
-		this.initialUpgradingTime = inc.initialUpgradingTime;
-		this.initialValue = inc.initialValue;	
-		this.constraints = inc.constraints;
-		this.game = inc.game;
-
-	
-		
-	}
-
-
+        this.name = inc.name;
+        this.description = inc.description;
+        this.imageUrl = inc.imageUrl;
+        this.type = inc.type;
+        this.levelIncrementDelayRate = inc.levelIncrementDelayRate;
+        this.productionIncrementRate = inc.productionIncrementRate;
+        this.initialUpgradingTime = inc.initialUpgradingTime;
+        this.initialValue = inc.initialValue;
+        this.constraints = inc.constraints;
+        this.game = inc.game;
+    }
 }

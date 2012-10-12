@@ -5,10 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class LudensUtilBean {
 
-
-
 	public String getHostName() {
-
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
@@ -18,11 +15,9 @@ public class LudensUtilBean {
 		String url = localHost + ":" + localPort;
 
 		return url;
-
 	}
 
 	public String getRequestUrl() {
-
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
@@ -33,7 +28,6 @@ public class LudensUtilBean {
 	}
 
 	public String getQueryString() {
-
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
@@ -41,10 +35,8 @@ public class LudensUtilBean {
 
 		return queryString;
 	}
-	
-	
-	public String getServerName() {
 
+	public String getServerName() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
@@ -52,20 +44,17 @@ public class LudensUtilBean {
 
 		return serverName;
 	}
-	
-	public String getServerPort() {
 
+	public String getServerPort() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
-		String serverPort = request.getServerPort()+"";
+		String serverPort = request.getServerPort() + "";
 
 		return serverPort;
 	}
-	
-	
-	public String getPathInfo() {
 
+	public String getPathInfo() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
@@ -73,9 +62,8 @@ public class LudensUtilBean {
 
 		return pathInfo;
 	}
-	
-	public String getContextPath() {
 
+	public String getContextPath() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
@@ -83,45 +71,37 @@ public class LudensUtilBean {
 
 		return contextPath;
 	}
-	
-	public String getUrlBase() {
 
+	public String getUrlBase() {
 		FacesContext context = FacesContext.getCurrentInstance();
-		
-		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-		
-		
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append(ConstantsLudens.HTTP_PROTOCOL);
 		sb.append(request.getServerName());
 		sb.append(":");
 		sb.append(request.getServerPort());
 		sb.append(request.getContextPath());
-		
 
 		return sb.toString();
 	}
-	
-	public String getSoftwareVersion(){
-		
+
+	public String getSoftwareVersion() {
+
 		return ConstantsLudens.SOFTWARE_VERSION;
-		
 	}
-	
-	public static String getFileSeparator(){
-		
+
+	public static String getFileSeparator() {
+
 		return System.getProperty("file.separator");
-		
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static Object findBean(String beanName) {
-	    FacesContext context = FacesContext.getCurrentInstance();
-	    return context.getApplication().evaluateExpressionGet(context, "#{" + beanName + "}", Object.class);
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		return context.getApplication().evaluateExpressionGet(context,
+				"#{" + beanName + "}", Object.class);
 	}
-
-
-
-
 }

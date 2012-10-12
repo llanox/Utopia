@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<beans 
-xmlns="http://www.springframework.org/schema/beans" 
-xmlns:p="http://www.springframework.org/schema/p" 
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
       http://www.springframework.org/schema/aop
@@ -13,15 +12,13 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       http://www.springframework.org/schema/context/spring-context-3.0.xsd
       http://www.springframework.org/schema/jee
       http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
-	
+
 	<!-- ******************************************************************** -->
 	<!-- Include context files from different layers -->
 	<!-- ******************************************************************** -->
 
-    <import resource="Utopia-security-context.xml" />
-	<import resource="Utopia-service-context.xml" />
-	<import resource="Utopia-dao-context.xml" />
-	<import resource="Utopia-web-context.xml" />
-	
-	
+	<import resource="Utopia-security-context.xml" ></import>
+	<import resource="Utopia-service-context.xml" ></import>
+	<import resource="Utopia-dao-context.xml" ></import>
+	<import resource="Utopia-web-context.xml" ></import>
 </beans>

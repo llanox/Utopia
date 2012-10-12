@@ -11,33 +11,28 @@ import co.edu.udea.ludens.services.ProcessHolderService;
 
 @Service("processHolderService")
 @Scope("singleton")
-public class ProcessHolderServiceImpl implements ProcessHolderService  {
+public class ProcessHolderServiceImpl implements ProcessHolderService {
 
-	private HashMap<String,Process> gameProcesses = new HashMap<String, Process>();
+	private HashMap<String, Process> gameProcesses = new HashMap<String, Process>();
 
 	@Override
 	public Process findProcessById(Class entityClass, Object primaryKey) {
-		
-        if(entityClass.getName().equals(GameProcess.class))
-        	gameProcesses.get(primaryKey);
-		
-		
+		if (entityClass.getName().equals(GameProcess.class))
+			gameProcesses.get(primaryKey);
+
 		return null;
 	}
 
 	@Override
-	 public void putProcess(Object primaryKey,Process process){
-	
-		   if(process.getClass().getName().equals(GameProcess.class))
-			   gameProcesses.put(primaryKey.toString(), process); 
-		
+	public void putProcess(Object primaryKey, Process process) {
+		if (process.getClass().getName().equals(GameProcess.class))
+			gameProcesses.put(primaryKey.toString(), process);
+
 	}
 
 	@Override
-	public Process removeProcess(Object primaryKey) {		
-		return gameProcesses.remove(primaryKey);
+	public Process removeProcess(Object primaryKey) {
+
+		return (this.gameProcesses.remove(primaryKey));
 	}
-
-
-
 }

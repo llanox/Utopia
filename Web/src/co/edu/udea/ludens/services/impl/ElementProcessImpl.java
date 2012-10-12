@@ -47,73 +47,61 @@ public class ElementProcessImpl implements ElementProcess {
 	}
 
 	public void initElements() {
-
 		// Execute that method only one time
-		
 		if (!initiated) {
-
 			initiated = true;
 			HashMap<String, Element> factors = player.getDevelopmentFactors();
 			mapElements.putAll(factors);
-
 			HashMap<String, Element> materials = player.getMaterials();
 			mapElements.putAll(materials);
 
 			// Calculating initial factor coverage
 			for (Object key : factors.keySet()) {
-				
 				Element el = factors.get(key);
 				logger.info("factor .." + el);
 				logger.info("key .." + key);
-
 				UtopiaUtil.calculateCoverage(el, player);
-
 			}
-			
 			notifyEvent(mapElements, EnumEventType.INITIAL_SETUP);
 		}
-
 	}
 
-	private void notifyEvent(HashMap<String, Element> elements,	EnumEventType type) {
-		
+	private void notifyEvent(HashMap<String, Element> elements,
+			EnumEventType type) {
 		MessageEvent aEvent;
 		Game game = gameService.findByUserLogin(player.getUser().getLogin());
 
 		for (Object key : elements.keySet()) {
+			Element ele = elements.get(key);
+			logger.info("Incrementable ---> " + ele.getIncrementable());
+			logger.info("Initial value ---> "
+					+ ele.getIncrementable().getInitialValue());
 
-			Element ele = elements.get(key);			
-			logger.info("Incrementable ---> "+ele.getIncrementable());
-			logger.info("Initial value ---> "+ele.getIncrementable().getInitialValue());
-
-			aEvent = new MessageEvent(this, UtopiaUtil.getId(),	EnumMsgs.INITIAL_VALUE_ELEMENT, ele.getIncrementable().getName(), ele.getIncrementable().getInitialValue());
-            aEvent.setGameName(game.getName());
+			aEvent = new MessageEvent(this, UtopiaUtil.getId(),
+					EnumMsgs.INITIAL_VALUE_ELEMENT, ele.getIncrementable()
+							.getName(), ele.getIncrementable()
+							.getInitialValue());
+			aEvent.setGameName(game.getName());
 			settingSystemEvent(aEvent, ele, type);
 			notifyMsg(aEvent);
 		}
-
 	}
 
 	@Override
 	public void produceElements() {
-
 		ProducerStrategy producer = null;
 		List<ElementBean> elementsBeans = null;
-
 		HashMap<String, Element> factors = player.getDevelopmentFactors();
 		mapElements.putAll(factors);
-
 		HashMap<String, Element> materials = player.getMaterials();
 		mapElements.putAll(materials);
-
 		Element population = player.getPopulation();
 
 		producer = ProducerFactory.createProducer(EnumElementType.POPULATION);
 		logger.info("population ---");
 		elementsBeans = producer.produce(population, this);
 		notifyEvent(elementsBeans, EnumEventType.POPULATION_PRODUCTION);
-		
-        
+
 		producer = ProducerFactory.createProducer(EnumElementType.MATERIAL);
 		logger.info("materials ---");
 		elementsBeans = producer.produce(materials, this);
@@ -127,28 +115,31 @@ public class ElementProcessImpl implements ElementProcess {
 		notifyMsg(EnumMsgs.PRODUCTION_PROCESS_HAPPENING);
 	}
 
-	private void notifyEvent(List<ElementBean> elementsBeans,EnumEventType eventType) {
+	private void notifyEvent(List<ElementBean> elementsBeans,
+			EnumEventType eventType) {
 		MessageEvent aEvent;
-
 		for (ElementBean aElement : elementsBeans) {
-
-			aEvent = new MessageEvent(this, UtopiaUtil.getId(),	EnumMsgs.PRODUCING_ELEMENT, aElement.getElement().getIncrementable().getName(), aElement.getElement().getQuantity());
-			Game game = gameService.findByUserLogin(player.getUser().getLogin());
+			aEvent = new MessageEvent(this, UtopiaUtil.getId(),
+					EnumMsgs.PRODUCING_ELEMENT, aElement.getElement()
+							.getIncrementable().getName(), aElement
+							.getElement().getQuantity());
+			Game game = gameService
+					.findByUserLogin(player.getUser().getLogin());
 			aEvent.setGameName(game.getName());
 			settingSystemEvent(aEvent, aElement.getElement(), eventType);
 			notifyMsg(aEvent);
-
 		}
 
-		IncrementableEvent event = new IncrementableEvent(this, eventType, elementsBeans);
+		IncrementableEvent event = new IncrementableEvent(this, eventType,
+				elementsBeans);
 
 		for (IncrementableStuffListener listener : incrementListeners) {
 			listener.changeIncrementable(event);
 		}
 	}
 
-	private void settingSystemEvent(MessageEvent aEvent, Element aElement,EnumEventType eventType) {
-
+	private void settingSystemEvent(MessageEvent aEvent, Element aElement,
+			EnumEventType eventType) {
 		aEvent.setAffectedElement1(aElement.getIncrementable().getName());
 		aEvent.setElement1Value(aElement.getQuantity() + "");
 		aEvent.setExecutorName(SYSTEM_ACTOR);
@@ -156,20 +147,17 @@ public class ElementProcessImpl implements ElementProcess {
 		aEvent.setExactDate(new Date());
 		aEvent.setGameElapsedTime(UtopiaUtil.getElapsedTime(player));
 		aEvent.setEventType(eventType);
-
 	}
 
 	private void notifyMsg(EnumMsgs enumMsg) {
-
 		MessageEvent event = new MessageEvent(this, enumMsg, UtopiaUtil.getId());
 		Game game = gameService.findByUserLogin(player.getUser().getLogin());
 		event.setGameName(game.getName());
-		
+
 		notifyMsg(event);
 	}
 
 	private void notifyMsg(MessageEvent event) {
-
 		Game game = gameService.findByUserLogin(player.getUser().getLogin());
 
 		event.setGameName(game.getName());
@@ -179,10 +167,9 @@ public class ElementProcessImpl implements ElementProcess {
 	}
 
 	@Override
-	public void addIncrementableStuffListener(IncrementableStuffListener listener) {
-
+	public void addIncrementableStuffListener(
+			IncrementableStuffListener listener) {
 		incrementListeners.add(listener);
-
 	}
 
 	public void addMessageListener(MessageListener listener) {
@@ -190,11 +177,9 @@ public class ElementProcessImpl implements ElementProcess {
 	}
 
 	public void removeAllMessageListeners() {
-
 		if (messagesListeners != null) {
 			messagesListeners.clear();
 		}
-
 	}
 
 	@Override
@@ -221,57 +206,60 @@ public class ElementProcessImpl implements ElementProcess {
 	@Override
 	public Player getPlayer() {
 
-		return player;
+		return (this.player);
 	}
 
 	@Async
 	public MessageEvent upLevel(String elementName) {
 		boolean error = false;
 		MessageEvent event = null;
-
 		Element el = mapElements.get(elementName);
 
 		logger.info("upgrading level " + elementName);
 
 		try {
-
 			boolean producing = player.isProducing();
 
 			logger.info("producing " + producing);
 
 			if (producing) {
-				event = new MessageEvent(this, UtopiaUtil.getId(),EnumMsgs.PRODUCING_ELEMENT_ERROR, el.getIncrementable().getName());
+				event = new MessageEvent(this, UtopiaUtil.getId(),
+						EnumMsgs.PRODUCING_ELEMENT_ERROR, el.getIncrementable()
+								.getName());
 				notifyMsg(event);
+
 				return event;
 			}
 
 			logger.info("initial upgrading time " + el);
 			int delay = 0;
-
 			if (el.getActualUpgradingTime() == 0) {
-
 				delay = el.getLevelIncrementDelayRate();
 				el.setActualUpgradingTime(delay);
 			}
 
-			event = new MessageEvent(this, UtopiaUtil.getId(),EnumMsgs.DELAY_UPGRADING_LEVEL, el.getIncrementable().getName(), el.getActualUpgradingTime(),	el.getLevel(), el.getLevel() + 1);
+			event = new MessageEvent(this, UtopiaUtil.getId(),
+					EnumMsgs.DELAY_UPGRADING_LEVEL, el.getIncrementable()
+							.getName(), el.getActualUpgradingTime(),
+					el.getLevel(), el.getLevel() + 1);
 			notifyMsg(event);
 
 			LevelUpgraderStrategy upgrader = LevelUpgraderFactory
 					.createLevelUpgrader(el);
 
 			upgrader.upLevel(el, player);
-
 		} catch (Exception e) {
-
-			event = new MessageEvent(this, EnumMsgType.ERROR, e.getMessage(),UtopiaUtil.getId());
+			event = new MessageEvent(this, EnumMsgType.ERROR, e.getMessage(),
+					UtopiaUtil.getId());
 			notifyMsg(event);
 			error = true;
 		}
 
 		if (!error) {
 			Calendar cal = Calendar.getInstance();
-			event = new MessageEvent(this, UtopiaUtil.getId(),EnumMsgs.SUCCESSFULY_UPGRADE, el.getIncrementable().getName(), el.getLevel());
+			event = new MessageEvent(this, UtopiaUtil.getId(),
+					EnumMsgs.SUCCESSFULY_UPGRADE, el.getIncrementable()
+							.getName(), el.getLevel());
 			event.setEventType(EnumEventType.UPGRADE_LEVEL);
 			event.setAffectedElement1(el.getIncrementable().getName());
 			event.setElement1Value(el.getLevel() + "");
@@ -284,13 +272,11 @@ public class ElementProcessImpl implements ElementProcess {
 		}
 
 		return event;
-
 	}
 
 	@Override
 	public void upLevel(Element element) {
 		upLevel(element.getIncrementable().getName());
-
 	}
 
 	/**
@@ -305,9 +291,7 @@ public class ElementProcessImpl implements ElementProcess {
 	 * @return the gameService
 	 */
 	public GameService getGameService() {
-		return gameService;
+
+		return (this.gameService);
 	}
-
-	
-
 }

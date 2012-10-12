@@ -3,21 +3,23 @@ package co.edu.udea.ludens.web;
 import java.util.Date;
 
 import co.edu.udea.ludens.domain.User;
+
+
 public class UserSessionBean {
 
 	private User user;
 	private Date startTime;
-	private String actualPage="login.xhtml";
+	private String actualPage = "login.xhtml";
 	private String actualGame = "";
-	private String actualTab ="";
-	
+	private String actualTab = "";
 
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 
 	public Date getStartTime() {
-		return startTime;
+
+		return (this.startTime);
 	}
 
 	public void setActualPage(String actualPage) {
@@ -25,7 +27,8 @@ public class UserSessionBean {
 	}
 
 	public String getActualPage() {
-		return actualPage;
+
+		return (this.actualPage);
 	}
 
 	public void setUser(User user) {
@@ -33,7 +36,8 @@ public class UserSessionBean {
 	}
 
 	public User getUser() {
-		return user;
+
+		return (this.user);
 	}
 
 	public void setActualGame(String actualGame) {
@@ -41,7 +45,8 @@ public class UserSessionBean {
 	}
 
 	public String getActualGame() {
-		return actualGame;
+
+		return (this.actualGame);
 	}
 
 	public void setActualTab(String actualTab) {
@@ -49,13 +54,7 @@ public class UserSessionBean {
 	}
 
 	public String getActualTab() {
-		return actualTab;
+
+		return (this.actualTab);
 	}
-
-
-	
-	
-	
-	
-
 }

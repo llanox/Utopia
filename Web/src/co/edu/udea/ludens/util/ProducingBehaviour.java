@@ -5,8 +5,6 @@ import java.util.List;
 import co.edu.udea.ludens.web.ElementBean;
 
 public interface ProducingBehaviour {
-	
-	
-	public List<ElementBean> produce();
 
+	public List<ElementBean> produce();
 }

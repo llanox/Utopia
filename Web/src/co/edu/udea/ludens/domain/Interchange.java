@@ -1,183 +1,156 @@
 package co.edu.udea.ludens.domain;
 
-import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import co.edu.udea.ludens.enums.EnumTradeStatus;
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.*;
 
 @Entity
-public class Interchange implements Updateable{
+@Table(name = "interchanges")
+public class Interchange implements Serializable, Updateable {
 
-	@Id
-	@GeneratedValue
-	private Long id;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date startTime;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date endTime;
-	private Element elFromSender = new Element();
-	private Element elFromReceiver = new Element();
-	private Integer quantityFromSender;
-	private Integer quantityFromReceiver;
-	private Player sender;
-	private Player receiver;
-	private EnumTradeStatus status;
-	private Interchange previousInterchange;
-	
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    private Long id;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "start_time")
+    private Date startTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "end_time")
+    private Date endTime;
+    @Column(name = "el_from_sender")
+    private Element elFromSender = new Element();
+    @Column(name = "el_from_receiver")
+    private Element elFromReceiver = new Element();
+    @Column(name = "quantity_from_sender")
+    private Integer quantityFromSender;
+    @Column(name = "quantity_from_receiver")
+    private Integer quantityFromReceiver;
+    @Column(name = "sender")
+    private Player sender;
+    @Column(name = "reciver")
+    private Player receiver;
+    @Column(name = "status")
+    private EnumTradeStatus status;
+    @Column(name = "previous_interchange")
+    private Interchange previousInterchange;
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Interchange() {
+    }
 
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
 
-	/**
-	 * @generated
-	 */
-	public void setStartTime(Date startTime) {
+        return (this.id);
+    }
 
-		this.startTime = startTime;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	/**
-	 * @generated
-	 */
-	public Date getStartTime() {
+    public Date getStartTime() {
 
-		return this.startTime;
-	}
+        return (this.startTime);
+    }
 
-	/**
-	 * @generated
-	 */
-	public void setEndTime(Date endTime) {
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
 
-		this.endTime = endTime;
-	}
+    public Date getEndTime() {
 
-	/**
-	 * @generated
-	 */
-	public Date getEndTime() {
+        return (this.endTime);
+    }
 
-		return this.endTime;
-	}
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
 
-	public void setPreviousInterchange(Interchange previousInterchange) {
+    public Element getElFromSender() {
 
-		this.previousInterchange = previousInterchange;
-	}
+        return (this.elFromSender);
+    }
 
-	public Interchange getPreviousInterchange() {
+    public void setElFromSender(Element elFromSender) {
+        this.elFromSender = elFromSender;
+    }
 
-		return previousInterchange;
-	}
+    public Element getElFromReceiver() {
 
-	public EnumTradeStatus getStatus() {
+        return (this.elFromReceiver);
+    }
 
-		return status;
-	}
+    public void setElFromReceiver(Element elFromReceiver) {
+        this.elFromReceiver = elFromReceiver;
+    }
 
-	public void setStatus(EnumTradeStatus status) {
+    public Integer getQuantityFromSender() {
 
-		this.status = status;
-	}
+        return (this.quantityFromSender);
+    }
 
-	public void setSender(Player sender) {
+    public void setQuantityFromSender(Integer quantityFromSender) {
+        this.quantityFromSender = quantityFromSender;
+    }
 
-		this.sender = sender;
-	}
+    public Integer getQuantityFromReceiver() {
 
-	public Player getSender() {
+        return (this.quantityFromReceiver);
+    }
 
-		return sender;
-	}
+    public void setQuantityFromReceiver(Integer quantityFromReceiver) {
+        this.quantityFromReceiver = quantityFromReceiver;
+    }
 
-	public void setReceiver(Player receiver) {
+    public Player getSender() {
 
-		this.receiver = receiver;
-	}
+        return (this.sender);
+    }
 
-	public Player getReceiver() {
+    public void setSender(Player sender) {
+        this.sender = sender;
+    }
 
-		return receiver;
-	}
+    public Player getReceiver() {
 
-	public Element getElFromReceiver() {
+        return (this.receiver);
+    }
 
-		return elFromReceiver;
-	}
+    public void setReceiver(Player receiver) {
+        this.receiver = receiver;
+    }
 
-	public void setElFromReceiver(Element elFromReceiver) {
+    public EnumTradeStatus getStatus() {
 
-		this.elFromReceiver = elFromReceiver;
-	}
+        return (this.status);
+    }
 
-	public Integer getQuantityFromSender() {
+    public void setStatus(EnumTradeStatus status) {
+        this.status = status;
+    }
 
-		return quantityFromSender;
-	}
+    public Interchange getPreviousInterchange() {
 
-	public void setQuantityFromSender(Integer quantityFromSender) {
+        return (this.previousInterchange);
+    }
 
-		this.quantityFromSender = quantityFromSender;
-	}
+    public void setPreviousInterchange(Interchange previousInterchange) {
+        this.previousInterchange = previousInterchange;
+    }
 
-	public Integer getQuantityFromReceiver() {
-
-		return quantityFromReceiver;
-	}
-
-	public void setQuantityFromReceiver(Integer quantityFromReceiver) {
-
-		this.quantityFromReceiver = quantityFromReceiver;
-	}
-
-	/**
-	 * @generated
-	 */
-	public Interchange() {
-	}
-
-	public void setElFromSender(Element elFromSender) {
-
-		this.elFromSender = elFromSender;
-	}
-
-	public Element getElFromSender() {
-
-		return elFromSender;
-	}
-
-	@Override
-	public void updateWith(Object o) {
+    @Override
+    public void updateWith(Object o) {
         Interchange inter = (Interchange) o;
-        
+
         this.startTime = inter.startTime;
         this.endTime = inter.endTime;
         this.elFromSender = inter.elFromSender;
         this.elFromReceiver = inter.elFromReceiver;
         this.quantityFromReceiver = inter.quantityFromReceiver;
         this.quantityFromSender = inter.quantityFromSender;
-        this.sender = inter.sender;        
+        this.sender = inter.sender;
         this.receiver = inter.receiver;
-        this.status = inter.status;		
-        this.previousInterchange = inter.previousInterchange;		
-		
-	}
-
+        this.status = inter.status;
+        this.previousInterchange = inter.previousInterchange;
+    }
 }

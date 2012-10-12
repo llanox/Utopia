@@ -21,23 +21,20 @@ import co.edu.udea.ludens.util.UpdateableView;
 import com.icesoft.faces.component.inputfile.InputFile;
 import common.Logger;
 
-public class IncrementableController implements UpdateableView{
+public class IncrementableController implements UpdateableView {
 
 	private Logger logger = Logger.getLogger(getClass());
 	private Incrementable actualIncrementable = new Incrementable();
 	private IncrementableConstraint actualConstraint;
 
-   
 	private boolean listingElements = true;
-	private boolean editingElement=false;
-	private boolean addingIncrementableImage=false;	
-	private boolean settingUpConstraints=false;
-
+	private boolean editingElement = false;
+	private boolean addingIncrementableImage = false;
+	private boolean settingUpConstraints = false;
 
 	private UIData incrementablesTable;
 	private UIData imagesIncrementableTable;
-	
-	
+
 	private static final String FACTORES_LABEL = "Factores";
 	private static final String RECURSOS_LABEL = "Materiales";
 	private String[] typesNames = { FACTORES_LABEL, RECURSOS_LABEL };
@@ -45,226 +42,176 @@ public class IncrementableController implements UpdateableView{
 	private List<SelectItem> materialItems = new ArrayList<SelectItem>();
 	private List<Incrementable> incrementables = new ArrayList<Incrementable>();
 
-
 	private GameController gameController;
-	
 
 	private String constraintMaterial;
 
 	private IncrementableService incrementableService;
 	private ElementService elementService;
 	private GameService gameService;
-	
-	private String  action;
 
+	private String action;
 
 	@PostConstruct
 	public void loadIncrementables() {
-
 		if (incrementableTypes == null || incrementableTypes.isEmpty()) {
-
 			EnumElementType[] types = EnumElementType.values();
 
 			for (EnumElementType type : types) {
-				incrementableTypes.add(new SelectItem(type.getType(), type.getType()));
+				incrementableTypes.add(new SelectItem(type.getType(), type
+						.getType()));
 			}
 		}
 
-		incrementables = incrementableService.getAllIncrementablesGame(gameController.getActualGame().getName());
-		
-		if(incrementables!=null && !incrementables.isEmpty()){			
-			Incrementable incr = incrementables.get(0);				
-			if(incr.getConstraints()!= null && !incr.getConstraints().isEmpty() ){
-				settingUpConstraints=true;
+		incrementables = incrementableService
+				.getAllIncrementablesGame(gameController.getActualGame()
+						.getName());
+
+		if (incrementables != null && !incrementables.isEmpty()) {
+			Incrementable incr = incrementables.get(0);
+			if (incr.getConstraints() != null
+					&& !incr.getConstraints().isEmpty()) {
+				settingUpConstraints = true;
+
 				return;
 			}
 		}
-		
-	
-
-
 	}
-	
-
 
 	public void addImageIncrementable(javax.faces.event.ActionEvent event) {
-		
 		incrementableService.save(actualIncrementable);
-        this.addingIncrementableImage = false;
+		this.addingIncrementableImage = false;
 	}
-	
-
 
 	public void cancelAddImage(javax.faces.event.ActionEvent event) {
-
-		this.addingIncrementableImage=false;
-	
+		this.addingIncrementableImage = false;
 	}
-	
-	
+
 	public void settingUpGame(javax.faces.event.ActionEvent event) {
-    this.gameController.settingUpGame(event);
-	listingElements = true;
-	editingElement=false;
-	addingIncrementableImage=false;
-    
-    
-    
-    loadIncrementables();
+		this.gameController.settingUpGame(event);
+		listingElements = true;
+		editingElement = false;
+		addingIncrementableImage = false;
 
+		loadIncrementables();
 	}
-
-
-
 
 	public void saveIncrementable(javax.faces.event.ActionEvent event) {
 		editingElement = false;
-		
-		
-		logger.info("Incrementable type to save: "+ actualIncrementable.getType());
 
-		incrementableService.save(actualIncrementable);		
-		gameController.getActualGame().getDefaultIncrementables().add(actualIncrementable);		
+		logger.info("Incrementable type to save: "
+				+ actualIncrementable.getType());
+
+		incrementableService.save(actualIncrementable);
+		gameController.getActualGame().getDefaultIncrementables()
+				.add(actualIncrementable);
 		gameService.save(gameController.getActualGame());
-		
+
 		actualIncrementable = new Incrementable();
 		loadIncrementables();
-		
 	}
 
-	public void newIncrementable(javax.faces.event.ActionEvent event) throws LudensException {
+	public void newIncrementable(javax.faces.event.ActionEvent event)
+			throws LudensException {
 		editingElement = true;
 		actualIncrementable = new Incrementable();
 		actualIncrementable.setType(EnumElementType.MATERIAL);
 		actualIncrementable.setGame(gameController.getActualGame());
-				
-		
 	}
-	
-	
-	public void setupConstraints(javax.faces.event.ActionEvent event) throws LudensException {
-		
-	        
-        logger.debug("action  .."+action);
-        incrementables = incrementableService.getAllIncrementablesGame(gameController.getActualGame().getName());
-        int i =0;
-        for(Incrementable incr:incrementables){
-        	i++;
-        	logger.debug(i+" Incrementable "+incr.getName());
-        	
-        }
-        
-        
-		if("action_setupconstraints".equalsIgnoreCase(action)){		
-			logger.debug("creating constraints ..");			
-			
-			for(Incrementable incr: incrementables){
-			incrementableService.createResourceConstraints(incr);
-			
+
+	public void setupConstraints(javax.faces.event.ActionEvent event)
+			throws LudensException {
+
+		logger.debug("action  .." + action);
+		incrementables = incrementableService
+				.getAllIncrementablesGame(gameController.getActualGame()
+						.getName());
+		int i = 0;
+		for (Incrementable incr : incrementables) {
+			i++;
+			logger.debug(i + " Incrementable " + incr.getName());
+		}
+
+		if ("action_setupconstraints".equalsIgnoreCase(action)) {
+			logger.debug("creating constraints ..");
+
+			for (Incrementable incr : incrementables) {
+				incrementableService.createResourceConstraints(incr);
+
 			}
 			settingUpConstraints = true;
-			
-		}	
-		
-		if("action_deleteallconstraints".equalsIgnoreCase(action)){
-			
-			logger.debug("Deleting constraints ..");
-			
-			for(Incrementable incr: incrementables){
-				incrementableService.deleteResourceConstraints(incr);
-		    }
-			
-			settingUpConstraints=false;
-		
 		}
-	
+
+		if ("action_deleteallconstraints".equalsIgnoreCase(action)) {
+
+			logger.debug("Deleting constraints ..");
+
+			for (Incrementable incr : incrementables) {
+				incrementableService.deleteResourceConstraints(incr);
+			}
+			settingUpConstraints = false;
+		}
 		loadIncrementables();
 	}
-	
-	
 
-	public void editingIncrementable(javax.faces.event.ActionEvent event) throws LudensException {
+	public void editingIncrementable(javax.faces.event.ActionEvent event)
+			throws LudensException {
 		editingElement = true;
 		int selectedRowIndex = incrementablesTable.getRowIndex();
 		logger.info("Selected row" + selectedRowIndex);
 		actualIncrementable = incrementables.get(selectedRowIndex);
 		logger.info("Selected " + actualIncrementable.getName());
-
-
-
 	}
-	
-	
-
 
 	public void listElements(javax.faces.event.ActionEvent event) {
 		this.listingElements = true;
-	
 	}
-	
-	
+
 	public void addNewImage(javax.faces.event.ActionEvent event) {
-		this.addingIncrementableImage=true;
-		
+		this.addingIncrementableImage = true;
 	}
-	
 
 	public void deleteIncrementable(javax.faces.event.ActionEvent event) {
-
 		int selectedRowIndex = incrementablesTable.getRowIndex();
 		logger.info("Selected row" + selectedRowIndex);
-		
-		if(selectedRowIndex<0)
+
+		if (selectedRowIndex < 0)
 			return;
-		
+
 		Incrementable incr = incrementables.get(selectedRowIndex);
 		logger.info("Incrementable to delete " + incr.getName());
 		incrementableService.delete(incr);
 
 		loadIncrementables();
-
-
 	}
-	
-
-	
 
 	public void cancelEditing(javax.faces.event.ActionEvent event) {
 		editingElement = false;
 		actualIncrementable = new Incrementable();
 
 		loadIncrementables();
-		
-
 	}
-	
-	
-	public void uploadActionListener(ActionEvent actionEvent) throws LudensException {
-        InputFile inputFile = (InputFile) actionEvent.getSource();          
-        
-                       
-        if (!inputFile.getFileInfo().isSaved()) {
-            throw new LudensException("No fue posible guardar la imágen");
-        }
-        
-        
-        actualIncrementable.setImageUrl(inputFile.getFileInfo().getFile().getName());
+
+	public void uploadActionListener(ActionEvent actionEvent)
+			throws LudensException {
+		InputFile inputFile = (InputFile) actionEvent.getSource();
+
+		if (!inputFile.getFileInfo().isSaved()) {
+			throw new LudensException("No fue posible guardar la imágen");
+		}
+
+		actualIncrementable.setImageUrl(inputFile.getFileInfo().getFile()
+				.getName());
 	}
-	
-
-
-
 
 	public void changeType(ValueChangeEvent vce) {
-	
-			if (vce.getNewValue()!=null) {
-				EnumElementType type = EnumElementType.getElementType(vce.getNewValue().toString());
-				logger.info("Setting type " + type);
-				actualIncrementable.setType(type);				
-			
-			}
 
-		
+		if (vce.getNewValue() != null) {
+			EnumElementType type = EnumElementType.getElementType(vce
+					.getNewValue().toString());
+			logger.info("Setting type " + type);
+			actualIncrementable.setType(type);
+		}
 	}
 
 	/**
@@ -279,28 +226,28 @@ public class IncrementableController implements UpdateableView{
 	 * @return the typesNames
 	 */
 	public String[] getTypesNames() {
-		return typesNames;
+
+		return (this.typesNames);
 	}
 
 	public Incrementable getActualIncrementable() {
-		return actualIncrementable;
+
+		return (this.actualIncrementable);
 	}
 
-	
-
 	public List<SelectItem> getIncrementableTypes() {
-		return incrementableTypes;
+
+		return (this.incrementableTypes);
 	}
 
 	public List<Incrementable> getIncrementables() {
-		return incrementables;
+
+		return (this.incrementables);
 	}
 
 	public void setActualIncrementable(Incrementable actualIncrementable) {
 		this.actualIncrementable = actualIncrementable;
 	}
-
-
 
 	public void setIncrementableTypes(List<SelectItem> incrementableTypes) {
 		this.incrementableTypes = incrementableTypes;
@@ -322,7 +269,8 @@ public class IncrementableController implements UpdateableView{
 	 * @return the incrementablesTable
 	 */
 	public UIData getIncrementablesTable() {
-		return incrementablesTable;
+
+		return (this.incrementablesTable);
 	}
 
 	/**
@@ -338,10 +286,9 @@ public class IncrementableController implements UpdateableView{
 	 * @return the incrementableService
 	 */
 	public IncrementableService getIncrementableService() {
-		return incrementableService;
-	}
 
-	
+		return (this.incrementableService);
+	}
 
 	/**
 	 * @param imagesIncrementableTable
@@ -355,14 +302,13 @@ public class IncrementableController implements UpdateableView{
 	 * @return the imagesIncrementableTable
 	 */
 	public UIData getImagesIncrementableTable() {
-		return imagesIncrementableTable;
+
+		return (this.imagesIncrementableTable);
 	}
 
-
-
-
 	/**
-	 * @param gameController the gameController to set
+	 * @param gameController
+	 *            the gameController to set
 	 */
 	public void setGameController(GameController gameController) {
 		this.gameController = gameController;
@@ -372,169 +318,131 @@ public class IncrementableController implements UpdateableView{
 	 * @return the gameController
 	 */
 	public GameController getGameController() {
-		return gameController;
-	}
 
+		return (this.gameController);
+	}
 
 	public boolean isListingElements() {
-		return listingElements;
-	}
 
+		return (this.listingElements);
+	}
 
 	public boolean isEditingElement() {
-		return editingElement;
-	}
 
+		return (this.editingElement);
+	}
 
 	public boolean isAddingIncrementableImage() {
-		return addingIncrementableImage;
-	}
 
+		return (this.addingIncrementableImage);
+	}
 
 	public void setListingElements(boolean listingElements) {
 		this.listingElements = listingElements;
 	}
 
-
 	public void setEditingElement(boolean editingElement) {
 		this.editingElement = editingElement;
 	}
-
 
 	public void setAddingIncrementableImage(boolean addingIncrementableImage) {
 		this.addingIncrementableImage = addingIncrementableImage;
 	}
 
-
 	/**
-	 * @param elementService the elementService to set
+	 * @param elementService
+	 *            the elementService to set
 	 */
 	public void setElementService(ElementService elementService) {
 		this.elementService = elementService;
 	}
 
-
 	/**
 	 * @return the elementService
 	 */
 	public ElementService getElementService() {
-		return elementService;
-	}
 
+		return (this.elementService);
+	}
 
 	@Override
 	public void update() {
 		logger.info("Updating IncrementableController");
+
 		loadIncrementables();
-		
 	}
 
-
 	/**
-	 * @param materials the materials to set
+	 * @param materials
+	 *            the materials to set
 	 */
 	public void setMaterials(List<SelectItem> materials) {
 		this.materialItems = materials;
 	}
 
-
 	public List<SelectItem> getMaterialItems() {
-		return materialItems;
-	}
 
+		return (this.materialItems);
+	}
 
 	public void setMaterialItems(List<SelectItem> materialItems) {
 		this.materialItems = materialItems;
 	}
 
-
 	/**
 	 * @return the materials
 	 */
 	public List<SelectItem> getMaterials() {
-		return materialItems;
+
+		return (this.materialItems);
 	}
 
-
 	/**
-	 * @param actualConstraint the actualConstraint to set
+	 * @param actualConstraint
+	 *            the actualConstraint to set
 	 */
 	public void setActualConstraint(IncrementableConstraint actualConstraint) {
 		this.actualConstraint = actualConstraint;
 	}
 
-
 	/**
 	 * @return the actualConstraint
 	 */
 	public IncrementableConstraint getActualConstraint() {
-		return actualConstraint;
+
+		return (this.actualConstraint);
 	}
 
-
 	/**
-	 * @param constraintMaterial the constraintMaterial to set
+	 * @param constraintMaterial
+	 *            the constraintMaterial to set
 	 */
 	public void setConstraintMaterial(String constraintMaterial) {
 		this.constraintMaterial = constraintMaterial;
 	}
 
-
 	/**
 	 * @return the constraintMaterial
 	 */
 	public String getConstraintMaterial() {
-		return constraintMaterial;
+
+		return (this.constraintMaterial);
 	}
-
-
-
-
-
-
-
-
-
 
 	public void setGameService(GameService gameService) {
 		this.gameService = gameService;
 	}
 
-
-
-
-
-
-
-
-
-
 	public void setSettingUpConstraints(boolean settingUpConstraints) {
 		this.settingUpConstraints = settingUpConstraints;
 	}
 
-
-
-
-
-
-
-
-
-
 	public boolean isSettingUpConstraints() {
-		return settingUpConstraints;
-	}
 
+		return (this.settingUpConstraints);
+	}
 
 	public void setAction(String action) {
 		this.action = action;
 	}
-
-
-	
-
-
-
-
 }

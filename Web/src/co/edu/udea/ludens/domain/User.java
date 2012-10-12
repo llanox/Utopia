@@ -1,227 +1,142 @@
 package co.edu.udea.ludens.domain;
 
-import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import co.edu.udea.ludens.enums.EnumUserRole;
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.*;
 
 @Entity
-public class User  implements Updateable {
-	
+@Table(name = "users")
+public class User implements Serializable, Updateable {
 
-
-	@Id @GeneratedValue
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private Long id;
-	private String name;	
-	private String login;	
-	private String email;	
-	private String gender;
-	@Temporal(TemporalType.DATE)
-	private Date birthDate;	
-	private EnumUserRole role;	
-	private String password;
-	private Boolean online=false;
-    private Boolean participatingInGame=false;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "login")
+    private String login;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "gender")
+    private String gender;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "birth_date")
+    private Date birthDate;
+    private EnumUserRole role;
+    @Column(name = "password")
+    private String password;
+    @Column(name = "on_line")
+    private Boolean online = false;
+    @Column(name = "participating_in_game")
+    private Boolean participatingInGame = false;
 
+    public User() {
+    }
 
-	
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public User() {
-	
-	}
+    @Override
+    public Long getId() {
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
+        return (this.id);
+    }
 
-	@Override
-	public Long getId() {
-		return id;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * @generated
-	 */
-	public void setName(String name) {
-	
-		this.name = name;
-	}
+    public String getName() {
 
-	/**
-	 * @generated
-	 */
-	public String getName() {
+        return (this.name);
+    }
 
-		return this.name;
-	}
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
-	/**
-	 * @generated
-	 */
-	public void setLogin(String login) {
-	
-		this.login = login;
-	}
+    public String getLogin() {
 
-	/**
-	 * @generated
-	 */
-	public String getLogin() {
+        return (this.login);
+    }
 
-		return this.login;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	/**
-	 * @generated
-	 */
-	public void setEmail(String email) {
+    public String getEmail() {
 
-		this.email = email;
-	}
+        return (this.email);
+    }
 
-	/**
-	 * @generated
-	 */
-	public String getEmail() {
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-		return this.email;
-	}
+    public String getGender() {
 
-	/**
-	 * @generated
-	 */
-	public void setGender(String gender) {
+        return (this.gender);
+    }
 
-		this.gender = gender;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	/**
-	 * @generated
-	 */
-	public String getGender() {
-	
-		return this.gender;
-	}
+    public String getPassword() {
 
+        return (this.password);
+    }
 
+    public void setOnline(Boolean online) {
+        this.online = online;
+    }
 
+    public Boolean isOnline() {
 
-	/**
-	 * @generated
-	 */
-	public void setPassword(String password) {
+        return (this.online);
+    }
 
-		this.password = password;
-	}
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
 
-	/**
-	 * @generated
-	 */
-	public String getPassword() {
+    public Date getBirthDate() {
 
-		return this.password;
-	}
+        return (this.birthDate);
+    }
 
+    public void setRole(EnumUserRole role) {
+        this.role = role;
+    }
 
+    public EnumUserRole getRole() {
 
-	/**
-	 * @param online the online to set
-	 */
-	public void setOnline(Boolean online){
+        return (this.role);
+    }
 
-		this.online = online;
-	}
+    public void setParticipatingInGame(Boolean participatingInGame) {
+        this.participatingInGame = participatingInGame;
+    }
 
-	/**
-	 * @return the online
-	 */
-	public Boolean isOnline() {
-	
-		return online;
-	}
+    public Boolean isParticipatingInGame() {
 
-	/**
-	 * @param birthDate the birthDate to set
-	 */
-	public void setBirthDate(Date birthDate) {
+        return (this.participatingInGame);
+    }
 
-		this.birthDate = birthDate;
-	}
-
-	/**
-	 * @return the birthDate
-	 */
-	public Date getBirthDate() {
-
-		return birthDate;
-	}
-
-	/**
-	 * @param role the role to set
-	 */
-	public void setRole(EnumUserRole role) {
-
-		this.role = role;
-	}
-
-	/**
-	 * @return the role
-	 */
-	public EnumUserRole getRole() {
-
-		return role;
-	}
-
-	
-
-
-	
-	
-
-
-	/**
-	 * @param participatingInGame the participatingInGame to set
-	 */
-	public void setParticipatingInGame(Boolean participatingInGame) {
-		
-		this.participatingInGame = participatingInGame;
-	}
-
-	/**
-	 * @return the participatingInGame
-	 */
-	public Boolean isParticipatingInGame() {
-	
-		return participatingInGame;
-	}
-
-	@Override
-	public void updateWith(Object o) {
+    @Override
+    public void updateWith(Object o) {
         User newUser = (User) o;
-		this.name = newUser.name;
-		this.login = newUser.login;
-		this.email = newUser.email;
-		this.gender = newUser.gender;
-		this.birthDate = newUser.birthDate;
-		this.role = newUser.role;
-		this.password = newUser.password;
-		this.online = newUser.online;
-		this.participatingInGame = newUser.participatingInGame;
-
-		
-	}
-
-
-
-
-	
-
+        this.name = newUser.name;
+        this.login = newUser.login;
+        this.email = newUser.email;
+        this.gender = newUser.gender;
+        this.birthDate = newUser.birthDate;
+        this.role = newUser.role;
+        this.password = newUser.password;
+        this.online = newUser.online;
+        this.participatingInGame = newUser.participatingInGame;
+    }
 }

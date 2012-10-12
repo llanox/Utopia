@@ -43,43 +43,39 @@ public class UtopiaUtil {
 		logger.info("LambdaD .." + lambdaD);
 
 		Double result = p0 * Math.exp(lambdaD * n);
-		
-		logger.info(p0+"*E^("+lambdaD+"*"+n+")");
 
+		logger.info(p0 + "*E^(" + lambdaD + "*" + n + ")");
 		logger.info("result .." + result);
 
 		return result;
 	}
 
 	public static boolean meetReqToGettingStart(Player player) {
-
 		HashMap<String, Element> elements = new HashMap<String, Element>();
 
 		elements.putAll(player.getMaterials());
 		elements.putAll(player.getDevelopmentFactors());
-		
-		System.out.println("Elements "+elements.size());
+
+		System.out.println("Elements " + elements.size());
 
 		boolean elementsOk = isHigherThanRequired(elements);
-		System.out.println("Elements OK? "+elementsOk);
-		
-		
+		System.out.println("Elements OK? " + elementsOk);
+
 		return elementsOk;
 	}
 
 	public static boolean isHigherThanRequired(HashMap<String, Element> factors) {
-
 		for (Object key : factors.keySet()) {
-
 			Element el = factors.get(key);
 			Integer level = el.getLevel();
 
 			if (level >= LEVEL_TO_GETTING_START) {
-				logger.info("level " + level + " element " + el.getIncrementable().getName()
-						+ " quantity " + el.getQuantity());
+				logger.info("level " + level + " element "
+						+ el.getIncrementable().getName() + " quantity "
+						+ el.getQuantity());
+
 				return true;
 			}
-
 		}
 
 		return false;
@@ -90,7 +86,6 @@ public class UtopiaUtil {
 		Long time = player.getStartTime();
 
 		if (time == 0) {
-
 			time = cal.getTimeInMillis();
 			player.setStartTime(time);
 			logger.info("adding start time " + time);
@@ -130,58 +125,49 @@ public class UtopiaUtil {
 		return n;
 	}
 
-	public static void checkOutResources(List<IncrementableConstraint> levelResources,
-			Element element, Player player) throws LudensException {
-
+	public static void checkOutResources(
+			List<IncrementableConstraint> levelResources, Element element,
+			Player player) throws LudensException {
 		boolean checked = true;
 		StringBuffer bf = new StringBuffer();
 
 		for (IncrementableConstraint pk : levelResources) {
-
 			Integer neededQuantity = pk.getQuantity();
 			String resourceName = pk.getElementName();
 			Element resource = player.getMaterials().get(resourceName);
-
 			int compare = resource.getQuantity() - neededQuantity;
 
 			if (compare < 0) {
 				checked = false;
 				bf.append(resource.getIncrementable().getName()).append(", ");
 			}
-
 		}
 
 		if (!checked) {
 			throw new LudensException(EnumMsgs.INSUFFICIENT_RESOURCE, bf,
-					element.getIncrementable().getName(), (element.getLevel() + 1));
+					element.getIncrementable().getName(),
+					(element.getLevel() + 1));
 		}
-
 	}
 
 	public static void updateUpgradingDelay(Element element) {
-
 		int lambda = element.getLevelIncrementDelayRate();
 		int n = element.getLevel() + 1;
 		int p0 = element.getLevelIncrementDelayRate();
-
 		Integer delayTime = (int) (calculateExpGrowth(p0, lambda, n) + 0);
 
 		element.setActualUpgradingTime(delayTime);
-
 	}
 
 	public static PlayerStatus generatePlayerStatus(Player player) {
 		PlayerStatus playerStatus = new PlayerStatus();
-
 		HashMap<String, Element> factors = player.getDevelopmentFactors();
 		int total = 0;
 		int average = 0;
 
 		for (Object key : factors.keySet()) {
-
 			Element el = factors.get(key);
 			total = el.getCalculatedValue() + total;
-
 		}
 
 		if (factors.size() > 0)
@@ -192,55 +178,48 @@ public class UtopiaUtil {
 		playerStatus.setAverage(average);
 
 		return playerStatus;
-
 	}
 
 	public static void calculateCoverage(Element element, Player player) {
-
 		double capacity = element.getQuantity();
 		double population = player.getPopulation().getQuantity();
-		int coverage = (int) ((capacity/population)*100);
+		int coverage = (int) ((capacity / population) * 100);
 
-		logger.info("Coverage: " + coverage + " element " + element.getIncrementable()+ " population " + population + " capacity " + capacity);
+		logger.info("Coverage: " + coverage + " element "
+				+ element.getIncrementable() + " population " + population
+				+ " capacity " + capacity);
 
 		element.setCalculatedValue(coverage);
 	}
 
 	public static List<SelectItem> getItems(String[] names) {
-
 		List<SelectItem> items = new ArrayList<SelectItem>();
-	
+
 		for (int i = 0; i < names.length; i++)
 			items.add(new SelectItem(names[i], names[i]));
 
 		return items;
-
 	}
 
 	public static List<SelectItem> getItems(List<Object> objects) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
-	public static Player getPlayerByName(List<Player> players,String offerSender) {
-		
-		for(Player player: players){			
-			if(player.getUser().getLogin().equalsIgnoreCase(offerSender))
+	public static Player getPlayerByName(List<Player> players,
+			String offerSender) {
+		for (Player player : players) {
+			if (player.getUser().getLogin().equalsIgnoreCase(offerSender))
 				return player;
 		}
-		
-		
+
 		return null;
 	}
 
+	public static int generateNumberBetweenRange(int lower, int upper) {
+		int result = -1;
+		result = lower + (int) (Math.random() * ((upper - lower) + 1));
 
-	public static int generateNumberBetweenRange(int lower, int upper){
-		
-		int result = -1;		
-		result = lower + (int)(Math.random() * ((upper - lower) + 1));
-		
 		return result;
 	}
-
-
 }

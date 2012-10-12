@@ -1,6 +1,9 @@
 package co.edu.udea.ludens.enums;
 
-public enum EnumMetric {
-	UNITS, PERCENTAGE;
+import java.io.Serializable;
 
+public enum EnumMetric implements Serializable {
+
+    UNITS,
+    PERCENTAGE;
 }

@@ -16,20 +16,18 @@ import co.edu.udea.ludens.domain.Interchange;
 import co.edu.udea.ludens.domain.MessageEvent;
 import co.edu.udea.ludens.enums.EnumElementType;
 import co.edu.udea.ludens.enums.EnumMsgs;
-import co.edu.udea.ludens.exceptions.LudensException;
 import co.edu.udea.ludens.services.ElementService;
 import co.edu.udea.ludens.services.ProcessHolderService;
-import co.edu.udea.ludens.services.SystemContainer;
 import co.edu.udea.ludens.services.GameProcess;
 import co.edu.udea.ludens.services.TradeProcess;
 import co.edu.udea.ludens.util.InterchangeEvent;
 import co.edu.udea.ludens.util.TradeListener;
 
 public class TradeController implements TradeListener {
-    
-	private static final String OWNER_VIEW="owner";
-	private static final String OTHERS_VIEW="others";
-	
+
+	private static final String OWNER_VIEW = "owner";
+	private static final String OTHERS_VIEW = "others";
+
 	private Logger logger = Logger.getLogger(getClass());
 	private UserSessionBean userSession;
 	private MessagesBean messagesBean;
@@ -37,81 +35,68 @@ public class TradeController implements TradeListener {
 
 	private List<SelectItem> elementItems = new ArrayList<SelectItem>();
 	private List<InterchangeBean> interchangeRequests = new ArrayList<InterchangeBean>();
-	
-	
+
 	private String elFromSender;
 	private int quantityFromSender;
 	private String elFromReceiver;
 	private int quantityFromReceiver;
-	
-	
 
 	private ProcessHolderService processHolderService;
 
 	public TradeController() {
 		super();
 	}
-	
 
 	public void postOffer(ActionEvent ae) {
-
 		logger.info("postOffer ....");
-		
-		
-		GameProcess gameProcess = (GameProcess) processHolderService.findProcessById(GameProcess.class,userSession.getActualGame());
-		TradeProcess tradeProcess = gameProcess.getTradeProcess();	
+
+		GameProcess gameProcess = (GameProcess) processHolderService
+				.findProcessById(GameProcess.class, userSession.getActualGame());
+		TradeProcess tradeProcess = gameProcess.getTradeProcess();
 		String offerSender = userSession.getUser().getLogin();
-		
 
-		tradeProcess.postOffer(elFromSender,quantityFromSender,elFromReceiver,quantityFromReceiver,offerSender);
-		
-		quantityFromSender =0;
-		quantityFromReceiver =0;
+		tradeProcess.postOffer(elFromSender, quantityFromSender,
+				elFromReceiver, quantityFromReceiver, offerSender);
 
+		quantityFromSender = 0;
+		quantityFromReceiver = 0;
 	}
 
-	
-	
 	@Override
 	public void requestTrade(InterchangeEvent event) {
 		interchangeRequests = new ArrayList<InterchangeBean>();
-		InterchangeBean bean =null;
-		
-	for(Interchange interchange: event.getInterchanges()){
-			
-			bean = new InterchangeBean();	
+		InterchangeBean bean = null;
+
+		for (Interchange interchange : event.getInterchanges()) {
+			bean = new InterchangeBean();
 			String offerSender = userSession.getUser().getLogin();
-			
-		    bean.setProcess((TradeProcess) event.getSource());
-		    bean.setInterchange(interchange);
-			
-			
-			String sender =interchange.getSender().getUser().getLogin();
-			
+
+			bean.setProcess((TradeProcess) event.getSource());
+			bean.setInterchange(interchange);
+
+			String sender = interchange.getSender().getUser().getLogin();
+
 			Integer qtFromSender = interchange.getQuantityFromSender();
-			String  elFromSender = interchange.getElFromSender().getIncrementable().getName();
-			
+			String elFromSender = interchange.getElFromSender()
+					.getIncrementable().getName();
+
 			Integer qtFromRecv = interchange.getQuantityFromReceiver();
-			String  elFromRecv = interchange.getElFromReceiver().getIncrementable().getName();
-			//                         
-			String msg = String.format(EnumMsgs.DETAILS_NEW_OFFER.getMsg(),sender ,qtFromSender,elFromSender,qtFromRecv,elFromRecv);
-			
+			String elFromRecv = interchange.getElFromReceiver()
+					.getIncrementable().getName();
+			//
+			String msg = String.format(EnumMsgs.DETAILS_NEW_OFFER.getMsg(),
+					sender, qtFromSender, elFromSender, qtFromRecv, elFromRecv);
+
 			bean.setMessage(msg);
-			
-			if(offerSender.equalsIgnoreCase(sender)){				
+
+			if (offerSender.equalsIgnoreCase(sender)) {
 				bean.setViewers(TradeController.OWNER_VIEW);
-			}else{
+			} else {
 				bean.setViewers(TradeController.OTHERS_VIEW);
 			}
-		    
-		    
 			interchangeRequests.add(bean);
 		}
-		
-		
-		
 		SessionRenderer.render(userSession.getUser().getLogin());
-
 	}
 
 	public void setInterchangeRequests(List<InterchangeBean> interchangeRequests) {
@@ -119,7 +104,8 @@ public class TradeController implements TradeListener {
 	}
 
 	public List<InterchangeBean> getInterchangeRequests() {
-		return interchangeRequests;
+
+		return (this.interchangeRequests);
 	}
 
 	public void setMessagesBean(MessagesBean messagesBean) {
@@ -127,14 +113,14 @@ public class TradeController implements TradeListener {
 	}
 
 	public MessagesBean getMessagesBean() {
-		return messagesBean;
+
+		return (this.messagesBean);
 	}
 
 	@Override
 	public void notifyMsg(MessageEvent event) {
 		messagesBean.notifyMsg(event);
 		SessionRenderer.render(userSession.getUser().getLogin());
-
 	}
 
 	public void setElementItems(List<SelectItem> elementItems) {
@@ -142,17 +128,16 @@ public class TradeController implements TradeListener {
 	}
 
 	public List<SelectItem> getElementItems() {
-
 		if (elementItems == null || elementItems.isEmpty()) {
-			
-					
-			Set<Element> elements = elementService.getAllElementsByPlayer(EnumElementType.MATERIAL,userSession.getUser().getLogin());
+			Set<Element> elements = elementService.getAllElementsByPlayer(
+					EnumElementType.MATERIAL, userSession.getUser().getLogin());
 
 			for (Element element : elements) {
-				elementItems.add(new SelectItem(element.getIncrementable().getName(), element.getIncrementable().getName()));
+				elementItems.add(new SelectItem(element.getIncrementable()
+						.getName(), element.getIncrementable().getName()));
 			}
-			
-			logger.debug("Retrieving elements to trade controller "+elements);
+
+			logger.debug("Retrieving elements to trade controller " + elements);
 		}
 
 		return elementItems;
@@ -167,63 +152,53 @@ public class TradeController implements TradeListener {
 	}
 
 	public UserSessionBean getUserSession() {
-		return userSession;
+
+		return (this.userSession);
 	}
-
-	
-	
-
-
-	
-
 
 	public void setQuantityFromSender(int quantityFromSender) {
 		this.quantityFromSender = quantityFromSender;
 	}
 
-
 	public int getQuantityFromSender() {
-		return quantityFromSender;
-	}
 
+		return (this.quantityFromSender);
+	}
 
 	public void setQuantityFromReceiver(int quantityFromReceiver) {
 		this.quantityFromReceiver = quantityFromReceiver;
 	}
 
-
 	public void setElFromReceiver(String elFromReceiver) {
 		this.elFromReceiver = elFromReceiver;
 	}
 
-
 	public String getElFromReceiver() {
-		return elFromReceiver;
-	}
 
+		return (this.elFromReceiver);
+	}
 
 	public int getQuantityFromReceiver() {
-		return quantityFromReceiver;
-	}
 
+		return (this.quantityFromReceiver);
+	}
 
 	public void setElFromSender(String elFromSender) {
 		this.elFromSender = elFromSender;
 	}
 
-
 	public String getElFromSender() {
-		return elFromSender;
-	}
 
+		return (this.elFromSender);
+	}
 
 	public ProcessHolderService getProcessHolderService() {
-		return processHolderService;
+
+		return (this.processHolderService);
 	}
 
-
-	public void setProcessHolderService(ProcessHolderService processHolderService) {
+	public void setProcessHolderService(
+			ProcessHolderService processHolderService) {
 		this.processHolderService = processHolderService;
 	}
-
 }

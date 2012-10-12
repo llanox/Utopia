@@ -21,5 +21,4 @@ public class InvalidNumberOfPlayersException extends RuntimeException {
 		super(arg0);
 		// TODO Auto-generated constructor stub
 	}
-
 }

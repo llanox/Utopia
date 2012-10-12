@@ -1,31 +1,23 @@
 package co.edu.udea.ludens.enums;
 
-public enum EnumUserRole {
+import java.io.Serializable;
 
-	ADMIN("Administrador"), 
-	PLAYER("Jugador");
-	
-	private String roleName;
-	
-	EnumUserRole(String roleName){
-		this.setRoleName(roleName);		
-	}
+public enum EnumUserRole implements Serializable {
 
-	/**
-	 * @param roleName the roleName to set
-	 */
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
+    ADMIN("Administrador"),
+    PLAYER("Jugador");
+    private String roleName;
 
-	/**
-	 * @return the roleName
-	 */
-	public String getRoleName() {
-		return roleName;
-	}
+    EnumUserRole(String roleName) {
+        this.setRoleName(roleName);
+    }
 
+    public String getRoleName() {
 
-	
-	
+        return (this.roleName);
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 }

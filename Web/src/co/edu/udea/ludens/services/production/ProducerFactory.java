@@ -4,9 +4,7 @@ import co.edu.udea.ludens.enums.EnumElementType;
 
 public class ProducerFactory {
 
-	
 	public static ProducerStrategy createProducer(EnumElementType productType) {
-
 		if (EnumElementType.FACTOR == productType) {
 			return new FactorProducerWithGrowthRate();
 		}
@@ -21,7 +19,4 @@ public class ProducerFactory {
 
 		return null;
 	}
-	
-	
-	
 }

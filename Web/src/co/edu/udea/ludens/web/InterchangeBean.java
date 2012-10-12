@@ -1,32 +1,27 @@
 package co.edu.udea.ludens.web;
 
-
-
 import org.apache.log4j.Logger;
 
 import co.edu.udea.ludens.domain.Interchange;
 import co.edu.udea.ludens.services.TradeProcess;
 
-
 public class InterchangeBean {
 
 	private TradeProcess process;
 	private Interchange interchange;
-	private String       message;
+	private String message;
 	private Logger logger = Logger.getLogger(getClass());
 	private String viewers;
-	
-	public InterchangeBean(){
+
+	public InterchangeBean() {
 		interchange = new Interchange();
-		
+
 	}
 
-	
-	
 	public void acceptOffer(javax.faces.event.ActionEvent event) {
-		
-		String player = (String) event.getComponent().getAttributes().get("player");	
-		logger.info("player who accept "+player);
+		String player = (String) event.getComponent().getAttributes()
+				.get("player");
+		logger.info("player who accept " + player);
 		process.acceptOffer(interchange, player);
 	}
 
@@ -37,59 +32,41 @@ public class InterchangeBean {
 
 	public void modifyOffer(javax.faces.event.ActionEvent ae) {
 		process.modifyOffer(interchange);
-	
 	}
-
-
 
 	public void setInterchange(Interchange interchange) {
 		this.interchange = interchange;
 	}
 
-
-
 	public Interchange getInterchange() {
-		return interchange;
+
+		return (this.interchange);
 	}
-
-
 
 	public void setProcess(TradeProcess process) {
 		this.process = process;
 	}
 
-
-
 	public TradeProcess getProcess() {
-		return process;
+
+		return (this.process);
 	}
-
-
 
 	public void setMessage(String message) {
 		this.message = message;
 	}
 
-
-
 	public String getMessage() {
-		return message;
+
+		return (this.message);
 	}
-
-
 
 	public void setViewers(String viewers) {
 		this.viewers = viewers;
 	}
 
-
-
 	public String getViewers() {
-		return viewers;
+
+		return (this.viewers);
 	}
-
-	
-	
-	
-
 }

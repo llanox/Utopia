@@ -1,5 +1,10 @@
 package co.edu.udea.ludens.enums;
 
-public enum EnumMsgType {
-	NOTICE, ERROR, SUCCESS;
+import java.io.Serializable;
+
+public enum EnumMsgType implements Serializable {
+
+    NOTICE,
+    ERROR,
+    SUCCESS;
 }

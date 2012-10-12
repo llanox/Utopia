@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.component.UIData;
-import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
 import common.Logger;
@@ -19,8 +18,7 @@ import co.edu.udea.ludens.services.PlayerService;
 import co.edu.udea.ludens.services.UserService;
 import co.edu.udea.ludens.util.UpdateableView;
 
-
-public class PlayerController implements UpdateableView{
+public class PlayerController implements UpdateableView {
 
 	private boolean settingPlayers = false;
 	private GameService gameService;
@@ -28,90 +26,79 @@ public class PlayerController implements UpdateableView{
 	private UserService userService;
 	private PlayerService playerService;
 	private GameController gameController;
-	private List<Player> selectedPlayers= new ArrayList<Player> ();
+	private List<Player> selectedPlayers = new ArrayList<Player>();
 	private List<SelectItem> availableUsers;
 	private String loginActualUser;
-	private Logger logger = Logger.getLogger(getClass());	
-	
-	
-	public void settingPlayers(javax.faces.event.ActionEvent event) {		
+	private Logger logger = Logger.getLogger(getClass());
+
+	public void settingPlayers(javax.faces.event.ActionEvent event) {
 		gameController.settingUpPlayers(event);
-		settingPlayers = true;		
+		settingPlayers = true;
 		updatingUsersAndPlayers();
 	}
-	
-    @PostConstruct
+
+	@PostConstruct
 	private void updatingUsersAndPlayers() {
-    	
-    	logger.debug(" Updating Player List");
-		List<User> availableUsersList = userService.findUserByRole(false,EnumUserRole.PLAYER);
-		selectedPlayers = playerService.findAllPlayersByGameName(true,gameController.getActualGame().getName());
-		logger.debug(" Updating Player List "+selectedPlayers.size());
-	    fillAvailableUsers(availableUsersList);
-	    
+		logger.debug(" Updating Player List");
+
+		List<User> availableUsersList = userService.findUserByRole(false,
+				EnumUserRole.PLAYER);
+		selectedPlayers = playerService.findAllPlayersByGameName(true,
+				gameController.getActualGame().getName());
+		logger.debug(" Updating Player List " + selectedPlayers.size());
+		fillAvailableUsers(availableUsersList);
 	}
-	
-	public void removePlayer(javax.faces.event.ActionEvent event) {		
-				
+
+	public void removePlayer(javax.faces.event.ActionEvent event) {
 		int selectedRowIndex = playersTable.getRowIndex();
 		Player player = selectedPlayers.remove(selectedRowIndex);
-		Game game = gameController.getActualGame();		
-		gameService.removePlayer(game,player);	
-	        
+		Game game = gameController.getActualGame();
+		gameService.removePlayer(game, player);
+
 		updatingUsersAndPlayers();
 	}
-	
-	public void listGames(javax.faces.event.ActionEvent event) {		
+
+	public void listGames(javax.faces.event.ActionEvent event) {
 		gameController.listGames(event);
 		settingPlayers = false;
-	  
 	}
-	
-	
-	
-	public void addPlayer(javax.faces.event.ActionEvent event) {		
+
+	public void addPlayer(javax.faces.event.ActionEvent event) {
 		Player player = new Player();
-						
-		if(loginActualUser==null || loginActualUser.isEmpty())
-			return;		
-		
+
+		if (loginActualUser == null || loginActualUser.isEmpty())
+			return;
+
 		Game game = gameController.getActualGame();
 		User user = userService.findUser(loginActualUser);
 		player.setUser(user);
 		user.setParticipatingInGame(true);
-	
-		
+
 		playerService.save(player);
-		
-		if(game.getPlayers()==null){
+		if (game.getPlayers() == null) {
 			game.setPlayers(new ArrayList<Player>());
 		}
-		
+
 		game.getPlayers().add(player);
-		
 		gameService.save(game);
-				
 		selectedPlayers.add(player);
 		updatingUsersAndPlayers();
 	}
 
-
-	
 	private void fillAvailableUsers(List<User> availableUsersList) {
 		availableUsers = new ArrayList<SelectItem>();
-		
-		for(User user : availableUsersList ){
-			availableUsers.add(new SelectItem(user.getLogin(), user.getLogin()));			
+
+		for (User user : availableUsersList) {
+			availableUsers
+					.add(new SelectItem(user.getLogin(), user.getLogin()));
 		}
-		
 	}
 
+	/** accesors and mutators **/
 
-	/**accesors and mutators**/
-	
-	
 	/**
-	 * @param settingPlayers the settingPlayers to set
+	 * @param settingPlayers
+	 *            the settingPlayers to set
 	 */
 	public void setSettingPlayers(boolean settingPlayers) {
 		this.settingPlayers = settingPlayers;
@@ -121,19 +108,23 @@ public class PlayerController implements UpdateableView{
 	 * @return the settingPlayers
 	 */
 	public boolean isSettingPlayers() {
-		return settingPlayers;
+
+		return (this.settingPlayers);
 	}
 
 	public GameService getGameService() {
-		return gameService;
+
+		return (this.gameService);
 	}
 
 	public UserService getUserService() {
-		return userService;
+
+		return (this.userService);
 	}
 
 	public PlayerService getPlayerService() {
-		return playerService;
+
+		return (this.playerService);
 	}
 
 	public void setGameService(GameService gameService) {
@@ -148,75 +139,73 @@ public class PlayerController implements UpdateableView{
 		this.playerService = playerService;
 	}
 
-
-
-
 	/**
-	 * @param gameController the gameController to set
+	 * @param gameController
+	 *            the gameController to set
 	 */
 	public void setGameController(GameController gameController) {
 		this.gameController = gameController;
 	}
 
-
 	/**
 	 * @return the gameController
 	 */
 	public GameController getGameController() {
-		return gameController;
+
+		return (this.gameController);
 	}
 
-
 	/**
-	 * @param playersTable the playersTable to set
+	 * @param playersTable
+	 *            the playersTable to set
 	 */
 	public void setPlayersTable(UIData playersTable) {
 		this.playersTable = playersTable;
 	}
 
-
-
 	/**
 	 * @return the playersTable
 	 */
 	public UIData getPlayersTable() {
-		return playersTable;
+
+		return (this.playersTable);
 	}
 
-
 	/**
-	 * @param selectedPlayers the selectedPlayers to set
+	 * @param selectedPlayers
+	 *            the selectedPlayers to set
 	 */
 	public void setSelectedPlayers(List<Player> selectedPlayers) {
 		this.selectedPlayers = selectedPlayers;
 	}
 
-
 	/**
 	 * @return the selectedPlayers
 	 */
 	public List<Player> getSelectedPlayers() {
-		return selectedPlayers;
+
+		return (this.selectedPlayers);
 	}
 
 	/**
-	 * @param availableUsers the availableUsers to set
+	 * @param availableUsers
+	 *            the availableUsers to set
 	 */
 	public void setAvailableUsers(List<SelectItem> availableUsers) {
 		this.availableUsers = availableUsers;
 	}
 
-
 	/**
 	 * @return the availableUsers
 	 */
 	public List<SelectItem> getAvailableUsers() {
-		return availableUsers;
+
+		return (this.availableUsers);
 	}
 
-
 	/**
-	 * @param loginActualUser the loginActualUser to set
+	 * @param loginActualUser
+	 *            the loginActualUser to set
 	 */
 	public void setLoginActualUser(String loginActualUser) {
 		this.loginActualUser = loginActualUser;
@@ -226,14 +215,12 @@ public class PlayerController implements UpdateableView{
 	 * @return the loginActualUser
 	 */
 	public String getLoginActualUser() {
-		return loginActualUser;
+
+		return (this.loginActualUser);
 	}
 
 	@Override
-	public void update() {	
-	
+	public void update() {
 		updatingUsersAndPlayers();
-	
 	}
-	
 }

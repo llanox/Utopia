@@ -24,39 +24,27 @@ import co.edu.udea.ludens.services.ElementProcess;
 import co.edu.udea.ludens.services.ElementService;
 import co.edu.udea.ludens.services.GameProcess;
 
-
-
 @Service
-@Transactional( propagation = Propagation.REQUIRES_NEW,readOnly = true )
+@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = true)
 public class ElementServiceImpl implements ElementService {
 	private Logger logger = Logger.getLogger(getClass());
-	
 
-	
 	@Autowired
 	private ElementDAO elementDao;
-	
-	
+
 	@Autowired
 	private PlayerDAO playerDao;
-	
+
 	@Autowired
 	private GameDAO gameDao;
-	
 
-	
-
-	
-
-	
-	
 	public ElementServiceImpl() {
-	
 	}
 
-	public ElementServiceImpl(GameDAO gameDao, PlayerDAO playerDao,	ElementDAO elementDao) {
+	public ElementServiceImpl(GameDAO gameDao, PlayerDAO playerDao,
+			ElementDAO elementDao) {
 		this.gameDao = gameDao;
-		this.playerDao= playerDao;
+		this.playerDao = playerDao;
 		this.elementDao = elementDao;
 	}
 
@@ -64,13 +52,11 @@ public class ElementServiceImpl implements ElementService {
 	public Set<Element> getAllElements(EnumElementType elementType) {
 		Set<Element> elements = new HashSet<Element>();
 
-
 		return elements;
 	}
 
 	@Override
 	public Set<Element> getAllElements(String idUser) {
-
 		Set<Element> elements = new HashSet<Element>();
 
 		return elements;
@@ -78,63 +64,53 @@ public class ElementServiceImpl implements ElementService {
 
 	@Override
 	public Set<Element> getFactors(String login) {
-		Set<Element> elements = new HashSet<Element>();     
-		
-		     
+		Set<Element> elements = new HashSet<Element>();
+
 		return elements;
 	}
 
 	@Override
 	public Set<Element> getMaterials(String login) {
-		Set<Element> elements = new HashSet<Element>();     
-			     
+		Set<Element> elements = new HashSet<Element>();
+
 		return elements;
 	}
 
 	@Override
-	@Transactional( propagation = Propagation.REQUIRES_NEW,readOnly = false )
-	public MessageEvent upLevel(String login, String elementName,GameProcess gameProcess) {
-		
-	
-		
-		System.out.println("game process: "+gameProcess);
-		
+	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
+	public MessageEvent upLevel(String login, String elementName,
+			GameProcess gameProcess) {
+		System.out.println("game process: " + gameProcess);
+
 		ElementProcess elementProcess = gameProcess.getElementProcess(login);
 		MessageEvent event = elementProcess.upLevel(elementName);
-		
-		
+
 		return event;
 	}
 
-
-
 	@Override
-	@Transactional( propagation = Propagation.REQUIRES_NEW,readOnly = false )
+	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public void save(Element element) {
-		
-		logger.info("Saving element ..."+element.getIncrementable().getName());
+		logger.info("Saving element ..." + element.getIncrementable().getName());
 		elementDao.saveOrUpdate(element);
-		
 	}
 
 	@Override
-	@Transactional( propagation = Propagation.REQUIRES_NEW,readOnly = false )
+	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public void delete(Element element) {
 		elementDao.delete(element);
-		
 	}
 
 	@Override
 	public Element findElementByName(String elementName) {
-		Element element  = elementDao.findElementByName(elementName);
+		Element element = elementDao.findElementByName(elementName);
+
 		return element;
 	}
 
-
-
-
 	/**
-	 * @param elementDao the elementDao to set
+	 * @param elementDao
+	 *            the elementDao to set
 	 */
 	public void setElementDao(ElementDAO elementDao) {
 		this.elementDao = elementDao;
@@ -144,81 +120,71 @@ public class ElementServiceImpl implements ElementService {
 	 * @return the elementDao
 	 */
 	public ElementDAO getElementDao() {
-		return elementDao;
+
+		return (this.elementDao);
 	}
 
 	@Override
 	public Element getPopulation(String login) {
 		Element population = null;
-		List<Element> elements = elementDao.findElementByType(EnumElementType.POPULATION,login);
-		
-		if(elements!=null && !elements.isEmpty())
+		List<Element> elements = elementDao.findElementByType(
+				EnumElementType.POPULATION, login);
+
+		if (elements != null && !elements.isEmpty())
 			population = elements.get(0);
-		
-		return population ;
-	
+
+		return population;
 	}
 
-	@Transactional( propagation = Propagation.REQUIRED,readOnly = false )
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void createElementsForEachPlayer(Game game) {
-		
 		List<Player> players = game.getPlayers();
-		logger.debug("creating elements for : "+players.size());
-		
-		
-		
-		for(Player pa:players){
-			
-		   for(Incrementable inc : game.getDefaultIncrementables()){			
-			Element element = new Element();
-			
-			if(EnumElementType.FACTOR == inc.getType()){
-				logger.info("Player "+pa+"Development Factors "+pa.getDevelopmentFactors() +"factor : "+element+" incrementable "+inc+" incrementable name"+inc.getName());			
-				
-				buildElement(pa, inc, element);				
-				elementDao.saveOrUpdate(element);
-				
-				
-				if(pa.getDevelopmentFactors()==null){
-					HashMap<String, Element> developmentFactors = new HashMap<String, Element>();
-					pa.setDevelopmentFactors(developmentFactors);
+		logger.debug("creating elements for : " + players.size());
+
+		for (Player pa : players) {
+			for (Incrementable inc : game.getDefaultIncrementables()) {
+				Element element = new Element();
+
+				if (EnumElementType.FACTOR == inc.getType()) {
+					logger.info("Player " + pa + "Development Factors "
+							+ pa.getDevelopmentFactors() + "factor : "
+							+ element + " incrementable " + inc
+							+ " incrementable name" + inc.getName());
+
+					buildElement(pa, inc, element);
+					elementDao.saveOrUpdate(element);
+
+					if (pa.getDevelopmentFactors() == null) {
+						HashMap<String, Element> developmentFactors = new HashMap<String, Element>();
+						pa.setDevelopmentFactors(developmentFactors);
+					}
+					pa.getDevelopmentFactors().put(inc.getName(), element);
+					continue;
 				}
-				
-				pa.getDevelopmentFactors().put(inc.getName(), element);
-				
-				continue;
-			}
-			
-			if(EnumElementType.MATERIAL == inc.getType()){	
-				logger.info("Material : "+element);
-				buildElement(pa, inc, element);
-				element = (Element) elementDao.saveOrUpdate(element);	
-				
-				if(pa.getMaterials()==null){
-					HashMap<String, Element> materials = new HashMap<String, Element>();
-					pa.setMaterials(materials);
+
+				if (EnumElementType.MATERIAL == inc.getType()) {
+					logger.info("Material : " + element);
+					buildElement(pa, inc, element);
+					element = (Element) elementDao.saveOrUpdate(element);
+
+					if (pa.getMaterials() == null) {
+						HashMap<String, Element> materials = new HashMap<String, Element>();
+						pa.setMaterials(materials);
+					}
+					pa.getMaterials().put(inc.getName(), element);
+					continue;
 				}
-				
-				pa.getMaterials().put(inc.getName(), element);
-			
-				continue;
+
+				if (EnumElementType.POPULATION == inc.getType()) {
+					logger.info("population : " + element);
+					buildElement(pa, inc, element);
+					element = (Element) elementDao.saveOrUpdate(element);
+					pa.setPopulation(element);
+					continue;
+				}
 			}
-			
-			if(EnumElementType.POPULATION == inc.getType()){
-				logger.info("population : "+element);
-				buildElement(pa, inc, element);
-				element = (Element) elementDao.saveOrUpdate(element);				
-				pa.setPopulation(element);
-			
-				continue;
-			}
-			
-			}
-		   
 			playerDao.saveOrUpdate(pa);
 		}
-		
-		
 	}
 
 	private void buildElement(Player pa, Incrementable inc, Element element) {
@@ -227,11 +193,8 @@ public class ElementServiceImpl implements ElementService {
 		element.setQuantity(inc.getInitialValue());
 		element.setCalculatedValue(0);
 		element.setActualUpgradingTime(inc.getInitialUpgradingTime());
-	    element.setPlayer(pa);
+		element.setPlayer(pa);
 		element.setProductionIncrementRate(inc.getProductionIncrementRate());
-		
-
-		
 	}
 
 	public void setPlayerDao(PlayerDAO playerDao) {
@@ -239,7 +202,8 @@ public class ElementServiceImpl implements ElementService {
 	}
 
 	public PlayerDAO getPlayerDao() {
-		return playerDao;
+
+		return (this.playerDao);
 	}
 
 	public void setGameDao(GameDAO gameDao) {
@@ -247,25 +211,22 @@ public class ElementServiceImpl implements ElementService {
 	}
 
 	public GameDAO getGameDao() {
-		return gameDao;
+
+		return (this.gameDao);
 
 	}
 
 	@Override
-	public Set<Element> getAllElementsByPlayer(EnumElementType type,String login) {
-		
-		Set<Element> elements  = new HashSet<Element>();
-		
-	    List<Element> elementsByType = elementDao.findElementByType(type, login);
-	    
-	    for(Element el:elementsByType){	    	
-	    	elements.add(el);	    	
-	    }
-	
-	
-		
+	public Set<Element> getAllElementsByPlayer(EnumElementType type,
+			String login) {
+		Set<Element> elements = new HashSet<Element>();
+		List<Element> elementsByType = elementDao
+				.findElementByType(type, login);
+
+		for (Element el : elementsByType) {
+			elements.add(el);
+		}
+
 		return elements;
 	}
-
-
 }

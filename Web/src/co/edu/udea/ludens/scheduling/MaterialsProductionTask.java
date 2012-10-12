@@ -9,21 +9,16 @@ public class MaterialsProductionTask implements Runnable {
 
 	GameProcess gameProcess;
 	private Logger logger = Logger.getLogger(this.getClass());
-	
-	
-	public MaterialsProductionTask(GameProcess gameProcess){
-		
+
+	public MaterialsProductionTask(GameProcess gameProcess) {
+
 		this.gameProcess = gameProcess;
-		
+
 	}
-	
-	
+
 	@Override
-	public void run() {		
-		logger.debug("Executing producction .."+new Date());
+	public void run() {
+		logger.debug("Executing producction .." + new Date());
 		gameProcess.produceElements();
 	}
-	
-	
-
 }

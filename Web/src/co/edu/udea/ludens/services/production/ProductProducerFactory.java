@@ -19,16 +19,16 @@ import co.edu.udea.ludens.web.ElementBean;
 
 public class ProductProducerFactory {
 
-	private static Logger logger = Logger.getLogger(ProductProducerFactory.class);
-	
+	private static Logger logger = Logger
+			.getLogger(ProductProducerFactory.class);
+
 	public int UPGRADING_LIVEL_DURATION = 30;// seconds
 
-	public static List<ElementBean> initBeans(	HashMap<String, Element> elements, ElementProcess process) {
-
+	public static List<ElementBean> initBeans(
+			HashMap<String, Element> elements, ElementProcess process) {
 		List<ElementBean> elementBeans = new ArrayList<ElementBean>();
 
 		for (Object key : elements.keySet()) {
-
 			Element incre = null;
 			Integer production = 0;
 			incre = elements.get(key);
@@ -37,17 +37,14 @@ public class ProductProducerFactory {
 			bean.setProduction(production);
 			bean.setProcess(process);
 			elementBeans.add(bean);
-
 		}
 
 		return elementBeans;
-
 	}
 
-	public static List<ElementBean> initPopulation(Element population,ElementProcess process) {
-
+	public static List<ElementBean> initPopulation(Element population,
+			ElementProcess process) {
 		List<ElementBean> elementBeans = new ArrayList<ElementBean>();
-
 		Element incre = null;
 		Integer production = 0;
 		incre = population;
@@ -58,25 +55,28 @@ public class ProductProducerFactory {
 		elementBeans.add(bean);
 
 		return elementBeans;
-
 	}
 
-	public static void upLevel(Element element, Player player) throws LudensException {
+	public static void upLevel(Element element, Player player)
+			throws LudensException {
+		boolean error = false;
+		Integer actualLevel = element.getLevel();
+		Integer newLevel = actualLevel + 1;
 
-        boolean error = false;	
-
-		Integer actualLevel = element.getLevel();	
-		Integer newLevel = actualLevel + 1;	
-
-		List<IncrementableConstraint> ctrs = element.getLevelConstraints().get(newLevel + "");		
-		// if didn't find resources constraints for this level then throw an exception
-		if (ctrs == null) {	
-			throw new LudensException(EnumMsgs.CANT_UP_LEVEL,element.getIncrementable().getName(), newLevel);
+		List<IncrementableConstraint> ctrs = element.getLevelConstraints().get(
+				newLevel + "");
+		// if didn't find resources constraints for this level then throw an
+		// exception
+		if (ctrs == null) {
+			throw new LudensException(EnumMsgs.CANT_UP_LEVEL, element
+					.getIncrementable().getName(), newLevel);
 		}
-		
-		//  we check out resources in order to know if we have enough to up the level
-		UtopiaUtil.checkOutResources(ctrs, element,player);
-		//Here, we have decremented each resource consumed to up to the next level
+
+		// we check out resources in order to know if we have enough to up the
+		// level
+		UtopiaUtil.checkOutResources(ctrs, element, player);
+		// Here, we have decremented each resource consumed to up to the next
+		// level
 		for (IncrementableConstraint pk : ctrs) {
 
 			Integer neededQuantity = pk.getQuantity();
@@ -84,47 +84,33 @@ public class ProductProducerFactory {
 			Element resource = player.getMaterials().get(resourceName);
 			Integer quantity = resource.getQuantity() - neededQuantity;
 			resource.setQuantity(quantity);
-		}		
-	  
-		// start to track  time in order to calculate population increase
-	     UtopiaUtil.addStartTimePlayer(player);
-	   
-	
-	   
-	  
-  	   	    
-	   try {   
-		   
-		   
-		   logger.info("Esperando "+element.getActualUpgradingTime()+" segundos para subir nivel");;
-		   player.setProducing(true);
-		   Thread.sleep(element.getActualUpgradingTime()*1000);
-		   logger.info("Listo subir nivel de "+element.getIncrementable().getName());
-		
-	} catch (InterruptedException e) {
-		logger.info("Error esperando para subir nivel", e);
-		error = true;
+		}
+
+		// start to track time in order to calculate population increase
+		UtopiaUtil.addStartTimePlayer(player);
+
+		try {
+			logger.info("Esperando " + element.getActualUpgradingTime()
+					+ " segundos para subir nivel");
+			;
+			player.setProducing(true);
+			Thread.sleep(element.getActualUpgradingTime() * 1000);
+			logger.info("Listo subir nivel de "
+					+ element.getIncrementable().getName());
+
+		} catch (InterruptedException e) {
+			logger.info("Error esperando para subir nivel", e);
+			error = true;
+		}
+
+		if (!error) {
+			element.setLevel(newLevel);
+			UtopiaUtil.updateUpgradingDelay(element);
+			player.setProducing(false);
+		}
 	}
-	   
-
-	
-	 	 
-	   
-       if(!error){
-	   element.setLevel(newLevel);
-	   UtopiaUtil.updateUpgradingDelay(element);
-	   player.setProducing(false);
-       }
-	   
-	  
-	   
-
-	}
-
-
 
 	public static ProducerStrategy createProducer(EnumElementType productType) {
-
 		if (EnumElementType.FACTOR == productType) {
 			return new FactorProducerWithGrowthRate();
 		}
@@ -139,10 +125,8 @@ public class ProductProducerFactory {
 
 		return null;
 	}
-	
-	
-	public  static Double calculateExpGrowth(int p0, double lambda,	int n) {
-		
+
+	public static Double calculateExpGrowth(int p0, double lambda, int n) {
 		logger.info("Calculating exp ..");
 
 		double lambdaD = lambda / 100;
@@ -150,10 +134,9 @@ public class ProductProducerFactory {
 		logger.info("LambdaD .." + lambdaD);
 
 		Double result = p0 * Math.exp(lambdaD * n);
-		
+
 		logger.info("result .." + result);
 
 		return result;
 	}
-
 }
