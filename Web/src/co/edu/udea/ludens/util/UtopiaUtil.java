@@ -31,7 +31,6 @@ public class UtopiaUtil {
 	public static long getId() {
 
 		return idCounter++;
-
 	}
 
 	public static Double calculateExpGrowth(int p0, double lambda, int n) {

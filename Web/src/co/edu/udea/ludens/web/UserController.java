@@ -9,8 +9,6 @@ import javax.faces.model.SelectItem;
 
 import org.apache.log4j.Logger;
 
-import com.icesoft.faces.component.ext.RowSelectorEvent;
-
 import co.edu.udea.ludens.domain.User;
 import co.edu.udea.ludens.enums.EnumUserRole;
 import co.edu.udea.ludens.services.UserService;

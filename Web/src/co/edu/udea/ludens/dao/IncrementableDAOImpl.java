@@ -2,9 +2,7 @@ package co.edu.udea.ludens.dao;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.udea.ludens.domain.Incrementable;
 import co.edu.udea.ludens.domain.IncrementableConstraint;
@@ -106,7 +104,7 @@ public class IncrementableDAOImpl extends ObjectDBDAO implements
 
 	@Override
 	public List<IncrementableConstraint> findAllConstraints() {
-		// TODO Auto-generated method stub
+
 		return (List<IncrementableConstraint>) this
 				.findObjectByType(IncrementableConstraint.class);
 	}
@@ -114,7 +112,7 @@ public class IncrementableDAOImpl extends ObjectDBDAO implements
 	@Override
 	public List<IncrementableConstraint> findAllConstraints(
 			String incrementableName, String gameName) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 }

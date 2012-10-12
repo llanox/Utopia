@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import co.edu.udea.ludens.domain.Player;
 import co.edu.udea.ludens.domain.User;
 import co.edu.udea.ludens.services.PlayerService;
 import co.edu.udea.ludens.services.UserService;

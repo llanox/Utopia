@@ -8,14 +8,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class TestEventProcessService {
 
 	@Test
-	public void choseeRandomEvent(){
-		
-		
-		
-		
-		
+	public void choseeRandomEvent() {
 	}
-	
-	
-	
 }

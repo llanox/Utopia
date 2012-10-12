@@ -27,6 +27,7 @@ public class ObjectDBDAO implements DBDAO {
 		logger.info("Guardando " + o);
 		em.persist(o);
 		em.flush();
+
 		return o;
 	}
 
@@ -42,7 +43,6 @@ public class ObjectDBDAO implements DBDAO {
 			logger.info("merging old object " + o);
 			em.merge(o);
 		}
-
 		em.flush();
 
 		return o;
@@ -57,6 +57,7 @@ public class ObjectDBDAO implements DBDAO {
 	@Override
 	public void delete(Object o) {
 		Object found = em.find(o.getClass(), ((Updateable) o).getId());
+
 		em.remove(found);
 	}
 

@@ -15,6 +15,8 @@ public class Element implements Serializable, Updateable {
     private Long id;
     @Column(name = "calculated_value")
     private int calculatedValue;
+    @Column(name = "level")
+    private int level;
     @Column(name = "progress_level")
     private int progressLevel;
     @Column(name = "quantity")
@@ -35,6 +37,24 @@ public class Element implements Serializable, Updateable {
     public Element() {
     }
 
+    public int getLevelIncrementDelayRate() {
+
+    	return (this.incrementable.getLevelIncrementDelayRate());
+    }
+
+    public void setLevelIncrementDelayRate(int levelIncrementDelayRate) {
+    	this.incrementable.setLevelIncrementDelayRate(levelIncrementDelayRate);
+    }
+
+    public int getProductionIncrementRate() {
+
+    	return (this.incrementable.getProductionIncrementRate());
+    }
+
+    public void setProductionIncrementRate(int productionIncrementRate) {
+    	this.incrementable.setProductionIncrementRate(productionIncrementRate);
+    }
+
     @Override
     public Long getId() {
 
@@ -52,6 +72,15 @@ public class Element implements Serializable, Updateable {
 
     public void setCalculatedValue(int calculatedValue) {
         this.calculatedValue = calculatedValue;
+    }
+
+    public int getLevel() {
+
+        return (this.level);
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public int getProgressLevel() {

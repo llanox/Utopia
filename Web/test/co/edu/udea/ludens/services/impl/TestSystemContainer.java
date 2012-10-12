@@ -6,15 +6,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-
 @RunWith(MockitoJUnitRunner.class)
 public class TestSystemContainer {
-	
-	@Test
-	public void testBootStrapGame(){
-		
-		Assert.assertEquals(true,true);
-		
-	}
 
+	@Test
+	public void testBootStrapGame() {
+		Assert.assertEquals(true, true);
+	}
 }

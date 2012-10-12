@@ -1,7 +1,6 @@
 package co.edu.udea.ludens.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.jdo.annotations.Unique;
 import javax.persistence.*;
@@ -14,6 +13,8 @@ public class Player implements Serializable, Updateable {
     @GeneratedValue
     @Column(name = "id")
     private long id;
+    @Column(name = "population")
+    private Element population;
     @Unique
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private User user;
@@ -29,7 +30,10 @@ public class Player implements Serializable, Updateable {
     @OneToMany
     @OrderColumn(name = "order")
     @JoinColumn(name = "player_id", nullable = false)
-    private List<MessageEvent> events = new ArrayList();
+    private List<MessageEvent> events;
+
+    private List<Element> developmentFactors;
+    private List<Element> materials;
 
     public void setId(long id) {
         this.id = id;
@@ -39,6 +43,15 @@ public class Player implements Serializable, Updateable {
     public Long getId() {
 
         return (this.id);
+    }
+
+    public void setPopulation(Element population) {
+        this.population = population;
+    }
+
+    public Element getPopulation() {
+
+        return (this.population);
     }
 
     public void setUser(User user) {
@@ -54,23 +67,36 @@ public class Player implements Serializable, Updateable {
   
     }
 
-    /**
-     * @return the elements
-     */
     public List<Element> getElements() {
-        return elements;
+
+    	return (this.elements);
     }
 
-    /**
-     * @param elements the elements to set
-     */
     public void setElements(List<Element> elements) {
         this.elements = elements;
+    }
+
+    public List<Element> getDevelopmentFactors() {
+
+    	return (this.developmentFactors);
+    }
+
+    public void setDevelopmentFactors(List<Element> developmentFactors) {
+        this.developmentFactors = developmentFactors;
     }
 
     public List<MessageEvent> getEvents() {
 
         return (this.events);
+    }
+
+    public List<Element> getMaterials() {
+
+    	return (this.materials);
+    }
+
+    public void setMaterials(List<Element> materials) {
+        this.materials = materials;
     }
 
     public void setEvents(List<MessageEvent> events) {

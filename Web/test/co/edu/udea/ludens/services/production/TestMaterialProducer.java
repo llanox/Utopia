@@ -22,7 +22,7 @@ public class TestMaterialProducer {
 		Element m1 = new Element();
 		Incrementable in1 = new Incrementable();
 		in1.setName("M1");
-		
+
 		in1.setInitialValue(100);
 		in1.setInitialUpgradingTime(2000);
 		in1.setLevelIncrementDelayRate(15);
@@ -30,23 +30,20 @@ public class TestMaterialProducer {
 		in1.setType(EnumElementType.MATERIAL);
 
 		m1.setIncrementable(in1);
-	
+
 		materials.put("M1", m1);
 
 	}
 
 	@Test
 	public void testIT() throws InterruptedException {
-
 		int i = 0;
 		while (i <= 10) {
-			
 			materials.get("M1").setLevel(i);
-			producer.produce(materials, null);		
-		
+			producer.produce(materials, null);
+
 			Thread.sleep(1000);
 			i++;
 		}
 	}
-
 }

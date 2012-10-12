@@ -4,15 +4,12 @@ import java.util.List;
 
 import co.edu.udea.ludens.domain.User;
 import co.edu.udea.ludens.enums.EnumUserRole;
-import org.apache.log4j.Logger;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserDAOImpl extends ObjectDBDAO implements UserDAO {
 
 	public UserDAOImpl() {
-
 	}
 
 	public User findUserByLogin(String login) {
@@ -28,7 +25,6 @@ public class UserDAOImpl extends ObjectDBDAO implements UserDAO {
 	}
 
 	public List<User> findAllUsers() {
-
 		List<User> result = (List<User>) this.findObjectByType(User.class);
 
 		return result;
@@ -39,12 +35,12 @@ public class UserDAOImpl extends ObjectDBDAO implements UserDAO {
 	public List<User> findUsersBy(boolean participatingInGame) {
 		List<User> result = (List<User>) findObjectByAttribute(User.class,
 				"participatingInGame", participatingInGame);
+
 		return result;
 	}
 
 	@Override
 	public List<User> findUsersBy(boolean participatingInGame, EnumUserRole role) {
-
 		List<User> result = (List<User>) findObjectByAttribute(User.class,
 				"participatingInGame", participatingInGame, "role", role);
 

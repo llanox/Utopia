@@ -47,7 +47,7 @@ public class PlayerServiceImpl implements PlayerService {
 	/**
 	 * @return the playerDao
 	 */
-	public PlayerDAO getPlayerDao() 
+	public PlayerDAO getPlayerDao() {
 
 		return (this.playerDao);
 	}

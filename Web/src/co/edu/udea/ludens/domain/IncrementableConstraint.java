@@ -23,6 +23,8 @@ public class IncrementableConstraint implements Serializable, Updateable {
     private Integer constrainedLevel;
     @Column(name = "quantity")
     private Integer quantity;
+    @Column(name = "element_name")
+    private String elementName;
 
     public IncrementableConstraint() {
     }
@@ -89,6 +91,15 @@ public class IncrementableConstraint implements Serializable, Updateable {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public String getElementName() {
+
+        return (this.elementName);
+    }
+
+    public void setElementName(String elementName) {
+        this.elementName = elementName;
     }
 
     @Override
