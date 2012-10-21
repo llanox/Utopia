@@ -49,36 +49,9 @@ public class UtopiaUtil {
 		return result;
 	}
 
-	public static boolean meetReqToGettingStart(Player player) {
-		HashMap<String, Element> elements = new HashMap<String, Element>();
 
-		elements.putAll(player.getMaterials());
-		elements.putAll(player.getDevelopmentFactors());
 
-		System.out.println("Elements " + elements.size());
-
-		boolean elementsOk = isHigherThanRequired(elements);
-		System.out.println("Elements OK? " + elementsOk);
-
-		return elementsOk;
-	}
-
-	public static boolean isHigherThanRequired(HashMap<String, Element> factors) {
-		for (Object key : factors.keySet()) {
-			Element el = factors.get(key);
-			Integer level = el.getLevel();
-
-			if (level >= LEVEL_TO_GETTING_START) {
-				logger.info("level " + level + " element "
-						+ el.getIncrementable().getName() + " quantity "
-						+ el.getQuantity());
-
-				return true;
-			}
-		}
-
-		return false;
-	}
+	
 
 	public static void addStartTimePlayer(Player player) {
 		Calendar cal = Calendar.getInstance();
@@ -124,29 +97,9 @@ public class UtopiaUtil {
 		return n;
 	}
 
-	public static void checkOutResources(
-			List<IncrementableConstraint> levelResources, Element element,
+	public static void checkOutResources(List<IncrementableConstraint> levelResources, Element element,
 			Player player) throws LudensException {
-		boolean checked = true;
-		StringBuffer bf = new StringBuffer();
-
-		for (IncrementableConstraint pk : levelResources) {
-			Integer neededQuantity = pk.getQuantity();
-			String resourceName = pk.getElementName();
-			Element resource = player.getMaterials().get(resourceName);
-			int compare = resource.getQuantity() - neededQuantity;
-
-			if (compare < 0) {
-				checked = false;
-				bf.append(resource.getIncrementable().getName()).append(", ");
-			}
-		}
-
-		if (!checked) {
-			throw new LudensException(EnumMsgs.INSUFFICIENT_RESOURCE, bf,
-					element.getIncrementable().getName(),
-					(element.getLevel() + 1));
-		}
+	
 	}
 
 	public static void updateUpgradingDelay(Element element) {
@@ -160,12 +113,11 @@ public class UtopiaUtil {
 
 	public static PlayerStatus generatePlayerStatus(Player player) {
 		PlayerStatus playerStatus = new PlayerStatus();
-		HashMap<String, Element> factors = player.getDevelopmentFactors();
+		List<Element> factors = player.getDevelopmentFactors();
 		int total = 0;
 		int average = 0;
 
-		for (Object key : factors.keySet()) {
-			Element el = factors.get(key);
+		for (Element el : factors) {
 			total = el.getCalculatedValue() + total;
 		}
 

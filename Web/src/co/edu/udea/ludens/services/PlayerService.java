@@ -2,7 +2,10 @@ package co.edu.udea.ludens.services;
 
 import java.util.List;
 
+import co.edu.udea.ludens.domain.Element;
+import co.edu.udea.ludens.domain.IncrementableConstraint;
 import co.edu.udea.ludens.domain.Player;
+import co.edu.udea.ludens.exceptions.LudensException;
 
 public interface PlayerService {
 
@@ -18,4 +21,15 @@ public interface PlayerService {
 
 	public List<Player> findAllPlayersByGameName(boolean participatingInGame,
 			String name);
+
+	public boolean meetReqToGettingStart(Player player);
+	
+	public Element getElementPlayerByName(List<Element> elementList, String name);
+
+	public void checkOutResources(List<IncrementableConstraint> ctrs,
+			Element element, Player player) throws LudensException;
+
+	public List<IncrementableConstraint> getIncrementableConstraintByLevel(
+			List<IncrementableConstraint> levelConstraints, Integer newLevel);
+
 }

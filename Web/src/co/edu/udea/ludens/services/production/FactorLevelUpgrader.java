@@ -3,25 +3,31 @@ package co.edu.udea.ludens.services.production;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import co.edu.udea.ludens.domain.Element;
 import co.edu.udea.ludens.domain.IncrementableConstraint;
 import co.edu.udea.ludens.domain.Player;
 import co.edu.udea.ludens.enums.EnumMsgs;
 import co.edu.udea.ludens.exceptions.LudensException;
+import co.edu.udea.ludens.services.ElementService;
+import co.edu.udea.ludens.services.PlayerService;
 import co.edu.udea.ludens.util.UtopiaUtil;
 
 public class FactorLevelUpgrader implements LevelUpgraderStrategy {
 	public int UPGRADING_LEVEL_DURATION = 30;// seconds
 	private static Logger logger = Logger.getLogger(FactorLevelUpgrader.class);
 
+	@Autowired
+	PlayerService playerService;
+	
+	
 	@Override
 	public void upLevel(Element element, Player player) throws LudensException {
 		boolean error = false;
 		Integer actualLevel = element.getLevel();
 		Integer newLevel = actualLevel + 1;
-		List<IncrementableConstraint> ctrs = element.getLevelConstraints().get(
-				newLevel + "");
+		List<IncrementableConstraint> ctrs = playerService.getIncrementableConstraintByLevel(element.getLevelConstraints(), newLevel);
 
 		// if didn't find resources constraints for this level then throw an
 		// exception
@@ -32,13 +38,14 @@ public class FactorLevelUpgrader implements LevelUpgraderStrategy {
 
 		// we check out resources in order to know if we have enough to up the
 		// level
-		UtopiaUtil.checkOutResources(ctrs, element, player);
+		playerService.checkOutResources(ctrs, element, player);
 
 		// Here, we decrement each resource consumed to up to the next level
 		for (IncrementableConstraint pk : ctrs) {
 			Integer neededQuantity = pk.getQuantity();
 			String resourceName = pk.getElementName();
-			Element resource = player.getMaterials().get(resourceName);
+			Element resource = playerService.getElementPlayerByName(player.getElements(), resourceName);
+			//Element resource = player.getMaterials().get(resourceName);
 			Integer quantity = resource.getQuantity() - neededQuantity;
 			resource.setQuantity(quantity);
 		}

@@ -51,27 +51,22 @@ public class EventProcessImpl implements EventProcess {
 
 		for (Player player : players) {
 
-			boolean meetReq = UtopiaUtil.meetReqToGettingStart(player);
+			boolean meetReq = playerService.meetReqToGettingStart(player);
 
 			if (!meetReq) {
 				logger.info("No cumple");
 				continue;
 			}
 
-			HashMap<String, Element> factors = player.getDevelopmentFactors();
-			HashMap<String, Element> materials = player.getMaterials();
+			List<Element> allElements = player.getDevelopmentFactors();
+			allElements.addAll(player.getMaterials());
 
 			String affectedElement = uevt.getElementName();
 			Integer changePortion = uevt.getQuantity();
 			int result = 0;
-			Element element = factors.get(affectedElement);
+			Element element = playerService.getElementPlayerByName(allElements, affectedElement);
 			factor = true;
 			MessageEvent event = null;
-
-			if (element == null) {
-				element = materials.get(affectedElement);
-				factor = false;
-			}
 
 			int elementQty = element.getQuantity();
 			int change = (elementQty * changePortion) / 100;

@@ -7,7 +7,7 @@ public enum EnumElementType implements Serializable {
 
     FACTOR("Factor"),
     MATERIAL("Material"),
-    POPULATION("PoblaciÃ³n");
+    POPULATION("Población");
     private static HashMap<String, EnumElementType> allEnums = null;
     private String type;
 

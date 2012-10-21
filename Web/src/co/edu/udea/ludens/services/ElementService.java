@@ -1,10 +1,13 @@
 package co.edu.udea.ludens.services;
 
+import java.util.List;
 import java.util.Set;
 
 import co.edu.udea.ludens.domain.Element;
 import co.edu.udea.ludens.domain.Game;
+import co.edu.udea.ludens.domain.IncrementableConstraint;
 import co.edu.udea.ludens.domain.MessageEvent;
+import co.edu.udea.ludens.domain.Player;
 import co.edu.udea.ludens.enums.EnumElementType;
 
 public interface ElementService {
@@ -32,4 +35,7 @@ public interface ElementService {
 
 	public Set<Element> getAllElementsByPlayer(EnumElementType material,
 			String login);
+
+	public void checkOutResources(List<IncrementableConstraint> ctrs,
+			Element element, Player player);
 }

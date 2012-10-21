@@ -3,12 +3,15 @@ package co.edu.udea.ludens.services.production;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import co.edu.udea.ludens.domain.Element;
 import co.edu.udea.ludens.domain.IncrementableConstraint;
 import co.edu.udea.ludens.domain.Player;
 import co.edu.udea.ludens.enums.EnumMsgs;
 import co.edu.udea.ludens.exceptions.LudensException;
+import co.edu.udea.ludens.services.ElementService;
+import co.edu.udea.ludens.services.PlayerService;
 import co.edu.udea.ludens.util.UtopiaUtil;
 
 public class MaterialLevelUpgrader implements LevelUpgraderStrategy {
@@ -17,13 +20,15 @@ public class MaterialLevelUpgrader implements LevelUpgraderStrategy {
 	private static Logger logger = Logger
 			.getLogger(MaterialLevelUpgrader.class);
 
+	@Autowired
+	PlayerService playerService;
+	
 	public void upLevel(Element element, Player player) throws LudensException {
 		boolean error = false;
 		Integer actualLevel = element.getLevel();
 		Integer newLevel = actualLevel + 1;
 
-		List<IncrementableConstraint> ctrs = element.getLevelConstraints().get(
-				newLevel + "");
+		List<IncrementableConstraint> ctrs = playerService.getIncrementableConstraintByLevel(element.getLevelConstraints(), newLevel);
 		// if didn't find resources constraints for this level then throw an
 		// exception
 		if (ctrs == null) {
