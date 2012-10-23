@@ -123,7 +123,6 @@ public class GameContainerServiceImpl implements GameContainerService {
 		if (game.getStatus() == EnumGameStatus.NO_STARTED) {
 			logger.debug("starting game ");
 			game.setStatus(EnumGameStatus.STARTED);
-
 		}
 
 		if (game.getStatus() == EnumGameStatus.STARTED
@@ -233,7 +232,6 @@ public class GameContainerServiceImpl implements GameContainerService {
 	@Override
 	public void unsubscribeMessageListener(MessageListener messageListener,
 			String gameName, String userName) {
-
 		GameProcess gameProcess = (GameProcess) processHolderService
 				.findProcessById(GameProcess.class, gameName);
 
@@ -255,7 +253,6 @@ public class GameContainerServiceImpl implements GameContainerService {
 	@Override
 	public void unsubscribeTradeListener(TradeListener tradeListener,
 			String gameName) {
-
 		TradeProcess tradeProcess = getTrader(gameName);
 		if (tradeProcess == null)
 			return;

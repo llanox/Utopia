@@ -38,5 +38,4 @@ public abstract class ServiceLocator {
 	public abstract EventProcess getEventProcess();
 
 	public abstract SimpleTriggerBean getSimpleTriggerBean();
-
 }

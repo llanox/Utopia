@@ -1,5 +1,6 @@
 package co.edu.udea.ludens.services.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -155,7 +156,12 @@ public class ElementServiceImpl implements ElementService {
 					elementDao.saveOrUpdate(element);
 
 					if (pa.getDevelopmentFactors() == null) {
-						HashMap<String, Element> developmentFactors = new HashMap<String, Element>();
+						/*
+						 * HashMap<String, Element> developmentFactors = new
+						 * HashMap<String, Element>();
+						 * pa.setDevelopmentFactors(developmentFactors);
+						 */
+						List<Element> developmentFactors = new ArrayList<Element>();
 						pa.setDevelopmentFactors(developmentFactors);
 					}
 					pa.getDevelopmentFactors().put(inc.getName(), element);
@@ -168,7 +174,12 @@ public class ElementServiceImpl implements ElementService {
 					element = (Element) elementDao.saveOrUpdate(element);
 
 					if (pa.getMaterials() == null) {
-						HashMap<String, Element> materials = new HashMap<String, Element>();
+						/*
+						 * HashMap<String, Element> materials = new
+						 * HashMap<String, Element>();
+						 * pa.setMaterials(materials);
+						 */
+						List<Element> materials = new ArrayList<Element>();
 						pa.setMaterials(materials);
 					}
 					pa.getMaterials().put(inc.getName(), element);

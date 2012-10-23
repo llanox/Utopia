@@ -181,7 +181,6 @@ public class GameServiceImpl implements GameService {
 		for (GameRequirement req : gameRequirements) {
 			req.verify(game);
 		}
-
 	}
 
 	private GameRequirement[] gameRequirements = { new AtLeastNPlayers(),

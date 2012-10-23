@@ -4,7 +4,5 @@ import java.io.Serializable;
 
 public enum EnumMsgType implements Serializable {
 
-    NOTICE,
-    ERROR,
-    SUCCESS;
+	NOTICE, ERROR, SUCCESS;
 }

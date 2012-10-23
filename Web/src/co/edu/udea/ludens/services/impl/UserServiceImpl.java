@@ -33,17 +33,16 @@ public class UserServiceImpl implements UserService {
 	 * @return the userDao
 	 */
 	public UserDAO getUserDao() {
-		return userDao;
+
+		return (this.userDao);
 	}
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public User save(User user) {
-
 		user = (User) userDao.saveOrUpdate(user);
 
 		return user;
-
 	}
 
 	@Override
@@ -73,6 +72,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findUser(String login) {
 		User user = userDao.findUserByLogin(login);
+
 		return user;
 	}
 
@@ -80,7 +80,6 @@ public class UserServiceImpl implements UserService {
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public void delete(User user) {
 		userDao.delete(user);
-
 	}
 
 	@Override

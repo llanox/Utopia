@@ -4,6 +4,5 @@ import java.io.Serializable;
 
 public enum EnumMetric implements Serializable {
 
-    UNITS,
-    PERCENTAGE;
+	UNITS, PERCENTAGE;
 }

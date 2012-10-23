@@ -22,7 +22,6 @@ public class MaterialProducerWithGrowthRate implements ProducerStrategy {
 
 		for (Object key : elements.keySet()) {
 			Element element = elements.get(key);
-
 			Integer n = element.getLevel();
 			Integer lambda = element.getProductionIncrementRate();
 			Integer p0 = element.getIncrementable().getInitialValue();

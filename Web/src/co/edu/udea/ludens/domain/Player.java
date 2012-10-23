@@ -9,138 +9,139 @@ import javax.persistence.*;
 @Table(name = "players")
 public class Player implements Serializable, Updateable {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private long id;
-    @Column(name = "population")
-    private Element population;
-    @Unique
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private User user;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
-    private Game game;
-    @Column(name = "start_time")
-    private long startTime;
-    @Column(name = "producing")
-    private boolean producing;
-    @Column(name = "elements")
-    @OneToMany(mappedBy = "player")
-    private List<Element> elements;
-    @OneToMany
-    @OrderColumn(name = "order")
-    @JoinColumn(name = "player_id", nullable = false)
-    private List<MessageEvent> events;
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private long id;
+	@Column(name = "population")
+	private Element population;
+	@Unique
+	@OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
+			CascadeType.MERGE })
+	private User user;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
+	private Game game;
+	@Column(name = "start_time")
+	private long startTime;
+	@Column(name = "producing")
+	private boolean producing;
+	@Column(name = "elements")
+	@OneToMany(mappedBy = "player")
+	private List<Element> elements;
+	@OneToMany
+	@OrderColumn(name = "order")
+	@JoinColumn(name = "player_id", nullable = false)
+	private List<MessageEvent> events;
 
-    private List<Element> developmentFactors;
-    private List<Element> materials;
+	private List<Element> developmentFactors;
+	private List<Element> materials;
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    @Override
-    public Long getId() {
+	@Override
+	public Long getId() {
 
-        return (this.id);
-    }
+		return (this.id);
+	}
 
-    public void setPopulation(Element population) {
-        this.population = population;
-    }
+	public void setPopulation(Element population) {
+		this.population = population;
+	}
 
-    public Element getPopulation() {
+	public Element getPopulation() {
 
-        return (this.population);
-    }
+		return (this.population);
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public User getUser() {
+	public User getUser() {
 
-        return (this.user);
-    }
+		return (this.user);
+	}
 
-    public Player() {
-  
-    }
+	public Player() {
 
-    public List<Element> getElements() {
+	}
 
-    	return (this.elements);
-    }
+	public List<Element> getElements() {
 
-    public void setElements(List<Element> elements) {
-        this.elements = elements;
-    }
+		return (this.elements);
+	}
 
-    public List<Element> getDevelopmentFactors() {
+	public void setElements(List<Element> elements) {
+		this.elements = elements;
+	}
 
-    	return (this.developmentFactors);
-    }
+	public List<Element> getDevelopmentFactors() {
 
-    public void setDevelopmentFactors(List<Element> developmentFactors) {
-        this.developmentFactors = developmentFactors;
-    }
+		return (this.developmentFactors);
+	}
 
-    public List<MessageEvent> getEvents() {
+	public void setDevelopmentFactors(List<Element> developmentFactors) {
+		this.developmentFactors = developmentFactors;
+	}
 
-        return (this.events);
-    }
+	public List<MessageEvent> getEvents() {
 
-    public List<Element> getMaterials() {
+		return (this.events);
+	}
 
-    	return (this.materials);
-    }
+	public List<Element> getMaterials() {
 
-    public void setMaterials(List<Element> materials) {
-        this.materials = materials;
-    }
+		return (this.materials);
+	}
 
-    public void setEvents(List<MessageEvent> events) {
-        this.events = events;
-    }
+	public void setMaterials(List<Element> materials) {
+		this.materials = materials;
+	}
 
-    public void setProducing(boolean producing) {
-        this.producing = producing;
-    }
+	public void setEvents(List<MessageEvent> events) {
+		this.events = events;
+	}
 
-    public boolean isProducing() {
+	public void setProducing(boolean producing) {
+		this.producing = producing;
+	}
 
-        return (this.producing);
-    }
+	public boolean isProducing() {
 
-    public void setStartTime(Long startTime) {
-        this.startTime = startTime;
-    }
+		return (this.producing);
+	}
 
-    public Long getStartTime() {
+	public void setStartTime(Long startTime) {
+		this.startTime = startTime;
+	}
 
-        return (this.startTime);
-    }
+	public Long getStartTime() {
 
-    @Override
-    public void updateWith(Object o) {
-        Player player = (Player) o;
+		return (this.startTime);
+	}
 
-        this.user = player.user;
-        this.startTime = player.startTime;
-        this.producing = player.producing;
-        this.events = player.events;
-    }
+	@Override
+	public void updateWith(Object o) {
+		Player player = (Player) o;
 
-    public void setGame(Game game) {
-        this.game = game;
-    }
+		this.user = player.user;
+		this.startTime = player.startTime;
+		this.producing = player.producing;
+		this.events = player.events;
+	}
 
-    public Game getGame() {
+	public void setGame(Game game) {
+		this.game = game;
+	}
 
-        return (this.game);
-    }
+	public Game getGame() {
 
-    public void setStartTime(long startTime) {
-        this.startTime = startTime;
-    }
+		return (this.game);
+	}
+
+	public void setStartTime(long startTime) {
+		this.startTime = startTime;
+	}
 }

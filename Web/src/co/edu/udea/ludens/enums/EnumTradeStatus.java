@@ -4,9 +4,5 @@ import java.io.Serializable;
 
 public enum EnumTradeStatus implements Serializable {
 
-    OPEN,
-    ACCEPTED,
-    CLOSED,
-    RENEGOCIATION,
-    RENEGOCIATED;
+	OPEN, ACCEPTED, CLOSED, RENEGOCIATION, RENEGOCIATED;
 }

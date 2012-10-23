@@ -20,14 +20,15 @@ public class FactorLevelUpgrader implements LevelUpgraderStrategy {
 
 	@Autowired
 	PlayerService playerService;
-	
-	
+
 	@Override
 	public void upLevel(Element element, Player player) throws LudensException {
 		boolean error = false;
 		Integer actualLevel = element.getLevel();
 		Integer newLevel = actualLevel + 1;
-		List<IncrementableConstraint> ctrs = playerService.getIncrementableConstraintByLevel(element.getLevelConstraints(), newLevel);
+		List<IncrementableConstraint> ctrs = playerService
+				.getIncrementableConstraintByLevel(
+						element.getLevelConstraints(), newLevel);
 
 		// if didn't find resources constraints for this level then throw an
 		// exception
@@ -44,8 +45,9 @@ public class FactorLevelUpgrader implements LevelUpgraderStrategy {
 		for (IncrementableConstraint pk : ctrs) {
 			Integer neededQuantity = pk.getQuantity();
 			String resourceName = pk.getElementName();
-			Element resource = playerService.getElementPlayerByName(player.getElements(), resourceName);
-			//Element resource = player.getMaterials().get(resourceName);
+			Element resource = playerService.getElementPlayerByName(
+					player.getElements(), resourceName);
+			// Element resource = player.getMaterials().get(resourceName);
 			Integer quantity = resource.getQuantity() - neededQuantity;
 			resource.setQuantity(quantity);
 		}

@@ -22,13 +22,15 @@ public class MaterialLevelUpgrader implements LevelUpgraderStrategy {
 
 	@Autowired
 	PlayerService playerService;
-	
+
 	public void upLevel(Element element, Player player) throws LudensException {
 		boolean error = false;
 		Integer actualLevel = element.getLevel();
 		Integer newLevel = actualLevel + 1;
 
-		List<IncrementableConstraint> ctrs = playerService.getIncrementableConstraintByLevel(element.getLevelConstraints(), newLevel);
+		List<IncrementableConstraint> ctrs = playerService
+				.getIncrementableConstraintByLevel(
+						element.getLevelConstraints(), newLevel);
 		// if didn't find resources constraints for this level then throw an
 		// exception
 		if (ctrs == null) {

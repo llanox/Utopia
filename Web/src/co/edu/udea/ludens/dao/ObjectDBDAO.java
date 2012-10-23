@@ -33,7 +33,6 @@ public class ObjectDBDAO implements DBDAO {
 
 	@Override
 	public Object saveOrUpdate(Object o) {
-
 		Updateable up = (Updateable) o;
 
 		if (up.getId() == null) {
@@ -70,7 +69,6 @@ public class ObjectDBDAO implements DBDAO {
 
 	@Override
 	public Object findObjectByAttribute(Class clazz, Object... parameters) {
-
 		StringBuilder sb = new StringBuilder();
 		int paramsLength = parameters.length;
 
@@ -91,6 +89,7 @@ public class ObjectDBDAO implements DBDAO {
 			sb.append("  o." + parameters[i] + ".toString() LIKE '%"
 					+ parameters[i + 1] + "' ");
 		}
+
 		CriteriaQuery<Object> query = em.getCriteriaBuilder().createQuery();
 		logger.info("SQL : " + "SELECT o FROM " + clazz.getName() + " o "
 				+ sb.toString());
@@ -105,7 +104,6 @@ public class ObjectDBDAO implements DBDAO {
 	public Object findObjectByAttributeAndFetch(Class clazz,
 			Object... parameters) {
 		String JOIN_SQL = "INNER JOIN";
-
 		StringBuilder sb = new StringBuilder();
 		// Elimina el atributo al cual se le quiere hacer el fetch
 		int paramsLength = parameters.length - 1;
@@ -113,7 +111,6 @@ public class ObjectDBDAO implements DBDAO {
 		// Garantiza que funcione con 2 > parametros y para cualquier tipo de
 		// dato.
 		if (paramsLength % 2 != 0) {
-
 			throw new DatabaseError("Número incorrecto de parámetros: "
 					+ paramsLength);
 		}
@@ -129,7 +126,6 @@ public class ObjectDBDAO implements DBDAO {
 		}
 
 		CriteriaQuery<Object> query = em.getCriteriaBuilder().createQuery();
-
 		String sqlStatement = "SELECT o FROM " + clazz.getName() + " o "
 				+ JOIN_SQL + " o." + parameters[paramsLength] + " p "
 				+ sb.toString();
@@ -151,6 +147,7 @@ public class ObjectDBDAO implements DBDAO {
 				+ " o");
 		TypedQuery<Class> q2 = em.createQuery(
 				"SELECT c FROM " + clazz.getSimpleName() + " c", clazz);
+
 		return q2.getResultList();
 	}
 
@@ -163,7 +160,6 @@ public class ObjectDBDAO implements DBDAO {
 	@Override
 	public void close(Object oc) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public EntityManager getEm() {

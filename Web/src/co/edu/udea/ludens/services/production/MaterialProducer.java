@@ -5,20 +5,24 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import co.edu.udea.ludens.domain.Element;
 import co.edu.udea.ludens.domain.IncrementableConstraint;
 import co.edu.udea.ludens.services.ElementProcess;
+import co.edu.udea.ludens.services.PlayerService;
 import co.edu.udea.ludens.web.ElementBean;
 
 public class MaterialProducer implements ProducerStrategy {
 	Logger logger = Logger.getLogger(MaterialProducer.class);
 
+	/* Hecho por mi... */
+	@Autowired
+	private PlayerService playerService;
+
 	@Override
 	public List<ElementBean> produce(Object supplies, ElementProcess process) {
-
 		HashMap<String, Element> elements = (HashMap<String, Element>) supplies;
-
 		List<ElementBean> elementBeans = new ArrayList<ElementBean>();
 
 		for (Object key : elements.keySet()) {
@@ -27,9 +31,14 @@ public class MaterialProducer implements ProducerStrategy {
 			Integer level = element.getLevel();
 			// LevelConstraint levelIncrement =
 			// element.getLevelIncrements().get(level);
-			HashMap<String, List<IncrementableConstraint>> d = element
-					.getLevelIncrements();
-			List<IncrementableConstraint> levelIncrements = d.get(level + "");
+			/*
+			 * HashMap<String, List<IncrementableConstraint>> d = element
+			 * .getLevelIncrements();
+			 */
+			List<IncrementableConstraint> d = element.getLevelIncrements();
+			/* Hecho por mi... */
+			List<IncrementableConstraint> levelIncrements = playerService
+					.getIncrementableConstraintByLevel(d, level);
 
 			if (levelIncrements != null) {
 				for (IncrementableConstraint pk : levelIncrements) {

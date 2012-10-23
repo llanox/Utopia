@@ -58,13 +58,10 @@ public class TradeProcessImpl implements TradeProcess {
 		interchange.setQuantityFromSender(quantityFromSender);
 
 		postOffer(interchange);
-
 	}
 
 	public void postOffer(Interchange interchange) {
-
 		Element elFromSender = interchange.getElFromSender();
-
 		Integer inventory = elFromSender.getQuantity();
 		Integer offeredQt = interchange.getQuantityFromSender();
 
@@ -92,12 +89,10 @@ public class TradeProcessImpl implements TradeProcess {
 	}
 
 	private boolean verifyAvailability(Element element, Integer quantityTosend) {
-
 		boolean availability = true;
 		Integer inventory = element.getQuantity();
 
 		if (inventory.compareTo(quantityTosend) < 0) {
-
 			MessageEvent event = new MessageEvent(this, UtopiaUtil.getId(),
 					EnumMsgs.NO_AVAILABILITY, element.getIncrementable()
 							.getName());
@@ -109,33 +104,25 @@ public class TradeProcessImpl implements TradeProcess {
 	}
 
 	public void acceptOffer(Interchange interchange, String playerUser) {
-
 		Player player = UtopiaUtil.getPlayerByName(game.getPlayers(),
 				playerUser);
 
 		logger.info("Player:: " + player);
 
 		acceptOffer(interchange, player);
-
 	}
 
 	public void acceptOffer(Interchange interchange, Player playerWhoAccept) {
-
 		Player playerWhoOffer = interchange.getSender();
 		interchange.setReceiver(playerWhoAccept);
-
-		HashMap<String, Element> receiverElements = playerWhoAccept
-				.getMaterials();
+		HashMap<String, Element> receiverElements = playerWhoAccept.getMaterials();
 		HashMap<String, Element> senderElements = playerWhoOffer.getMaterials();
-
 		String nameElGivenByReceiver = interchange.getElFromReceiver()
 				.getIncrementable().getName();
 		String nameElGivenBySender = interchange.getElFromSender()
 				.getIncrementable().getName();
-
 		Element rdFromReceiver = receiverElements.get(nameElGivenByReceiver);
 		interchange.setElFromReceiver(rdFromReceiver);
-
 		int quantityFromReceiver = interchange.getQuantityFromReceiver();
 		int quantityFromSender = interchange.getQuantityFromSender();
 
@@ -143,7 +130,6 @@ public class TradeProcessImpl implements TradeProcess {
 				+ nameElGivenByReceiver);
 		logger.info("lo q da el oferente " + quantityFromSender + " de "
 				+ nameElGivenBySender);
-
 		logger.info("Verificando disponibilidad");
 
 		if (!verifyAvailability(rdFromReceiver, quantityFromReceiver)) {
@@ -215,18 +201,14 @@ public class TradeProcessImpl implements TradeProcess {
 
 	private void notyfyInterchange(List<Interchange> offers,
 			EnumEventType eventType) {
-
 		List<InterchangeBean> beans = new ArrayList<InterchangeBean>();
 		InterchangeBean bean;
 
 		InterchangeEvent event = new InterchangeEvent(this, offers);
 
 		for (InterchangeListener listener : interchangeListeners) {
-
 			listener.requestTrade(event);
-
 		}
-
 	}
 
 	public void removeInterchangeListener(InterchangeListener listener) {
@@ -240,11 +222,9 @@ public class TradeProcessImpl implements TradeProcess {
 	}
 
 	public void removeInterchangeListener() {
-
 		if (interchangeListeners != null) {
 			interchangeListeners.clear();
 		}
-
 	}
 
 	public void addMessageListener(MessageListener listener) {
@@ -252,11 +232,9 @@ public class TradeProcessImpl implements TradeProcess {
 	}
 
 	public void removeAllMessageListeners() {
-
 		if (messagesListeners != null) {
 			messagesListeners.clear();
 		}
-
 	}
 
 	public void removeMessageListener(MessageListener listener) {
@@ -264,7 +242,6 @@ public class TradeProcessImpl implements TradeProcess {
 	}
 
 	public void notifyMsg(MessageEvent event) {
-
 		if (game != null)
 			event.setGameName(game.getName());
 
@@ -274,6 +251,7 @@ public class TradeProcessImpl implements TradeProcess {
 	}
 
 	public List<Interchange> getOffers() {
+
 		return offers;
 	}
 
@@ -284,7 +262,6 @@ public class TradeProcessImpl implements TradeProcess {
 	@Override
 	public void addTradeListener(TradeListener listener) {
 		addInterchangeListener(listener);
-
 	}
 
 	public void setPlayerService(PlayerService playerService) {
@@ -292,13 +269,13 @@ public class TradeProcessImpl implements TradeProcess {
 	}
 
 	public PlayerService getPlayerService() {
+
 		return playerService;
 	}
 
 	@Override
 	public void setGame(Game game) {
 		this.game = game;
-
 	}
 
 	@Override
@@ -309,12 +286,9 @@ public class TradeProcessImpl implements TradeProcess {
 
 	@Override
 	public void cancelOffer(Interchange interchange) {
-
 		Element elFromSender = interchange.getElFromSender();
-
 		Integer inventory = elFromSender.getQuantity();
 		Integer offeredQt = interchange.getQuantityFromSender();
-
 		Integer result = inventory + offeredQt;
 		elFromSender.setQuantity(result);
 
@@ -329,7 +303,6 @@ public class TradeProcessImpl implements TradeProcess {
 		MessageEvent event = new MessageEvent(this, UtopiaUtil.getId(),
 				EnumMsgs.CANCEL_OFFER, sender);
 		notifyMsg(event);
-
 	}
 
 	@Override
@@ -338,7 +311,6 @@ public class TradeProcessImpl implements TradeProcess {
 
 	@Override
 	public void removeTradeListener(TradeListener listener) {
-
 		this.removeInterchangeListener(listener);
 	}
 }

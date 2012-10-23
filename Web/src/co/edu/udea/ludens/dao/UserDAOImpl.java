@@ -21,14 +21,12 @@ public class UserDAOImpl extends ObjectDBDAO implements UserDAO {
 			user = result.get(0);
 
 		return user;
-
 	}
 
 	public List<User> findAllUsers() {
 		List<User> result = (List<User>) this.findObjectByType(User.class);
 
 		return result;
-
 	}
 
 	@Override

@@ -7,106 +7,106 @@ import javax.persistence.*;
 @Table(name = "incrementables_constraints")
 public class IncrementableConstraint implements Serializable, Updateable {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private Long id;
-    @Column(name = "increment_rate")
-    private int incrementRate;
-    @Column(name = "initial_value")
-    private int initialValue;
-    @ManyToOne
-    private Element constrainedElement;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    private Incrementable restrictedIncrementable;
-    @Column(name = "constrained_level")
-    private Integer constrainedLevel;
-    @Column(name = "quantity")
-    private Integer quantity;
-    @Column(name = "element_name")
-    private String elementName;
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private Long id;
+	@Column(name = "increment_rate")
+	private int incrementRate;
+	@Column(name = "initial_value")
+	private int initialValue;
+	@ManyToOne
+	private Element constrainedElement;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	private Incrementable restrictedIncrementable;
+	@Column(name = "constrained_level")
+	private Integer constrainedLevel;
+	@Column(name = "quantity")
+	private Integer quantity;
+	@Column(name = "element_name")
+	private String elementName;
 
-    public IncrementableConstraint() {
-    }
+	public IncrementableConstraint() {
+	}
 
-    @Override
-    public Long getId() {
+	@Override
+	public Long getId() {
 
-        return (this.id);
-    }
+		return (this.id);
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Integer getConstrainedLevel() {
+	public Integer getConstrainedLevel() {
 
-        return (this.constrainedLevel);
-    }
+		return (this.constrainedLevel);
+	}
 
-    public void setConstrainedLevel(Integer constrainedLevel) {
-        this.constrainedLevel = constrainedLevel;
-    }
+	public void setConstrainedLevel(Integer constrainedLevel) {
+		this.constrainedLevel = constrainedLevel;
+	}
 
-    public Element getConstrainedElement() {
+	public Element getConstrainedElement() {
 
-        return (this.constrainedElement);
-    }
+		return (this.constrainedElement);
+	}
 
-    public void setConstrainedElement(Element constrainedElement) {
-        this.constrainedElement = constrainedElement;
-    }
+	public void setConstrainedElement(Element constrainedElement) {
+		this.constrainedElement = constrainedElement;
+	}
 
-    public Incrementable getRestrictedIncrementable() {
+	public Incrementable getRestrictedIncrementable() {
 
-        return (this.restrictedIncrementable);
-    }
+		return (this.restrictedIncrementable);
+	}
 
-    public void setRestrictedIncrementable(Incrementable restrictedIncrementable) {
-        this.restrictedIncrementable = restrictedIncrementable;
-    }
+	public void setRestrictedIncrementable(Incrementable restrictedIncrementable) {
+		this.restrictedIncrementable = restrictedIncrementable;
+	}
 
-    public int getInitialValue() {
+	public int getInitialValue() {
 
-        return (this.initialValue);
-    }
+		return (this.initialValue);
+	}
 
-    public void setInitialValue(int initialValue) {
-        this.initialValue = initialValue;
-    }
+	public void setInitialValue(int initialValue) {
+		this.initialValue = initialValue;
+	}
 
-    public int getIncrementRate() {
+	public int getIncrementRate() {
 
-        return (this.incrementRate);
-    }
+		return (this.incrementRate);
+	}
 
-    public void setIncrementRate(int incrementRate) {
-        this.incrementRate = incrementRate;
-    }
+	public void setIncrementRate(int incrementRate) {
+		this.incrementRate = incrementRate;
+	}
 
-    public Integer getQuantity() {
+	public Integer getQuantity() {
 
-        return (this.quantity);
-    }
+		return (this.quantity);
+	}
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
 
-    public String getElementName() {
+	public String getElementName() {
 
-        return (this.elementName);
-    }
+		return (this.elementName);
+	}
 
-    public void setElementName(String elementName) {
-        this.elementName = elementName;
-    }
+	public void setElementName(String elementName) {
+		this.elementName = elementName;
+	}
 
-    @Override
-    public void updateWith(Object o) {
-        IncrementableConstraint constraint = (IncrementableConstraint) o;
+	@Override
+	public void updateWith(Object o) {
+		IncrementableConstraint constraint = (IncrementableConstraint) o;
 
-        this.quantity = constraint.quantity;
-        this.restrictedIncrementable = constraint.restrictedIncrementable;
-    }
+		this.quantity = constraint.quantity;
+		this.restrictedIncrementable = constraint.restrictedIncrementable;
+	}
 }

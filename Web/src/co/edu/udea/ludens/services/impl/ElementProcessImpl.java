@@ -1,5 +1,6 @@
 package co.edu.udea.ludens.services.impl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -36,7 +37,8 @@ public class ElementProcessImpl implements ElementProcess {
 	private Player player;
 	private Vector<IncrementableStuffListener> incrementListeners = new Vector<IncrementableStuffListener>();;
 	private Vector<MessageListener> messagesListeners = new Vector<MessageListener>();
-	private HashMap<String, Element> mapElements = new HashMap<String, Element>();
+	//private HashMap<String, Element> mapElements = new HashMap<String, Element>();
+	private List<Element> mapElements = new ArrayList<Element>();
 	private static Logger logger = Logger.getLogger(ElementProcessImpl.class);
 	private boolean initiated = false;
 	@Autowired
@@ -50,9 +52,10 @@ public class ElementProcessImpl implements ElementProcess {
 		// Execute that method only one time
 		if (!initiated) {
 			initiated = true;
-			HashMap<String, Element> factors = player.getDevelopmentFactors();
-			mapElements.putAll(factors);
-			HashMap<String, Element> materials = player.getMaterials();
+			List<Element> factors = player.getDevelopmentFactors();
+			mapElements.clear();
+			mapElements.addAll(factors);
+			List<Element> materials = player.getMaterials();
 			mapElements.putAll(materials);
 
 			// Calculating initial factor coverage

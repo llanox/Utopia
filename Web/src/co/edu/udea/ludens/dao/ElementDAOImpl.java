@@ -27,7 +27,7 @@ public class ElementDAOImpl extends ObjectDBDAO implements ElementDAO {
 		List<Element> elements = (List<Element>) findObjectByAttribute(
 				Element.class, "incrementable.type", type, "player.user.login",
 				login);
+
 		return elements;
 	}
-
 }

@@ -135,7 +135,6 @@ public class GameProcessImpl implements GameProcess {
 
 	public void createAdditionalProcesses() {
 		if (game != null) {
-
 			List<Player> players = playerService.findAllPlayersByGameName(true,
 					game.getName());
 

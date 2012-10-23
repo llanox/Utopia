@@ -9,134 +9,134 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User implements Serializable, Updateable {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private Long id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "login")
-    private String login;
-    @Column(name = "email")
-    private String email;
-    @Column(name = "gender")
-    private String gender;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "birth_date")
-    private Date birthDate;
-    private EnumUserRole role;
-    @Column(name = "password")
-    private String password;
-    @Column(name = "on_line")
-    private Boolean online = false;
-    @Column(name = "participating_in_game")
-    private Boolean participatingInGame = false;
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private Long id;
+	@Column(name = "name")
+	private String name;
+	@Column(name = "login")
+	private String login;
+	@Column(name = "email")
+	private String email;
+	@Column(name = "gender")
+	private String gender;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "birth_date")
+	private Date birthDate;
+	private EnumUserRole role;
+	@Column(name = "password")
+	private String password;
+	@Column(name = "on_line")
+	private Boolean online = false;
+	@Column(name = "participating_in_game")
+	private Boolean participatingInGame = false;
 
-    public User() {
-    }
+	public User() {
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    @Override
-    public Long getId() {
+	@Override
+	public Long getId() {
 
-        return (this.id);
-    }
+		return (this.id);
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getName() {
+	public String getName() {
 
-        return (this.name);
-    }
+		return (this.name);
+	}
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+	public void setLogin(String login) {
+		this.login = login;
+	}
 
-    public String getLogin() {
+	public String getLogin() {
 
-        return (this.login);
-    }
+		return (this.login);
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getEmail() {
+	public String getEmail() {
 
-        return (this.email);
-    }
+		return (this.email);
+	}
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
-    public String getGender() {
+	public String getGender() {
 
-        return (this.gender);
-    }
+		return (this.gender);
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getPassword() {
+	public String getPassword() {
 
-        return (this.password);
-    }
+		return (this.password);
+	}
 
-    public void setOnline(Boolean online) {
-        this.online = online;
-    }
+	public void setOnline(Boolean online) {
+		this.online = online;
+	}
 
-    public Boolean isOnline() {
+	public Boolean isOnline() {
 
-        return (this.online);
-    }
+		return (this.online);
+	}
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
 
-    public Date getBirthDate() {
+	public Date getBirthDate() {
 
-        return (this.birthDate);
-    }
+		return (this.birthDate);
+	}
 
-    public void setRole(EnumUserRole role) {
-        this.role = role;
-    }
+	public void setRole(EnumUserRole role) {
+		this.role = role;
+	}
 
-    public EnumUserRole getRole() {
+	public EnumUserRole getRole() {
 
-        return (this.role);
-    }
+		return (this.role);
+	}
 
-    public void setParticipatingInGame(Boolean participatingInGame) {
-        this.participatingInGame = participatingInGame;
-    }
+	public void setParticipatingInGame(Boolean participatingInGame) {
+		this.participatingInGame = participatingInGame;
+	}
 
-    public Boolean isParticipatingInGame() {
+	public Boolean isParticipatingInGame() {
 
-        return (this.participatingInGame);
-    }
+		return (this.participatingInGame);
+	}
 
-    @Override
-    public void updateWith(Object o) {
-        User newUser = (User) o;
-        this.name = newUser.name;
-        this.login = newUser.login;
-        this.email = newUser.email;
-        this.gender = newUser.gender;
-        this.birthDate = newUser.birthDate;
-        this.role = newUser.role;
-        this.password = newUser.password;
-        this.online = newUser.online;
-        this.participatingInGame = newUser.participatingInGame;
-    }
+	@Override
+	public void updateWith(Object o) {
+		User newUser = (User) o;
+		this.name = newUser.name;
+		this.login = newUser.login;
+		this.email = newUser.email;
+		this.gender = newUser.gender;
+		this.birthDate = newUser.birthDate;
+		this.role = newUser.role;
+		this.password = newUser.password;
+		this.online = newUser.online;
+		this.participatingInGame = newUser.participatingInGame;
+	}
 }

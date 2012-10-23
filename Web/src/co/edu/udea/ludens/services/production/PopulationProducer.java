@@ -23,7 +23,6 @@ public class PopulationProducer implements ProducerStrategy {
 
 	@Override
 	public List<ElementBean> produce(Object supplies, ElementProcess process) {
-
 		Element population = (Element) supplies;
 		List<ElementBean> elementBeans = new ArrayList<ElementBean>();
 		double populationIncrease = 1.015;
@@ -38,6 +37,5 @@ public class PopulationProducer implements ProducerStrategy {
 		elementBeans.add(bean);
 
 		return elementBeans;
-
 	}
 }

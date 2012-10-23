@@ -14,5 +14,4 @@ public interface PlayerDAO extends FundamentalsOperationsDAO {
 
 	public List<Player> findAllPlayersByGameName(boolean participatingInGame,
 			String gameName);
-
 }

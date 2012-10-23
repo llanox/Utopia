@@ -4,7 +4,6 @@ import java.util.Date;
 
 import co.edu.udea.ludens.domain.User;
 
-
 public class UserSessionBean {
 
 	private User user;

@@ -46,6 +46,5 @@ public class UtopiaSessionListener implements HttpSessionListener {
 		systemContainer.logOut(user);
 		logger.info("------------- logged out user -------------");
 		logger.info("------------- Session destroyed -------------");
-
 	}
 }

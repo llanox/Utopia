@@ -28,8 +28,10 @@ public class FactorProducer implements ProducerStrategy {
 			Element element = elements.get(key);
 			Integer level = element.getLevel();
 
-			List<IncrementableConstraint> levelIncrements  = element.getLevelIncrements();
-			//List<IncrementableConstraint> levelIncrements = d.get(level + "");
+			List<IncrementableConstraint> levelIncrements = element
+					.getLevelIncrements();
+			// List<IncrementableConstraint> levelIncrements = d.get(level +
+			// "");
 
 			Integer production = element.getQuantity();
 

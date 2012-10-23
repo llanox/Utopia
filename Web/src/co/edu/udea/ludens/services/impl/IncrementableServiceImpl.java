@@ -44,7 +44,8 @@ public class IncrementableServiceImpl implements IncrementableService {
 	 * @return the incrementableDao
 	 */
 	IncrementableDAO getIncrementableDao() {
-		return incrementableDao;
+
+		return (this.incrementableDao);
 	}
 
 	@Override
@@ -126,7 +127,6 @@ public class IncrementableServiceImpl implements IncrementableService {
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public void createResourceConstraints(Incrementable actualIncrementable)
 			throws LudensException {
-
 		if (actualIncrementable.getGame() == null)
 			throw new LudensException(
 					"No fue definido un juego para el actual incrementable");
@@ -158,7 +158,6 @@ public class IncrementableServiceImpl implements IncrementableService {
 
 	private boolean contains(List<IncrementableConstraint> constraints,
 			Incrementable incr) {
-
 		for (IncrementableConstraint lc : constraints) {
 			if (incr.getName().equalsIgnoreCase(lc.getElementName())) {
 				logger.info("Sí esta " + incr.getName());
@@ -183,7 +182,6 @@ public class IncrementableServiceImpl implements IncrementableService {
 	@Override
 	public void deleteResourceConstraints(Incrementable actualIncrementable)
 			throws LudensException {
-
 		if (actualIncrementable.getGame() == null)
 			throw new LudensException(
 					"No fue definido un juego para el actual incrementable");

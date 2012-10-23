@@ -2,7 +2,6 @@ package co.edu.udea.ludens.util;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.faces.model.SelectItem;
@@ -13,7 +12,6 @@ import co.edu.udea.ludens.domain.Element;
 import co.edu.udea.ludens.domain.IncrementableConstraint;
 import co.edu.udea.ludens.domain.Player;
 import co.edu.udea.ludens.domain.PlayerStatus;
-import co.edu.udea.ludens.enums.EnumMsgs;
 import co.edu.udea.ludens.exceptions.LudensException;
 
 public class UtopiaUtil {
@@ -48,10 +46,6 @@ public class UtopiaUtil {
 
 		return result;
 	}
-
-
-
-	
 
 	public static void addStartTimePlayer(Player player) {
 		Calendar cal = Calendar.getInstance();
@@ -97,9 +91,9 @@ public class UtopiaUtil {
 		return n;
 	}
 
-	public static void checkOutResources(List<IncrementableConstraint> levelResources, Element element,
+	public static void checkOutResources(
+			List<IncrementableConstraint> levelResources, Element element,
 			Player player) throws LudensException {
-	
 	}
 
 	public static void updateUpgradingDelay(Element element) {
@@ -145,7 +139,6 @@ public class UtopiaUtil {
 
 	public static List<SelectItem> getItems(String[] names) {
 		List<SelectItem> items = new ArrayList<SelectItem>();
-
 		for (int i = 0; i < names.length; i++)
 			items.add(new SelectItem(names[i], names[i]));
 

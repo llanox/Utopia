@@ -64,7 +64,8 @@ public class EventProcessImpl implements EventProcess {
 			String affectedElement = uevt.getElementName();
 			Integer changePortion = uevt.getQuantity();
 			int result = 0;
-			Element element = playerService.getElementPlayerByName(allElements, affectedElement);
+			Element element = playerService.getElementPlayerByName(allElements,
+					affectedElement);
 			factor = true;
 			MessageEvent event = null;
 

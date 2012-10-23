@@ -140,12 +140,9 @@ public class PlayerServiceImpl implements PlayerService {
 
 		return elementsOk;
 	}
-	
-	
-     private  boolean isHigherThanRequired(List<Element> factors) {
-		
+
+	private boolean isHigherThanRequired(List<Element> factors) {
 		for (Element el : factors) {
-		
 			Integer level = el.getLevel();
 
 			if (level >= UtopiaUtil.LEVEL_TO_GETTING_START) {
@@ -164,23 +161,25 @@ public class PlayerServiceImpl implements PlayerService {
 	public Element getElementPlayerByName(List<Element> elementList, String name) {
 		for (Element element : elementList) {
 			if (element.getIncrementable().getName().equals(name)) {
-				
+
 				return element;
 			}
 		}
-		
+
 		return null;
 	}
 
 	@Override
-	public void checkOutResources(List<IncrementableConstraint> levelResources,Element element, Player player) throws LudensException {
+	public void checkOutResources(List<IncrementableConstraint> levelResources,
+			Element element, Player player) throws LudensException {
 		boolean checked = true;
 		StringBuffer bf = new StringBuffer();
 
 		for (IncrementableConstraint pk : levelResources) {
 			Integer neededQuantity = pk.getQuantity();
 			String resourceName = pk.getElementName();
-			Element resource = this.getElementPlayerByName(player.getElements(), resourceName);
+			Element resource = this.getElementPlayerByName(
+					player.getElements(), resourceName);
 			int compare = resource.getQuantity() - neededQuantity;
 
 			if (compare < 0) {
@@ -194,20 +193,20 @@ public class PlayerServiceImpl implements PlayerService {
 					element.getIncrementable().getName(),
 					(element.getLevel() + 1));
 		}
-		
+
 	}
 
 	@Override
 	public List<IncrementableConstraint> getIncrementableConstraintByLevel(
 			List<IncrementableConstraint> levelConstraints, Integer newLevel) {
 		List<IncrementableConstraint> list = new ArrayList<IncrementableConstraint>();
-		
+
 		for (IncrementableConstraint ic : levelConstraints) {
 			if (ic.getConstrainedLevel().equals(newLevel)) {
 				list.add(ic);
 			}
 		}
-		
+
 		return list;
 	}
 }

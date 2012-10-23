@@ -31,5 +31,4 @@ public interface PlayerService {
 
 	public List<IncrementableConstraint> getIncrementableConstraintByLevel(
 			List<IncrementableConstraint> levelConstraints, Integer newLevel);
-
 }

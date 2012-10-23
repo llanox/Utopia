@@ -14,18 +14,15 @@ public class GameDAOImpl extends ObjectDBDAO implements GameDAO {
 	private Logger logger = Logger.getLogger(getClass());
 
 	public List<Game> findAllByStatus(String status) {
-		throw new RuntimeException("FunciÃ³n No implementada");
-
+		throw new RuntimeException("Función No implementada");
 	}
 
 	public Game findGameByUserName(String userName) {
-
-		throw new RuntimeException("FunciÃ³n No implementada");
+		throw new RuntimeException("Función No implementada");
 	}
 
 	@Override
 	public Game findGameByName(String gameName) {
-
 		Game game = null;
 		String jpql = "Select g from Game g Where g.name like '%" + gameName
 				+ "'";

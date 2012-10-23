@@ -1,4 +1,3 @@
-
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -20,9 +19,7 @@ public class Testing {
 		// String url =
 		// "C:\\Documents and Settings\\Adriel\\Escritorio\\Gabriel\\Dropbox\\Utopo\\WebContent\\WEB-INF\\applicationContext.xml";
 		ApplicationContext appContext = new FileSystemXmlApplicationContext(url);
-
 		String filePath = "/media/Data/DropBox/Dropbox/Projects/Web/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/db4oTest.db4";
-
 		UserService userService = (UserService) appContext
 				.getBean("userService");
 		PlayerService playerService = (PlayerService) appContext
@@ -52,9 +49,7 @@ public class Testing {
 			logger.info("id " + user.getId());
 			logger.info(" " + user.getName());
 			logger.info(" " + user.getEmail());
-
 		}
-
 		//
 		// Player player1 = new Player();
 		// player1.setStartTime(0l);
