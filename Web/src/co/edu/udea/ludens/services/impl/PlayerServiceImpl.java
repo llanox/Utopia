@@ -207,6 +207,19 @@ public class PlayerServiceImpl implements PlayerService {
 			}
 		}
 
-		return list;
+		return (list);
+	}
+
+	@Override
+	public List<Element> getElementsByName(List<Element> elements, String name) {
+		List<Element> list = new ArrayList<Element>();
+
+		for (Element e : elements) {
+			if (e.getIncrementable().getName().equals(name)) {
+				list.add(e);
+			}
+		}
+
+		return (list);
 	}
 }

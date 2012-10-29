@@ -17,6 +17,7 @@ import co.edu.udea.ludens.domain.Player;
 import co.edu.udea.ludens.enums.EnumEventType;
 import co.edu.udea.ludens.enums.EnumMsgType;
 import co.edu.udea.ludens.enums.EnumMsgs;
+import co.edu.udea.ludens.services.ElementService;
 import co.edu.udea.ludens.services.PlayerService;
 import co.edu.udea.ludens.services.TradeProcess;
 import co.edu.udea.ludens.util.InterchangeEvent;
@@ -37,19 +38,26 @@ public class TradeProcessImpl implements TradeProcess {
 
 	@Autowired
 	PlayerService playerService;
+	@Autowired
+	ElementService elementService;
 
 	@Override
 	public void postOffer(String elFromSender, int quantityFromSender,
 			String elFromReceiver, int quantityFromReceiver, String offerSender) {
-
 		Player sender = UtopiaUtil.getPlayerByName(game.getPlayers(),
 				offerSender);
 
 		Interchange interchange = new Interchange();
 		interchange.setSender(sender);
 
-		Element elReceiver = sender.getMaterials().get(elFromReceiver);
-		Element elSender = sender.getMaterials().get(elFromSender);
+		/*
+		 * Element elReceiver = sender.getMaterials().get(elFromReceiver);
+		 * Element elSender = sender.getMaterials().get(elFromSender);
+		 */
+		Element elReceiver = playerService.getElementsByName(
+				sender.getMaterials(), elFromReceiver).get(0);
+		Element elSender = playerService.getElementsByName(
+				sender.getMaterials(), elFromSender).get(0);
 
 		interchange.setElFromReceiver(elReceiver);
 		interchange.setElFromSender(elSender);
@@ -58,6 +66,9 @@ public class TradeProcessImpl implements TradeProcess {
 		interchange.setQuantityFromSender(quantityFromSender);
 
 		postOffer(interchange);
+
+		elementService.save(elReceiver);
+		elementService.save(elSender);
 	}
 
 	public void postOffer(Interchange interchange) {
@@ -115,13 +126,24 @@ public class TradeProcessImpl implements TradeProcess {
 	public void acceptOffer(Interchange interchange, Player playerWhoAccept) {
 		Player playerWhoOffer = interchange.getSender();
 		interchange.setReceiver(playerWhoAccept);
-		HashMap<String, Element> receiverElements = playerWhoAccept.getMaterials();
-		HashMap<String, Element> senderElements = playerWhoOffer.getMaterials();
+
+		/*
+		 * HashMap<String, Element> receiverElements = playerWhoAccept
+		 * .getMaterials(); HashMap<String, Element> senderElements =
+		 * playerWhoOffer.getMaterials();
+		 */
+		List<Element> receiverElements = playerWhoAccept.getMaterials();
+		List<Element> senderElements = playerWhoOffer.getMaterials();
+
 		String nameElGivenByReceiver = interchange.getElFromReceiver()
 				.getIncrementable().getName();
 		String nameElGivenBySender = interchange.getElFromSender()
 				.getIncrementable().getName();
-		Element rdFromReceiver = receiverElements.get(nameElGivenByReceiver);
+
+		// Element rdFromReceiver = receiverElements.get(nameElGivenByReceiver);
+		Element rdFromReceiver = playerService.getElementPlayerByName(
+				receiverElements, nameElGivenBySender);
+
 		interchange.setElFromReceiver(rdFromReceiver);
 		int quantityFromReceiver = interchange.getQuantityFromReceiver();
 		int quantityFromSender = interchange.getQuantityFromSender();
@@ -149,7 +171,9 @@ public class TradeProcessImpl implements TradeProcess {
 
 		logger.info("lo que recibe  " + quantityFromSender);
 
-		Element rdFromSender = receiverElements.get(nameElGivenBySender);
+		// Element rdFromSender = receiverElements.get(nameElGivenBySender);
+		Element rdFromSender = playerService.getElementPlayerByName(
+				receiverElements, nameElGivenBySender);
 		avaibleElReceiver = rdFromSender.getQuantity();
 
 		result = quantityFromSender + avaibleElReceiver;
@@ -159,7 +183,10 @@ public class TradeProcessImpl implements TradeProcess {
 		rdFromSender.setQuantity(result);
 
 		logger.info("Dandole al emisor  " + quantityFromReceiver);
-		Element elGivenToSender = senderElements.get(nameElGivenByReceiver);
+		// Element elGivenToSender = senderElements.get(nameElGivenByReceiver);
+		Element elGivenToSender = playerService.getElementPlayerByName(
+				senderElements, nameElGivenByReceiver);
+
 		int senderQuantity = elGivenToSender.getQuantity();
 		result = senderQuantity + quantityFromReceiver;
 		elGivenToSender.setQuantity(result);

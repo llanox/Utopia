@@ -45,7 +45,8 @@ public class MaterialLevelUpgrader implements LevelUpgraderStrategy {
 		for (IncrementableConstraint pk : ctrs) {
 			Integer neededQuantity = pk.getQuantity();
 			String resourceName = pk.getElementName();
-			Element resource = player.getMaterials().get(resourceName);
+			Element resource = playerService.getElementsByName(
+					player.getMaterials(), resourceName).get(0);
 			Integer quantity = resource.getQuantity() - neededQuantity;
 			resource.setQuantity(quantity);
 		}

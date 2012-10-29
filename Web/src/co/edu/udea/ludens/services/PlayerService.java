@@ -31,4 +31,7 @@ public interface PlayerService {
 
 	public List<IncrementableConstraint> getIncrementableConstraintByLevel(
 			List<IncrementableConstraint> levelConstraints, Integer newLevel);
+	
+	// Hecho por mi...
+	public List<Element> getElementsByName(List<Element> elements, String name);
 }

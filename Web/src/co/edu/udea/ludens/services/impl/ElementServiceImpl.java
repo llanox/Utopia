@@ -18,6 +18,7 @@ import co.edu.udea.ludens.dao.PlayerDAO;
 import co.edu.udea.ludens.domain.Element;
 import co.edu.udea.ludens.domain.Game;
 import co.edu.udea.ludens.domain.Incrementable;
+import co.edu.udea.ludens.domain.IncrementableConstraint;
 import co.edu.udea.ludens.domain.MessageEvent;
 import co.edu.udea.ludens.domain.Player;
 import co.edu.udea.ludens.enums.EnumElementType;
@@ -164,7 +165,8 @@ public class ElementServiceImpl implements ElementService {
 						List<Element> developmentFactors = new ArrayList<Element>();
 						pa.setDevelopmentFactors(developmentFactors);
 					}
-					pa.getDevelopmentFactors().put(inc.getName(), element);
+					//pa.getDevelopmentFactors().put(inc.getName(), element);
+					pa.getDevelopmentFactors().add(element);
 					continue;
 				}
 
@@ -182,7 +184,8 @@ public class ElementServiceImpl implements ElementService {
 						List<Element> materials = new ArrayList<Element>();
 						pa.setMaterials(materials);
 					}
-					pa.getMaterials().put(inc.getName(), element);
+					//pa.getMaterials().put(inc.getName(), element);
+					pa.getMaterials().add(element);
 					continue;
 				}
 
@@ -224,7 +227,6 @@ public class ElementServiceImpl implements ElementService {
 	public GameDAO getGameDao() {
 
 		return (this.gameDao);
-
 	}
 
 	@Override
@@ -239,5 +241,10 @@ public class ElementServiceImpl implements ElementService {
 		}
 
 		return elements;
+	}
+
+	@Override
+	public void checkOutResources(List<IncrementableConstraint> ctrs,
+			Element element, Player player) {		
 	}
 }

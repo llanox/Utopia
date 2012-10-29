@@ -1,6 +1,5 @@
 package co.edu.udea.ludens.services.impl;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -37,8 +36,8 @@ public class ElementProcessImpl implements ElementProcess {
 	private Player player;
 	private Vector<IncrementableStuffListener> incrementListeners = new Vector<IncrementableStuffListener>();;
 	private Vector<MessageListener> messagesListeners = new Vector<MessageListener>();
-	//private HashMap<String, Element> mapElements = new HashMap<String, Element>();
-	private List<Element> mapElements = new ArrayList<Element>();
+	private HashMap<String, Element> mapElements = new HashMap<String, Element>();
+	//private List<Element> mapElements = new ArrayList<Element>();
 	private static Logger logger = Logger.getLogger(ElementProcessImpl.class);
 	private boolean initiated = false;
 	@Autowired
@@ -52,10 +51,10 @@ public class ElementProcessImpl implements ElementProcess {
 		// Execute that method only one time
 		if (!initiated) {
 			initiated = true;
-			List<Element> factors = player.getDevelopmentFactors();
-			mapElements.clear();
-			mapElements.addAll(factors);
-			List<Element> materials = player.getMaterials();
+			//List<Element> factors = player.getDevelopmentFactors();
+			HashMap<String, Element> factors = createHashMapFromListElement(player.getDevelopmentFactors());
+			mapElements.putAll(factors);
+			HashMap<String, Element> materials = createHashMapFromListElement(player.getMaterials());
 			mapElements.putAll(materials);
 
 			// Calculating initial factor coverage
@@ -69,6 +68,16 @@ public class ElementProcessImpl implements ElementProcess {
 		}
 	}
 
+	// Hecho por mi...
+	public HashMap<String, Element> createHashMapFromListElement(List<Element> list) {
+		HashMap<String, Element> factors = new HashMap<String, Element>();
+		for (Element e : list) {
+			factors.put(e.getIncrementable().getName(), e);
+		}
+		
+		return (factors);
+	}
+	
 	private void notifyEvent(HashMap<String, Element> elements,
 			EnumEventType type) {
 		MessageEvent aEvent;
@@ -94,9 +103,9 @@ public class ElementProcessImpl implements ElementProcess {
 	public void produceElements() {
 		ProducerStrategy producer = null;
 		List<ElementBean> elementsBeans = null;
-		HashMap<String, Element> factors = player.getDevelopmentFactors();
+		HashMap<String, Element> factors = createHashMapFromListElement(player.getDevelopmentFactors());
 		mapElements.putAll(factors);
-		HashMap<String, Element> materials = player.getMaterials();
+		HashMap<String, Element> materials = createHashMapFromListElement(player.getMaterials());
 		mapElements.putAll(materials);
 		Element population = player.getPopulation();
 

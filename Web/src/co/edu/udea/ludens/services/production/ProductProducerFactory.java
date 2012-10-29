@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import co.edu.udea.ludens.domain.Element;
 import co.edu.udea.ludens.domain.IncrementableConstraint;
@@ -14,10 +15,15 @@ import co.edu.udea.ludens.enums.EnumElementType;
 import co.edu.udea.ludens.enums.EnumMsgs;
 import co.edu.udea.ludens.exceptions.LudensException;
 import co.edu.udea.ludens.services.ElementProcess;
+import co.edu.udea.ludens.services.PlayerService;
 import co.edu.udea.ludens.util.UtopiaUtil;
 import co.edu.udea.ludens.web.ElementBean;
 
 public class ProductProducerFactory {
+
+	// No se que problemas hayan con ese "static"
+	@Autowired
+	private static PlayerService playerService;
 
 	private static Logger logger = Logger
 			.getLogger(ProductProducerFactory.class);
@@ -63,8 +69,13 @@ public class ProductProducerFactory {
 		Integer actualLevel = element.getLevel();
 		Integer newLevel = actualLevel + 1;
 
-		List<IncrementableConstraint> ctrs = element.getLevelConstraints().get(
-				newLevel + "");
+		/*
+		 * List<IncrementableConstraint> ctrs =
+		 * element.getLevelConstraints().get( newLevel + "");
+		 */
+		List<IncrementableConstraint> ctrs = playerService
+				.getIncrementableConstraintByLevel(
+						element.getLevelConstraints(), newLevel);
 		// if didn't find resources constraints for this level then throw an
 		// exception
 		if (ctrs == null) {
@@ -78,10 +89,10 @@ public class ProductProducerFactory {
 		// Here, we have decremented each resource consumed to up to the next
 		// level
 		for (IncrementableConstraint pk : ctrs) {
-
 			Integer neededQuantity = pk.getQuantity();
 			String resourceName = pk.getElementName();
-			Element resource = player.getMaterials().get(resourceName);
+			Element resource = playerService.getElementsByName(
+					player.getMaterials(), resourceName).get(0);
 			Integer quantity = resource.getQuantity() - neededQuantity;
 			resource.setQuantity(quantity);
 		}

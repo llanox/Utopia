@@ -11,9 +11,7 @@ public class MaterialsProductionTask implements Runnable {
 	private Logger logger = Logger.getLogger(this.getClass());
 
 	public MaterialsProductionTask(GameProcess gameProcess) {
-
 		this.gameProcess = gameProcess;
-
 	}
 
 	@Override
