@@ -16,10 +16,10 @@ public class Player implements Serializable, Updateable {
 	@Column(name = "population")
 	private Element population;
 	@Unique
-	@OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
+	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,
 			CascadeType.MERGE })
 	private User user;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
 	private Game game;
 	@Column(name = "start_time")
 	private long startTime;
@@ -32,9 +32,12 @@ public class Player implements Serializable, Updateable {
 	@OrderColumn(name = "order")
 	@JoinColumn(name = "player_id", nullable = false)
 	private List<MessageEvent> events;
-
-	private List<Element> developmentFactors;
-	private List<Element> materials;
+    @Column(name = "development_factors")
+    @OneToMany(mappedBy = "player")
+    private List<Element> developmentFactors;
+    @Column(name = "materials")
+    @OneToMany(mappedBy = "player")
+    private List<Element> materials;
 
 	public void setId(long id) {
 		this.id = id;

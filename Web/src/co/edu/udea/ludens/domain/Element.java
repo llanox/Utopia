@@ -27,8 +27,10 @@ public class Element implements Serializable, Updateable {
 	private Incrementable incrementable;
 	@Transient
 	private List<Integer> changeEvents = new ArrayList<Integer>();
+	@Column(name = "level_constraints")
 	@OneToMany(mappedBy = "constrainedElement")
 	private List<IncrementableConstraint> levelConstraints;
+	@Column(name = "level_increments")
 	@OneToMany(mappedBy = "constrainedElement")
 	private List<IncrementableConstraint> levelIncrements;
 	@ManyToOne

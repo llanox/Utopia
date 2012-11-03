@@ -52,7 +52,6 @@ public class ObjectDBDAO implements DBDAO {
 	 * 
 	 * @see co.edu.udea.ludens.dao.DBDAO#delete(java.lang.Object)
 	 */
-
 	@Override
 	public void delete(Object o) {
 		Object found = em.find(o.getClass(), ((Updateable) o).getId());
@@ -66,7 +65,6 @@ public class ObjectDBDAO implements DBDAO {
 	 * @see co.edu.udea.ludens.dao.DBDAO#findObjectByAttribute(java.lang.Class,
 	 * java.lang.Object)
 	 */
-
 	@Override
 	public Object findObjectByAttribute(Class clazz, Object... parameters) {
 		StringBuilder sb = new StringBuilder();
@@ -76,7 +74,7 @@ public class ObjectDBDAO implements DBDAO {
 		// dato.
 		if (paramsLength % 2 != 0) {
 
-			throw new DatabaseError("NÃºmero incorrecto de parÃ¡metros: "
+			throw new DatabaseError("Número incorrecto de parámetros: "
 					+ paramsLength);
 		}
 
@@ -90,6 +88,7 @@ public class ObjectDBDAO implements DBDAO {
 					+ parameters[i + 1] + "' ");
 		}
 
+		//CriteriaQuery<Object> query1 = 
 		CriteriaQuery<Object> query = em.getCriteriaBuilder().createQuery();
 		logger.info("SQL : " + "SELECT o FROM " + clazz.getName() + " o "
 				+ sb.toString());
@@ -97,7 +96,7 @@ public class ObjectDBDAO implements DBDAO {
 				"SELECT o FROM " + clazz.getName() + " o " + sb.toString(),
 				clazz);
 
-		return q2.getResultList();
+		return (q2.getResultList());
 	}
 
 	@Override
@@ -132,7 +131,7 @@ public class ObjectDBDAO implements DBDAO {
 		logger.info("SQL : " + sqlStatement);
 		TypedQuery<Class> q2 = em.createQuery(sqlStatement, clazz);
 
-		return q2.getResultList();
+		return (q2.getResultList());
 	}
 
 	/*

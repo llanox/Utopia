@@ -26,6 +26,8 @@ public class GameDAOImpl extends ObjectDBDAO implements GameDAO {
 		Game game = null;
 		String jpql = "Select g from Game g Where g.name like '%" + gameName
 				+ "'";
+
+		
 		TypedQuery<Game> q2 = em.createQuery(jpql, Game.class);
 		List<Game> games = q2.getResultList();
 

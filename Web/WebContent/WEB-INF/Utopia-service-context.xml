@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jee="http://www.springframework.org/schema/jee"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
@@ -27,7 +25,8 @@
 	<context:component-scan base-package="co.edu.udea.ludens.test" />
 
 	<!-- Use @Transaction annotations for managing transactions -->
-	<tx:annotation-driven mode="proxy" transaction-manager="myTxManager" />
+	<tx:annotation-driven mode="proxy"
+		transaction-manager="myTxManager" />
 
 	<!-- Scheduler -->
 	<task:scheduler id="productionScheduler" pool-size="10" />
@@ -35,27 +34,32 @@
 	<!-- Add JPA support -->
 
 	<bean id="emf"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
-		<property name="jpaDialect" >
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" ></bean>
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="jpaDialect">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"></bean>
 		</property>
-		<property name="persistenceUnitName" value="UtopiaPU" ></property>
-		<property name="persistenceUnitManager" >
-			<bean class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager" ></bean>
+		<property name="persistenceUnitName" value="UtopiaPU"></property>
+		<property name="persistenceUnitManager">
+			<bean
+				class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager"></bean>
 		</property>
-		<property name="jpaProperties" >
+		<property name="jpaProperties">
 			<props>
-				<prop key="hibernate.dialect" >org.hibernate.dialect.MySQLDialect</prop>
-				<prop key="hibernate.connection.driver_class" >com.mysql.jdbc.Driver</prop>
-				<prop key="hibernate.connection.url" >jdbc:mysql://localhost:3306/Utopia</prop>
-				<prop key="hibernate.connection.username" >root</prop>
-				<prop key="hibernate.connection.password" >r00t</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect
+				</prop>
+				<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver
+				</prop>
+				<prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/Utopia
+				</prop>
+				<prop key="hibernate.connection.username">root</prop>
+				<prop key="hibernate.connection.password">r00t</prop>
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
 			</props>
 		</property>
 	</bean>
 
 	<!-- Add Transaction support -->
-	<bean id="myTxManager" class="org.springframework.orm.jpa.JpaTransactionManager" >
+	<bean id="myTxManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="emf" />
 	</bean>
 
@@ -74,67 +78,54 @@
 		<lookup-method name="getSimpleTriggerBean" bean="simpleTriggerBean" />
 	</bean>
 
-	<bean name="userDao"
-		class="co.edu.udea.ludens.dao.UserDAOImpl" >
+	<bean name="userDao" class="co.edu.udea.ludens.dao.UserDAOImpl">
 	</bean>
 
-	<bean name="gameDao"
-		class="co.edu.udea.ludens.dao.GameDAOImpl" >
+	<bean name="gameDao" class="co.edu.udea.ludens.dao.GameDAOImpl">
 	</bean>
 
-	<bean name="playerDao"
-		class="co.edu.udea.ludens.dao.PlayerDAOImpl" >
+	<bean name="playerDao" class="co.edu.udea.ludens.dao.PlayerDAOImpl">
 	</bean>
 
-	<bean name="incrementableDao"
-		class="co.edu.udea.ludens.dao.IncrementableDAOImpl" >
+	<bean name="incrementableDao" class="co.edu.udea.ludens.dao.IncrementableDAOImpl">
 	</bean>
 
-	<bean name="incrementableConstraintDao"
-		class="co.edu.udea.ludens.dao.IncrementableConstraintDAOImpl" >
+	<bean name="incrementableConstraintDao" class="co.edu.udea.ludens.dao.IncrementableConstraintDAOImpl">
 	</bean>
 
-	<bean name="elementDao"
-		class="co.edu.udea.ludens.dao.ElementDAOImpl" >
+	<bean name="elementDao" class="co.edu.udea.ludens.dao.ElementDAOImpl">
 	</bean>
 
-	<bean name="eventProcess"
-		class="co.edu.udea.ludens.services.impl.EventProcessImpl"
+	<bean name="eventProcess" class="co.edu.udea.ludens.services.impl.EventProcessImpl"
 		scope="prototype">
 	</bean>
 
-	<bean name="elementProcess"
-		class="co.edu.udea.ludens.services.impl.ElementProcessImpl"
+	<bean name="elementProcess" class="co.edu.udea.ludens.services.impl.ElementProcessImpl"
 		scope="prototype">
 	</bean>
 
 	<bean name="gameProcess" class="co.edu.udea.ludens.services.impl.GameProcessImpl"
-		scope="prototype" >
+		scope="prototype">
 		<property name="serviceLocator" ref="serviceLocator" />
 	</bean>
 
-	<bean name="userService"
-		class="co.edu.udea.ludens.services.impl.UserServiceImpl" >
+	<bean name="userService" class="co.edu.udea.ludens.services.impl.UserServiceImpl">
 	</bean>
 
-	<bean name="gameService"
-		class="co.edu.udea.ludens.services.impl.GameServiceImpl" >
+	<bean name="gameService" class="co.edu.udea.ludens.services.impl.GameServiceImpl">
 	</bean>
 
-	<bean name="playerService"
-		class="co.edu.udea.ludens.services.impl.PlayerServiceImpl" >
+	<bean name="playerService" class="co.edu.udea.ludens.services.impl.PlayerServiceImpl">
 	</bean>
 
-	<bean name="tradeProcess"
-		class="co.edu.udea.ludens.services.impl.TradeProcessImpl"
-		scope="prototype" >
+	<bean name="tradeProcess" class="co.edu.udea.ludens.services.impl.TradeProcessImpl"
+		scope="prototype">
 	</bean>
 
-	<bean name="elementService"
-		class="co.edu.udea.ludens.services.impl.ElementServiceImpl" >
+	<bean name="elementService" class="co.edu.udea.ludens.services.impl.ElementServiceImpl">
 	</bean>
 
 	<bean name="incrementableService"
-		class="co.edu.udea.ludens.services.impl.IncrementableServiceImpl" >
+		class="co.edu.udea.ludens.services.impl.IncrementableServiceImpl">
 	</bean>
 </beans>
