@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
 		users = userDao.findAllUsers();
 
-		return users;
+		return (users);
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package co.edu.udea.ludens.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
@@ -15,12 +16,6 @@ public class ObjectDBDAO implements DBDAO {
 
 	@PersistenceContext
 	protected EntityManager em;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see co.edu.udea.ludens.dao.DBDAO#save(java.lang.Object)
-	 */
 
 	@Override
 	public Object save(Object o) {
@@ -47,11 +42,6 @@ public class ObjectDBDAO implements DBDAO {
 		return o;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see co.edu.udea.ludens.dao.DBDAO#delete(java.lang.Object)
-	 */
 	@Override
 	public void delete(Object o) {
 		Object found = em.find(o.getClass(), ((Updateable) o).getId());
@@ -59,12 +49,6 @@ public class ObjectDBDAO implements DBDAO {
 		em.remove(found);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see co.edu.udea.ludens.dao.DBDAO#findObjectByAttribute(java.lang.Class,
-	 * java.lang.Object)
-	 */
 	@Override
 	public Object findObjectByAttribute(Class clazz, Object... parameters) {
 		StringBuilder sb = new StringBuilder();
@@ -84,19 +68,28 @@ public class ObjectDBDAO implements DBDAO {
 			} else {
 				sb.append(" WHERE ");
 			}
-			sb.append("  o." + parameters[i] + ".toString() LIKE '%"
-					+ parameters[i + 1] + "' ");
+			sb.append("o." + parameters[i] + " LIKE :"
+					+ parameters[i + 1]);
+		}
+		logger.info("Clausules: " + sb.toString());
+
+		// CriteriaQuery<Object> query1 =
+		// CriteriaQuery<Object> q = em.getCriteriaBuilder().createQuery();
+		logger.info("SQL : " + "FROM " + clazz.getSimpleName() + " AS o"
+				+ sb.toString());
+		// TypedQuery<Class> q2 = em.createQuery(
+		// "SELECT o FROM " + clazz.getName() + " o " + sb.toString(),
+		// clazz);
+
+		Query query = this.em.createQuery("FROM " + clazz.getSimpleName()
+				+ " AS o" + sb.toString());
+		for (int i = 0; i < paramsLength; i = i + 2) {
+			query.setParameter(parameters[i].toString(), parameters[1 + i]);
+			logger.info(parameters[i].toString() + " -> " + parameters[1 + i]);
 		}
 
-		//CriteriaQuery<Object> query1 = 
-		CriteriaQuery<Object> query = em.getCriteriaBuilder().createQuery();
-		logger.info("SQL : " + "SELECT o FROM " + clazz.getName() + " o "
-				+ sb.toString());
-		TypedQuery<Class> q2 = em.createQuery(
-				"SELECT o FROM " + clazz.getName() + " o " + sb.toString(),
-				clazz);
-
-		return (q2.getResultList());
+		return (query.getResultList());
+		// return (q2.getResultList());
 	}
 
 	@Override
@@ -134,31 +127,25 @@ public class ObjectDBDAO implements DBDAO {
 		return (q2.getResultList());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see co.edu.udea.ludens.dao.DBDAO#findObjectByType(java.lang.Class)
-	 */
-
 	@Override
 	public Object findObjectByType(Class clazz) {
-		logger.info("Query : " + "SELECT o FROM " + clazz.getSimpleName()
-				+ " o");
-		TypedQuery<Class> q2 = em.createQuery(
-				"SELECT c FROM " + clazz.getSimpleName() + " c", clazz);
+		// logger.info("Query : " + "SELECT o FROM " + clazz.getSimpleName()
+		// + " o");
+		// TypedQuery<Class> q2 = em.createQuery(
+		// "SELECT c FROM " + clazz.getSimpleName() + " c", clazz);
+		logger.info("Query : " + "FROM " + clazz.getSimpleName());
+		Query query = this.em.createQuery("FROM " + clazz.getSimpleName());
 
-		return q2.getResultList();
+		if (query.getResultList().isEmpty()) {
+			logger.info("The query.getResultList() is empty...");
+		}
+
+		return (query.getResultList());
+		// return q2.getResultList();
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see co.edu.udea.ludens.dao.DBDAO#close(java.lang.Object)
-	 */
 
 	@Override
 	public void close(Object oc) {
-		// TODO Auto-generated method stub
 	}
 
 	public EntityManager getEm() {

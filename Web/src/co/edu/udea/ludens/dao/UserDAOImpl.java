@@ -14,19 +14,20 @@ public class UserDAOImpl extends ObjectDBDAO implements UserDAO {
 
 	public User findUserByLogin(String login) {
 		User user = null;
-		List<User> result = (List<User>) findObjectByAttribute(User.class,
-				"login", login);
+		List<User> result = (List<User>) (findObjectByAttribute(User.class,
+				"login", login));
 
-		if (result != null && !result.isEmpty())
+		if (result != null && !result.isEmpty()) {
 			user = result.get(0);
+		}
 
-		return user;
+		return (user);
 	}
 
 	public List<User> findAllUsers() {
-		List<User> result = (List<User>) this.findObjectByType(User.class);
+		List<User> result = (List<User>) (this.findObjectByType(User.class));
 
-		return result;
+		return (result);
 	}
 
 	@Override
