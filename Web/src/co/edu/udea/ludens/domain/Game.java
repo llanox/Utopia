@@ -33,13 +33,13 @@ public class Game implements Serializable, Updateable {
 	private EnumGameStatus status = EnumGameStatus.NO_STARTED;
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
 			CascadeType.MERGE })
-	private List<Incrementable> defaultIncrementables = new ArrayList();
+	private List<Incrementable> defaultIncrementables = new ArrayList<Incrementable>();
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
 			CascadeType.MERGE })
-	private List<Player> players = new ArrayList();
+	private List<Player> players = new ArrayList<Player>();
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
 			CascadeType.MERGE })
-	private List<UnexpectedEvent> unexpectedEvents = new ArrayList();
+	private List<UnexpectedEvent> unexpectedEvents = new ArrayList<UnexpectedEvent>();
 	@Column(name = "name")
 	private String name;
 

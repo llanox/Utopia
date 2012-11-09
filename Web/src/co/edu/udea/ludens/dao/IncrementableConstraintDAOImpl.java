@@ -27,16 +27,16 @@ public class IncrementableConstraintDAOImpl extends ObjectDBDAO implements
 	public Object saveOrUpdate(Object o) {
 		IncrementableConstraint cr = (IncrementableConstraint) o;
 		logger.info("merging incrementable");
-		em.merge(cr.getRestrictedIncrementable());
+		entityManager.merge(cr.getRestrictedIncrementable());
 
 		if (cr.getId() != null) {
 			logger.info("merging IncrementableConstraint");
-			em.merge(cr);
+			entityManager.merge(cr);
 		} else {
-			em.persist(cr);
+			entityManager.persist(cr);
 			logger.info("persisting IncrementableConstraint");
 		}
-		em.flush();
+		entityManager.flush();
 
 		return o;
 	}

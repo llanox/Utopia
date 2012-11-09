@@ -22,8 +22,8 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 		Player player = null;
 		String SQL = "SELECT o FROM " + clazz.getName()
 				+ " o  WHERE o.user.login " + " LIKE '%" + userName + "'";
-		CriteriaQuery<Object> query = em.getCriteriaBuilder().createQuery();
-		TypedQuery<Player> q2 = em.createQuery(SQL, clazz);
+		CriteriaQuery<Object> query = entityManager.getCriteriaBuilder().createQuery();
+		TypedQuery<Player> q2 = entityManager.createQuery(SQL, clazz);
 		List<Player> players = q2.getResultList();
 
 		if (players != null & !players.isEmpty())
@@ -40,8 +40,8 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 		List<Game> games = new ArrayList<Game>();
 		String SQL = "SELECT o FROM " + clazz.getName() + " o  WHERE o.name "
 				+ " LIKE '%" + gameName + "'";
-		CriteriaQuery<Object> query = em.getCriteriaBuilder().createQuery();
-		TypedQuery<Game> q2 = em.createQuery(SQL, clazz);
+		CriteriaQuery<Object> query = entityManager.getCriteriaBuilder().createQuery();
+		TypedQuery<Game> q2 = entityManager.createQuery(SQL, clazz);
 
 		games = q2.getResultList();
 
@@ -72,8 +72,8 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 				+ gameName + "' AND o.user.participatingInGame.toString() "
 				+ " LIKE '%" + participatingInGame + "'";
 		logger.info(SQL);
-		CriteriaQuery<Object> query = em.getCriteriaBuilder().createQuery();
-		TypedQuery<Player> q2 = em.createQuery(SQL, clazz);
+		CriteriaQuery<Object> query = entityManager.getCriteriaBuilder().createQuery();
+		TypedQuery<Player> q2 = entityManager.createQuery(SQL, clazz);
 
 		players = q2.getResultList();
 

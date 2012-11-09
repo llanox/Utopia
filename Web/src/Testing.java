@@ -9,7 +9,6 @@ import co.edu.udea.ludens.domain.User;
 import co.edu.udea.ludens.enums.EnumGameStatus;
 import co.edu.udea.ludens.enums.EnumUserRole;
 import co.edu.udea.ludens.services.GameService;
-import co.edu.udea.ludens.services.PlayerService;
 import co.edu.udea.ludens.services.UserService;
 
 public class Testing {
@@ -25,8 +24,8 @@ public class Testing {
 
 		UserService userService = (UserService) appContext
 				.getBean("userService");
-		GameService gameService = (GameService) appContext
-				.getBean("gameService");
+		/*GameService gameService = (GameService) appContext
+				.getBean("gameService");*/
 
 		User user1 = new User();
 		user1.setEmail("correo.del.llanox@gmail.com");
@@ -48,12 +47,30 @@ public class Testing {
 		user2.setPassword("neiber123");
 		user2.setRole(EnumUserRole.ADMIN);
 
+		User user3 = new User();
+		user3.setEmail("npadierna@gmail.com");
+		user3.setGender("Masculino");
+		user3.setLogin("rebien");
+		user3.setName("Neiber Padierna Perez");
+		user3.setOnline(Boolean.TRUE);
+		user3.setParticipatingInGame(Boolean.FALSE);
+		user3.setPassword("neiber123");
+		user3.setRole(EnumUserRole.ADMIN);
+
 		userService.save(user1);
 		userService.save(user2);
+		userService.save(user3);
 
-		// User temp = userService.findUser(user2.getLogin());
-		// logger.info("User temp: " + temp.toString());
-		// userService.delete(user2);
+		User temp = userService.findUser(user2.getLogin());
+		System.out.println("user2: " + user2.getLogin());
+		//logger.info("User temp: " + temp.toString());
+		//userService.delete(user2);
+
+		if (user1.getId() != null) {
+			System.out.println("user1 ID: " + user1.getId().toString());
+		} else {
+			System.out.println("Doesn't work!!!!");
+		}
 
 		List<User> users = userService.findAllUsers();
 		for (User user : users) {
@@ -61,11 +78,13 @@ public class Testing {
 			logger.info("id " + user.getId());
 			logger.info(" " + user.getName());
 			logger.info(" " + user.getEmail());
+			
+			System.out.println("User: " + user.getLogin());
 		}
 
 
 
-		Game game = new Game();
+		/*Game game = new Game();
 		game.setDuration(1000L);
 		game.setLowerThreshold(500L);
 		game.setName("Test Gamge");
@@ -73,6 +92,6 @@ public class Testing {
 		game.setStatus(EnumGameStatus.PAUSED);
 		game.setUpperThreshold(1500L);
 		gameService.save(game);
-		gameService.delete(game);
+		gameService.delete(game);*/
 	}
 }

@@ -2,9 +2,7 @@ package co.edu.udea.ludens.services.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import co.edu.udea.ludens.domain.Interchange;
 import co.edu.udea.ludens.domain.MessageEvent;
 import co.edu.udea.ludens.domain.Player;
 import co.edu.udea.ludens.enums.EnumEventType;
-import co.edu.udea.ludens.enums.EnumMsgType;
 import co.edu.udea.ludens.enums.EnumMsgs;
 import co.edu.udea.ludens.services.ElementService;
 import co.edu.udea.ludens.services.PlayerService;

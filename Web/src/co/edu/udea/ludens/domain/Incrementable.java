@@ -28,7 +28,7 @@ public class Incrementable implements Serializable, Updateable {
 	private Game game;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "restrictedIncrementable", cascade = { CascadeType.MERGE })
 	@Column(name = "constraints")
-	private List<IncrementableConstraint> constraints = new ArrayList();
+	private List<IncrementableConstraint> constraints = new ArrayList<IncrementableConstraint>();
 	@Column(name = "description")
 	private String description;
 	@Column(name = "image_url")

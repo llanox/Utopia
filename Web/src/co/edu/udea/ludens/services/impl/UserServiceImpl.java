@@ -21,17 +21,10 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDao;
 
-	/**
-	 * @param userDao
-	 *            the userDao to set
-	 */
 	public void setUserDao(UserDAO userDao) {
 		this.userDao = userDao;
 	}
 
-	/**
-	 * @return the userDao
-	 */
 	public UserDAO getUserDao() {
 
 		return (this.userDao);

@@ -11,7 +11,6 @@ public class ElementBean {
 
 	private Element element;
 	private Integer production;
-	private Logger logger = Logger.getLogger(getClass());
 	private ElementProcess process;
 
 	public void upLevel(javax.faces.event.ActionEvent ae) {
