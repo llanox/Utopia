@@ -24,12 +24,14 @@ public class GameDAOImpl extends ObjectDBDAO implements GameDAO {
 	@Override
 	public Game findGameByName(String gameName) {
 		Game game = null;
-		String jpql = "Select g from Game g Where g.name like '%" + gameName
-				+ "'";
-
+//		String jpql = "Select g from Game g Where g.name like '%" + gameName
+//				+ "'";
+//
+//		
+//		TypedQuery<Game> q2 = entityManager.createQuery(jpql, Game.class);
+		List<Game> games  = (List<Game>) this.findObjectByAttribute(Game.class, "name",gameName);
 		
-		TypedQuery<Game> q2 = entityManager.createQuery(jpql, Game.class);
-		List<Game> games = q2.getResultList();
+		
 
 		if (games != null && !games.isEmpty())
 			game = games.get(0);

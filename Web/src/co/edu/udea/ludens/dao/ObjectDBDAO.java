@@ -69,7 +69,7 @@ public class ObjectDBDAO implements DBDAO {
 				sb.append(" WHERE ");
 			}
 			sb.append("o." + parameters[i] + " LIKE :"
-					+ parameters[i + 1]);
+					+ parameters[i]);
 		}
 		logger.info("Clausules: " + sb.toString());
 

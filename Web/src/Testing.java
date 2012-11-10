@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -63,7 +64,7 @@ public class Testing {
 
 		User temp = userService.findUser(user2.getLogin());
 		System.out.println("user2: " + user2.getLogin());
-		//logger.info("User temp: " + temp.toString());
+		System.out.println("User temp: " + temp.toString());
 		//userService.delete(user2);
 
 		if (user1.getId() != null) {
@@ -78,7 +79,8 @@ public class Testing {
 			logger.info("id " + user.getId());
 			logger.info(" " + user.getName());
 			logger.info(" " + user.getEmail());
-			
+			user.setName(""+(new Date()).getTime());
+			userService.save(user);
 			System.out.println("User: " + user.getLogin());
 		}
 
