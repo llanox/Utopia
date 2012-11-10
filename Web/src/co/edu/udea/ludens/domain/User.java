@@ -24,6 +24,7 @@ public class User implements Serializable, Updateable {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "birth_date")
 	private Date birthDate;
+	@Column(name = "role")
 	private EnumUserRole role;
 	@Column(name = "password")
 	private String password;

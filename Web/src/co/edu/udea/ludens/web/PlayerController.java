@@ -73,14 +73,11 @@ public class PlayerController implements UpdateableView {
 		User user = userService.findUser(loginActualUser);
 		player.setUser(user);
 		user.setParticipatingInGame(true);
+		player.setGame(game);
 
 		playerService.save(player);
-		if (game.getPlayers() == null) {
-			game.setPlayers(new ArrayList<Player>());
-		}
-
-		game.getPlayers().add(player);
-		gameService.save(game);
+	
+	
 		selectedPlayers.add(player);
 		updatingUsersAndPlayers();
 	}
@@ -93,8 +90,6 @@ public class PlayerController implements UpdateableView {
 					.add(new SelectItem(user.getLogin(), user.getLogin()));
 		}
 	}
-
-	/** accesors and mutators **/
 
 	/**
 	 * @param settingPlayers

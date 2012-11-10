@@ -31,16 +31,14 @@ public class UserDAOImpl extends ObjectDBDAO implements UserDAO {
 
 	@Override
 	public List<User> findUsersBy(boolean participatingInGame) {
-		List<User> result = (List<User>) findObjectByAttribute(User.class,
-				"participatingInGame", participatingInGame);
+		List<User> result = (List<User>) findObjectByAttribute(User.class,"participatingInGame", participatingInGame);
 
 		return result;
 	}
 
 	@Override
 	public List<User> findUsersBy(boolean participatingInGame, EnumUserRole role) {
-		List<User> result = (List<User>) findObjectByAttribute(User.class,
-				"participatingInGame", participatingInGame, "role", role);
+		List<User> result = (List<User>) findObjectByAttribute(User.class,"participatingInGame", participatingInGame, "role", role);
 
 		return result;
 	}

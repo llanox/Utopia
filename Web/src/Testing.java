@@ -27,7 +27,7 @@ public class Testing {
 				.getBean("userService");
 		/*GameService gameService = (GameService) appContext
 				.getBean("gameService");*/
-
+//
 		User user1 = new User();
 		user1.setEmail("correo.del.llanox@gmail.com");
 		user1.setGender("Masculino");
@@ -37,7 +37,7 @@ public class Testing {
 		user1.setParticipatingInGame(Boolean.TRUE);
 		user1.setPassword("gabo***");
 		user1.setRole(EnumUserRole.PLAYER);
-
+//
 		User user2 = new User();
 		user2.setEmail("npadierna@gmail.com");
 		user2.setGender("Masculino");
@@ -47,7 +47,7 @@ public class Testing {
 		user2.setParticipatingInGame(Boolean.FALSE);
 		user2.setPassword("neiber123");
 		user2.setRole(EnumUserRole.ADMIN);
-
+//
 		User user3 = new User();
 		user3.setEmail("npadierna@gmail.com");
 		user3.setGender("Masculino");
@@ -57,31 +57,31 @@ public class Testing {
 		user3.setParticipatingInGame(Boolean.FALSE);
 		user3.setPassword("neiber123");
 		user3.setRole(EnumUserRole.ADMIN);
-
+//
 		userService.save(user1);
 		userService.save(user2);
 		userService.save(user3);
+//
+//		User temp = userService.findUser(user2.getLogin());
+//		System.out.println("user2: " + user2.getLogin());
+//		System.out.println("User temp: " + temp.toString());
+//		//userService.delete(user2);
+//
+//		if (user1.getId() != null) {
+//			System.out.println("user1 ID: " + user1.getId().toString());
+//		} else {
+//			System.out.println("Doesn't work!!!!");
+//		}
 
-		User temp = userService.findUser(user2.getLogin());
-		System.out.println("user2: " + user2.getLogin());
-		System.out.println("User temp: " + temp.toString());
-		//userService.delete(user2);
-
-		if (user1.getId() != null) {
-			System.out.println("user1 ID: " + user1.getId().toString());
-		} else {
-			System.out.println("Doesn't work!!!!");
-		}
-
-		List<User> users = userService.findAllUsers();
+		List<User> users = userService.findUserByRole(Boolean.FALSE, EnumUserRole.ADMIN);
 		for (User user : users) {
 			logger.info("User " + user.getLogin());
 			logger.info("id " + user.getId());
 			logger.info(" " + user.getName());
 			logger.info(" " + user.getEmail());
-			user.setName(""+(new Date()).getTime());
-			userService.save(user);
-			System.out.println("User: " + user.getLogin());
+			
+		
+			System.out.println("Name: "+user.getName()+" role: " + user.getRole()+" participiting "+user.isParticipatingInGame());
 		}
 
 

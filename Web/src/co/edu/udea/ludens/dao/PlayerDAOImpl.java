@@ -18,14 +18,10 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 
 	@Override
 	public Player findPlayerByUserName(final String userName) {
-		Class clazz = Player.class;
-		Player player = null;
-		String SQL = "SELECT o FROM " + clazz.getName()
-				+ " o  WHERE o.user.login " + " LIKE '%" + userName + "'";
-		CriteriaQuery<Object> query = entityManager.getCriteriaBuilder().createQuery();
-		TypedQuery<Player> q2 = entityManager.createQuery(SQL, clazz);
-		List<Player> players = q2.getResultList();
-
+	
+		List<Player> players = (List<Player>) this.findObjectByAttribute(Player.class, "user.login",userName);
+		Player player =null;
+		
 		if (players != null & !players.isEmpty())
 			player = players.get(0);
 
@@ -34,22 +30,18 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 
 	@Override
 	public List<Player> findAllPlayersByGameName(String gameName) {
-		List<Player> players = new ArrayList<Player>();
-		Class clazz = Game.class;
-		Game game = null;
-		List<Game> games = new ArrayList<Game>();
-		String SQL = "SELECT o FROM " + clazz.getName() + " o  WHERE o.name "
-				+ " LIKE '%" + gameName + "'";
-		CriteriaQuery<Object> query = entityManager.getCriteriaBuilder().createQuery();
-		TypedQuery<Game> q2 = entityManager.createQuery(SQL, clazz);
+		
 
-		games = q2.getResultList();
+//		Game game = null;
+//		List<Game> games = new ArrayList<Game>();
+//		String SQL = "SELECT o FROM " + clazz.getName() + " o  WHERE o.name "
+//				+ " LIKE '%" + gameName + "'";
+//		CriteriaQuery<Object> query = entityManager.getCriteriaBuilder().createQuery();
+//		TypedQuery<Game> q2 = entityManager.createQuery(SQL, clazz);
 
-		if (games != null && !games.isEmpty())
-			game = games.get(0);
+		
+		List<Player> players = (List<Player>) this.findObjectByAttribute(Player.class, "game.name",gameName);
 
-		if (game != null)
-			players = game.getPlayers();
 
 		return players;
 	}
@@ -63,19 +55,18 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 	}
 
 	@Override
-	public List<Player> findAllPlayersByGameName(boolean participatingInGame,
-			String gameName) {
-		List<Player> players = new ArrayList<Player>();
-		Class clazz = Player.class;
-		String SQL = "SELECT o FROM " + clazz.getName()
-				+ " o JOIN FETCH o.materials WHERE o.game.name " + " LIKE '%"
-				+ gameName + "' AND o.user.participatingInGame.toString() "
-				+ " LIKE '%" + participatingInGame + "'";
-		logger.info(SQL);
-		CriteriaQuery<Object> query = entityManager.getCriteriaBuilder().createQuery();
-		TypedQuery<Player> q2 = entityManager.createQuery(SQL, clazz);
+	public List<Player> findAllPlayersByGameName(boolean participatingInGame,String gameName) {
+		List<Player> players =(List<Player>) this.findObjectByAttribute(Player.class, "user.participatingInGame",participatingInGame,"game.name",gameName);
+//		Class clazz = Player.class;
+//		String SQL = "SELECT o FROM " + clazz.getName()
+//				+ " o JOIN FETCH o.materials WHERE o.game.name " + " LIKE '%"
+//				+ gameName + "' AND o.user.participatingInGame.toString() "
+//				+ " LIKE '%" + participatingInGame + "'";
+//		logger.info(SQL);
+//		CriteriaQuery<Object> query = entityManager.getCriteriaBuilder().createQuery();
+//		TypedQuery<Player> q2 = entityManager.createQuery(SQL, clazz);
 
-		players = q2.getResultList();
+	
 
 		return players;
 	}

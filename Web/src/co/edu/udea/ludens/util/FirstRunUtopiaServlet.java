@@ -39,7 +39,7 @@ public class FirstRunUtopiaServlet implements ServletContextListener {
 		logger.info("File path ---> " + filePath);
 		file = new File(filePath);
 
-		if (!file.exists()) {
+		if (true/*!file.exists()*/) {
 			logger.info("First Run ....");
 
 			ApplicationContext ctx = WebApplicationContextUtils
