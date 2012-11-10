@@ -9,6 +9,7 @@ import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
+import co.edu.udea.ludens.domain.Game;
 import co.edu.udea.ludens.domain.Incrementable;
 import co.edu.udea.ludens.domain.IncrementableConstraint;
 import co.edu.udea.ludens.enums.EnumElementType;
@@ -100,12 +101,11 @@ public class IncrementableController implements UpdateableView {
 
 		logger.info("Incrementable type to save: "
 				+ actualIncrementable.getType());
-
+	
+		Game game = gameController.getActualGame();
+		actualIncrementable.setGame(game);
+		
 		incrementableService.save(actualIncrementable);
-		gameController.getActualGame().getDefaultIncrementables()
-				.add(actualIncrementable);
-		gameService.save(gameController.getActualGame());
-
 		actualIncrementable = new Incrementable();
 		loadIncrementables();
 	}
