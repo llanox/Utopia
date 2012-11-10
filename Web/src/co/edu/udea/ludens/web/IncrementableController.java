@@ -63,8 +63,7 @@ public class IncrementableController implements UpdateableView {
 			}
 		}
 
-		incrementables = incrementableService
-				.getAllIncrementablesGame(gameController.getActualGame()
+		incrementables = incrementableService.getAllIncrementablesGame(gameController.getActualGame()
 						.getName());
 
 		if (incrementables != null && !incrementables.isEmpty()) {

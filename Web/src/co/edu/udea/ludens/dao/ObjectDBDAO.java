@@ -69,7 +69,7 @@ public class ObjectDBDAO implements DBDAO {
 				sb.append(" WHERE ");
 			}
 			sb.append("o." + parameters[i] + " LIKE :"
-					+ parameters[i]);
+					+ removeDot(parameters[i]));
 		}
 		logger.info("Clausules: " + sb.toString());
 
@@ -84,12 +84,26 @@ public class ObjectDBDAO implements DBDAO {
 		Query query = this.entityManager.createQuery("FROM " + clazz.getSimpleName()
 				+ " AS o" + sb.toString());
 		for (int i = 0; i < paramsLength; i = i + 2) {
-			query.setParameter(parameters[i].toString(), parameters[1 + i]);
+			query.setParameter( removeDot(parameters[i]), parameters[1 + i]);
 			logger.info(parameters[i].toString() + " -> " + parameters[1 + i]);
 		}
 
 		return (query.getResultList());
 		// return (q2.getResultList());
+	}
+
+	private String removeDot(Object object) {
+		String parameter = (String) object;
+		StringBuilder sb = new StringBuilder(parameter);
+		int index = sb.indexOf(".");
+		
+		while(index > -1 ){
+			
+			sb.deleteCharAt(index);
+			index = sb.indexOf(".");	
+		}
+		
+		return sb.toString();
 	}
 
 	@Override
