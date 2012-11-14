@@ -7,6 +7,9 @@ import co.edu.udea.ludens.enums.EnumEventType;
 import co.edu.udea.ludens.web.ElementBean;
 
 public class IncrementableEvent extends EventObject {
+
+	private static final long serialVersionUID = 1739544804L;
+
 	private EnumEventType eventType;
 	private List<ElementBean> incrementables;
 
@@ -31,7 +34,7 @@ public class IncrementableEvent extends EventObject {
 	}
 
 	public List<ElementBean> getIncrementables() {
-	
+
 		return (this.incrementables);
 	}
 }

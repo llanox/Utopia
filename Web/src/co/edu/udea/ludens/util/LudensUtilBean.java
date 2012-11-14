@@ -97,7 +97,6 @@ public class LudensUtilBean {
 		return System.getProperty("file.separator");
 	}
 
-	@SuppressWarnings("unchecked")
 	public static Object findBean(String beanName) {
 		FacesContext context = FacesContext.getCurrentInstance();
 

@@ -7,6 +7,8 @@ import co.edu.udea.ludens.enums.EnumEventType;
 
 public class UserSessionEvent extends EventObject {
 
+	private static final long serialVersionUID = 1739545098L;
+
 	private EnumEventType eventType;
 	private User user;
 
@@ -28,17 +30,10 @@ public class UserSessionEvent extends EventObject {
 		this.eventType = eventType;
 	}
 
-	/**
-	 * @param user
-	 *            the user to set
-	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
 
-	/**
-	 * @return the user
-	 */
 	public User getUser() {
 
 		return (this.user);

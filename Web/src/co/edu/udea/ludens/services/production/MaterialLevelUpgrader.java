@@ -10,7 +10,6 @@ import co.edu.udea.ludens.domain.IncrementableConstraint;
 import co.edu.udea.ludens.domain.Player;
 import co.edu.udea.ludens.enums.EnumMsgs;
 import co.edu.udea.ludens.exceptions.LudensException;
-import co.edu.udea.ludens.services.ElementService;
 import co.edu.udea.ludens.services.PlayerService;
 import co.edu.udea.ludens.util.UtopiaUtil;
 

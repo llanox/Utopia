@@ -2,6 +2,8 @@ package co.edu.udea.ludens.exceptions;
 
 public class DatabaseError extends RuntimeException {
 
+	private static final long serialVersionUID = 1739544501L;
+
 	public DatabaseError() {
 		super();
 		// TODO Auto-generated constructor stub

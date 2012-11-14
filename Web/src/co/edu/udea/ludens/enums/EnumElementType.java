@@ -7,7 +7,7 @@ public enum EnumElementType implements Serializable {
 
     FACTOR("Factor"),
     MATERIAL("Material"),
-    POPULATION("PoblaciÃ³n");
+    POPULATION("Población");
     private static HashMap<String, EnumElementType> allEnums = null;
     private String type;
 
@@ -15,7 +15,8 @@ public enum EnumElementType implements Serializable {
         this.setType(type);
     }
 
-    public static EnumElementType getElementType(String typeName) {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public static EnumElementType getElementType(String typeName) {
         if (allEnums == null) {
             allEnums = new HashMap();
             EnumElementType[] types = EnumElementType.values();

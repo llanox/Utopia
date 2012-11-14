@@ -2,6 +2,8 @@ package co.edu.udea.ludens.exceptions;
 
 public class InvalidNumberOfFactorsException extends RuntimeException {
 
+	private static final long serialVersionUID = 1739544798L;
+
 	public InvalidNumberOfFactorsException() {
 		super();
 		// TODO Auto-generated constructor stub

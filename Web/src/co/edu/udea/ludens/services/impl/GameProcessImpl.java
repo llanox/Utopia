@@ -1,7 +1,6 @@
 package co.edu.udea.ludens.services.impl;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +14,6 @@ import co.edu.udea.ludens.domain.Element;
 import co.edu.udea.ludens.domain.Game;
 import co.edu.udea.ludens.domain.Player;
 import co.edu.udea.ludens.enums.EnumElementType;
-import co.edu.udea.ludens.enums.EnumGameStatus;
 import co.edu.udea.ludens.services.ElementProcess;
 import co.edu.udea.ludens.services.ElementService;
 import co.edu.udea.ludens.services.EventProcess;

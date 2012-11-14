@@ -2,6 +2,8 @@ package co.edu.udea.ludens.exceptions;
 
 public class InvalidNumberOfMaterialsException extends RuntimeException {
 
+	private static final long serialVersionUID = 1739544795L;
+
 	public InvalidNumberOfMaterialsException() {
 		super();
 		// TODO Auto-generated constructor stub

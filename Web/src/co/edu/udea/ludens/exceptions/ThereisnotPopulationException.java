@@ -2,6 +2,8 @@ package co.edu.udea.ludens.exceptions;
 
 public class ThereisnotPopulationException extends RuntimeException {
 
+	private static final long serialVersionUID = 1739545086L;
+
 	public ThereisnotPopulationException() {
 		super();
 		// TODO Auto-generated constructor stub

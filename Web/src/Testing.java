@@ -1,23 +1,16 @@
-import java.util.Date;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import co.edu.udea.ludens.domain.Game;
 import co.edu.udea.ludens.domain.User;
-import co.edu.udea.ludens.enums.EnumGameStatus;
 import co.edu.udea.ludens.enums.EnumUserRole;
-import co.edu.udea.ludens.services.GameService;
 import co.edu.udea.ludens.services.UserService;
 
 public class Testing {
 
 	private static Logger logger = Logger.getLogger(Testing.class);
 
-	public static void main(String[] jgg) throws InterruptedException {
-
+	public static void main(String[] args) throws InterruptedException {
 		logger.info("Geting Started");
 
 		String url = "/WebContent/WEB-INF/applicationContext.xml";
@@ -25,9 +18,7 @@ public class Testing {
 
 		UserService userService = (UserService) appContext
 				.getBean("userService");
-		/*GameService gameService = (GameService) appContext
-				.getBean("gameService");*/
-//
+
 		User user1 = new User();
 		user1.setEmail("correo.del.llanox@gmail.com");
 		user1.setGender("Masculino");
@@ -37,7 +28,7 @@ public class Testing {
 		user1.setParticipatingInGame(Boolean.TRUE);
 		user1.setPassword("gabo***");
 		user1.setRole(EnumUserRole.PLAYER);
-//
+
 		User user2 = new User();
 		user2.setEmail("npadierna@gmail.com");
 		user2.setGender("Masculino");
@@ -47,7 +38,7 @@ public class Testing {
 		user2.setParticipatingInGame(Boolean.FALSE);
 		user2.setPassword("neiber123");
 		user2.setRole(EnumUserRole.ADMIN);
-//
+
 		User user3 = new User();
 		user3.setEmail("npadierna@gmail.com");
 		user3.setGender("Masculino");
@@ -57,43 +48,37 @@ public class Testing {
 		user3.setParticipatingInGame(Boolean.FALSE);
 		user3.setPassword("neiber123");
 		user3.setRole(EnumUserRole.ADMIN);
-//
+
 		userService.save(user1);
 		userService.save(user2);
 		userService.save(user3);
-//
-//		User temp = userService.findUser(user2.getLogin());
-//		System.out.println("user2: " + user2.getLogin());
-//		System.out.println("User temp: " + temp.toString());
-//		//userService.delete(user2);
-//
-//		if (user1.getId() != null) {
-//			System.out.println("user1 ID: " + user1.getId().toString());
-//		} else {
-//			System.out.println("Doesn't work!!!!");
-//		}
+		//userService.delete(user3);
 
-		List<User> users = userService.findUserByRole(Boolean.FALSE, EnumUserRole.ADMIN);
+		//List<User> users = null;
+		// List<User> users = userService.findUserByRole(Boolean.FALSE,
+		// EnumUserRole.ADMIN);
+		/*users = userService.findAllUsers();
 		for (User user : users) {
 			logger.info("User " + user.getLogin());
 			logger.info("id " + user.getId());
 			logger.info(" " + user.getName());
 			logger.info(" " + user.getEmail());
-			
-		
-			System.out.println("Name: "+user.getName()+" role: " + user.getRole()+" participiting "+user.isParticipatingInGame());
-		}
 
+			System.out.println("Name: " + user.getName() + " role: "
+					+ user.getRole() + " participiting "
+					+ user.isParticipatingInGame());
+		}*/
 
+		/*User temp = userService.findUser("rebien");
+		System.out.println("Name: " + temp.getName() + " role: "
+				+ temp.getRole() + " participiting "
+				+ temp.isParticipatingInGame());
 
-		/*Game game = new Game();
-		game.setDuration(1000L);
-		game.setLowerThreshold(500L);
-		game.setName("Test Gamge");
-		game.setProductionTime(1500L);
-		game.setStatus(EnumGameStatus.PAUSED);
-		game.setUpperThreshold(1500L);
-		gameService.save(game);
-		gameService.delete(game);*/
+		temp = userService.findUser("neiber");
+		if (temp != null) {
+			System.out.println("Name: " + temp.getName() + " role: "
+					+ temp.getRole() + " participiting "
+					+ temp.isParticipatingInGame());
+		}*/
 	}
 }

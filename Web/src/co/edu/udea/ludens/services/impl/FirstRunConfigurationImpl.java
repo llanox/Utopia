@@ -42,6 +42,7 @@ public class FirstRunConfigurationImpl implements FirstRunConfiguration {
 			admin.setLogin("admin");
 			admin.setPassword("admin");
 			admin.setRole(EnumUserRole.ADMIN);
+
 			userService.save(admin);
 			logger.info("creando usuario admin");
 		} else {

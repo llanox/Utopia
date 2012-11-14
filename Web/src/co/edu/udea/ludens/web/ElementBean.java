@@ -2,8 +2,6 @@ package co.edu.udea.ludens.web;
 
 import com.icesoft.faces.async.render.SessionRenderer;
 
-import common.Logger;
-
 import co.edu.udea.ludens.domain.Element;
 import co.edu.udea.ludens.services.ElementProcess;
 

@@ -4,6 +4,8 @@ import co.edu.udea.ludens.enums.EnumMsgs;
 
 public class LudensException extends Exception {
 
+	private static final long serialVersionUID = 1739544789L;
+
 	public LudensException(String string) {
 		super(string);
 	}

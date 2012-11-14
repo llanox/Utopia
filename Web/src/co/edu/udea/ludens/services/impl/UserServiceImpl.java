@@ -56,8 +56,10 @@ public class UserServiceImpl implements UserService {
 
 		String userPassw = user.getPassword();
 
-		if (userPassw == null || !userPassw.equalsIgnoreCase(password))
+		if (userPassw == null || !userPassw.equalsIgnoreCase(password)) {
+
 			return null;
+		}
 
 		return user;
 	}

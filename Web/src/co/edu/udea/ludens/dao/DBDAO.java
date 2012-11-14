@@ -11,13 +11,16 @@ public interface DBDAO {
 	public abstract void delete(Object o);
 
 	// @Transactional( propagation = Propagation.SUPPORTS,readOnly = true )
+	@SuppressWarnings("rawtypes")
 	public abstract Object findObjectByAttribute(Class clazz,
 			Object... parameters);
 
 	// @Transactional( propagation = Propagation.SUPPORTS,readOnly = true )
+	@SuppressWarnings("rawtypes")
 	public abstract Object findObjectByType(Class clazz);
 
 	// @Transactional( propagation = Propagation.SUPPORTS,readOnly = true )
+	@SuppressWarnings("rawtypes")
 	public abstract Object findObjectByAttributeAndFetch(Class clazz,
 			Object... parameters);
 

@@ -3,7 +3,7 @@ package co.edu.udea.ludens.util;
 public class ConstantsLudens {
 
 	public static final String HTTP_PROTOCOL = "http://";
-	public static final String SOFTWARE_VERSION = "1.11.8.10";
+	public static final String SOFTWARE_VERSION = "2.11.14.12";
 	public static final String KEY_DB4O_FILE_NAME = "UtopiaDBName";
 	public static final String KEY_DB4O_SERVER = "db4oServer";
 	public static final String FILE_PATH_KEY = "filePath";

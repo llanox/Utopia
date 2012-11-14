@@ -13,6 +13,7 @@ public interface ProcessHolderService {
 	 *             second argument is not a valid type for that entity's primary
 	 *             key
 	 */
+	@SuppressWarnings("rawtypes")
 	public Process findProcessById(Class entityClass, Object primaryKey);
 
 	public void putProcess(Object primaryKey, Process process);

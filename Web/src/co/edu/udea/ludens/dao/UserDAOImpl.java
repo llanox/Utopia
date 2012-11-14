@@ -12,9 +12,11 @@ public class UserDAOImpl extends ObjectDBDAO implements UserDAO {
 	public UserDAOImpl() {
 	}
 
+	@SuppressWarnings("unchecked")
 	public User findUserByLogin(String login) {
 		User user = null;
-		List<User> result = (List<User>) (findObjectByAttribute(User.class,"login", login));
+		List<User> result = (List<User>) (findObjectByAttribute(User.class,
+				"login", login));
 
 		if (result != null && !result.isEmpty()) {
 			user = result.get(0);
@@ -23,6 +25,7 @@ public class UserDAOImpl extends ObjectDBDAO implements UserDAO {
 		return (user);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<User> findAllUsers() {
 		List<User> result = (List<User>) (this.findObjectByType(User.class));
 
@@ -30,15 +33,19 @@ public class UserDAOImpl extends ObjectDBDAO implements UserDAO {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<User> findUsersBy(boolean participatingInGame) {
-		List<User> result = (List<User>) findObjectByAttribute(User.class,"participatingInGame", participatingInGame);
+		List<User> result = (List<User>) findObjectByAttribute(User.class,
+				"participatingInGame", participatingInGame);
 
 		return result;
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<User> findUsersBy(boolean participatingInGame, EnumUserRole role) {
-		List<User> result = (List<User>) findObjectByAttribute(User.class,"participatingInGame", participatingInGame, "role", role);
+		List<User> result = (List<User>) findObjectByAttribute(User.class,
+				"participatingInGame", participatingInGame, "role", role);
 
 		return result;
 	}

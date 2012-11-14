@@ -16,6 +16,7 @@ public class ProcessHolderServiceImpl implements ProcessHolderService {
 	private HashMap<String, Process> gameProcesses = new HashMap<String, Process>();
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public Process findProcessById(Class entityClass, Object primaryKey) {
 		if (entityClass.getName().equals(GameProcess.class))
 			gameProcesses.get(primaryKey);

@@ -21,6 +21,7 @@ public class MaterialProducer implements ProducerStrategy {
 	private PlayerService playerService;
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<ElementBean> produce(Object supplies, ElementProcess process) {
 		HashMap<String, Element> elements = (HashMap<String, Element>) supplies;
 		List<ElementBean> elementBeans = new ArrayList<ElementBean>();

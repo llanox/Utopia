@@ -1,15 +1,10 @@
 package co.edu.udea.ludens.dao;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaQuery;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
-import co.edu.udea.ludens.domain.Game;
 import co.edu.udea.ludens.domain.Player;
 
 @Repository
@@ -17,11 +12,13 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 	public Logger logger = Logger.getLogger(this.getClass());
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public Player findPlayerByUserName(final String userName) {
-	
-		List<Player> players = (List<Player>) this.findObjectByAttribute(Player.class, "user.login",userName);
-		Player player =null;
-		
+
+		List<Player> players = (List<Player>) this.findObjectByAttribute(
+				Player.class, "user.login", userName);
+		Player player = null;
+
 		if (players != null & !players.isEmpty())
 			player = players.get(0);
 
@@ -29,24 +26,25 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Player> findAllPlayersByGameName(String gameName) {
-		
 
-//		Game game = null;
-//		List<Game> games = new ArrayList<Game>();
-//		String SQL = "SELECT o FROM " + clazz.getName() + " o  WHERE o.name "
-//				+ " LIKE '%" + gameName + "'";
-//		CriteriaQuery<Object> query = entityManager.getCriteriaBuilder().createQuery();
-//		TypedQuery<Game> q2 = entityManager.createQuery(SQL, clazz);
+		// Game game = null;
+		// List<Game> games = new ArrayList<Game>();
+		// String SQL = "SELECT o FROM " + clazz.getName() + " o  WHERE o.name "
+		// + " LIKE '%" + gameName + "'";
+		// CriteriaQuery<Object> query =
+		// entityManager.getCriteriaBuilder().createQuery();
+		// TypedQuery<Game> q2 = entityManager.createQuery(SQL, clazz);
 
-		
-		List<Player> players = (List<Player>) this.findObjectByAttribute(Player.class, "game.name",gameName);
-
+		List<Player> players = (List<Player>) this.findObjectByAttribute(
+				Player.class, "game.name", gameName);
 
 		return players;
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Player> findAllPlayers() {
 		List<Player> result = (List<Player>) this
 				.findObjectByType(Player.class);
@@ -55,18 +53,21 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 	}
 
 	@Override
-	public List<Player> findAllPlayersByGameName(boolean participatingInGame,String gameName) {
-		List<Player> players =(List<Player>) this.findObjectByAttribute(Player.class, "user.participatingInGame",participatingInGame,"game.name",gameName);
-//		Class clazz = Player.class;
-//		String SQL = "SELECT o FROM " + clazz.getName()
-//				+ " o JOIN FETCH o.materials WHERE o.game.name " + " LIKE '%"
-//				+ gameName + "' AND o.user.participatingInGame.toString() "
-//				+ " LIKE '%" + participatingInGame + "'";
-//		logger.info(SQL);
-//		CriteriaQuery<Object> query = entityManager.getCriteriaBuilder().createQuery();
-//		TypedQuery<Player> q2 = entityManager.createQuery(SQL, clazz);
-
-	
+	@SuppressWarnings("unchecked")
+	public List<Player> findAllPlayersByGameName(boolean participatingInGame,
+			String gameName) {
+		List<Player> players = (List<Player>) this.findObjectByAttribute(
+				Player.class, "user.participatingInGame", participatingInGame,
+				"game.name", gameName);
+		// Class clazz = Player.class;
+		// String SQL = "SELECT o FROM " + clazz.getName()
+		// + " o JOIN FETCH o.materials WHERE o.game.name " + " LIKE '%"
+		// + gameName + "' AND o.user.participatingInGame.toString() "
+		// + " LIKE '%" + participatingInGame + "'";
+		// logger.info(SQL);
+		// CriteriaQuery<Object> query =
+		// entityManager.getCriteriaBuilder().createQuery();
+		// TypedQuery<Player> q2 = entityManager.createQuery(SQL, clazz);
 
 		return players;
 	}

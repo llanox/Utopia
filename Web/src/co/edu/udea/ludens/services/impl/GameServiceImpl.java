@@ -66,17 +66,10 @@ public class GameServiceImpl implements GameService {
 		return (Game) gameDao.saveOrUpdate(game);
 	}
 
-	/**
-	 * @param gameDao
-	 *            the gameDao to set
-	 */
 	public void setGameDao(GameDAO gameDao) {
 		this.gameDao = gameDao;
 	}
 
-	/**
-	 * @return the gameDao
-	 */
 	public GameDAO getGameDao() {
 
 		return (this.gameDao);
@@ -133,17 +126,10 @@ public class GameServiceImpl implements GameService {
 		userService.save(user);
 	}
 
-	/**
-	 * @param userService
-	 *            the userService to set
-	 */
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
 
-	/**
-	 * @return the userService
-	 */
 	public UserService getUserService() {
 
 		return (this.userService);
@@ -158,17 +144,10 @@ public class GameServiceImpl implements GameService {
 		this.playerService = playerService;
 	}
 
-	/**
-	 * @param playerDao
-	 *            the playerDao to set
-	 */
 	public void setPlayerDao(PlayerDAO playerDao) {
 		this.playerDao = playerDao;
 	}
 
-	/**
-	 * @return the playerDao
-	 */
 	public PlayerDAO getPlayerDao() {
 
 		return (this.playerDao);

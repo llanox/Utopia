@@ -8,39 +8,12 @@ import co.edu.udea.ludens.domain.Incrementable;
 import co.edu.udea.ludens.domain.IncrementableConstraint;
 import co.edu.udea.ludens.enums.EnumElementType;
 
-import org.apache.log4j.Logger;
-
 @Repository
 public class IncrementableDAOImpl extends ObjectDBDAO implements
 		IncrementableDAO {
 
-	private Logger logger = Logger.getLogger(getClass());
-
-	// @Override
-	// public Object saveOrUpdate(Object o) {
-	//
-	// logger.info("Saving or updating incrementable");
-	//
-	// Incrementable incr = (Incrementable) o;
-	// logger.info("merging game");
-	// em.merge(incr.getGame());
-	//
-	//
-	// if(incr.getId()!=null){
-	// logger.info("merging incrementable");
-	// em.merge(incr);
-	// }else{
-	//
-	// em.persist(incr);
-	// logger.info("persisting incrementable");
-	// }
-	//
-	// em.flush();
-	//
-	// return o;
-	// }
-
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Incrementable> findAllByType(EnumElementType type) {
 		List<Incrementable> incrementables = (List<Incrementable>) findObjectByAttribute(
 				Incrementable.class, "type", type);
@@ -52,6 +25,7 @@ public class IncrementableDAOImpl extends ObjectDBDAO implements
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public Incrementable findIncrementableByName(String incrementableName) {
 		List<Incrementable> incrementables = (List<Incrementable>) findObjectByAttribute(
 				Incrementable.class, "name", incrementableName);
@@ -63,6 +37,7 @@ public class IncrementableDAOImpl extends ObjectDBDAO implements
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Incrementable> findAllIncrementable() {
 		List<Incrementable> result = (List<Incrementable>) this
 				.findObjectByType(Incrementable.class);
@@ -71,6 +46,7 @@ public class IncrementableDAOImpl extends ObjectDBDAO implements
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Incrementable> findAllIncrementable(String game) {
 		List<Incrementable> incrementables = (List<Incrementable>) findObjectByAttribute(
 				Incrementable.class, "game.name", game);
@@ -79,6 +55,7 @@ public class IncrementableDAOImpl extends ObjectDBDAO implements
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Incrementable> findAllByTypeAndGame(String gameName,
 			EnumElementType type) {
 		List<Incrementable> incrementables = (List<Incrementable>) findObjectByAttribute(
@@ -91,6 +68,7 @@ public class IncrementableDAOImpl extends ObjectDBDAO implements
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<IncrementableConstraint> findAllLevelConstraint(
 			String gameName, String incrementableName) {
 		List<IncrementableConstraint> constraints = (List<IncrementableConstraint>) findObjectByAttribute(
@@ -101,6 +79,7 @@ public class IncrementableDAOImpl extends ObjectDBDAO implements
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<IncrementableConstraint> findAllConstraints() {
 
 		return (List<IncrementableConstraint>) this

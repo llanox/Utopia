@@ -17,6 +17,7 @@ public class FactorProducerWithGrowthRate implements ProducerStrategy {
 	Logger logger = Logger.getLogger(FactorProducerWithGrowthRate.class);
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<ElementBean> produce(Object supplies, ElementProcess process) {
 		HashMap<String, Element> elements = (HashMap<String, Element>) supplies;
 		List<ElementBean> elementBeans = new ArrayList<ElementBean>();

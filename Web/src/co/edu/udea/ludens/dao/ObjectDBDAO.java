@@ -44,18 +44,18 @@ public class ObjectDBDAO implements DBDAO {
 
 	@Override
 	public void delete(Object o) {
-		Object found = entityManager.find(o.getClass(), ((Updateable) o).getId());
+		Object found = entityManager.find(o.getClass(),
+				((Updateable) o).getId());
 
 		entityManager.remove(found);
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public Object findObjectByAttribute(Class clazz, Object... parameters) {
 		StringBuilder sb = new StringBuilder();
 		int paramsLength = parameters.length;
 
-		// Garantiza que funcione con 2 > parametros y para cualquier tipo de
-		// dato.
 		if (paramsLength % 2 != 0) {
 
 			throw new DatabaseError("Número incorrecto de parámetros: "
@@ -68,56 +68,49 @@ public class ObjectDBDAO implements DBDAO {
 			} else {
 				sb.append(" WHERE ");
 			}
-			if(parameters[i+1] instanceof Boolean )
-				sb.append("o." + parameters[i] + " = :"+ removeDot(parameters[i]));
+			if (parameters[i + 1] instanceof Boolean)
+				sb.append("o." + parameters[i] + " = :"
+						+ removeDot(parameters[i]));
 			else
-				sb.append("o." + parameters[i] + " LIKE :"+ removeDot(parameters[i]));
+				sb.append("o." + parameters[i] + " LIKE :"
+						+ removeDot(parameters[i]));
 		}
 		logger.info("Clausules: " + sb.toString());
-
-		// CriteriaQuery<Object> query1 =
-		// CriteriaQuery<Object> q = em.getCriteriaBuilder().createQuery();
 		logger.info("SQL : " + "FROM " + clazz.getSimpleName() + " AS o"
 				+ sb.toString());
-		// TypedQuery<Class> q2 = em.createQuery(
-		// "SELECT o FROM " + clazz.getName() + " o " + sb.toString(),
-		// clazz);
 
-		Query query = this.entityManager.createQuery("FROM " + clazz.getSimpleName()
-				+ " AS o" + sb.toString());
+		Query query = this.entityManager.createQuery("FROM "
+				+ clazz.getSimpleName() + " AS o" + sb.toString());
 		for (int i = 0; i < paramsLength; i = i + 2) {
-			query.setParameter( removeDot(parameters[i]), parameters[1 + i]);
+			query.setParameter(removeDot(parameters[i]), parameters[1 + i]);
 			logger.info(parameters[i].toString() + " -> " + parameters[1 + i]);
 		}
 
 		return (query.getResultList());
-		// return (q2.getResultList());
 	}
 
 	private String removeDot(Object object) {
 		String parameter = (String) object;
 		StringBuilder sb = new StringBuilder(parameter);
 		int index = sb.indexOf(".");
-		
-		while(index > -1 ){
-			
+
+		while (index > -1) {
+
 			sb.deleteCharAt(index);
-			index = sb.indexOf(".");	
+			index = sb.indexOf(".");
 		}
-		
+
 		return sb.toString();
 	}
 
 	@Override
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object findObjectByAttributeAndFetch(Class clazz,
 			Object... parameters) {
 		String JOIN_SQL = "INNER JOIN";
 		StringBuilder sb = new StringBuilder();
-		// Elimina el atributo al cual se le quiere hacer el fetch
 		int paramsLength = parameters.length - 1;
 
-		// Garantiza que funcione con 2 > parametros y para cualquier tipo de
-		// dato.
 		if (paramsLength % 2 != 0) {
 			throw new DatabaseError("Número incorrecto de parámetros: "
 					+ paramsLength);
@@ -133,7 +126,8 @@ public class ObjectDBDAO implements DBDAO {
 					+ parameters[i + 1] + "' ");
 		}
 
-		CriteriaQuery<Object> query = entityManager.getCriteriaBuilder().createQuery();
+		CriteriaQuery<Object> query = entityManager.getCriteriaBuilder()
+				.createQuery();
 		String sqlStatement = "SELECT o FROM " + clazz.getName() + " o "
 				+ JOIN_SQL + " o." + parameters[paramsLength] + " p "
 				+ sb.toString();
@@ -144,13 +138,15 @@ public class ObjectDBDAO implements DBDAO {
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public Object findObjectByType(Class clazz) {
 		// logger.info("Query : " + "SELECT o FROM " + clazz.getSimpleName()
 		// + " o");
 		// TypedQuery<Class> q2 = em.createQuery(
 		// "SELECT c FROM " + clazz.getSimpleName() + " c", clazz);
 		logger.info("Query : " + "FROM " + clazz.getSimpleName());
-		Query query = this.entityManager.createQuery("FROM " + clazz.getSimpleName());
+		Query query = this.entityManager.createQuery("FROM "
+				+ clazz.getSimpleName());
 
 		return (query.getResultList());
 	}
