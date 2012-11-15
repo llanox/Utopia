@@ -19,7 +19,7 @@ public class LabelRenderer extends DefaultTableCellRenderer {
     /**
      * @see java.io.Serializable
      */
-    private static final long serialVersionUID = 2l;
+    private static final long serialVersionUID = 1739544765l;
 
     /*
      * (non-Javadoc)
@@ -28,6 +28,7 @@ public class LabelRenderer extends DefaultTableCellRenderer {
      * javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent
      * (javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
      */
+    @Override
     public Component getTableCellRendererComponent(JTable table,
             Object value,
             boolean isSelected,

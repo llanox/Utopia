@@ -34,7 +34,8 @@ public class ItemResource extends JPanel {
      * @return the resourceImage
      */
     public JLabel getResourceImage() {
-        return resourceImage;
+        
+        return (this.resourceImage);
     }
 
     /**
@@ -48,7 +49,8 @@ public class ItemResource extends JPanel {
      * @return the resourceName
      */
     public JLabel getResourceName() {
-        return resourceName;
+        
+        return (this.resourceName);
     }
 
     /**
@@ -62,7 +64,8 @@ public class ItemResource extends JPanel {
      * @return the resourceQuantity
      */
     public JLabel getResourceQuantity() {
-        return resourceQuantity;
+        
+        return (this.resourceQuantity);
     }
 
     /**

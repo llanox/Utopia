@@ -32,7 +32,6 @@ class LevelConstraintsContainer {
     public static final String MSG_UP_LEVEL_TIME = "Debe esperar %s segundos.";
 
     public PanelElement createUpLevelContainer(String selectedElement) {
-
         PanelElement panel = panelUpLevelElement.get(selectedElement);
         System.out.println("Selected element " + selectedElement);
 
@@ -50,13 +49,8 @@ class LevelConstraintsContainer {
             JPanel required = panel.getPnlRequired();
             required.setLayout(new MigLayout("wrap 1"));
 
-
-
-
             panelUpLevelElement.put(selectedElement, panel);
         }
-
-
 
         updateLevelConstraints(selectedElement);
 
@@ -92,11 +86,9 @@ class LevelConstraintsContainer {
         Image image = MapDashboard.imagesMap.get(MapDashboard.FILE_PREFIX + level);
         panel.getLbAskuplevel().setIcon(new ImageIcon(image));
 
-
         List<LevelConstraint> constraints = element.getLevelConstraints().get(level + "");
 
         Collections.sort(constraints, new KeyComparator());
-
 
         if (constraints != null) {
             for (LevelConstraint ctr : constraints) {
@@ -106,25 +98,19 @@ class LevelConstraintsContainer {
         }
 
         Map<String, Element> mapa = sortMapByKey(mapMaterials);
-
         for (Object key : mapa.keySet()) {
             Element el = mapa.get(key);
             updatePnlResources(el.getIncrementable().getName(), el.getQuantity(), actual, actualResources);
         }
 
         if (constraints == null || constraints.isEmpty()) {
-
             required.add(new JLabel(NO_AVAIBLE_DATA));
+            
             return;
         }
-
-
-
-
     }
 
     private void updatePnlResources(String elementName, int quantity, JPanel panel, HashMap<String, ItemResource> itemResources) {
-
         ItemResource pnlRsrc = itemResources.get(elementName);
 
         if (pnlRsrc == null) {
@@ -135,60 +121,50 @@ class LevelConstraintsContainer {
             pnlRsrc.getResourceName().setText(elementName);
 
             itemResources.put(elementName, pnlRsrc);
-
-
-
         }
+        
         pnlRsrc.getResourceQuantity().setText(quantity + "");
         pnlRsrc.getResourceQuantity().setForeground(Color.black);
+        
         if (panel != null) {
             panel.add(pnlRsrc);
         }
 
         validateRequeriments();
-
     }
 
     public void updateElements(List<Object> elements, EnumDataType dataType) {
-
         if (elements == null) {
+            
             return;
         }
 
         for (Object o : elements) {
             Element el = (Element) o;
             mapElements.put(el.getIncrementable().getName(), el);
-
         }
 
         if (EnumDataType.MATERIAL == dataType) {
-
             for (Object o : elements) {
                 Element el = (Element) o;
                 mapMaterials.put(el.getIncrementable().getName(), el);
                 updatePnlResources(el.getIncrementable().getName(), el.getQuantity(), null, actualResources);
             }
-
-
         }
-
     }
 
     private void validateRequeriments() {
-
         for (Object key : actualResources.keySet()) {
-
             ItemResource actual = actualResources.get(key);
             ItemResource required = requiredResources.get(key);
 
-
             if (actual == null || required == null) {
+                
                 return;
             }
 
             String actValue = actual.getResourceQuantity().getText();
             String reqValue = required.getResourceQuantity().getText();
-
             if (actValue == null || actValue.isEmpty() || reqValue == null || reqValue.isEmpty()) {
                 return;
             }
@@ -198,12 +174,8 @@ class LevelConstraintsContainer {
 
             if (actualValue < requiredValue) {
                 actual.getResourceQuantity().setForeground(Color.red);
-
             }
-
-
         }
-
     }
 
     private Map<String, Element> sortMapByKey(HashMap<String, Element> aItems) {
@@ -214,12 +186,10 @@ class LevelConstraintsContainer {
     }
 
     public class KeyComparator implements Comparator<LevelConstraint> {
-
         @Override
         public int compare(LevelConstraint o1, LevelConstraint o2) {
 
             return o1.getElementName().compareToIgnoreCase(o2.getElementName());
-
         }
     }
 }

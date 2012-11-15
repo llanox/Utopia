@@ -28,6 +28,7 @@ public class IndicatorContainer {
 
     public void updateOrCreateFactorIndicator(List<Object> data, JComponent panel) {
         if (data == null) {
+            
             return;
         }
 
@@ -45,6 +46,7 @@ public class IndicatorContainer {
     private void updateLevelNotification(Element el) {
         Image notification = MapDashboard.imagesMap.get(MapDashboard.FILE_PREFIX + el.getLevel());
         Sprite spNotification = MapDashboard.spritesMap.get(el.getIncrementable().getName());
+        
         if (notification == null) {
             notification = MapDashboard.imagesMap.get(MapDashboard.FILE_PREFIX);
         }
@@ -54,7 +56,6 @@ public class IndicatorContainer {
     }
 
     public void updateOrCreateMaterialIndicator(List<Object> data, JComponent panel) {
-
         if (data == null) {
             return;
         }
@@ -68,20 +69,18 @@ public class IndicatorContainer {
 
         ElementTableModel model = new ElementTableModel(columnNames, data);
         table.setModel(model);
-
     }
 
     public void updateOrCreatePopulationIndicator(Population el, JPanel panel) {
-
         if (el == null) {
+            
             return;
         }
 
         StringBuilder bf;
-        JLabel indicator = null;
+        JLabel indicator;
 
         indicator = (JLabel) indicatorMap.get(el.getIncrementable().getName());
-
         if (indicator == null) {
             indicator = new JLabel();
             Image image = MapDashboard.imagesMap.get(el.getIncrementable().getName());
@@ -100,13 +99,11 @@ public class IndicatorContainer {
         bf.append(el.getQuantity());
         bf.append(" ");
         indicator.setText(bf.toString());
-
-
-
     }
 
     void updateOrCreateMessageEvents(List<Object> data, JPanel indicatorsMarquee) {
         if (data == null) {
+            
             return;
         }
 
@@ -114,6 +111,5 @@ public class IndicatorContainer {
             MessageEvent event = (MessageEvent) o;
             System.out.println(" " + event.getMsg());
         }
-
     }
 }
