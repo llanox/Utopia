@@ -6,217 +6,194 @@ import java.util.Date;
 
 import co.edu.udea.ludens.enums.EnumUserRole;
 
-public class User  implements Updateable {
-	
-
-
+public class User implements Updateable {
 
     private Long id;
-	private String name;	
-	private String login;	
-	private String email;	
-	private String gender;	
-	private Date birthDate;	
-	private EnumUserRole role;	
-	private String password;
-	private Boolean online=false;
-    private Boolean participatingInGame=false;
+    private String name;
+    private String login;
+    private String email;
+    private String gender;
+    private Date birthDate;
+    private EnumUserRole role;
+    private String password;
+    private Boolean online = false;
+    private Boolean participatingInGame = false;
 
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	
+    @Override
+    public Long getId() {
+        return id;
+    }
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
+    /**
+     * @generated
+     */
+    public void setName(String name) {
 
-	@Override
-	public Long getId() {
-		return id;
-	}
+        this.name = name;
+    }
 
-	/**
-	 * @generated
-	 */
-	public void setName(String name) {
-	
-		this.name = name;
-	}
+    /**
+     * @generated
+     */
+    public String getName() {
 
-	/**
-	 * @generated
-	 */
-	public String getName() {
+        return this.name;
+    }
 
-		return this.name;
-	}
+    /**
+     * @generated
+     */
+    public void setLogin(String login) {
 
-	/**
-	 * @generated
-	 */
-	public void setLogin(String login) {
-	
-		this.login = login;
-	}
+        this.login = login;
+    }
 
-	/**
-	 * @generated
-	 */
-	public String getLogin() {
+    /**
+     * @generated
+     */
+    public String getLogin() {
 
-		return this.login;
-	}
+        return this.login;
+    }
 
-	/**
-	 * @generated
-	 */
-	public void setEmail(String email) {
+    /**
+     * @generated
+     */
+    public void setEmail(String email) {
 
-		this.email = email;
-	}
+        this.email = email;
+    }
 
-	/**
-	 * @generated
-	 */
-	public String getEmail() {
+    /**
+     * @generated
+     */
+    public String getEmail() {
 
-		return this.email;
-	}
+        return this.email;
+    }
 
-	/**
-	 * @generated
-	 */
-	public void setGender(String gender) {
+    /**
+     * @generated
+     */
+    public void setGender(String gender) {
 
-		this.gender = gender;
-	}
+        this.gender = gender;
+    }
 
-	/**
-	 * @generated
-	 */
-	public String getGender() {
-	
-		return this.gender;
-	}
+    /**
+     * @generated
+     */
+    public String getGender() {
 
+        return this.gender;
+    }
 
+    /**
+     * @generated
+     */
+    public void setPassword(String password) {
 
+        this.password = password;
+    }
 
-	/**
-	 * @generated
-	 */
-	public void setPassword(String password) {
+    /**
+     * @generated
+     */
+    public String getPassword() {
 
-		this.password = password;
-	}
+        return this.password;
+    }
 
-	/**
-	 * @generated
-	 */
-	public String getPassword() {
+    /**
+     * @generated
+     */
+    public User() {
+    }
 
-		return this.password;
-	}
+    /**
+     * @param online the online to set
+     */
+    public void setOnline(Boolean online) {
 
-	/**
-	 * @generated
-	 */
-	public User() {
-	}
+        this.online = online;
+    }
 
+    /**
+     * @return the online
+     */
+    public Boolean isOnline() {
 
-	/**
-	 * @param online the online to set
-	 */
-	public void setOnline(Boolean online){
+        return online;
+    }
 
-		this.online = online;
-	}
+    /**
+     * @param birthDate the birthDate to set
+     */
+    public void setBirthDate(Date birthDate) {
 
-	/**
-	 * @return the online
-	 */
-	public Boolean isOnline() {
-	
-		return online;
-	}
+        this.birthDate = birthDate;
+    }
 
-	/**
-	 * @param birthDate the birthDate to set
-	 */
-	public void setBirthDate(Date birthDate) {
+    /**
+     * @return the birthDate
+     */
+    public Date getBirthDate() {
 
-		this.birthDate = birthDate;
-	}
+        return birthDate;
+    }
 
-	/**
-	 * @return the birthDate
-	 */
-	public Date getBirthDate() {
+    /**
+     * @param role the role to set
+     */
+    public void setRole(EnumUserRole role) {
 
-		return birthDate;
-	}
+        this.role = role;
+    }
 
-	/**
-	 * @param role the role to set
-	 */
-	public void setRole(EnumUserRole role) {
+    /**
+     * @return the role
+     */
+    public EnumUserRole getRole() {
 
-		this.role = role;
-	}
+        return role;
+    }
 
-	/**
-	 * @return the role
-	 */
-	public EnumUserRole getRole() {
+    /**
+     * @param participatingInGame the participatingInGame to set
+     */
+    public void setParticipatingInGame(Boolean participatingInGame) {
 
-		return role;
-	}
+        this.participatingInGame = participatingInGame;
+    }
 
-	
+    /**
+     * @return the participatingInGame
+     */
+    public Boolean isParticipatingInGame() {
 
+        return participatingInGame;
+    }
 
-	
-	
-
-
-	/**
-	 * @param participatingInGame the participatingInGame to set
-	 */
-	public void setParticipatingInGame(Boolean participatingInGame) {
-		
-		this.participatingInGame = participatingInGame;
-	}
-
-	/**
-	 * @return the participatingInGame
-	 */
-	public Boolean isParticipatingInGame() {
-	
-		return participatingInGame;
-	}
-
-	@Override
-	public void updateWith(Object o) {
+    @Override
+    public void updateWith(Object o) {
         User newUser = (User) o;
-		this.name = newUser.name;
-		this.login = newUser.login;
-		this.email = newUser.email;
-		this.gender = newUser.gender;
-		this.birthDate = newUser.birthDate;
-		this.role = newUser.role;
-		this.password = newUser.password;
-		this.online = newUser.online;
-		this.participatingInGame = newUser.participatingInGame;
-
-		
-	}
+        this.name = newUser.name;
+        this.login = newUser.login;
+        this.email = newUser.email;
+        this.gender = newUser.gender;
+        this.birthDate = newUser.birthDate;
+        this.role = newUser.role;
+        this.password = newUser.password;
+        this.online = newUser.online;
+        this.participatingInGame = newUser.participatingInGame;
 
 
-
-
-	
-
+    }
 }

@@ -2,139 +2,117 @@ package co.edu.udea.ludens.domain;
 
 import java.util.HashMap;
 
+public class Community implements Updateable {
 
-
-
-
-
-public class Community  implements Updateable{
-
-   
     private Long id;
     private String name;
-	private Integer length;
-	private Integer width;
-	private Integer corX;
-	private Integer corY;
+    private Integer length;
+    private Integer width;
+    private Integer corX;
+    private Integer corY;
+    private HashMap<String, Element> developmentFactors = new HashMap<String, Element>();
+    private HashMap<String, Element> materials = new HashMap<String, Element>();
+    private Population population;
 
+    @Override
+    public Long getId() {
+        return id;
+    }
 
-	private HashMap<String,Element> developmentFactors = new HashMap<String,Element>();
-	
-	private HashMap<String,Element> materials = new HashMap<String,Element>();
-	
-	private Population population;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	@Override
-	public Long getId() {
-		return id;
-	}
+    public void setName(String name) {
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+        this.name = name;
+    }
 
-	public void setName(String name) {
+    public String getName() {
 
-		this.name = name;
-	}
+        return this.name;
+    }
 
-	public String getName() {
-	
-		return this.name;
-	}
+    public void setLength(Integer length) {
 
-	public void setLength(Integer length) {
+        this.length = length;
+    }
 
-		this.length = length;
-	}
+    public Integer getLength() {
 
-	public Integer getLength() {
-	
-		return this.length;
-	}
+        return this.length;
+    }
 
-	public void setWidth(Integer width) {
+    public void setWidth(Integer width) {
 
-		this.width = width;
-	}
+        this.width = width;
+    }
 
-	public Integer getWidth() {
+    public Integer getWidth() {
 
-		return this.width;
-	}
+        return this.width;
+    }
 
-	public void setCorX(Integer corX) {
-	
-		this.corX = corX;
-	}
+    public void setCorX(Integer corX) {
 
-	public Integer getCorX() {
+        this.corX = corX;
+    }
 
-		return this.corX;
-	}
+    public Integer getCorX() {
 
-	
-	public void setCorY(Integer corY) {
+        return this.corX;
+    }
 
-		this.corY = corY;
-	}
+    public void setCorY(Integer corY) {
 
-	public Integer getCorY() {
+        this.corY = corY;
+    }
 
-		return this.corY;
-	}
+    public Integer getCorY() {
 
+        return this.corY;
+    }
 
+    public void setDevelopmentFactors(HashMap<String, Element> developmentFactors) {
+        this.developmentFactors = developmentFactors;
+    }
 
-	public void setDevelopmentFactors(HashMap<String,Element> developmentFactors) {
-		this.developmentFactors = developmentFactors;
-	}
+    public HashMap<String, Element> getDevelopmentFactors() {
+        return developmentFactors;
+    }
 
-	public HashMap<String,Element> getDevelopmentFactors() {
-		return developmentFactors;
-	}
+    public void setMaterials(HashMap<String, Element> materials) {
 
-	public void setMaterials(HashMap<String,Element> materials) {
-	
-		this.materials = new HashMap<String,Element>(materials);
-	}
+        this.materials = new HashMap<String, Element>(materials);
+    }
 
-	
-	public HashMap<String,Element> getMaterials() {
-		return materials;
-	}
+    public HashMap<String, Element> getMaterials() {
+        return materials;
+    }
 
+    public void setPopulation(Population population) {
+        this.population = population;
+    }
 
-	public void setPopulation(Population population) {
-		this.population = population;
-	}
+    public Population getPopulation() {
+        return population;
+    }
 
-	
-	public Population getPopulation() {
-		return population;
-	}
+    public Community() {
+    }
 
-	
-	public Community() {
-	}
+    @Override
+    public void updateWith(Object o) {
+        Community newCom = (Community) o;
 
-	@Override
-	public void updateWith(Object o) {
-		Community newCom = (Community) o;
-		
-		this.name = newCom.name;
-		this.length = newCom.length;
-		this.width = newCom.width;
-		this.corX = newCom.corX;
-		this.corY = newCom.corY;
-		this.developmentFactors = newCom.developmentFactors;
-		this.materials = newCom.materials;
-		this.population = newCom.population;
+        this.name = newCom.name;
+        this.length = newCom.length;
+        this.width = newCom.width;
+        this.corX = newCom.corX;
+        this.corY = newCom.corY;
+        this.developmentFactors = newCom.developmentFactors;
+        this.materials = newCom.materials;
+        this.population = newCom.population;
 
-	}
-
-
-
-
-
+    }
 }

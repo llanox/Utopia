@@ -59,21 +59,21 @@ public class ElementTableModel extends AbstractTableModel {
         Element element = (Element) elements.get(row);
 
         if (col == 0) {
-            
-            
+
+
             return element.getIncrementable().getName();
 
         } else if (col == 1) {
 
-            return element.getQuantity()+"";
+            return element.getQuantity() + "";
 
         } else if (col == 2) {
 
-            return element.getCalculatedValue()+"";
+            return element.getCalculatedValue() + "";
 
         } else if (col == 3) {
 
-            return element.getLevel()+"";
+            return element.getLevel() + "";
 
         }
 
@@ -84,7 +84,7 @@ public class ElementTableModel extends AbstractTableModel {
     @Override
     public Class<?> getColumnClass(int column) {
         if (0 < this.getRowCount()) {
-           return getValueAt(0, column).getClass();
+            return getValueAt(0, column).getClass();
         } else {
             return null;
         }

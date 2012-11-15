@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package co.edu.udea.ludens.applet.gui;
 
 /**
@@ -12,6 +11,6 @@ package co.edu.udea.ludens.applet.gui;
 public interface Updatable {
 
     public void updatingProcess();
-    public boolean isStopped();
 
+    public boolean isStopped();
 }

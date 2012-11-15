@@ -13,7 +13,6 @@ import co.edu.udea.ludens.enums.EnumDataType;
 public class XMLParserFactory {
 
     public static XMLParser getInstance(EnumDataType dataType) {
-
         if (EnumDataType.FACTOR == dataType) {
             return new XStreamParser();
 
@@ -23,14 +22,10 @@ public class XMLParserFactory {
         } else if (EnumDataType.POPULATION == dataType) {
             return new XStreamParser();
 
-        }else if (EnumDataType.NOTIFICATIONS == dataType) {
+        } else if (EnumDataType.NOTIFICATIONS == dataType) {
             return new XStreamParser();
         }
 
-
-
-
         return null;
-
     }
 }

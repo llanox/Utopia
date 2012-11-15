@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package co.edu.udea.ludens.applet.gui;
 
 import javax.swing.JLabel;
@@ -15,9 +14,8 @@ import net.miginfocom.swing.MigLayout;
  */
 public class ItemResource extends JPanel {
 
-
     private JLabel resourceImage;
-    private JLabel resourceName ;
+    private JLabel resourceName;
     private JLabel resourceQuantity;
 
     public ItemResource() {
@@ -25,8 +23,8 @@ public class ItemResource extends JPanel {
 
         resourceImage = new JLabel();
         resourceName = new JLabel();
-        resourceQuantity= new JLabel();
-        
+        resourceQuantity = new JLabel();
+
         add(resourceImage);
         add(resourceName);
         add(resourceQuantity);
@@ -73,11 +71,4 @@ public class ItemResource extends JPanel {
     public void setResourceQuantity(JLabel resourceQuantity) {
         this.resourceQuantity = resourceQuantity;
     }
-
- 
-
-
-
-
-
 }

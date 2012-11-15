@@ -1,26 +1,25 @@
 package co.edu.udea.ludens.enums;
 
 public enum EnumGameStatus {
-	PLAYING("Activo"),FINISHED("Finalizado"), NO_STARTED("No inicializado");
-	
-	private String status;
 
-	private EnumGameStatus(String status) {
-		this.setStatus(status);
-	}
+    PLAYING("Activo"), FINISHED("Finalizado"), NO_STARTED("No inicializado");
+    private String status;
 
-	/**
-	 * @param status the status to set
-	 */
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    private EnumGameStatus(String status) {
+        this.setStatus(status);
+    }
 
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
-	}
-	
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
 }

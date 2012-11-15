@@ -1,12 +1,9 @@
 package co.edu.udea.ludens.applet.gui;
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * To change this template, choose Tools | Templates and open the template in
+ * the editor.
  */
-
-
-
 import com.genuts.gameui.Sprite;
 import java.awt.Image;
 
@@ -14,11 +11,11 @@ import java.awt.Image;
  *
  * @author juanga
  */
-public class SpriteUtopia extends Sprite{
-private String name;
+public class SpriteUtopia extends Sprite {
 
+    private String name;
 
-   public  SpriteUtopia(Image image) {
+    public SpriteUtopia(Image image) {
         super(image);
     }
 
@@ -35,8 +32,4 @@ private String name;
     public void setName(String name) {
         this.name = name;
     }
-
-
-
-
 }

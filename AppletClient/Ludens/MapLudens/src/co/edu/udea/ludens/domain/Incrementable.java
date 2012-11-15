@@ -7,101 +7,82 @@ import java.util.List;
 
 import co.edu.udea.ludens.enums.EnumElementType;
 
-
-
-
-
 public class Incrementable implements Updateable {
 
-  
     private Long id;
+    private String name;
+    private String description;
+    private String imageUrl;
+    private EnumElementType type;
+    private int levelIncrementDelayRate;
+    private int productionIncrementRate;
+    private int initialUpgradingTime;
+    private int actualUpgradingTime;
+    private String game;
+    private List<GraphicIncrementable> levelImages = new ArrayList<GraphicIncrementable>();
 
-	private String name;
-	private String description;	
-	private String imageUrl;
-	private EnumElementType type;
-	private int levelIncrementDelayRate;
-	private int productionIncrementRate;	
-	private int initialUpgradingTime;
-	private int actualUpgradingTime;
-	private String game;
-	
-	private List<GraphicIncrementable> levelImages = new ArrayList<GraphicIncrementable>();
-	
-	
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    @Override
+    public Long getId() {
+        return id;
+    }
 
+    public void setName(String name) {
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+        this.name = name;
+    }
 
-	@Override
-	public Long getId() {
-		return id;
-	}
+    public String getName() {
 
-	public void setName(String name) {
+        return this.name;
+    }
 
-		this.name = name;
-	}
+    public void setDescription(String description) {
 
-	public String getName() {
-	
-		return this.name;
-	}
+        this.description = description;
+    }
 
-	public void setDescription(String description) {
-		
-		this.description = description;
-	}
+    public String getDescription() {
 
-	public String getDescription() {
+        return this.description;
+    }
 
-		return this.description;
-	}
+    public void setImageUrl(String imageUrl) {
 
-	public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
-		this.imageUrl = imageUrl;
-	}
+    public String getImageUrl() {
 
-	public String getImageUrl() {
+        return this.imageUrl;
+    }
 
-		return this.imageUrl;
-	}
+    public Incrementable() {
 
-	public Incrementable() {
-		
-		this.imageUrl ="sensation_data/food.png";
-	}
+        this.imageUrl = "sensation_data/food.png";
+    }
 
+    /**
+     * @param type the type to set
+     */
+    public void setType(EnumElementType type) {
 
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(EnumElementType type) {
-	
-		this.type = type;
-	}
+        this.type = type;
+    }
 
+    /**
+     * @return the type
+     */
+    public EnumElementType getType() {
 
-	/**
-	 * @return the type
-	 */
-	public EnumElementType getType() {
-
-		return type;
-	}
-
-
-	
-
-
-
+        return type;
+    }
 
 //
 //	/**
@@ -118,97 +99,87 @@ public class Incrementable implements Updateable {
 //	public HashMap<String,GraphicIncrementable> getLevelImage() {
 //		return levelImage;
 //	}
+    public int getLevelIncrementDelayRate() {
+        return levelIncrementDelayRate;
+    }
 
-	public int getLevelIncrementDelayRate() {
-		return levelIncrementDelayRate;
-	}
+    public int getProductionIncrementRate() {
+        return productionIncrementRate;
+    }
 
-	public int getProductionIncrementRate() {
-		return productionIncrementRate;
-	}
+    public int getInitialUpgradingTime() {
+        return initialUpgradingTime;
+    }
 
-	public int getInitialUpgradingTime() {
-		return initialUpgradingTime;
-	}
+    public int getActualUpgradingTime() {
+        return actualUpgradingTime;
+    }
 
-	public int getActualUpgradingTime() {
-		return actualUpgradingTime;
-	}
+    public void setLevelIncrementDelayRate(int levelIncrementDelayRate) {
 
-	public void setLevelIncrementDelayRate(int levelIncrementDelayRate) {
+        this.levelIncrementDelayRate = levelIncrementDelayRate;
+    }
 
-		this.levelIncrementDelayRate = levelIncrementDelayRate;
-	}
+    public void setProductionIncrementRate(int productionIncrementRate) {
 
-	public void setProductionIncrementRate(int productionIncrementRate) {
-	
-		this.productionIncrementRate = productionIncrementRate;
-	}
+        this.productionIncrementRate = productionIncrementRate;
+    }
 
-	public void setInitialUpgradingTime(int initialUpgradingTime) {
-	
-		this.initialUpgradingTime = initialUpgradingTime;
-	}
+    public void setInitialUpgradingTime(int initialUpgradingTime) {
 
-	public void setActualUpgradingTime(int actualUpgradingTime) {
-	
-		this.actualUpgradingTime = actualUpgradingTime;
-	}
+        this.initialUpgradingTime = initialUpgradingTime;
+    }
 
-	/**
-	 * @param game the game to set
-	 */
-	public void setGame(String game) {
+    public void setActualUpgradingTime(int actualUpgradingTime) {
 
-		this.game = game;
-	}
+        this.actualUpgradingTime = actualUpgradingTime;
+    }
 
-	/**
-	 * @return the game
-	 */
-	public String getGame() {
-		return game;
-	}
+    /**
+     * @param game the game to set
+     */
+    public void setGame(String game) {
 
-	/**
-	 * @param levelImages the levelImages to set
-	 */
-	public void setLevelImages(List<GraphicIncrementable> levelImages) {
-		this.levelImages = levelImages;
-	}
+        this.game = game;
+    }
 
-	/**
-	 * @return the levelImages
-	 */
-	public List<GraphicIncrementable> getLevelImages() {
-		return levelImages;
-	}
+    /**
+     * @return the game
+     */
+    public String getGame() {
+        return game;
+    }
 
-	@Override
-	public void updateWith(Object o) {
-	
-		Incrementable inc = (Incrementable) o;
-		
-		this.name = inc.name;
-		this.description =inc.description;
-		this.imageUrl = inc.imageUrl;
-		this.type = inc.type;
-		this.levelIncrementDelayRate = inc.levelIncrementDelayRate;
-		this.productionIncrementRate = inc.productionIncrementRate;
-		this.initialUpgradingTime = inc.initialUpgradingTime;
-		this.actualUpgradingTime = inc.actualUpgradingTime;
-		this.game = inc.game;
-		this.levelImages = inc.levelImages;
-	
-		
-	}
+    /**
+     * @param levelImages the levelImages to set
+     */
+    public void setLevelImages(List<GraphicIncrementable> levelImages) {
+        this.levelImages = levelImages;
+    }
+
+    /**
+     * @return the levelImages
+     */
+    public List<GraphicIncrementable> getLevelImages() {
+        return levelImages;
+    }
+
+    @Override
+    public void updateWith(Object o) {
+
+        Incrementable inc = (Incrementable) o;
+
+        this.name = inc.name;
+        this.description = inc.description;
+        this.imageUrl = inc.imageUrl;
+        this.type = inc.type;
+        this.levelIncrementDelayRate = inc.levelIncrementDelayRate;
+        this.productionIncrementRate = inc.productionIncrementRate;
+        this.initialUpgradingTime = inc.initialUpgradingTime;
+        this.actualUpgradingTime = inc.actualUpgradingTime;
+        this.game = inc.game;
+        this.levelImages = inc.levelImages;
 
 
-
-
-	
-
-
-
-
+    }
 }

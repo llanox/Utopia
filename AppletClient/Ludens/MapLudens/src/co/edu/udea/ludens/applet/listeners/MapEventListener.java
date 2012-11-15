@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package co.edu.udea.ludens.applet.listeners;
 
 /**
@@ -12,5 +11,4 @@ package co.edu.udea.ludens.applet.listeners;
 public interface MapEventListener {
 
     public void eventHappening();
-
 }

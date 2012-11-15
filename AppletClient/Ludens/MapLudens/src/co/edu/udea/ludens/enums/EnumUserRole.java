@@ -2,30 +2,25 @@ package co.edu.udea.ludens.enums;
 
 public enum EnumUserRole {
 
-	ADMIN("Administrador"), 
-	PLAYER("Jugador");
-	
-	private String roleName;
-	
-	EnumUserRole(String roleName){
-		this.setRoleName(roleName);		
-	}
+    ADMIN("Administrador"),
+    PLAYER("Jugador");
+    private String roleName;
 
-	/**
-	 * @param roleName the roleName to set
-	 */
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
+    EnumUserRole(String roleName) {
+        this.setRoleName(roleName);
+    }
 
-	/**
-	 * @return the roleName
-	 */
-	public String getRoleName() {
-		return roleName;
-	}
+    /**
+     * @param roleName the roleName to set
+     */
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
-
-	
-	
+    /**
+     * @return the roleName
+     */
+    public String getRoleName() {
+        return roleName;
+    }
 }

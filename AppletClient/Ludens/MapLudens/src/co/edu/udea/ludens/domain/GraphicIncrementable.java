@@ -1,107 +1,86 @@
 package co.edu.udea.ludens.domain;
 
-
-
-
-
-public class GraphicIncrementable implements Updateable  {
-
+public class GraphicIncrementable implements Updateable {
 
     private Long id;
-    
-	private int level;
-	private int coorX;
-	private int coorY;
-	private String urlImage;
+    private int level;
+    private int coorX;
+    private int coorY;
+    private String urlImage;
 
-	
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Override
+    public Long getId() {
+        return id;
+    }
 
+    public GraphicIncrementable() {
+        super();
+        this.urlImage = "";
+    }
 
-	@Override
-	public Long getId() {
-		return id;
-	}
+    public GraphicIncrementable(int level, int coorX, int coorY, String urlImage) {
+        super();
+        this.level = level;
+        this.coorX = coorX;
+        this.coorY = coorY;
+        this.urlImage = urlImage;
+    }
 
+    public int getLevel() {
 
-	public GraphicIncrementable() {
-		super();
-		this.urlImage = "";
-	}
-	
-	
-	public GraphicIncrementable(int level, int coorX, int coorY, String urlImage) {
-		super();
-		this.level = level;
-		this.coorX = coorX;
-		this.coorY = coorY;
-		this.urlImage = urlImage;
-	}
+        return level;
+    }
 
-	
+    public int getCoorX() {
 
+        return coorX;
+    }
 
-	public int getLevel() {
+    public int getCoorY() {
 
-		return level;
-	}
+        return coorY;
+    }
 
-	public int getCoorX() {
+    public String getUrlImage() {
 
-		return coorX;
-	}
+        return urlImage;
+    }
 
-	public int getCoorY() {
+    public void setLevel(int level) {
 
-		return coorY;
-	}
+        this.level = level;
+    }
 
-	public String getUrlImage() {
+    public void setCoorX(int coorX) {
 
-		return urlImage;
-	}
+        this.coorX = coorX;
+    }
 
-	public void setLevel(int level) {
+    public void setCoorY(int coorY) {
 
-		this.level = level;
-	}
+        this.coorY = coorY;
+    }
 
-	public void setCoorX(int coorX) {
+    public void setUrlImage(String urlImage) {
 
-		this.coorX = coorX;
-	}
+        this.urlImage = urlImage;
+    }
 
-	public void setCoorY(int coorY) {
-
-		this.coorY = coorY;
-	}
-
-	public void setUrlImage(String urlImage) {
-
-		this.urlImage = urlImage;
-	}
+    @Override
+    public void updateWith(Object o) {
+        GraphicIncrementable graphic = (GraphicIncrementable) o;
+        this.coorX = graphic.coorX;
+        this.level = graphic.level;
+        this.urlImage = graphic.urlImage;
+        this.coorY = graphic.coorY;
 
 
-	@Override
-	public void updateWith(Object o) {
-		GraphicIncrementable graphic = (GraphicIncrementable) o;
-		this.coorX = graphic.coorX;
-		this.level =graphic.level;
-		this.urlImage = graphic.urlImage;
-		this.coorY = graphic.coorY;
-		
-		
-	}
-
-
-	
-
-
+    }
 }

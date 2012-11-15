@@ -19,12 +19,11 @@ public class ElementEvent extends EventObject {
     private String msg;
     private EnumDataType dataType;
 
-    public ElementEvent(Object source, List<Object> results,EnumDataType dataType, String msg) {
+    public ElementEvent(Object source, List<Object> results, EnumDataType dataType, String msg) {
         super(source);
         this.results = results;
         this.msg = msg;
         this.dataType = dataType;
-
     }
 
     /**

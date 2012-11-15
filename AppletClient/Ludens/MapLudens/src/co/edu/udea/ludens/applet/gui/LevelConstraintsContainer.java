@@ -9,16 +9,10 @@ import co.edu.udea.ludens.domain.LevelConstraint;
 import co.edu.udea.ludens.enums.EnumDataType;
 import java.awt.Color;
 import java.awt.Image;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -26,16 +20,16 @@ import net.miginfocom.swing.MigLayout;
  * @author juanga
  */
 class LevelConstraintsContainer {
-    public static final String NO_AVAIBLE_DATA = "NO DISPONIBLE";
 
+    public static final String NO_AVAIBLE_DATA = "NO DISPONIBLE";
     public HashMap<String, PanelElement> panelUpLevelElement = new HashMap<String, PanelElement>();
     public HashMap<String, ItemResource> actualResources = new HashMap<String, ItemResource>();
     public HashMap<String, ItemResource> requiredResources = new HashMap<String, ItemResource>();
     public HashMap<String, Element> mapElements = new HashMap<String, Element>();
     public HashMap<String, Element> mapMaterials = new HashMap<String, Element>();
     public static int SIZE_IMAGE_RESOURCE = 30;
-    public static final String MSG_UP_LEVEL ="¿Subir al nivel %s?";
-    public static final String MSG_UP_LEVEL_TIME ="Debe esperar %s segundos.";
+    public static final String MSG_UP_LEVEL = "¿Subir al nivel %s?";
+    public static final String MSG_UP_LEVEL_TIME = "Debe esperar %s segundos.";
 
     public PanelElement createUpLevelContainer(String selectedElement) {
 
@@ -85,17 +79,19 @@ class LevelConstraintsContainer {
 
         Integer time = element.getActualUpgradingTime();
 
-        if(time==null)
+        if (time == null) {
             time = element.getInitialUpgradingTime();
-        if(time==null)
-            time=0;
+        }
+        if (time == null) {
+            time = 0;
+        }
 
         msgLevel = String.format(MSG_UP_LEVEL_TIME, time);
         panel.getLbLevelProduction().setText(msgLevel);
 
-        Image image = MapDashboard.imagesMap.get(MapDashboard.FILE_PREFIX+level);
+        Image image = MapDashboard.imagesMap.get(MapDashboard.FILE_PREFIX + level);
         panel.getLbAskuplevel().setIcon(new ImageIcon(image));
-      
+
 
         List<LevelConstraint> constraints = element.getLevelConstraints().get(level + "");
 
@@ -109,7 +105,7 @@ class LevelConstraintsContainer {
             }
         }
 
-        Map<String,Element> mapa  = sortMapByKey(mapMaterials);
+        Map<String, Element> mapa = sortMapByKey(mapMaterials);
 
         for (Object key : mapa.keySet()) {
             Element el = mapa.get(key);
@@ -155,8 +151,9 @@ class LevelConstraintsContainer {
 
     public void updateElements(List<Object> elements, EnumDataType dataType) {
 
-        if(elements == null)
+        if (elements == null) {
             return;
+        }
 
         for (Object o : elements) {
             Element el = (Element) o;
@@ -184,7 +181,7 @@ class LevelConstraintsContainer {
             ItemResource actual = actualResources.get(key);
             ItemResource required = requiredResources.get(key);
 
-          
+
             if (actual == null || required == null) {
                 return;
             }
@@ -209,7 +206,6 @@ class LevelConstraintsContainer {
 
     }
 
-
     private Map<String, Element> sortMapByKey(HashMap<String, Element> aItems) {
         TreeMap<String, Element> result = new TreeMap<String, Element>(String.CASE_INSENSITIVE_ORDER);
         result.putAll(aItems);
@@ -217,7 +213,7 @@ class LevelConstraintsContainer {
         return result;
     }
 
-   public  class KeyComparator implements Comparator<LevelConstraint>{
+    public class KeyComparator implements Comparator<LevelConstraint> {
 
         @Override
         public int compare(LevelConstraint o1, LevelConstraint o2) {
@@ -225,12 +221,5 @@ class LevelConstraintsContainer {
             return o1.getElementName().compareToIgnoreCase(o2.getElementName());
 
         }
-
-
-
-
+    }
 }
-
-}
-
-

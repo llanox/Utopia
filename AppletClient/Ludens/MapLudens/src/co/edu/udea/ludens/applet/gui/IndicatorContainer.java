@@ -31,7 +31,7 @@ public class IndicatorContainer {
             return;
         }
 
-        String[] columnNames = {"Nombre", "Capacidad","Cobertura (%)", "Nivel"};
+        String[] columnNames = {"Nombre", "Capacidad", "Cobertura (%)", "Nivel"};
         JTable table = (JTable) panel;
 
         for (Object o : data) {
@@ -59,7 +59,7 @@ public class IndicatorContainer {
             return;
         }
 
-        String[] columnNames = {"Nombre", "Inventario","Produccion", "Nivel"};
+        String[] columnNames = {"Nombre", "Inventario", "Produccion", "Nivel"};
         JTable table = (JTable) panel;
 
         for (Object o : data) {

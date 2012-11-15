@@ -1,26 +1,29 @@
 package co.edu.udea.ludens.applet.gui;
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * To change this template, choose Tools | Templates and open the template in
+ * the editor.
  */
-import co.edu.udea.ludens.applet.util.ElementEvent;
 import co.edu.udea.ludens.applet.listeners.ElementListener;
 import co.edu.udea.ludens.applet.listeners.MapEventListener;
 import co.edu.udea.ludens.applet.restful.UtopiaRestClient;
+import co.edu.udea.ludens.applet.util.ElementEvent;
 import co.edu.udea.ludens.applet.util.LudensConstants;
 import co.edu.udea.ludens.domain.MessageEvent;
 import co.edu.udea.ludens.domain.Population;
 import co.edu.udea.ludens.enums.EnumDataType;
-
 import co.edu.udea.ludens.util.MessageListener;
-import com.genuts.gameui.*;
-import java.awt.*;
+import com.genuts.gameui.PlayField;
+import com.genuts.gameui.Sprite;
+import com.genuts.gameui.SpriteCollisionManager;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.Point;
 import java.util.HashMap;
 import javax.swing.JApplet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 
 public class MapDashboard extends JApplet implements Updatable, ElementListener, MessageListener, MapEventListener {
 
@@ -40,16 +43,13 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
 
     @Override
     public synchronized void init() {
-
         java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
 
         setLayout(null);
         mapPanel.getMap().setLayout(null);
 
-
         String login = this.getParameter(LudensConstants.LOGIN);
         String urlBase = this.getParameter(LudensConstants.URL_BASE);
-
 
         if (login == null || urlBase == null) {
             JOptionPane.showMessageDialog(this, LudensConstants.ERROR_MESSAGE_CONNECTION);
@@ -64,9 +64,6 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
 
         client = new UtopiaRestClient(login, urlBase);
         client.addElementListener(this);
-
-
-
 
         // Loading images        
         Image tileMap = getImage(getClass().getResource(RESOURCES_PATH + "map.png"));
@@ -95,7 +92,7 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
         tracker.addImage(tilePeople, 0);
 
         //Default image
-        Image tileNotifications=null;
+        Image tileNotifications;
 
         for (int i = 0; i <= LEVEL_MAXIMUM; i++) {
             tileNotifications = getImage(getClass().getResource(RESOURCES_PATH + FILE_PREFIX + i + ".png"));
@@ -135,7 +132,6 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
         point = spTile.getPosition();
         spNotification.setPosition(point.x + tileWidth, point.y + tileHeight);
 
-
         spTile.setName("Desarrollo Urbano");
         imagesMap.put(spTile.getName(), tileForniture);
 
@@ -157,14 +153,10 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
         spTile.setName("Industria");
         imagesMap.put(spTile.getName(), tileFactory);
 
-
-
         playfield.addSprite(spTile);
         playfield.addSprite(spNotification);
 
-
         spritesMap.put(spTile.getName(), spNotification);
-
 
         spTile = new SpriteUtopia(tileEducation);
         spNotification = new Sprite(imagesMap.get(FILE_PREFIX + 0));
@@ -180,14 +172,10 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
         spTile.setName("Educacion");
         imagesMap.put(spTile.getName(), tileEducation);
 
-
         playfield.addSprite(spTile);
         playfield.addSprite(spNotification);
 
-
         spritesMap.put(spTile.getName(), spNotification);
-
-
 
         spTile = new SpriteUtopia(tileHealth);
         spNotification = new Sprite(imagesMap.get(FILE_PREFIX + 0));
@@ -205,9 +193,7 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
         playfield.addSprite(spTile);
         playfield.addSprite(spNotification);
 
-
         spritesMap.put(spTile.getName(), spNotification);
-
 
         spTile = new SpriteUtopia(tileWood);
         spNotification = new Sprite(imagesMap.get(FILE_PREFIX + 0));
@@ -227,9 +213,6 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
 
         spritesMap.put(spTile.getName(), spNotification);
 
-
-
-
         spTile = new SpriteUtopia(tileWater);
         spNotification = new Sprite(imagesMap.get(FILE_PREFIX + 0));
         //Elemento 6 x=348 y=0
@@ -241,7 +224,6 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
 
         spTile.setName("Agua");
         imagesMap.put(spTile.getName(), tileWater);
-
 
         playfield.addSprite(spTile);
         playfield.addSprite(spNotification);
@@ -263,12 +245,10 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
         spTile.setName("Barro");
         imagesMap.put(spTile.getName(), tileMud);
 
-
         playfield.addSprite(spTile);
         playfield.addSprite(spNotification);
 
         spritesMap.put(spTile.getName(), spNotification);
-
 
         spTile = new SpriteUtopia(tileIron);
         spNotification = new Sprite(imagesMap.get(FILE_PREFIX + 0));
@@ -288,8 +268,6 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
 
         spritesMap.put(spTile.getName(), spNotification);
 
-
-
         spTile = new SpriteUtopia(tileFood);
         spNotification = new Sprite(imagesMap.get(FILE_PREFIX + 0));
 
@@ -307,13 +285,10 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
 
         spritesMap.put(spTile.getName(), spNotification);
 
-
         MapEventProcessor processor = new MapEventProcessor(playfield);
         processor.setLevelContainer(levelContainer);
 
         playfield.addMouseListener(processor);
-
-
 
         processor.setRestClient(client);
         processor.addMapEventListener(this);
@@ -322,8 +297,6 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
 
         mapPanel.getMap().add(playfield);
         mapPanel.setSize(playfield.getSize());
-
-
         mapPanel.getPnlIndicators().add(indicatorsMarquee);
 
         System.out.println("Starting");
@@ -342,7 +315,6 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
         mapPanel.setVisible(true);
         stopped = false;
         System.out.println("Starting-Resumming");
-
     }
 
     @Override
@@ -364,14 +336,14 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
 
             System.out.println("updating factors");
             container.updateOrCreateFactorIndicator(event.getResults(), mapPanel.getTbFactors());
-            levelContainer.updateElements(event.getResults(),event.getDataType());
+            levelContainer.updateElements(event.getResults(), event.getDataType());
 
         } else if (EnumDataType.MATERIAL == event.getDataType()) {
 
 
             System.out.println("updating materials");
             container.updateOrCreateMaterialIndicator(event.getResults(), mapPanel.getTbMaterials());
-            levelContainer.updateElements(event.getResults(),event.getDataType());
+            levelContainer.updateElements(event.getResults(), event.getDataType());
 
 
         } else if (EnumDataType.POPULATION == event.getDataType()) {

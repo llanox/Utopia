@@ -9,16 +9,10 @@ import co.edu.udea.ludens.applet.restful.UtopiaRestClient;
 import com.genuts.gameui.PlayField;
 import com.genuts.gameui.Sprite;
 import com.genuts.gameui.SpriteCollisionManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -52,13 +46,9 @@ public class MapEventProcessor implements MouseListener, ActionListener, WindowL
 
     @Override
     public void mousePressed(MouseEvent e) {
-
         Sprite sprite = ((SpriteCollisionManager) playfield.getCollisionManager()).getSpriteAt(playfield.getXOffset() + e.getX(), playfield.getYOffset() + e.getY());
 
-
         if (sprite != null && sprite instanceof SpriteUtopia) {
-
-
             actualElement = ((SpriteUtopia) sprite).getName();
 
             if (actualElement == null) {
@@ -66,13 +56,12 @@ public class MapEventProcessor implements MouseListener, ActionListener, WindowL
             }
 
             PanelElement panel = panelLevelContainer.createUpLevelContainer(actualElement);
-
             JOptionPane joptionPane = new JOptionPane();
             joptionPane.setMessage(panel);
             joptionPane.setMessageType(JOptionPane.QUESTION_MESSAGE);
             joptionPane.setOptionType(0);
             btnUpLevel.setEnabled(true);
-            
+
             joptionPane.setOptions(new Object[]{btnUpLevel, btnCancel});
 
             dialog = joptionPane.createDialog(null, "Utopia");
@@ -80,20 +69,12 @@ public class MapEventProcessor implements MouseListener, ActionListener, WindowL
             dialog.setVisible(true);
             dialog.setDefaultCloseOperation(0);
             dialog.addWindowListener(this);
-
-
-
-
         } else {
-
             if (dialog != null) {
                 this.dialog.setVisible(false);
             }
-
         }
-
         notifyEvent();
-
     }
 
     @Override
@@ -110,8 +91,6 @@ public class MapEventProcessor implements MouseListener, ActionListener, WindowL
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-
         Object o = e.getSource();
 
         if (o == btnUpLevel) {
@@ -120,47 +99,45 @@ public class MapEventProcessor implements MouseListener, ActionListener, WindowL
 
         dialog.setVisible(false);
         notifyEvent();
-
-
-
     }
 
     private void upLevel(final String element) {
-
         Runnable restRequest = new Runnable() {
-
+            @Override
             public void run() {
-
                 restClient.upLevel(element);
-
-
             }
         };
         SwingUtilities.invokeLater(restRequest);
-
-
     }
 
+    @Override
     public void windowOpened(WindowEvent e) {
     }
 
+    @Override
     public void windowClosed(WindowEvent e) {
         dialog.setVisible(false);
     }
 
+    @Override
     public void windowIconified(WindowEvent e) {
     }
 
+    @Override
     public void windowDeiconified(WindowEvent e) {
     }
 
+    @Override
     public void windowActivated(WindowEvent e) {
     }
 
+    @Override
     public void windowClosing(WindowEvent paramWindowEvent) {
         dialog.setVisible(false);
     }
 
+    @Override
     public void windowDeactivated(WindowEvent e) {
     }
 
@@ -168,7 +145,8 @@ public class MapEventProcessor implements MouseListener, ActionListener, WindowL
      * @return the restClient
      */
     public UtopiaRestClient getRestClient() {
-        return restClient;
+        
+        return (this.restClient);
     }
 
     /**
@@ -187,11 +165,9 @@ public class MapEventProcessor implements MouseListener, ActionListener, WindowL
     }
 
     public void notifyEvent() {
-
         for (MapEventListener listener : mapEventListeners) {
             listener.eventHappening();
         }
-
     }
 
     public void setLevelContainer(LevelConstraintsContainer levelContainer) {
