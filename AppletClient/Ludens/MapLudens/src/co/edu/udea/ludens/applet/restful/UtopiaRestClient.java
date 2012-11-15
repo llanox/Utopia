@@ -4,13 +4,12 @@
  */
 package co.edu.udea.ludens.applet.restful;
 
-import co.edu.udea.ludens.applet.util.ElementEvent;
 import co.edu.udea.ludens.applet.listeners.ElementListener;
+import co.edu.udea.ludens.applet.util.ElementEvent;
 import co.edu.udea.ludens.applet.util.LudensConstants;
 import co.edu.udea.ludens.domain.MessageEvent;
 import co.edu.udea.ludens.enums.EnumDataType;
 import co.edu.udea.ludens.enums.EnumMsgType;
-
 import co.edu.udea.ludens.util.MessageListener;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -58,23 +57,21 @@ public class UtopiaRestClient {
     public void fetchDataByType(EnumDataType dataType) {
         List<Object> results = null;
         ElementEvent event;
-        String msg = null;
+        String msg;
         String requestedPath = null;
 
         if (EnumDataType.FACTOR == dataType) {
             requestedPath = PATH_FACTORS;
-
         } else if (EnumDataType.MATERIAL == dataType) {
             requestedPath = PATH_MATERIALS;
-
         } else if (EnumDataType.POPULATION == dataType) {
             requestedPath = PATH_POPULATION;
-
         } else if (EnumDataType.NOTIFICATIONS == dataType) {
             requestedPath = PATH_NOTIFICATIONS;
         }
 
         if (requestedPath == null) {
+
             return;
         }
 
@@ -104,7 +101,7 @@ public class UtopiaRestClient {
 
     public void upLevel(String elementName) {
         MessageEvent event = null;
-        String msg = null;
+        String msg;
 
         try {
             elementName = URLEncoder.encode(elementName, "ISO-8859-1");
@@ -162,13 +159,13 @@ public class UtopiaRestClient {
 
             return sb.toString();
         } catch (java.io.IOException e) {
-
             java.io.InputStream is = foo.getErrorStream();
             StringBuilder sb = new StringBuilder();
             java.io.InputStreamReader reader = new java.io.InputStreamReader(is);
             String charSet = reader.getEncoding();
             int nbytes;
             byte[] buf = new byte[4096];
+
             do {
                 nbytes = is.read(buf);
                 if (nbytes > 0) {

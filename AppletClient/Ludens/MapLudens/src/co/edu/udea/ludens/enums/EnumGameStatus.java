@@ -1,6 +1,8 @@
 package co.edu.udea.ludens.enums;
 
-public enum EnumGameStatus {
+import java.io.Serializable;
+
+public enum EnumGameStatus implements Serializable {
 
     PLAYING("Activo"), FINISHED("Finalizado"), NO_STARTED("No inicializado");
     private String status;
@@ -9,17 +11,12 @@ public enum EnumGameStatus {
         this.setStatus(status);
     }
 
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(String status) {
-        this.status = status;
+    public String getStatus() {
+
+        return (this.status);
     }
 
-    /**
-     * @return the status
-     */
-    public String getStatus() {
-        return status;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

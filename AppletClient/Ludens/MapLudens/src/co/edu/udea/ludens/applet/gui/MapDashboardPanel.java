@@ -164,6 +164,7 @@ public class MapDashboardPanel extends javax.swing.JPanel {
 
         return (this.tbFactors);
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

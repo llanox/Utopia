@@ -1,6 +1,8 @@
 package co.edu.udea.ludens.enums;
 
-public enum EnumTradeStatus {
+import java.io.Serializable;
 
-    OPEN, ACCEPTED, CLOSED, RENEGOCIATION, RENEGOCIATED;
+public enum EnumTradeStatus implements Serializable {
+
+	OPEN, ACCEPTED, CLOSED, RENEGOCIATION, RENEGOCIATED;
 }

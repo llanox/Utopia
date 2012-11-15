@@ -1,6 +1,8 @@
 package co.edu.udea.ludens.enums;
 
-public enum EnumDataType {
+import java.io.Serializable;
+
+public enum EnumDataType implements Serializable {
 
     FACTOR, MATERIAL, POPULATION, NOTIFICATIONS;
 }

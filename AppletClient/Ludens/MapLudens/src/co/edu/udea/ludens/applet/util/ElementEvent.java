@@ -30,7 +30,8 @@ public class ElementEvent extends EventObject {
      * @return the elements
      */
     public List<Object> getResults() {
-        return results;
+
+        return (this.results);
     }
 
     /**
@@ -44,7 +45,8 @@ public class ElementEvent extends EventObject {
      * @return the msg
      */
     public String getMsg() {
-        return msg;
+
+        return (this.msg);
     }
 
     /**
@@ -58,7 +60,8 @@ public class ElementEvent extends EventObject {
      * @return the eventType
      */
     public EnumDataType getDataType() {
-        return dataType;
+
+        return (this.dataType);
     }
 
     /**

@@ -16,7 +16,8 @@ public class Community implements Updateable {
 
     @Override
     public Long getId() {
-        return id;
+
+        return (this.id);
     }
 
     public void setId(Long id) {
@@ -24,53 +25,48 @@ public class Community implements Updateable {
     }
 
     public void setName(String name) {
-
         this.name = name;
     }
 
     public String getName() {
 
-        return this.name;
+        return (this.name);
     }
 
     public void setLength(Integer length) {
-
         this.length = length;
     }
 
     public Integer getLength() {
 
-        return this.length;
+        return (this.length);
     }
 
     public void setWidth(Integer width) {
-
         this.width = width;
     }
 
     public Integer getWidth() {
 
-        return this.width;
+        return (this.width);
     }
 
     public void setCorX(Integer corX) {
-
         this.corX = corX;
     }
 
     public Integer getCorX() {
 
-        return this.corX;
+        return (this.corX);
     }
 
     public void setCorY(Integer corY) {
-
         this.corY = corY;
     }
 
     public Integer getCorY() {
 
-        return this.corY;
+        return (this.corY);
     }
 
     public void setDevelopmentFactors(HashMap<String, Element> developmentFactors) {
@@ -78,16 +74,17 @@ public class Community implements Updateable {
     }
 
     public HashMap<String, Element> getDevelopmentFactors() {
-        return developmentFactors;
+
+        return (this.developmentFactors);
     }
 
     public void setMaterials(HashMap<String, Element> materials) {
-
         this.materials = new HashMap<String, Element>(materials);
     }
 
     public HashMap<String, Element> getMaterials() {
-        return materials;
+
+        return (this.materials);
     }
 
     public void setPopulation(Population population) {
@@ -95,7 +92,8 @@ public class Community implements Updateable {
     }
 
     public Population getPopulation() {
-        return population;
+
+        return (this.population);
     }
 
     public Community() {
@@ -113,6 +111,5 @@ public class Community implements Updateable {
         this.developmentFactors = newCom.developmentFactors;
         this.materials = newCom.materials;
         this.population = newCom.population;
-
     }
 }

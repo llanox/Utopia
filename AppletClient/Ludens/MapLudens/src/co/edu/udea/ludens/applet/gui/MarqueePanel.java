@@ -59,13 +59,12 @@ public class MarqueePanel extends JPanel
     @Override
     public void paintChildren(Graphics g) {
         //  Need this so we don't see a flicker of the text before scrolling
-
         if (!paintChildren) {
+            
             return;
         }
 
         //  Normal painting as the components scroll right to left
-
         Graphics2D g2d = (Graphics2D) g;
         g2d.translate(-scrollOffset, 0);
         super.paintChildren(g);
@@ -74,7 +73,6 @@ public class MarqueePanel extends JPanel
         //  Repaint the start of the components on the right edge of the panel once
         //  all the components are completely visible on the panel.
         //  (Its like the components are in two places at the same time)
-
         if (isWrap()) {
             wrapOffset = scrollOffset - super.getPreferredSize().width - wrapAmount;
             g2d.translate(-wrapOffset, 0);
@@ -243,7 +241,6 @@ public class MarqueePanel extends JPanel
     public void startScrolling() {
         paintChildren = true;
         scrollOffset = -getSize().width;
-
         timer.start();
     }
 

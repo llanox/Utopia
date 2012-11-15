@@ -1,6 +1,8 @@
 package co.edu.udea.ludens.enums;
 
-public enum EnumElementType {
+import java.io.Serializable;
+
+public enum EnumElementType implements Serializable {
 
     FACTOR("Factor"), MATERIAL("Material"), POPULATION("Población");
     private String type;
@@ -9,17 +11,12 @@ public enum EnumElementType {
         this.setType(type);
     }
 
-    /**
-     * @param type the type to set
-     */
-    public void setType(String type) {
-        this.type = type;
+    public String getType() {
+
+        return (this.type);
     }
 
-    /**
-     * @return the type
-     */
-    public String getType() {
-        return type;
+    public void setType(String type) {
+        this.type = type;
     }
 }

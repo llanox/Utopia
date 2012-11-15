@@ -23,7 +23,8 @@ public class SpriteUtopia extends Sprite {
      * @return the name
      */
     public String getName() {
-        return name;
+        
+        return (this.name);
     }
 
     /**

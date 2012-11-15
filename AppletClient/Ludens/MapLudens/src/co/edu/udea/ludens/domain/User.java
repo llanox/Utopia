@@ -1,10 +1,7 @@
 package co.edu.udea.ludens.domain;
 
-import java.util.Date;
-
-
-
 import co.edu.udea.ludens.enums.EnumUserRole;
+import java.util.Date;
 
 public class User implements Updateable {
 
@@ -193,7 +190,5 @@ public class User implements Updateable {
         this.password = newUser.password;
         this.online = newUser.online;
         this.participatingInGame = newUser.participatingInGame;
-
-
     }
 }

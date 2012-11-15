@@ -25,8 +25,6 @@ public class XStreamParser implements XMLParser {
     @Override
     public List<Object> parseXML(String response) throws ParserConfigurationException, SAXException, IOException {
 
-
-
         return (List<Object>) xstream.fromXML(response);
     }
 }
