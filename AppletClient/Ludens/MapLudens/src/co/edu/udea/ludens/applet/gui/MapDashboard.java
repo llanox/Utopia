@@ -45,7 +45,7 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
     public synchronized void init() {
         java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
 
-        setLayout(null);
+        this.setLayout(null);
         mapPanel.getMap().setLayout(null);
 
         String login = this.getParameter(LudensConstants.LOGIN);
@@ -58,6 +58,7 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
         if (login == null) {
             login = "Gabo";
         }
+
         if (urlBase == null) {
             urlBase = "http://localhost:8080/Utopia";
         }
