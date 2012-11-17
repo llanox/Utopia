@@ -7,12 +7,15 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
-@Entity
+@Entity()
 @Table(name = "games")
 public class Game implements Serializable, Updateable {
 
-	@Id
-	@GeneratedValue
+	@Transient()
+	private static final long serialVersionUID = 1739544762L;
+
+	@Id()
+	@GeneratedValue()
 	@Column(name = "id")
 	private Long id;
 	@Column(name = "duration")

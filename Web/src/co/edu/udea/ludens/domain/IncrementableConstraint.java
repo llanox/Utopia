@@ -3,12 +3,15 @@ package co.edu.udea.ludens.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 
-@Entity
+@Entity()
 @Table(name = "incrementables_constraints")
 public class IncrementableConstraint implements Serializable, Updateable {
 
-	@Id
-	@GeneratedValue
+	@Transient()
+	private static final long serialVersionUID = 1739542389L;
+
+	@Id()
+	@GeneratedValue()
 	@Column(name = "id")
 	private Long id;
 	@Column(name = "increment_rate")

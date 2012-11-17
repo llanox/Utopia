@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaQuery;
 
 import org.apache.log4j.Logger;
 
@@ -126,8 +125,8 @@ public class ObjectDBDAO implements DBDAO {
 					+ parameters[i + 1] + "' ");
 		}
 
-		CriteriaQuery<Object> query = entityManager.getCriteriaBuilder()
-				.createQuery();
+		/*CriteriaQuery<Object> query = entityManager.getCriteriaBuilder()
+				.createQuery();*/
 		String sqlStatement = "SELECT o FROM " + clazz.getName() + " o "
 				+ JOIN_SQL + " o." + parameters[paramsLength] + " p "
 				+ sb.toString();

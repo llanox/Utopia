@@ -19,7 +19,7 @@ public class MessagesCentralServiceImpl implements MessagesCentralService {
 
 	private static Logger logger = Logger
 			.getLogger(MessagesCentralServiceImpl.class);
-	private static final int MAX_STORED_MESSAGES = 160000;
+	// private static final int MAX_STORED_MESSAGES = 160000;
 
 	@Autowired
 	PlayerService playerService;

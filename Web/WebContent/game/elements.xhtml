@@ -71,8 +71,7 @@
 
 				<ice:selectOneMenu style="width:200px;border:1px solid #AAAAAA"
 					valueChangeListener="#{incrementableController.changeType}"
-					id="somIncrementableTypes"
-					partialSubmit="true">
+					id="somIncrementableTypes" partialSubmit="true">
 					<f:selectItems id="slctTypes"
 						value="#{incrementableController.incrementableTypes}" />
 				</ice:selectOneMenu>
@@ -123,27 +122,29 @@
 
 						<ice:panelGrid>
 
-                </ice:panelGrid>
+						</ice:panelGrid>
 
 						<ice:panelGrid columns="2">
-						   <ice:outputLabel id="optlbMaterialName"
-								style="width:60px;" value="Material:">
+							<ice:outputLabel id="optlbMaterialName" style="width:60px;"
+								value="Material:">
 							</ice:outputLabel>
-							<ice:outputLabel id="optlbMaterialNameValue"
-								style="width:60px;" value="#{incrementableConstraint.elementName}">
+							<ice:outputLabel id="optlbMaterialNameValue" style="width:60px;"
+								value="#{incrementableConstraint.elementName}">
 							</ice:outputLabel>
-							
+
 							<ice:outputLabel id="optlbConstraintInitialValue"
 								style="width:60px;" value="Valor inicial:">
 							</ice:outputLabel>
 							<ice:inputText style="width:40px;" id="iptConstraintInitialValue"
-								value="#{incrementableConstraint.initialValue}" partialSubmit="true" />
+								value="#{incrementableConstraint.initialValue}"
+								partialSubmit="true" />
 							<ice:outputLabel id="optlbConstraintIncrementRate"
 								value="Tasa incremento:">
 							</ice:outputLabel>
 							<ice:inputText style="width:40px;"
 								id="iptConstraintIncrementRate"
-								value="#{incrementableConstraint.incrementRate}" partialSubmit="true" />
+								value="#{incrementableConstraint.incrementRate}"
+								partialSubmit="true" />
 						</ice:panelGrid>
 
 					</ice:panelSeries>
@@ -173,31 +174,37 @@
 			</ice:panelGrid>
 
 
-			<ice:panelGrid id="pnlTableElements" 	rendered="#{!incrementableController.editingElement}">
+			<ice:panelGrid id="pnlTableElements"
+				rendered="#{!incrementableController.editingElement}">
 
 				<div>
-				<ice:commandButton id="btnNewElement" 
-				    disabled="#{incrementableController.settingUpConstraints}"
-					actionListener="#{incrementableController.newIncrementable}"
-					style="top: 90%; position: relative" value="Nuevo Elemento" />
-				
-				<ice:commandButton id="btnSetUpConstraints"
-				    rendered="#{!incrementableController.settingUpConstraints}"
-					actionListener="#{incrementableController.setupConstraints}"
-					style="top: 90%; position: relative" value="Establecer Restricciones">
-					
-					<f:setPropertyActionListener target="#{incrementableController.action}" value="action_setupconstraints" />
-				</ice:commandButton>	
-							
-					<ice:commandButton id="btnDeleteAllConstraints"
-					rendered="#{incrementableController.settingUpConstraints}"
-					actionListener="#{incrementableController.setupConstraints}"
-					style="top: 90%; position: relative" value="Limpiar Restricciones" >
-					<f:setPropertyActionListener target="#{incrementableController.action}" value="action_deleteallconstraints" />
+					<ice:commandButton id="btnNewElement"
+						disabled="#{incrementableController.settingUpConstraints}"
+						actionListener="#{incrementableController.newIncrementable}"
+						style="top: 90%; position: relative" value="Nuevo Elemento" />
+
+					<ice:commandButton id="btnSetUpConstraints"
+						rendered="#{!incrementableController.settingUpConstraints}"
+						actionListener="#{incrementableController.setupConstraints}"
+						style="top: 90%; position: relative"
+						value="Establecer Restricciones">
+
+						<f:setPropertyActionListener
+							target="#{incrementableController.action}"
+							value="action_setupconstraints" />
 					</ice:commandButton>
-					
+
+					<ice:commandButton id="btnDeleteAllConstraints"
+						rendered="#{incrementableController.settingUpConstraints}"
+						actionListener="#{incrementableController.setupConstraints}"
+						style="top: 90%; position: relative" value="Limpiar Restricciones">
+						<f:setPropertyActionListener
+							target="#{incrementableController.action}"
+							value="action_deleteallconstraints" />
+					</ice:commandButton>
+
 				</div>
-				
+
 				<ice:dataTable
 					binding="#{incrementableController.incrementablesTable}"
 					headerClass="icelist-header" id="incrementablesTable"

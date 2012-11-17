@@ -5,12 +5,15 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-@Entity
+@Entity()
 @Table(name = "users")
 public class User implements Serializable, Updateable {
 
-	@Id
-	@GeneratedValue
+	@Transient()
+	private static final long serialVersionUID = 1739544489L;
+
+	@Id()
+	@GeneratedValue()
 	@Column(name = "id")
 	private Long id;
 	@Column(name = "name")

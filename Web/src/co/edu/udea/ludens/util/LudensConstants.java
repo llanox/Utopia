@@ -1,6 +1,6 @@
 package co.edu.udea.ludens.util;
 
-public class ConstantsLudens {
+public class LudensConstants {
 
 	public static final String HTTP_PROTOCOL = "http://";
 	public static final String SOFTWARE_VERSION = "2.11.14.12";

@@ -46,7 +46,7 @@ public class ReportController implements MessageListener, UserSessionListener {
 		List<MessageEvent> temp = new ArrayList<MessageEvent>();
 
 		logger.info("loading data ....");
-		String game = userSession.getActualGame();
+		//String game = userSession.getActualGame();
 		String login = userSession.getUser().getLogin();
 		Player player = playerService.findPlayer(login);
 
@@ -74,9 +74,9 @@ public class ReportController implements MessageListener, UserSessionListener {
 	}
 
 	private void msgFormatter(MessageEvent e) {
-		String msg = e.getMsg();
+		/*String msg = e.getMsg();
 
-		int start = msg.indexOf('<');
+		int start = msg.indexOf('<');*/
 	}
 
 	public void loadDataPlayerStatus() {
@@ -94,49 +94,28 @@ public class ReportController implements MessageListener, UserSessionListener {
 		SessionRenderer.render(getUserSession().getUser().getLogin());
 	}
 
-	/**
-	 * @param events
-	 *            the events to set
-	 */
 	public void setEvents(List<MessageEvent> events) {
 		this.events = events;
 	}
 
-	/**
-	 * @return the events
-	 */
 	public List<MessageEvent> getEvents() {
 
 		return (this.events);
 	}
 
-	/**
-	 * @param userSession
-	 *            the userSession to set
-	 */
 	public void setUserSession(UserSessionBean userSession) {
 		this.userSession = userSession;
 	}
 
-	/**
-	 * @return the userSession
-	 */
 	public UserSessionBean getUserSession() {
 
 		return (this.userSession);
 	}
 
-	/**
-	 * @param playerService
-	 *            the playerService to set
-	 */
 	public void setPlayerService(PlayerService playerService) {
 		this.playerService = playerService;
 	}
 
-	/**
-	 * @return the playerService
-	 */
 	public PlayerService getPlayerService() {
 
 		return (this.playerService);
@@ -151,17 +130,10 @@ public class ReportController implements MessageListener, UserSessionListener {
 		this.logger = logger;
 	}
 
-	/**
-	 * @param playersStatus
-	 *            the playersStatus to set
-	 */
 	public void setPlayersStatus(List<PlayerStatus> playersStatus) {
 		this.playersStatus = playersStatus;
 	}
 
-	/**
-	 * @return the playersStatus
-	 */
 	public List<PlayerStatus> getPlayersStatus() {
 
 		return (this.playersStatus);

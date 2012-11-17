@@ -45,6 +45,15 @@ public class BoardController implements MessageListener {
 		this.materials = materials;
 	}
 
+	public Element getPopulation() {
+		
+		return (this.population);
+	}
+
+	public void setPopulation(Element population) {
+		this.population = population;
+	}
+
 	// public void changeIncrementable(IncrementableEvent event) {
 	//
 	// if (EnumEventType.CHANGE_FACTOR == event.getEventType()) {

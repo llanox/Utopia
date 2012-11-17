@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-@Entity
+@Entity()
 @Table(name = "elements")
 public class Element implements Serializable, Updateable {
 
-	@Id
-	@GeneratedValue
+	@Transient()
+	private static final long serialVersionUID = 1739544495L;	
+
+	@Id()
+	@GeneratedValue()
 	@Column(name = "id")
 	private Long id;
 	@Column(name = "calculated_value")

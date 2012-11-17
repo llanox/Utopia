@@ -24,9 +24,9 @@ public class UtopiaSessionListener implements HttpSessionListener {
 	public void sessionDestroyed(HttpSessionEvent event) {
 		HttpSession session = event.getSession();
 		UserSessionBean userBean = (UserSessionBean) session
-				.getAttribute(ConstantsLudens.SESSION_BEAN);
+				.getAttribute(LudensConstants.SESSION_BEAN);
 		SystemContainer systemContainer = (SystemContainer) session
-				.getAttribute(ConstantsLudens.SYSTEM_CONTAINER_BEAN);
+				.getAttribute(LudensConstants.SYSTEM_CONTAINER_BEAN);
 		User user = null;
 
 		if (userBean == null)

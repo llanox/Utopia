@@ -7,13 +7,16 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-@Entity
+@Entity()
 @Table(name = "messages_events")
 public class MessageEvent implements Comparable<MessageEvent>, Serializable,
 		Updateable {
 
-	@Id
-	@GeneratedValue
+	@Transient()
+	private static final long serialVersionUID = 1739542986L;
+
+	@Id()
+	@GeneratedValue()
 	@Column(name = "id")
 	private Long id;
 	@Column(name = "msg")

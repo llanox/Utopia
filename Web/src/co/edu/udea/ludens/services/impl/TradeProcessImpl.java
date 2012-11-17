@@ -22,7 +22,6 @@ import co.edu.udea.ludens.util.MessageListener;
 import co.edu.udea.ludens.util.InterchangeListener;
 import co.edu.udea.ludens.util.UtopiaUtil;
 import co.edu.udea.ludens.util.TradeListener;
-import co.edu.udea.ludens.web.InterchangeBean;
 
 public class TradeProcessImpl implements TradeProcess {
 
@@ -225,8 +224,8 @@ public class TradeProcessImpl implements TradeProcess {
 
 	private void notyfyInterchange(List<Interchange> offers,
 			EnumEventType eventType) {
-		List<InterchangeBean> beans = new ArrayList<InterchangeBean>();
-		InterchangeBean bean;
+		// List<InterchangeBean> beans = new ArrayList<InterchangeBean>();
+		// InterchangeBean bean;
 
 		InterchangeEvent event = new InterchangeEvent(this, offers);
 

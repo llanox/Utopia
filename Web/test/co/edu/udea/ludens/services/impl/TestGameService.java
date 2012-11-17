@@ -19,7 +19,7 @@ import co.edu.udea.ludens.exceptions.InvalidNumberOfMaterialsException;
 import co.edu.udea.ludens.exceptions.InvalidNumberOfPlayersException;
 import co.edu.udea.ludens.exceptions.ThereisnotPopulationException;
 import co.edu.udea.ludens.services.GameService;
-import co.edu.udea.ludens.util.ConstantsLudens;
+import co.edu.udea.ludens.util.LudensConstants;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestGameService {
@@ -196,7 +196,7 @@ public class TestGameService {
 		int quantity = game.getUnexpectedEvents().get(0).getQuantity();
 		Assert.assertTrue(
 				"Los porcentajes de afectación no estan en el rango permitido: "
-						+ quantity, quantity >= ConstantsLudens.LOWER_THRESHOLD
-						&& quantity <= ConstantsLudens.UPPER_THRESHOLD);
+						+ quantity, quantity >= LudensConstants.LOWER_THRESHOLD
+						&& quantity <= LudensConstants.UPPER_THRESHOLD);
 	}
 }

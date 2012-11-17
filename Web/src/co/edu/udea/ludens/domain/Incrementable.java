@@ -1,18 +1,21 @@
 package co.edu.udea.ludens.domain;
 
 import co.edu.udea.ludens.enums.EnumElementType;
-import co.edu.udea.ludens.util.ConstantsLudens;
+import co.edu.udea.ludens.util.LudensConstants;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-@Entity
+@Entity()
 @Table(name = "incrementables")
 public class Incrementable implements Serializable, Updateable {
 
-	@Id
-	@GeneratedValue
+	@Transient()
+	private static final long serialVersionUID = 1739542395L;
+
+	@Id()
+	@GeneratedValue()
 	private Long id;
 	@Column(name = "initial_upgrading_time")
 	private long initialUpgradingTime;
@@ -32,7 +35,7 @@ public class Incrementable implements Serializable, Updateable {
 	@Column(name = "description")
 	private String description;
 	@Column(name = "image_url")
-	private String imageUrl = ConstantsLudens.NO_IMAGE_FILE;
+	private String imageUrl = LudensConstants.NO_IMAGE_FILE;
 	@Column(name = "name")
 	private String name;
 

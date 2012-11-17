@@ -78,7 +78,7 @@ public class LudensUtilBean {
 				.getExternalContext().getRequest();
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(ConstantsLudens.HTTP_PROTOCOL);
+		sb.append(LudensConstants.HTTP_PROTOCOL);
 		sb.append(request.getServerName());
 		sb.append(":");
 		sb.append(request.getServerPort());
@@ -89,7 +89,7 @@ public class LudensUtilBean {
 
 	public String getSoftwareVersion() {
 
-		return ConstantsLudens.SOFTWARE_VERSION;
+		return LudensConstants.SOFTWARE_VERSION;
 	}
 
 	public static String getFileSeparator() {

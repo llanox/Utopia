@@ -5,12 +5,15 @@ import java.util.List;
 import javax.jdo.annotations.Unique;
 import javax.persistence.*;
 
-@Entity
+@Entity()
 @Table(name = "players")
 public class Player implements Serializable, Updateable {
 
-	@Id
-	@GeneratedValue
+	@Transient()
+	private static final long serialVersionUID = 1739543883L;
+
+	@Id()
+	@GeneratedValue()
 	@Column(name = "id")
 	private long id;
 	@Column(name = "population")

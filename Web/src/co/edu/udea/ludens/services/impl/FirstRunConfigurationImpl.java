@@ -10,7 +10,6 @@ import co.edu.udea.ludens.enums.EnumGameStatus;
 import co.edu.udea.ludens.enums.EnumUserRole;
 import co.edu.udea.ludens.services.FirstRunConfiguration;
 import co.edu.udea.ludens.services.GameService;
-import co.edu.udea.ludens.services.IncrementableService;
 import co.edu.udea.ludens.services.UserService;
 
 public class FirstRunConfigurationImpl implements FirstRunConfiguration {
@@ -24,8 +23,9 @@ public class FirstRunConfigurationImpl implements FirstRunConfiguration {
 	// @Autowired
 	// private PlayerService playerService;
 
-	@Autowired
-	private IncrementableService incrementableService;
+	// @Autowired
+	// private IncrementableService incrementableService;
+
 	private static boolean EXECUTED_CONFIGURATION = false;
 	private Logger logger = Logger.getLogger(getClass());
 	private String TEST_GAME_NAME = "JuegoPrueba";

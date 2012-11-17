@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public enum EnumEventType implements Serializable {
 
-	FACTORS_PRODUCTION("ProducciÃ³n Factor", 0),
-	MATERIALS_PRODUCTION("ProducciÃ³n Material", 1),
-	POPULATION_PRODUCTION("Incremento PoblaciÃ³n", 2),
+	FACTORS_PRODUCTION("Producción Factor", 0),
+	MATERIALS_PRODUCTION("Producción Material", 1),
+	POPULATION_PRODUCTION("Incremento Població", 2),
 	REQUEST_TRADE("Solicitud de intercambio", 3),
 	INTERCHANGE("Intercambio comercial", 4),
 	INITIAL_SETUP("Inventario Inicial", 5),

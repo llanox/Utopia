@@ -23,7 +23,7 @@ import co.edu.udea.ludens.exceptions.ThereisnotPopulationException;
 import co.edu.udea.ludens.services.GameService;
 import co.edu.udea.ludens.services.PlayerService;
 import co.edu.udea.ludens.services.UserService;
-import co.edu.udea.ludens.util.ConstantsLudens;
+import co.edu.udea.ludens.util.LudensConstants;
 import co.edu.udea.ludens.util.GameRequirement;
 import co.edu.udea.ludens.util.UtopiaUtil;
 
@@ -297,8 +297,8 @@ public class GameServiceImpl implements GameService {
 
 				good.setElementName(incr.getName());
 				int quantity = UtopiaUtil.generateNumberBetweenRange(
-						ConstantsLudens.LOWER_THRESHOLD,
-						ConstantsLudens.UPPER_THRESHOLD);
+						LudensConstants.LOWER_THRESHOLD,
+						LudensConstants.UPPER_THRESHOLD);
 				good.setQuantity(quantity);
 				good.setMessage("Evento Fortuito: " + incr.getName()
 						+ " ha sido afectado positivamente en un "
@@ -315,8 +315,8 @@ public class GameServiceImpl implements GameService {
 						+ " ha sido afectado negativamente en un "
 						+ good.getQuantity() + " % ");
 				quantity = UtopiaUtil.generateNumberBetweenRange(
-						ConstantsLudens.LOWER_THRESHOLD,
-						ConstantsLudens.UPPER_THRESHOLD);
+						LudensConstants.LOWER_THRESHOLD,
+						LudensConstants.UPPER_THRESHOLD);
 				bad.setQuantity(quantity);
 
 				unexpectedEvents.add(bad);

@@ -64,7 +64,8 @@ public class IncrementableController implements UpdateableView {
 			}
 		}
 
-		incrementables = incrementableService.getAllIncrementablesGame(gameController.getActualGame()
+		incrementables = incrementableService
+				.getAllIncrementablesGame(gameController.getActualGame()
 						.getName());
 
 		if (incrementables != null && !incrementables.isEmpty()) {
@@ -101,10 +102,10 @@ public class IncrementableController implements UpdateableView {
 
 		logger.info("Incrementable type to save: "
 				+ actualIncrementable.getType());
-	
+
 		Game game = gameController.getActualGame();
 		actualIncrementable.setGame(game);
-		
+
 		incrementableService.save(actualIncrementable);
 		actualIncrementable = new Incrementable();
 		loadIncrementables();
@@ -213,17 +214,10 @@ public class IncrementableController implements UpdateableView {
 		}
 	}
 
-	/**
-	 * @param typesNames
-	 *            the typesNames to set
-	 */
 	public void setTypesNames(String[] typesNames) {
 		this.typesNames = typesNames;
 	}
 
-	/**
-	 * @return the typesNames
-	 */
 	public String[] getTypesNames() {
 
 		return (this.typesNames);
@@ -256,66 +250,38 @@ public class IncrementableController implements UpdateableView {
 		this.incrementables = incrementables;
 	}
 
-	/**
-	 * @param incrementablesTable
-	 *            the incrementablesTable to set
-	 */
 	public void setIncrementablesTable(UIData incrementablesTable) {
 		this.incrementablesTable = incrementablesTable;
 	}
 
-	/**
-	 * @return the incrementablesTable
-	 */
 	public UIData getIncrementablesTable() {
 
 		return (this.incrementablesTable);
 	}
 
-	/**
-	 * @param incrementableService
-	 *            the incrementableService to set
-	 */
 	public void setIncrementableService(
 			IncrementableService incrementableService) {
 		this.incrementableService = incrementableService;
 	}
 
-	/**
-	 * @return the incrementableService
-	 */
 	public IncrementableService getIncrementableService() {
 
 		return (this.incrementableService);
 	}
 
-	/**
-	 * @param imagesIncrementableTable
-	 *            the imagesIncrementableTable to set
-	 */
 	public void setImagesIncrementableTable(UIData imagesIncrementableTable) {
 		this.imagesIncrementableTable = imagesIncrementableTable;
 	}
 
-	/**
-	 * @return the imagesIncrementableTable
-	 */
 	public UIData getImagesIncrementableTable() {
 
 		return (this.imagesIncrementableTable);
 	}
 
-	/**
-	 * @param gameController
-	 *            the gameController to set
-	 */
 	public void setGameController(GameController gameController) {
 		this.gameController = gameController;
 	}
 
-	/**
-	 * @return the gameController
-	 */
 	public GameController getGameController() {
 
 		return (this.gameController);
@@ -348,17 +314,10 @@ public class IncrementableController implements UpdateableView {
 		this.addingIncrementableImage = addingIncrementableImage;
 	}
 
-	/**
-	 * @param elementService
-	 *            the elementService to set
-	 */
 	public void setElementService(ElementService elementService) {
 		this.elementService = elementService;
 	}
 
-	/**
-	 * @return the elementService
-	 */
 	public ElementService getElementService() {
 
 		return (this.elementService);
@@ -371,10 +330,6 @@ public class IncrementableController implements UpdateableView {
 		loadIncrementables();
 	}
 
-	/**
-	 * @param materials
-	 *            the materials to set
-	 */
 	public void setMaterials(List<SelectItem> materials) {
 		this.materialItems = materials;
 	}
@@ -388,44 +343,32 @@ public class IncrementableController implements UpdateableView {
 		this.materialItems = materialItems;
 	}
 
-	/**
-	 * @return the materials
-	 */
 	public List<SelectItem> getMaterials() {
 
 		return (this.materialItems);
 	}
 
-	/**
-	 * @param actualConstraint
-	 *            the actualConstraint to set
-	 */
 	public void setActualConstraint(IncrementableConstraint actualConstraint) {
 		this.actualConstraint = actualConstraint;
 	}
 
-	/**
-	 * @return the actualConstraint
-	 */
 	public IncrementableConstraint getActualConstraint() {
 
 		return (this.actualConstraint);
 	}
 
-	/**
-	 * @param constraintMaterial
-	 *            the constraintMaterial to set
-	 */
 	public void setConstraintMaterial(String constraintMaterial) {
 		this.constraintMaterial = constraintMaterial;
 	}
 
-	/**
-	 * @return the constraintMaterial
-	 */
 	public String getConstraintMaterial() {
 
 		return (this.constraintMaterial);
+	}
+
+	public GameService getGameService() {
+
+		return (this.gameService);
 	}
 
 	public void setGameService(GameService gameService) {

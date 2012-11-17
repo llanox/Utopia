@@ -2,7 +2,6 @@ package co.edu.udea.ludens.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -22,10 +21,10 @@ public class FirstRunUtopiaServlet implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		ServletContext context = event.getServletContext();
-		Calendar cal = Calendar.getInstance();
+		// Calendar cal = Calendar.getInstance();
 		String filePath = null;
 		String fileName = context
-				.getInitParameter(ConstantsLudens.KEY_CONFIGURATION_FILE_NAME);
+				.getInitParameter(LudensConstants.KEY_CONFIGURATION_FILE_NAME);
 		String realAppPath = context.getRealPath("");
 
 		logger.info("realAppPath: CONTEXT INITIALIZED " + realAppPath);
@@ -45,7 +44,7 @@ public class FirstRunUtopiaServlet implements ServletContextListener {
 			ApplicationContext ctx = WebApplicationContextUtils
 					.getWebApplicationContext(context);
 			FirstRunConfiguration config = (FirstRunConfiguration) ctx
-					.getBean(ConstantsLudens.FIRST_RUN_CONFIG_BEAN);
+					.getBean(LudensConstants.FIRST_RUN_CONFIG_BEAN);
 			config.loadAllDefaultConfiguration();
 
 			try {

@@ -21,7 +21,7 @@ import co.edu.udea.ludens.services.GameProcess;
 import co.edu.udea.ludens.services.MessagesCentralService;
 import co.edu.udea.ludens.services.PlayerService;
 import co.edu.udea.ludens.services.ProcessHolderService;
-import co.edu.udea.ludens.util.ConstantsLudens;
+import co.edu.udea.ludens.util.LudensConstants;
 
 @Controller
 @RequestMapping(value = "/elements")
@@ -103,7 +103,7 @@ public class ElementController {
 
 		try {
 			elementName = URLDecoder.decode(elementName,
-					ConstantsLudens.CHAR_SET);
+					LudensConstants.CHAR_SET);
 		} catch (UnsupportedEncodingException e) {
 			logger.error("Decoding error", e);
 

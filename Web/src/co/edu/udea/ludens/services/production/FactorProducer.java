@@ -21,9 +21,8 @@ public class FactorProducer implements ProducerStrategy {
 		List<ElementBean> elementBeans = new ArrayList<ElementBean>();
 
 		for (Object key : elements.keySet()) {
-
 			Element element = elements.get(key);
-			Integer level = element.getLevel();
+			// Integer level = element.getLevel();
 
 			List<IncrementableConstraint> levelIncrements = element
 					.getLevelIncrements();
