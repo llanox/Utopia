@@ -24,7 +24,7 @@
 			<property name="hibernate.connection.password" value="r00t" ></property>
 			<property name="hibernate.connection.pool_size" value="1" ></property>
 			<property name="hibernate.show_sql" value="true" ></property>
-			<property name="hibernate.hbm2ddl.auto" value="update" ></property>
+			<!-- <property name="hibernate.hbm2ddl.auto" value="update" ></property> -->
 		</properties>
 	</persistence-unit>
 </persistence>
