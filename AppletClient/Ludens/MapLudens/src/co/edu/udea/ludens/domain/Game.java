@@ -1,235 +1,138 @@
 package co.edu.udea.ludens.domain;
 
+import co.edu.udea.ludens.enums.EnumGameStatus;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+public class Game implements Serializable, Updateable {
 
-
-import co.edu.udea.ludens.enums.EnumGameStatus;
-
-public class Game implements Updateable {
-
+    private static final long serialVersionUID = 1739544762L;
     private Long id;
-    private String name;
     private long duration;
-    private Date startTime;
-    private Date endTime;
-    private long productionTime;
     private long lowerThreshold;
+    private long productionTime;
     private long upperThreshold;
-    private EnumGameStatus status;
-    private HashMap<String, Player> players = new HashMap<String, Player>();
-    private Set<Incrementable> defaultDevelopmentFactors = new HashSet<Incrementable>();
+    private Date endTime;
+    private Date startTime;
+    private EnumGameStatus status = EnumGameStatus.NO_STARTED;
+    private List<Incrementable> defaultIncrementables = new ArrayList<Incrementable>();
+    private List<Player> players = new ArrayList<Player>();
     private List<UnexpectedEvent> unexpectedEvents = new ArrayList<UnexpectedEvent>();
-    private Set<Incrementable> defaultMaterials = new HashSet<Incrementable>();
-    private Population defaultPopulation;
+    private String name;
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
+    public Game() {
     }
 
     @Override
     public Long getId() {
-        return id;
+
+        return (this.id);
     }
 
-    /**
-     * @generated
-     */
-    public void setName(String name) {
-
-        this.name = name;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    /**
-     * @generated
-     */
-    public String getName() {
+    public long getDuration() {
 
-        return this.name;
+        return (this.duration);
     }
 
-    /**
-     * @generated
-     */
-    public void setStartTime(Date startTime) {
-
-        this.startTime = startTime;
+    public void setDuration(long duration) {
+        this.duration = duration;
     }
 
-    /**
-     * @generated
-     */
-    public Date getStartTime() {
+    public long getLowerThreshold() {
 
-        return this.startTime;
+        return (this.lowerThreshold);
     }
 
-    /**
-     * @generated
-     */
+    public void setLowerThreshold(long lowerThreshold) {
+        this.lowerThreshold = lowerThreshold;
+    }
+
+    public long getProductionTime() {
+
+        return (this.productionTime);
+    }
+
+    public void setProductionTime(long productionTime) {
+        this.productionTime = productionTime;
+    }
+
+    public long getUpperThreshold() {
+
+        return (this.upperThreshold);
+    }
+
+    public void setUpperThreshold(long upperThreshold) {
+        this.upperThreshold = upperThreshold;
+    }
+
+    public Date getEndTime() {
+
+        return (this.endTime);
+    }
+
     public void setEndTime(Date endTime) {
-
         this.endTime = endTime;
     }
 
-    /**
-     * @generated
-     */
-    public Date getEndTime() {
+    public Date getStartTime() {
 
-        return this.endTime;
+        return (this.startTime);
     }
 
-    /**
-     * @generated
-     */
-    public void setStatus(EnumGameStatus status) {
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
 
+    public EnumGameStatus getStatus() {
+
+        return (this.status);
+    }
+
+    public void setStatus(EnumGameStatus status) {
         this.status = status;
     }
 
-    /**
-     * @generated
-     */
-    public EnumGameStatus getStatus() {
+    public List<Incrementable> getDefaultIncrementables() {
 
-        return this.status;
+        return (this.defaultIncrementables);
     }
 
-    /**
-     * @generated
-     */
-    public void setPlayers(HashMap<String, Player> players) {
-
-        this.players = new HashMap<String, Player>(players);
+    public void setDefaultIncrementables(
+            List<Incrementable> defaultIncrementables) {
+        this.defaultIncrementables = defaultIncrementables;
     }
 
-    /**
-     * @generated
-     */
-    public HashMap<String, Player> getPlayers() {
+    public List<Player> getPlayers() {
 
-        return players;
+        return (this.players);
     }
 
-    /**
-     * @generated
-     */
-    public Game() {
-
-        status = EnumGameStatus.NO_STARTED;
-    }
-
-    public void setUnexpectedEvents(List<UnexpectedEvent> unexpectedEvents) {
-
-        this.unexpectedEvents = new ArrayList<UnexpectedEvent>(unexpectedEvents);
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
     public List<UnexpectedEvent> getUnexpectedEvents() {
 
-        return unexpectedEvents;
+        return (this.unexpectedEvents);
     }
 
-    public void setDefaultDevelopmentFactors(Set<Incrementable> defaultDevelopmentFactors) {
-
-        this.defaultDevelopmentFactors = new HashSet<Incrementable>(defaultDevelopmentFactors);
+    public void setUnexpectedEvents(List<UnexpectedEvent> unexpectedEvents) {
+        this.unexpectedEvents = unexpectedEvents;
     }
 
-    public Set<Incrementable> getDefaultDevelopmentFactors() {
+    public String getName() {
 
-        return defaultDevelopmentFactors;
+        return (this.name);
     }
 
-    public void setDefaultMaterials(Set<Incrementable> defaultMaterials) {
-
-        this.defaultMaterials = new HashSet<Incrementable>(defaultMaterials);
-    }
-
-    public Set<Incrementable> getDefaultMaterials() {
-
-        return defaultMaterials;
-    }
-
-    public void setDefaultPopulation(Population defaultPopulation) {
-
-        this.defaultPopulation = defaultPopulation;
-    }
-
-    public Population getDefaultPopulation() {
-
-        return defaultPopulation;
-    }
-
-    /**
-     * @param duration the duration to set
-     */
-    public void setDuration(long duration) {
-
-        this.duration = duration;
-    }
-
-    /**
-     * @return the duration
-     */
-    public long getDuration() {
-
-        return duration;
-    }
-
-    /**
-     * @param productionTime the productionTime to set
-     */
-    public void setProductionTime(long productionTime) {
-
-        this.productionTime = productionTime;
-    }
-
-    /**
-     * @return the productionTime
-     */
-    public long getProductionTime() {
-
-        return productionTime;
-    }
-
-    /**
-     * @param lowerThreshold the lowerThreshold to set
-     */
-    public void setLowerThreshold(long lowerThreshold) {
-
-        this.lowerThreshold = lowerThreshold;
-    }
-
-    /**
-     * @return the lowerThreshold
-     */
-    public long getLowerThreshold() {
-
-        return lowerThreshold;
-    }
-
-    /**
-     * @param upperThreshold the upperThreshold to set
-     */
-    public void setUpperThreshold(long upperThreshold) {
-
-        this.upperThreshold = upperThreshold;
-    }
-
-    /**
-     * @return the upperThreshold
-     */
-    public long getUpperThreshold() {
-
-        return upperThreshold;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -246,10 +149,16 @@ public class Game implements Updateable {
         this.status = game.status;
         this.players = game.players;
         this.unexpectedEvents = game.unexpectedEvents;
-        this.defaultDevelopmentFactors = game.defaultDevelopmentFactors;
-        this.defaultMaterials = game.defaultMaterials;
-        this.defaultPopulation = game.defaultPopulation;
+        this.defaultIncrementables = game.defaultIncrementables;
+    }
 
+    @Override
+    public String toString() {
 
+        return ("id " + id + " name " + name + " duration " + duration
+                + " startTime " + startTime + " endTime " + endTime
+                + " productionTime " + productionTime + " lowerThreshold "
+                + lowerThreshold + " upperThreshold " + upperThreshold
+                + " status " + status);
     }
 }

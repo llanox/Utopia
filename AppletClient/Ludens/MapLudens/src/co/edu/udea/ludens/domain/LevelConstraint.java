@@ -67,8 +67,5 @@ public class LevelConstraint implements Updateable {
         this.elementName = constraint.elementName;
         this.level = constraint.level;
         this.quantity = constraint.quantity;
-
-
-
     }
 }

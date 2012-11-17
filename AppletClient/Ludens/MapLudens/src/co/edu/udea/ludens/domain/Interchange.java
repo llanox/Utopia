@@ -1,13 +1,12 @@
 package co.edu.udea.ludens.domain;
 
+import co.edu.udea.ludens.enums.EnumTradeStatus;
+import java.io.Serializable;
 import java.util.Date;
 
+public class Interchange implements Serializable, Updateable {
 
-
-import co.edu.udea.ludens.enums.EnumTradeStatus;
-
-public class Interchange implements Updateable {
-
+    private static final long serialVersionUID = 1739542383L;
     private Long id;
     private Date startTime;
     private Date endTime;
@@ -20,136 +19,106 @@ public class Interchange implements Updateable {
     private EnumTradeStatus status;
     private Interchange previousInterchange;
 
-    /**
-     * @param id the id to set
-     */
+    public Interchange() {
+    }
+
+    public Long getId() {
+
+        return (this.id);
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
+    public Date getStartTime() {
+
+        return (this.startTime);
     }
 
-    /**
-     * @generated
-     */
     public void setStartTime(Date startTime) {
-
         this.startTime = startTime;
     }
 
-    /**
-     * @generated
-     */
-    public Date getStartTime() {
+    public Date getEndTime() {
 
-        return this.startTime;
+        return (this.endTime);
     }
 
-    /**
-     * @generated
-     */
     public void setEndTime(Date endTime) {
-
         this.endTime = endTime;
     }
 
-    /**
-     * @generated
-     */
-    public Date getEndTime() {
+    public Element getElFromSender() {
 
-        return this.endTime;
+        return (this.elFromSender);
     }
 
-    public void setPreviousInterchange(Interchange previousInterchange) {
-
-        this.previousInterchange = previousInterchange;
-    }
-
-    public Interchange getPreviousInterchange() {
-
-        return previousInterchange;
-    }
-
-    public EnumTradeStatus getStatus() {
-
-        return status;
-    }
-
-    public void setStatus(EnumTradeStatus status) {
-
-        this.status = status;
-    }
-
-    public void setSender(Player sender) {
-
-        this.sender = sender;
-    }
-
-    public Player getSender() {
-
-        return sender;
-    }
-
-    public void setReceiver(Player receiver) {
-
-        this.receiver = receiver;
-    }
-
-    public Player getReceiver() {
-
-        return receiver;
+    public void setElFromSender(Element elFromSender) {
+        this.elFromSender = elFromSender;
     }
 
     public Element getElFromReceiver() {
 
-        return elFromReceiver;
+        return (this.elFromReceiver);
     }
 
     public void setElFromReceiver(Element elFromReceiver) {
-
         this.elFromReceiver = elFromReceiver;
     }
 
     public Integer getQuantityFromSender() {
 
-        return quantityFromSender;
+        return (this.quantityFromSender);
     }
 
     public void setQuantityFromSender(Integer quantityFromSender) {
-
         this.quantityFromSender = quantityFromSender;
     }
 
     public Integer getQuantityFromReceiver() {
 
-        return quantityFromReceiver;
+        return (this.quantityFromReceiver);
     }
 
     public void setQuantityFromReceiver(Integer quantityFromReceiver) {
-
         this.quantityFromReceiver = quantityFromReceiver;
     }
 
-    /**
-     * @generated
-     */
-    public Interchange() {
+    public Player getSender() {
+
+        return (this.sender);
     }
 
-    public void setElFromSender(Element elFromSender) {
-
-        this.elFromSender = elFromSender;
+    public void setSender(Player sender) {
+        this.sender = sender;
     }
 
-    public Element getElFromSender() {
+    public Player getReceiver() {
 
-        return elFromSender;
+        return (this.receiver);
+    }
+
+    public void setReceiver(Player receiver) {
+        this.receiver = receiver;
+    }
+
+    public EnumTradeStatus getStatus() {
+
+        return (this.status);
+    }
+
+    public void setStatus(EnumTradeStatus status) {
+        this.status = status;
+    }
+
+    public Interchange getPreviousInterchange() {
+
+        return (this.previousInterchange);
+    }
+
+    public void setPreviousInterchange(Interchange previousInterchange) {
+        this.previousInterchange = previousInterchange;
     }
 
     @Override
@@ -166,6 +135,5 @@ public class Interchange implements Updateable {
         this.receiver = inter.receiver;
         this.status = inter.status;
         this.previousInterchange = inter.previousInterchange;
-
     }
 }

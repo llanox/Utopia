@@ -8,16 +8,17 @@ public class PlayerStatus implements Comparable<PlayerStatus> {
     private int ranking;
 
     public String getLogin() {
-        return login;
+
+        return (this.login);
     }
 
     public void setLogin(String login) {
-
         this.login = login;
     }
 
     public int getAverage() {
-        return average;
+
+        return (this.average);
     }
 
     public void setAverage(int average) {
@@ -25,7 +26,8 @@ public class PlayerStatus implements Comparable<PlayerStatus> {
     }
 
     public boolean isOnline() {
-        return online;
+
+        return (this.online);
     }
 
     public void setOnline(boolean online) {
@@ -33,7 +35,8 @@ public class PlayerStatus implements Comparable<PlayerStatus> {
     }
 
     public int getRanking() {
-        return ranking;
+
+        return (this.ranking);
     }
 
     public void setRanking(int ranking) {
@@ -43,6 +46,7 @@ public class PlayerStatus implements Comparable<PlayerStatus> {
     @Override
     public int compareTo(PlayerStatus o) {
         int result = o.getAverage() - this.average;
-        return result;
+
+        return (result);
     }
 }

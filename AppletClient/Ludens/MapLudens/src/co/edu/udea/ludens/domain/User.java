@@ -1,10 +1,12 @@
 package co.edu.udea.ludens.domain;
 
 import co.edu.udea.ludens.enums.EnumUserRole;
+import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Updateable {
+public class User implements Serializable, Updateable {
 
+    private static final long serialVersionUID = 1739544489L;
     private Long id;
     private String name;
     private String login;
@@ -16,166 +18,98 @@ public class User implements Updateable {
     private Boolean online = false;
     private Boolean participatingInGame = false;
 
-    /**
-     * @param id the id to set
-     */
+    public User() {
+    }
+
     public void setId(long id) {
         this.id = id;
     }
 
     @Override
     public Long getId() {
-        return id;
+
+        return (this.id);
     }
 
-    /**
-     * @generated
-     */
     public void setName(String name) {
-
         this.name = name;
     }
 
-    /**
-     * @generated
-     */
     public String getName() {
 
-        return this.name;
+        return (this.name);
     }
 
-    /**
-     * @generated
-     */
     public void setLogin(String login) {
-
         this.login = login;
     }
 
-    /**
-     * @generated
-     */
     public String getLogin() {
 
-        return this.login;
+        return (this.login);
     }
 
-    /**
-     * @generated
-     */
     public void setEmail(String email) {
-
         this.email = email;
     }
 
-    /**
-     * @generated
-     */
     public String getEmail() {
 
-        return this.email;
+        return (this.email);
     }
 
-    /**
-     * @generated
-     */
     public void setGender(String gender) {
-
         this.gender = gender;
     }
 
-    /**
-     * @generated
-     */
     public String getGender() {
 
-        return this.gender;
+        return (this.gender);
     }
 
-    /**
-     * @generated
-     */
     public void setPassword(String password) {
-
         this.password = password;
     }
 
-    /**
-     * @generated
-     */
     public String getPassword() {
 
-        return this.password;
+        return (this.password);
     }
 
-    /**
-     * @generated
-     */
-    public User() {
-    }
-
-    /**
-     * @param online the online to set
-     */
     public void setOnline(Boolean online) {
-
         this.online = online;
     }
 
-    /**
-     * @return the online
-     */
     public Boolean isOnline() {
 
-        return online;
+        return (this.online);
     }
 
-    /**
-     * @param birthDate the birthDate to set
-     */
     public void setBirthDate(Date birthDate) {
-
         this.birthDate = birthDate;
     }
 
-    /**
-     * @return the birthDate
-     */
     public Date getBirthDate() {
 
-        return birthDate;
+        return (this.birthDate);
     }
 
-    /**
-     * @param role the role to set
-     */
     public void setRole(EnumUserRole role) {
-
         this.role = role;
     }
 
-    /**
-     * @return the role
-     */
     public EnumUserRole getRole() {
 
-        return role;
+        return (this.role);
     }
 
-    /**
-     * @param participatingInGame the participatingInGame to set
-     */
     public void setParticipatingInGame(Boolean participatingInGame) {
-
         this.participatingInGame = participatingInGame;
     }
 
-    /**
-     * @return the participatingInGame
-     */
     public Boolean isParticipatingInGame() {
 
-        return participatingInGame;
+        return (this.participatingInGame);
     }
 
     @Override

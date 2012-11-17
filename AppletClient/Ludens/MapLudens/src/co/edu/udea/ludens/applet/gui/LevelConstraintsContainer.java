@@ -5,6 +5,7 @@
 package co.edu.udea.ludens.applet.gui;
 
 import co.edu.udea.ludens.domain.Element;
+import co.edu.udea.ludens.domain.IncrementableConstraint;
 import co.edu.udea.ludens.domain.LevelConstraint;
 import co.edu.udea.ludens.enums.EnumDataType;
 import java.awt.Color;
@@ -76,9 +77,6 @@ class LevelConstraintsContainer {
         if (time == null) {
             time = element.getInitialUpgradingTime();
         }
-        if (time == null) {
-            time = 0;
-        }
 
         msgLevel = String.format(MSG_UP_LEVEL_TIME, time);
         panel.getLbLevelProduction().setText(msgLevel);
@@ -86,7 +84,8 @@ class LevelConstraintsContainer {
         Image image = MapDashboard.imagesMap.get(MapDashboard.FILE_PREFIX + level);
         panel.getLbAskuplevel().setIcon(new ImageIcon(image));
 
-        List<LevelConstraint> constraints = element.getLevelConstraints().get(level + "");
+        //List<LevelConstraint> constraints = element.getLevelConstraints().get(level + "");
+        List<IncrementableConstraint> constraints = getConstraintsByLevel(level, element.getLevelConstraints());
 
         Collections.sort(constraints, new KeyComparator());
 
@@ -105,9 +104,21 @@ class LevelConstraintsContainer {
 
         if (constraints == null || constraints.isEmpty()) {
             required.add(new JLabel(NO_AVAIBLE_DATA));
-            
+
             return;
         }
+    }
+
+    private List<IncrementableConstraint> getConstraintsByLevel(int level, List<IncrementableConstraint> levelConstraints) {
+        List<IncrementableConstraint> list = new ArrayList<IncrementableConstraint>();
+
+        for (IncrementableConstraint ic : levelConstraints) {
+            if (ic.getConstrainedLevel().intValue() == level) {
+                list.add(ic);
+            }
+        }
+
+        return (list);
     }
 
     private void updatePnlResources(String elementName, int quantity, JPanel panel, HashMap<String, ItemResource> itemResources) {
@@ -122,10 +133,10 @@ class LevelConstraintsContainer {
 
             itemResources.put(elementName, pnlRsrc);
         }
-        
+
         pnlRsrc.getResourceQuantity().setText(quantity + "");
         pnlRsrc.getResourceQuantity().setForeground(Color.black);
-        
+
         if (panel != null) {
             panel.add(pnlRsrc);
         }
@@ -135,7 +146,7 @@ class LevelConstraintsContainer {
 
     public void updateElements(List<Object> elements, EnumDataType dataType) {
         if (elements == null) {
-            
+
             return;
         }
 
@@ -159,7 +170,7 @@ class LevelConstraintsContainer {
             ItemResource required = requiredResources.get(key);
 
             if (actual == null || required == null) {
-                
+
                 return;
             }
 
@@ -186,6 +197,7 @@ class LevelConstraintsContainer {
     }
 
     public class KeyComparator implements Comparator<LevelConstraint> {
+
         @Override
         public int compare(LevelConstraint o1, LevelConstraint o2) {
 
