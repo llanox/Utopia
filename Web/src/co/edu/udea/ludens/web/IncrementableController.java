@@ -70,8 +70,14 @@ public class IncrementableController implements UpdateableView {
 
 		if (incrementables != null && !incrementables.isEmpty()) {
 			Incrementable incr = incrementables.get(0);
-			if (incr.getConstraints() != null
-					&& !incr.getConstraints().isEmpty()) {
+			List<IncrementableConstraint> list = incr.getConstraints();
+			/*
+			 * if (incr.getConstraints() != null &&
+			 * !incr.getConstraints().isEmpty()) { settingUpConstraints = true;
+			 * 
+			 * return; }
+			 */
+			if (list != null && !list.isEmpty()) {
 				settingUpConstraints = true;
 
 				return;

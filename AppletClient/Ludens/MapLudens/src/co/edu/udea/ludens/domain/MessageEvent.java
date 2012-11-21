@@ -73,7 +73,7 @@ public class MessageEvent implements Comparable<MessageEvent>, Serializable,
         return (this.msgType);
     }
 
-    @Override
+    @Override()
     public Long getId() {
 
         return (this.id);
@@ -173,7 +173,7 @@ public class MessageEvent implements Comparable<MessageEvent>, Serializable,
         this.id = id;
     }
 
-    @Override
+    @Override()
     public int compareTo(MessageEvent o) {
         long result = this.id - o.getId();
 
@@ -189,7 +189,7 @@ public class MessageEvent implements Comparable<MessageEvent>, Serializable,
         return (this.gameName);
     }
 
-    @Override
+    @Override()
     public void updateWith(Object o) {
         MessageEvent event = (MessageEvent) o;
 

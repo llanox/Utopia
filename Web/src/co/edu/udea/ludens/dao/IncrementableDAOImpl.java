@@ -48,8 +48,10 @@ public class IncrementableDAOImpl extends ObjectDBDAO implements
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Incrementable> findAllIncrementable(String game) {
-		List<Incrementable> incrementables = (List<Incrementable>) findObjectByAttribute(
-				Incrementable.class, "game.name", game);
+		//List<Incrementable> incrementables = (List<Incrementable>) findObjectByAttribute(
+		//		Incrementable.class, "game.name", game);
+		List<Incrementable> incrementables = (List<Incrementable>) findObjectByAttributeAndFetch(
+				Incrementable.class, "game.name", game, "game");
 
 		return incrementables;
 	}

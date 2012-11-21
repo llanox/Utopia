@@ -43,7 +43,7 @@ public class PlayerStatus implements Comparable<PlayerStatus> {
         this.ranking = ranking;
     }
 
-    @Override
+    @Override()
     public int compareTo(PlayerStatus o) {
         int result = o.getAverage() - this.average;
 

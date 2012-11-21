@@ -8,136 +8,135 @@ import java.util.List;
 
 public class Incrementable implements Serializable, Updateable {
 
-	private static final long serialVersionUID = 1739542395L;
+    private static final long serialVersionUID = 1739542395L;
+    private Long id;
+    private long initialUpgradingTime;
+    private int initialValue;
+    private int levelIncrementDelayRate;
+    private int productionIncrementRate;
+    private EnumElementType type;
+    private Game game;
+    private List<IncrementableConstraint> constraints = new ArrayList<IncrementableConstraint>();
+    private String description;
+    private String imageUrl = LudensConstants.NO_IMAGE_FILE;
+    private String name;
 
-	private Long id;
-	private long initialUpgradingTime;
-	private int initialValue;
-	private int levelIncrementDelayRate;
-	private int productionIncrementRate;
-	private EnumElementType type;
-	private Game game;
-	private List<IncrementableConstraint> constraints = new ArrayList<IncrementableConstraint>();
-	private String description;
-	private String imageUrl = LudensConstants.NO_IMAGE_FILE;
-	private String name;
+    public Incrementable() {
+    }
 
-	public Incrementable() {
-	}
+    @Override()
+    public Long getId() {
 
-	@Override
-	public Long getId() {
+        return (this.id);
+    }
 
-		return (this.id);
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public long getInitialUpgradingTime() {
 
-	public long getInitialUpgradingTime() {
+        return (this.initialUpgradingTime);
+    }
 
-		return (this.initialUpgradingTime);
-	}
+    public void setInitialUpgradingTime(long initialUpgradingTime) {
+        this.initialUpgradingTime = initialUpgradingTime;
+    }
 
-	public void setInitialUpgradingTime(long initialUpgradingTime) {
-		this.initialUpgradingTime = initialUpgradingTime;
-	}
+    public int getInitialValue() {
 
-	public int getInitialValue() {
+        return (this.initialValue);
+    }
 
-		return (this.initialValue);
-	}
+    public void setInitialValue(int initialValue) {
+        this.initialValue = initialValue;
+    }
 
-	public void setInitialValue(int initialValue) {
-		this.initialValue = initialValue;
-	}
+    public int getLevelIncrementDelayRate() {
 
-	public int getLevelIncrementDelayRate() {
+        return (this.levelIncrementDelayRate);
+    }
 
-		return (this.levelIncrementDelayRate);
-	}
+    public void setLevelIncrementDelayRate(int levelIncrementDelayRate) {
+        this.levelIncrementDelayRate = levelIncrementDelayRate;
+    }
 
-	public void setLevelIncrementDelayRate(int levelIncrementDelayRate) {
-		this.levelIncrementDelayRate = levelIncrementDelayRate;
-	}
+    public int getProductionIncrementRate() {
 
-	public int getProductionIncrementRate() {
+        return (this.productionIncrementRate);
+    }
 
-		return (this.productionIncrementRate);
-	}
+    public void setProductionIncrementRate(int productionIncrementRate) {
+        this.productionIncrementRate = productionIncrementRate;
+    }
 
-	public void setProductionIncrementRate(int productionIncrementRate) {
-		this.productionIncrementRate = productionIncrementRate;
-	}
+    public EnumElementType getType() {
 
-	public EnumElementType getType() {
+        return (this.type);
+    }
 
-		return (this.type);
-	}
+    public void setType(EnumElementType type) {
+        this.type = type;
+    }
 
-	public void setType(EnumElementType type) {
-		this.type = type;
-	}
+    public Game getGame() {
 
-	public Game getGame() {
+        return (this.game);
+    }
 
-		return (this.game);
-	}
+    public void setGame(Game game) {
+        this.game = game;
+    }
 
-	public void setGame(Game game) {
-		this.game = game;
-	}
+    public List<IncrementableConstraint> getConstraints() {
 
-	public List<IncrementableConstraint> getConstraints() {
+        return (this.constraints);
+    }
 
-		return (this.constraints);
-	}
+    public void setConstraints(List<IncrementableConstraint> constraints) {
+        this.constraints = constraints;
+    }
 
-	public void setConstraints(List<IncrementableConstraint> constraints) {
-		this.constraints = constraints;
-	}
+    public String getDescription() {
 
-	public String getDescription() {
+        return (this.description);
+    }
 
-		return (this.description);
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getImageUrl() {
 
-	public String getImageUrl() {
+        return (this.imageUrl);
+    }
 
-		return (this.imageUrl);
-	}
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
+    public String getName() {
 
-	public String getName() {
+        return (this.name);
+    }
 
-		return (this.name);
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @Override()
+    public void updateWith(Object o) {
+        Incrementable inc = (Incrementable) o;
 
-	@Override
-	public void updateWith(Object o) {
-		Incrementable inc = (Incrementable) o;
-
-		this.name = inc.name;
-		this.description = inc.description;
-		this.imageUrl = inc.imageUrl;
-		this.type = inc.type;
-		this.levelIncrementDelayRate = inc.levelIncrementDelayRate;
-		this.productionIncrementRate = inc.productionIncrementRate;
-		this.initialUpgradingTime = inc.initialUpgradingTime;
-		this.initialValue = inc.initialValue;
-		this.constraints = inc.constraints;
-		this.game = inc.game;
-	}
+        this.name = inc.name;
+        this.description = inc.description;
+        this.imageUrl = inc.imageUrl;
+        this.type = inc.type;
+        this.levelIncrementDelayRate = inc.levelIncrementDelayRate;
+        this.productionIncrementRate = inc.productionIncrementRate;
+        this.initialUpgradingTime = inc.initialUpgradingTime;
+        this.initialValue = inc.initialValue;
+        this.constraints = inc.constraints;
+        this.game = inc.game;
+    }
 }

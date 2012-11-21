@@ -21,7 +21,7 @@ public class Player implements Serializable, Updateable {
         this.id = id;
     }
 
-    @Override
+    @Override()
     public Long getId() {
 
         return (this.id);
@@ -102,7 +102,7 @@ public class Player implements Serializable, Updateable {
         return (this.startTime);
     }
 
-    @Override
+    @Override()
     public void updateWith(Object o) {
         Player player = (Player) o;
 

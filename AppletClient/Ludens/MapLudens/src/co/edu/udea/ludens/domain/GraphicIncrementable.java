@@ -8,16 +8,14 @@ public class GraphicIncrementable implements Updateable {
     private int coorY;
     private String urlImage;
 
-    /**
-     * @param id the id to set
-     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    @Override
+    @Override()
     public Long getId() {
-        return id;
+
+        return (this.id);
     }
 
     public GraphicIncrementable() {
@@ -35,52 +33,47 @@ public class GraphicIncrementable implements Updateable {
 
     public int getLevel() {
 
-        return level;
+        return (this.level);
     }
 
     public int getCoorX() {
 
-        return coorX;
+        return (this.coorX);
     }
 
     public int getCoorY() {
 
-        return coorY;
+        return (this.coorY);
     }
 
     public String getUrlImage() {
 
-        return urlImage;
+        return (this.urlImage);
     }
 
     public void setLevel(int level) {
-
         this.level = level;
     }
 
     public void setCoorX(int coorX) {
-
         this.coorX = coorX;
     }
 
     public void setCoorY(int coorY) {
-
         this.coorY = coorY;
     }
 
     public void setUrlImage(String urlImage) {
-
         this.urlImage = urlImage;
     }
 
-    @Override
+    @Override()
     public void updateWith(Object o) {
         GraphicIncrementable graphic = (GraphicIncrementable) o;
+
         this.coorX = graphic.coorX;
         this.level = graphic.level;
         this.urlImage = graphic.urlImage;
         this.coorY = graphic.coorY;
-
-
     }
 }

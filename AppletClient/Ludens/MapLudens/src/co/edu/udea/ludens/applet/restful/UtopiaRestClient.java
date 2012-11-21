@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.udea.ludens.applet.restful;
 
 import co.edu.udea.ludens.applet.listeners.ElementListener;
@@ -17,10 +13,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author juanga
- */
 public class UtopiaRestClient {
 
     private String login;

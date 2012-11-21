@@ -14,7 +14,7 @@ public class Community implements Updateable {
     private HashMap<String, Element> materials = new HashMap<String, Element>();
     private Population population;
 
-    @Override
+    @Override()
     public Long getId() {
 
         return (this.id);
@@ -99,7 +99,7 @@ public class Community implements Updateable {
     public Community() {
     }
 
-    @Override
+    @Override()
     public void updateWith(Object o) {
         Community newCom = (Community) o;
 

@@ -25,7 +25,7 @@ public class Game implements Serializable, Updateable {
     public Game() {
     }
 
-    @Override
+    @Override()
     public Long getId() {
 
         return (this.id);
@@ -135,7 +135,7 @@ public class Game implements Serializable, Updateable {
         this.name = name;
     }
 
-    @Override
+    @Override()
     public void updateWith(Object o) {
         Game game = (Game) o;
 

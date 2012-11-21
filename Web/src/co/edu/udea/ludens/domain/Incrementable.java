@@ -27,7 +27,8 @@ public class Incrementable implements Serializable, Updateable {
 	private int productionIncrementRate;
 	@Column(name = "type")
 	private EnumElementType type;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
+	//@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
+	@ManyToOne(cascade = { CascadeType.MERGE })
 	private Game game;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "restrictedIncrementable", cascade = { CascadeType.MERGE })
 	@Column(name = "constraints")
@@ -42,7 +43,7 @@ public class Incrementable implements Serializable, Updateable {
 	public Incrementable() {
 	}
 
-	@Override
+	@Override()
 	public Long getId() {
 
 		return (this.id);
@@ -142,7 +143,7 @@ public class Incrementable implements Serializable, Updateable {
 		this.name = name;
 	}
 
-	@Override
+	@Override()
 	public void updateWith(Object o) {
 		Incrementable inc = (Incrementable) o;
 

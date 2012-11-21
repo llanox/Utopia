@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.udea.ludens.applet.gui;
 
 import co.edu.udea.ludens.domain.Element;
@@ -9,10 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-/**
- *
- * @author telematica
- */
 public class ElementTableModel extends AbstractTableModel {
 
     String[] columnNames;
@@ -32,6 +24,7 @@ public class ElementTableModel extends AbstractTableModel {
     @Override
     public int getRowCount() {
         if (this.elements == null) {
+            
             return 0;
         }
 
@@ -54,13 +47,13 @@ public class ElementTableModel extends AbstractTableModel {
         Element element = (Element) elements.get(row);
         if (col == 0) {
 
-            return element.getIncrementable().getName();
+            return (element.getIncrementable().getName());
         } else if (col == 1) {
 
-            return element.getQuantity() + "";
+            return (element.getQuantity() + "");
         } else if (col == 2) {
 
-            return element.getCalculatedValue() + "";
+            return (element.getCalculatedValue() + "");
         } else if (col == 3) {
 
             return element.getLevel() + "";

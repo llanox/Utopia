@@ -22,7 +22,7 @@ public class UnexpectedEvent implements Serializable, Updateable {
         this.id = id;
     }
 
-    @Override
+    @Override()
     public Long getId() {
 
         return (this.id);
@@ -82,7 +82,7 @@ public class UnexpectedEvent implements Serializable, Updateable {
         return (this.quantity);
     }
 
-    @Override
+    @Override()
     public void updateWith(Object o) {
         UnexpectedEvent event = (UnexpectedEvent) o;
 

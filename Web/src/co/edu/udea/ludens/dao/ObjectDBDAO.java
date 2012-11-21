@@ -3,7 +3,6 @@ package co.edu.udea.ludens.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 import org.apache.log4j.Logger;
 
@@ -67,12 +66,14 @@ public class ObjectDBDAO implements DBDAO {
 			} else {
 				sb.append(" WHERE ");
 			}
-			if (parameters[i + 1] instanceof Boolean)
+
+			if (parameters[i + 1] instanceof Boolean) {
 				sb.append("o." + parameters[i] + " = :"
 						+ removeDot(parameters[i]));
-			else
+			} else {
 				sb.append("o." + parameters[i] + " LIKE :"
 						+ removeDot(parameters[i]));
+			}
 		}
 		logger.info("Clausules: " + sb.toString());
 		logger.info("SQL : " + "FROM " + clazz.getSimpleName() + " AS o"
@@ -103,17 +104,27 @@ public class ObjectDBDAO implements DBDAO {
 	}
 
 	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes"})
 	public Object findObjectByAttributeAndFetch(Class clazz,
 			Object... parameters) {
-		String JOIN_SQL = "INNER JOIN";
+		String JOIN_SQL = "JOIN FETCH";
 		StringBuilder sb = new StringBuilder();
 		int paramsLength = parameters.length - 1;
 
 		if (paramsLength % 2 != 0) {
-			throw new DatabaseError("NÃºmero incorrecto de parÃ¡metros: "
+			throw new DatabaseError("Número incorrecto de parámetros: "
 					+ paramsLength);
 		}
+
+		// for (int i = 0; i < paramsLength; i = i + 2) {
+		// if (i >= 2) {
+		// sb.append(" AND ");
+		// } else {
+		// sb.append(" WHERE ");
+		// }
+		// sb.append("  o." + parameters[i] + ".toString() LIKE '%"
+		// + parameters[i + 1] + "' ");
+		// }
 
 		for (int i = 0; i < paramsLength; i = i + 2) {
 			if (i >= 2) {
@@ -121,19 +132,40 @@ public class ObjectDBDAO implements DBDAO {
 			} else {
 				sb.append(" WHERE ");
 			}
-			sb.append("  o." + parameters[i] + ".toString() LIKE '%"
-					+ parameters[i + 1] + "' ");
+
+			if (parameters[i + 1] instanceof Boolean) {
+				sb.append("o." + parameters[i] + " = :"
+						+ removeDot(parameters[i]));
+			} else {
+				sb.append("o." + parameters[i] + " LIKE :"
+						+ removeDot(parameters[i]));
+			}
+		}
+		//sb.append(" ").append(JOIN_SQL).append(" o.")
+		//		.append(parameters[paramsLength]);
+
+		logger.info("Clausules: " + sb.toString());
+		logger.info("SQL : " + "SELECT o FROM " + clazz.getSimpleName() + " o " + JOIN_SQL + " o."
+				+ parameters[paramsLength] + sb.toString());
+
+		//Query query = this.entityManager.createQuery("SELECT o FROM "
+		//		+ clazz.getSimpleName() + " AS o" + sb.toString());
+		Query query = this.entityManager.createQuery("SELECT o FROM " + clazz.getSimpleName() + " o " + JOIN_SQL + " o."
+				+ parameters[paramsLength] + sb.toString());
+		for (int i = 0; i < paramsLength; i = i + 2) {
+			query.setParameter(removeDot(parameters[i]), parameters[1 + i]);
+			logger.info(parameters[i].toString() + " -> " + parameters[1 + i]);
 		}
 
-		/*CriteriaQuery<Object> query = entityManager.getCriteriaBuilder()
-				.createQuery();*/
-		String sqlStatement = "SELECT o FROM " + clazz.getName() + " o "
-				+ JOIN_SQL + " o." + parameters[paramsLength] + " p "
-				+ sb.toString();
-		logger.info("SQL : " + sqlStatement);
-		TypedQuery<Class> q2 = entityManager.createQuery(sqlStatement, clazz);
+		// return (query.getResultList());
 
-		return (q2.getResultList());
+//		String sqlStatement = "SELECT o FROM " + clazz.getName() + " o "
+//				+ JOIN_SQL + " o." + parameters[paramsLength] + " p "
+//				+ sb.toString();
+//		logger.info("SQL : " + sqlStatement);
+//		TypedQuery<Class> q2 = entityManager.createQuery(sqlStatement, clazz);
+
+		return (query.getResultList());
 	}
 
 	@Override

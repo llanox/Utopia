@@ -25,7 +25,7 @@ public class User implements Serializable, Updateable {
         this.id = id;
     }
 
-    @Override
+    @Override()
     public Long getId() {
 
         return (this.id);
@@ -112,9 +112,10 @@ public class User implements Serializable, Updateable {
         return (this.participatingInGame);
     }
 
-    @Override
+    @Override()
     public void updateWith(Object o) {
         User newUser = (User) o;
+
         this.name = newUser.name;
         this.login = newUser.login;
         this.email = newUser.email;

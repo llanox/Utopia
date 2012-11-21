@@ -40,7 +40,7 @@ public class Element implements Serializable, Updateable {
         this.incrementable.setProductionIncrementRate(productionIncrementRate);
     }
 
-    @Override
+    @Override()
     public Long getId() {
 
         return (this.id);
@@ -141,16 +141,16 @@ public class Element implements Serializable, Updateable {
         this.player = player;
     }
 
-    public int getActualUpgradingTime() {
-        if (this.incrementable == null) {
-            
-            return -1;
-        }
-        
-        return this.incrementable.getActualUpgradingTime();
+    public long getInitialUpgradingTime() {
+
+        return (this.incrementable.getInitialValue());
     }
 
-    @Override
+    public void setInitialUpgradingTime(long initialUpgradingTime) {
+        this.incrementable.setInitialUpgradingTime(initialUpgradingTime);
+    }
+
+    @Override()
     public void updateWith(Object o) {
         Element newElement = (Element) o;
 

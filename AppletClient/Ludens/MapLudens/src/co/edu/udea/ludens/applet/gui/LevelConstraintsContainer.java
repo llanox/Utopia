@@ -16,10 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 
-/**
- *
- * @author juanga
- */
 class LevelConstraintsContainer {
 
     public static final String NO_AVAIBLE_DATA = "NO DISPONIBLE";
@@ -72,7 +68,7 @@ class LevelConstraintsContainer {
         String msgLevel = String.format(MSG_UP_LEVEL, level);
         panel.getLbAskuplevel().setText(msgLevel);
 
-        Integer time = element.getActualUpgradingTime();
+        Long time = new Long(element.getActualUpgradingTime());
 
         if (time == null) {
             time = element.getInitialUpgradingTime();
@@ -85,14 +81,14 @@ class LevelConstraintsContainer {
         panel.getLbAskuplevel().setIcon(new ImageIcon(image));
 
         //List<LevelConstraint> constraints = element.getLevelConstraints().get(level + "");
-        List<IncrementableConstraint> constraints = getConstraintsByLevel(level, element.getLevelConstraints());
+        List<IncrementableConstraint> constraints = getIncrementableConstraintsByLevel(level, element.getLevelConstraints());
 
         Collections.sort(constraints, new KeyComparator());
 
         if (constraints != null) {
-            for (LevelConstraint ctr : constraints) {
-                updatePnlResources(ctr.getElementName(), ctr.getQuantity(), required, requiredResources);
-
+            for (IncrementableConstraint ctr : constraints) {
+                updatePnlResources(ctr.getElementName(),
+                        ctr.getQuantity(), required, requiredResources);
             }
         }
 
@@ -109,7 +105,8 @@ class LevelConstraintsContainer {
         }
     }
 
-    private List<IncrementableConstraint> getConstraintsByLevel(int level, List<IncrementableConstraint> levelConstraints) {
+    private List<IncrementableConstraint> getIncrementableConstraintsByLevel(
+            int level, List<IncrementableConstraint> levelConstraints) {
         List<IncrementableConstraint> list = new ArrayList<IncrementableConstraint>();
 
         for (IncrementableConstraint ic : levelConstraints) {
@@ -196,12 +193,12 @@ class LevelConstraintsContainer {
         return result;
     }
 
-    public class KeyComparator implements Comparator<LevelConstraint> {
+    public class KeyComparator implements Comparator<IncrementableConstraint> {
 
         @Override
-        public int compare(LevelConstraint o1, LevelConstraint o2) {
+        public int compare(IncrementableConstraint o1, IncrementableConstraint o2) {
 
-            return o1.getElementName().compareToIgnoreCase(o2.getElementName());
+            return (o1.getElementName().compareTo(o2.getElementName()));
         }
     }
 }

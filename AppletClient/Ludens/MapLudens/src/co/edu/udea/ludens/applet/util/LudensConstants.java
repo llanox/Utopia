@@ -1,15 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.udea.ludens.applet.util;
 
 import java.awt.Color;
 
-/**
- *
- * @author juanga
- */
 public class LudensConstants {
 
     public static final Color BACKGROUND_COLOR = new java.awt.Color(64, 64, 64);

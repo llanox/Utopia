@@ -5,7 +5,6 @@ public class Population extends Element {
     private Integer busyPeople;
 
     public void setBusyPeople(Integer busyPeople) {
-
         this.busyPeople = busyPeople;
     }
 

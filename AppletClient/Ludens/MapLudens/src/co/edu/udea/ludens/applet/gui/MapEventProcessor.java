@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.udea.ludens.applet.gui;
 
 import co.edu.udea.ludens.applet.listeners.MapEventListener;
@@ -17,10 +13,6 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-/**
- *
- * @author juanga
- */
 public class MapEventProcessor implements MouseListener, ActionListener, WindowListener {
 
     public static final String CANCEL = " Cancelar ";
@@ -40,11 +32,11 @@ public class MapEventProcessor implements MouseListener, ActionListener, WindowL
         this.btnCancel.addActionListener(this);
     }
 
-    @Override
+    @Override()
     public void mouseClicked(MouseEvent e) {
     }
 
-    @Override
+    @Override()
     public void mousePressed(MouseEvent e) {
         Sprite sprite = ((SpriteCollisionManager) playfield.getCollisionManager()).getSpriteAt(playfield.getXOffset() + e.getX(), playfield.getYOffset() + e.getY());
 

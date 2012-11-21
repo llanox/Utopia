@@ -26,9 +26,9 @@ public class Element implements Serializable, Updateable {
 	private int quantity;
 	@Column(name = "actual_upgrading_time")
 	private long actualUpgradingTime;
-	@ManyToOne
+	@ManyToOne()
 	private Incrementable incrementable;
-	@Transient
+	@Transient()
 	private List<Integer> changeEvents = new ArrayList<Integer>();
 	@Column(name = "level_constraints")
 	@OneToMany(mappedBy = "constrainedElement")
@@ -36,7 +36,7 @@ public class Element implements Serializable, Updateable {
 	@Column(name = "level_increments")
 	@OneToMany(mappedBy = "constrainedElement")
 	private List<IncrementableConstraint> levelIncrements;
-	@ManyToOne
+	@ManyToOne()
 	private Player player;
 
 	public Element() {
@@ -60,7 +60,7 @@ public class Element implements Serializable, Updateable {
 		this.incrementable.setProductionIncrementRate(productionIncrementRate);
 	}
 
-	@Override
+	@Override()
 	public Long getId() {
 
 		return (this.id);
@@ -161,7 +161,7 @@ public class Element implements Serializable, Updateable {
 		this.player = player;
 	}
 
-	@Override
+	@Override()
 	public void updateWith(Object o) {
 		Element newElement = (Element) o;
 
