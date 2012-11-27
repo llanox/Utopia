@@ -11,7 +11,7 @@ import co.edu.udea.ludens.enums.EnumElementType;
 @Repository()
 public class ElementDAOImpl extends ObjectDBDAO implements ElementDAO {
 
-	@Override
+	@Override()
 	@SuppressWarnings("unchecked")
 	public Element findElementByName(String elementName) {
 		List<Element> elements = (List<Element>) findObjectByAttribute(
@@ -23,7 +23,7 @@ public class ElementDAOImpl extends ObjectDBDAO implements ElementDAO {
 		return null;
 	}
 
-	@Override
+	@Override()
 	@SuppressWarnings("unchecked")
 	public List<Element> findElementByType(EnumElementType type, String login) {
 		List<Element> elements = (List<Element>) findObjectByAttribute(

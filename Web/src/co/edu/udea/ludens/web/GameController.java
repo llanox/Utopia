@@ -250,17 +250,10 @@ public class GameController implements UpdateableView {
 		actualGame = new Game();
 	}
 
-	/**
-	 * @param actualGame
-	 *            the actualGame to set
-	 */
 	public void setActualGame(Game actualGame) {
 		this.actualGame = actualGame;
 	}
 
-	/**
-	 * @return the actualGame
-	 */
 	public Game getActualGame() {
 
 		return (this.actualGame);
@@ -279,210 +272,119 @@ public class GameController implements UpdateableView {
 		this.units = units;
 	}
 
-	/**
-	 * @param editingGame
-	 *            the editingGame to set
-	 */
 	public void setEditingGame(boolean editingGame) {
 		this.editingGame = editingGame;
 	}
 
-	/**
-	 * @return the editingGame
-	 */
 	public boolean isEditingGame() {
 
 		return (this.editingGame);
 	}
 
-	/**
-	 * @param gamesTable
-	 *            the gamesTable to set
-	 */
 	public void setGamesTable(UIData gamesTable) {
 		this.gamesTable = gamesTable;
 	}
 
-	/**
-	 * @return the gamesTable
-	 */
 	public UIData getGamesTable() {
 
 		return (this.gamesTable);
 	}
 
-	/**
-	 * @param games
-	 *            the games to set
-	 */
 	public void setGames(List<Game> games) {
 		this.games = games;
 	}
 
-	/**
-	 * @return the games
-	 */
 	public List<Game> getGames() {
 
 		return (this.games);
 	}
 
-	/**
-	 * @param gameService
-	 *            the gameService to set
-	 */
 	public void setGameService(GameService gameService) {
 		this.gameService = gameService;
 	}
 
-	/**
-	 * @return the gameService
-	 */
 	public GameService getGameService() {
 
 		return (this.gameService);
 	}
 
-	/**
-	 * @param settingGame
-	 *            the settingGame to set
-	 */
 	public void setSettingGame(boolean settingGame) {
 		this.settingGame = settingGame;
 	}
 
-	/**
-	 * @return the settingGame
-	 */
 	public boolean isSettingGame() {
 
 		return (this.settingGame);
 	}
 
-	/**
-	 * @param configurables
-	 *            the configurables to set
-	 */
 	public void setConfigurables(List<SelectItem> configurables) {
 		this.configurables = configurables;
 	}
 
-	/**
-	 * @return the configurables
-	 */
 	public List<SelectItem> getConfigurables() {
 		configurables = UtopiaUtil.getItems(configurableThings);
 
 		return configurables;
 	}
 
-	/**
-	 * @param productionTime
-	 *            the productionTime to set
-	 */
 	public void setProductionTime(long productionTime) {
 		this.productionTime = productionTime;
 	}
 
-	/**
-	 * @return the productionTime
-	 */
 	public long getProductionTime() {
 
 		return (this.productionTime);
 	}
 
-	/**
-	 * @param duration
-	 *            the duration to set
-	 */
 	public void setDuration(long duration) {
 		this.duration = duration;
 	}
 
-	/**
-	 * @return the duration
-	 */
 	public long getDuration() {
 
 		return (this.duration);
 	}
 
-	/**
-	 * @param durationUnit
-	 *            the durationUnit to set
-	 */
 	public void setDurationUnit(String durationUnit) {
 		this.durationUnit = durationUnit;
 	}
 
-	/**
-	 * @return the durationUnit
-	 */
 	public String getDurationUnit() {
 
 		return (this.durationUnit);
 	}
 
-	/**
-	 * @param productionTimeUnit
-	 *            the productionTimeUnit to set
-	 */
 	public void setProductionTimeUnit(String productionTimeUnit) {
 		this.productionTimeUnit = productionTimeUnit;
 	}
 
-	/**
-	 * @return the productionTimeUnit
-	 */
 	public String getProductionTimeUnit() {
 
 		return (this.productionTimeUnit);
 	}
 
-	/**
-	 * @param thresholdEventsUnit
-	 *            the thresholdEventsUnit to set
-	 */
 	public void setThresholdEventsUnit(String thresholdEventsUnit) {
 		this.thresholdEventsUnit = thresholdEventsUnit;
 	}
 
-	/**
-	 * @return the thresholdEventsUnit
-	 */
 	public String getThresholdEventsUnit() {
 
 		return (this.thresholdEventsUnit);
 	}
 
-	/**
-	 * @param lowerThreshold
-	 *            the lowerThreshold to set
-	 */
 	public void setLowerThreshold(long lowerThreshold) {
 		this.lowerThreshold = lowerThreshold;
 	}
 
-	/**
-	 * @return the lowerThreshold
-	 */
 	public long getLowerThreshold() {
 
 		return (this.lowerThreshold);
 	}
 
-	/**
-	 * @param upperThreshold
-	 *            the upperThreshold to set
-	 */
 	public void setUpperThreshold(long upperThreshold) {
 		this.upperThreshold = upperThreshold;
 	}
 
-	/**
-	 * @return the upperThreshold
-	 */
 	public long getUpperThreshold() {
 
 		return (this.upperThreshold);

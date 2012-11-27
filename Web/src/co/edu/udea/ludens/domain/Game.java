@@ -34,14 +34,20 @@ public class Game implements Serializable, Updateable {
 	private Date startTime;
 	@Column(name = "status")
 	private EnumGameStatus status = EnumGameStatus.NO_STARTED;
-	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
+	@OneToMany(cascade = { CascadeType.PERSIST,
 			CascadeType.MERGE })
+	//@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
+	//		CascadeType.MERGE })
 	private List<Incrementable> defaultIncrementables = new ArrayList<Incrementable>();
-	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,
+	@OneToMany(cascade = { CascadeType.PERSIST,
 			CascadeType.MERGE })
+	//@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,
+	//		CascadeType.MERGE })
 	private List<Player> players = new ArrayList<Player>();
-	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
+	@OneToMany(cascade = { CascadeType.PERSIST,
 			CascadeType.MERGE })
+	//@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
+	//		CascadeType.MERGE })
 	private List<UnexpectedEvent> unexpectedEvents = new ArrayList<UnexpectedEvent>();
 	@Column(name = "name")
 	private String name;
@@ -180,9 +186,9 @@ public class Game implements Serializable, Updateable {
 	public String toString() {
 
 		return ("id " + id + " name " + name + " duration " + duration
-				+ " startTime " + startTime + " endTime " + endTime
-				+ " productionTime " + productionTime + " lowerThreshold "
-				+ lowerThreshold + " upperThreshold " + upperThreshold
-				+ " status " + status);
+			+ " startTime " + startTime + " endTime " + endTime
+			+ " productionTime " + productionTime + " lowerThreshold "
+			+ lowerThreshold + " upperThreshold " + upperThreshold
+			+ " status " + status);
 	}
 }

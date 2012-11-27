@@ -17,7 +17,7 @@ public class GameDAOImpl extends ObjectDBDAO implements GameDAO {
 		throw new RuntimeException("Función No implementada");
 	}
 
-	@Override
+	@Override()
 	@SuppressWarnings("unchecked")
 	public Game findGameByName(String gameName) {
 		Game game = null;
@@ -30,7 +30,7 @@ public class GameDAOImpl extends ObjectDBDAO implements GameDAO {
 		return game;
 	}
 
-	@Override
+	@Override()
 	@SuppressWarnings("unchecked")
 	public List<Game> findAllGames() {
 		List<Game> result = (List<Game>) this.findObjectByType(Game.class);

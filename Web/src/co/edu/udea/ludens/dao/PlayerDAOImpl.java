@@ -11,7 +11,7 @@ import co.edu.udea.ludens.domain.Player;
 public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 	public Logger logger = Logger.getLogger(this.getClass());
 
-	@Override
+	@Override()
 	@SuppressWarnings("unchecked")
 	public Player findPlayerByUserName(final String userName) {
 
@@ -25,7 +25,7 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 		return player;
 	}
 
-	@Override
+	@Override()
 	@SuppressWarnings("unchecked")
 	public List<Player> findAllPlayersByGameName(String gameName) {
 
@@ -43,7 +43,7 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 		return players;
 	}
 
-	@Override
+	@Override()
 	@SuppressWarnings("unchecked")
 	public List<Player> findAllPlayers() {
 		List<Player> result = (List<Player>) this
@@ -52,7 +52,7 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 		return result;
 	}
 
-	@Override
+	@Override()
 	@SuppressWarnings("unchecked")
 	public List<Player> findAllPlayersByGameName(boolean participatingInGame,
 			String gameName) {
@@ -72,7 +72,7 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 		return players;
 	}
 
-	// @Override
+	// @Override()
 	// public Object saveOrUpdate(Object o) {
 	// logger.info("Saving player instance ");
 	// Player player = (Player) o;

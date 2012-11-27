@@ -68,7 +68,7 @@ public class IncrementableController implements UpdateableView {
 				.getAllIncrementablesGame(gameController.getActualGame()
 						.getName());
 
-		if (incrementables != null && !incrementables.isEmpty()) {
+		if ((incrementables != null) && (!incrementables.isEmpty())) {
 			Incrementable incr = incrementables.get(0);
 			List<IncrementableConstraint> list = incr.getConstraints();
 			/*
@@ -77,7 +77,8 @@ public class IncrementableController implements UpdateableView {
 			 * 
 			 * return; }
 			 */
-			if (list != null && !list.isEmpty()) {
+			// Aqui se genera la exception de carga perezosa.
+			if ((list != null) && (!list.isEmpty())) {
 				settingUpConstraints = true;
 
 				return;
@@ -329,7 +330,7 @@ public class IncrementableController implements UpdateableView {
 		return (this.elementService);
 	}
 
-	@Override
+	@Override()
 	public void update() {
 		logger.info("Updating IncrementableController");
 

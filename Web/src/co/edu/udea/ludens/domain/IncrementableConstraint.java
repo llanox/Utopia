@@ -18,9 +18,10 @@ public class IncrementableConstraint implements Serializable, Updateable {
 	private int incrementRate;
 	@Column(name = "initial_value")
 	private int initialValue;
-	@ManyToOne
+	@ManyToOne()
 	private Element constrainedElement;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.MERGE)
+	//@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Incrementable restrictedIncrementable;
 	@Column(name = "constrained_level")
 	private Integer constrainedLevel;
@@ -32,7 +33,7 @@ public class IncrementableConstraint implements Serializable, Updateable {
 	public IncrementableConstraint() {
 	}
 
-	@Override
+	@Override()
 	public Long getId() {
 
 		return (this.id);
@@ -105,7 +106,7 @@ public class IncrementableConstraint implements Serializable, Updateable {
 		this.elementName = elementName;
 	}
 
-	@Override
+	@Override()
 	public void updateWith(Object o) {
 		IncrementableConstraint constraint = (IncrementableConstraint) o;
 

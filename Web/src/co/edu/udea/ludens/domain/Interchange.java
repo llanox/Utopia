@@ -141,7 +141,7 @@ public class Interchange implements Serializable, Updateable {
 		this.previousInterchange = previousInterchange;
 	}
 
-	@Override
+	@Override()
 	public void updateWith(Object o) {
 		Interchange inter = (Interchange) o;
 

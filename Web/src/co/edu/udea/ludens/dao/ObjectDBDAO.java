@@ -12,10 +12,10 @@ import co.edu.udea.ludens.exceptions.DatabaseError;
 public class ObjectDBDAO implements DBDAO {
 	private static Logger logger = Logger.getLogger(ObjectDBDAO.class);
 
-	@PersistenceContext
+	@PersistenceContext()
 	protected EntityManager entityManager;
 
-	@Override
+	@Override()
 	public Object save(Object o) {
 		logger.info("Guardando " + o);
 		entityManager.persist(o);
@@ -24,7 +24,7 @@ public class ObjectDBDAO implements DBDAO {
 		return o;
 	}
 
-	@Override
+	@Override()
 	public Object saveOrUpdate(Object o) {
 		Updateable up = (Updateable) o;
 
@@ -40,7 +40,7 @@ public class ObjectDBDAO implements DBDAO {
 		return o;
 	}
 
-	@Override
+	@Override()
 	public void delete(Object o) {
 		Object found = entityManager.find(o.getClass(),
 				((Updateable) o).getId());
@@ -48,7 +48,7 @@ public class ObjectDBDAO implements DBDAO {
 		entityManager.remove(found);
 	}
 
-	@Override
+	@Override()
 	@SuppressWarnings("rawtypes")
 	public Object findObjectByAttribute(Class clazz, Object... parameters) {
 		StringBuilder sb = new StringBuilder();
@@ -103,14 +103,14 @@ public class ObjectDBDAO implements DBDAO {
 		return sb.toString();
 	}
 
-	@Override
-	@SuppressWarnings({ "rawtypes"})
+	@Override()
+	@SuppressWarnings("rawtypes")
 	public Object findObjectByAttributeAndFetch(Class clazz,
 			Object... parameters) {
 		String JOIN_SQL = "JOIN FETCH";
 		StringBuilder sb = new StringBuilder();
 		int paramsLength = parameters.length - 1;
-
+		
 		if (paramsLength % 2 != 0) {
 			throw new DatabaseError("Número incorrecto de parámetros: "
 					+ paramsLength);
@@ -153,8 +153,10 @@ public class ObjectDBDAO implements DBDAO {
 		Query query = this.entityManager.createQuery("SELECT o FROM " + clazz.getSimpleName() + " o " + JOIN_SQL + " o."
 				+ parameters[paramsLength] + sb.toString());
 		for (int i = 0; i < paramsLength; i = i + 2) {
-			query.setParameter(removeDot(parameters[i]), parameters[1 + i]);
-			logger.info(parameters[i].toString() + " -> " + parameters[1 + i]);
+			if (i != paramsLength - 1) {
+				query.setParameter(removeDot(parameters[i]), parameters[1 + i]);
+				logger.info(parameters[i].toString() + " -> " + parameters[1 + i]);
+			}
 		}
 
 		// return (query.getResultList());
@@ -168,7 +170,7 @@ public class ObjectDBDAO implements DBDAO {
 		return (query.getResultList());
 	}
 
-	@Override
+	@Override()
 	@SuppressWarnings("rawtypes")
 	public Object findObjectByType(Class clazz) {
 		// logger.info("Query : " + "SELECT o FROM " + clazz.getSimpleName()
@@ -182,7 +184,7 @@ public class ObjectDBDAO implements DBDAO {
 		return (query.getResultList());
 	}
 
-	@Override
+	@Override()
 	public void close(Object oc) {
 	}
 

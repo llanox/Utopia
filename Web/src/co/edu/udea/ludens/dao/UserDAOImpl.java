@@ -32,7 +32,7 @@ public class UserDAOImpl extends ObjectDBDAO implements UserDAO {
 		return (result);
 	}
 
-	@Override
+	@Override()
 	@SuppressWarnings("unchecked")
 	public List<User> findUsersBy(boolean participatingInGame) {
 		List<User> result = (List<User>) findObjectByAttribute(User.class,
@@ -41,7 +41,7 @@ public class UserDAOImpl extends ObjectDBDAO implements UserDAO {
 		return result;
 	}
 
-	@Override
+	@Override()
 	@SuppressWarnings("unchecked")
 	public List<User> findUsersBy(boolean participatingInGame, EnumUserRole role) {
 		List<User> result = (List<User>) findObjectByAttribute(User.class,

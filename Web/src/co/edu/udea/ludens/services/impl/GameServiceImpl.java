@@ -52,7 +52,7 @@ public class GameServiceImpl implements GameService {
 	public GameServiceImpl() {
 	}
 
-	@Override
+	@Override()
 	public Game findByUserLogin(String userName) {
 		Player player = playerDao.findPlayerByUserName(userName);
 		Game game = player.getGame();
@@ -75,14 +75,14 @@ public class GameServiceImpl implements GameService {
 		return (this.gameDao);
 	}
 
-	@Override
+	@Override()
 	public List<Game> findAllGames() {
 		List<Game> games = gameDao.findAllGames();
 
 		return games;
 	}
 
-	@Override
+	@Override()
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public void delete(Game game) {
 		List<Player> players = game.getPlayers();
@@ -96,14 +96,14 @@ public class GameServiceImpl implements GameService {
 		this.gameDao.delete(game);
 	}
 
-	@Override
+	@Override()
 	public Game findGameByName(String gameName) {
 		Game game = this.gameDao.findGameByName(gameName);
 
 		return game;
 	}
 
-	@Override
+	@Override()
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public void removePlayer(Game game, String login) {
 		logger.info("User Service" + userService);
@@ -117,7 +117,7 @@ public class GameServiceImpl implements GameService {
 		gameDao.saveOrUpdate(game);
 	}
 
-	@Override
+	@Override()
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public void removePlayer(Game game, Player player) {
 		User user = userService.findUser(player.getUser().getLogin());
@@ -153,7 +153,7 @@ public class GameServiceImpl implements GameService {
 		return (this.playerDao);
 	}
 
-	@Override
+	@Override()
 	public void meetRequirements(Game game) {
 		logger.info("meeting Requirements");
 
@@ -169,7 +169,7 @@ public class GameServiceImpl implements GameService {
 	public class AtLeastNPlayers implements GameRequirement {
 		public static final int AT_LEAST_N_PLAYERS = 2;
 
-		@Override
+		@Override()
 		public void verify(Game game) {
 			List<Player> players = playerDao.findAllPlayersByGameName(true,
 					game.getName());
@@ -195,7 +195,7 @@ public class GameServiceImpl implements GameService {
 	public class AtLeastNMaterial implements GameRequirement {
 		public static final int ALEAST_N_MATERIALS = 1;
 
-		@Override
+		@Override()
 		public void verify(Game game) {
 
 			int counter = 0;
@@ -225,7 +225,7 @@ public class GameServiceImpl implements GameService {
 	public class AtLeastNFactors implements GameRequirement {
 		public static final int ALEAST_N_FACTORS = 1;
 
-		@Override
+		@Override()
 		public void verify(Game game) {
 
 			int counter = 0;
@@ -253,7 +253,7 @@ public class GameServiceImpl implements GameService {
 	public class AtLeastNPopulations implements GameRequirement {
 		public static final int ALEAST_N_POPULATIONS = 1;
 
-		@Override
+		@Override()
 		public void verify(Game game) {
 			int counter = 0;
 			List<Incrementable> incrementables = game
@@ -277,7 +277,7 @@ public class GameServiceImpl implements GameService {
 		}
 	}
 
-	@Override
+	@Override()
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = true)
 	public void generateUnexpectedEvents(Game game) {
 		List<Incrementable> incrementables = game.getDefaultIncrementables();
@@ -325,7 +325,7 @@ public class GameServiceImpl implements GameService {
 		}
 	}
 
-	@Override
+	@Override()
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public void addPlayer(Game game, Player player) {
 		player.getUser().setParticipatingInGame(true);

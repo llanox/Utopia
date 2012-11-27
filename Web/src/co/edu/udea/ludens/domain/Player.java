@@ -18,11 +18,14 @@ public class Player implements Serializable, Updateable {
 	private long id;
 	@Column(name = "population")
 	private Element population;
-	@Unique
-	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,
+	@Unique()
+	@OneToOne(cascade = { CascadeType.PERSIST,
 			CascadeType.MERGE })
+	//@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,
+	//		CascadeType.MERGE })
 	private User user;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
+	@ManyToOne(cascade = { CascadeType.MERGE })
+	//@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
 	private Game game;
 	@Column(name = "start_time")
 	private long startTime;
@@ -31,7 +34,7 @@ public class Player implements Serializable, Updateable {
 	@Column(name = "elements")
 	@OneToMany(mappedBy = "player")
 	private List<Element> elements;
-	@OneToMany
+	@OneToMany()
 	@OrderColumn(name = "order")
 	@JoinColumn(name = "player_id", nullable = false)
 	private List<MessageEvent> events;
@@ -46,7 +49,7 @@ public class Player implements Serializable, Updateable {
 		this.id = id;
 	}
 
-	@Override
+	@Override()
 	public Long getId() {
 
 		return (this.id);
@@ -128,7 +131,7 @@ public class Player implements Serializable, Updateable {
 		return (this.startTime);
 	}
 
-	@Override
+	@Override()
 	public void updateWith(Object o) {
 		Player player = (Player) o;
 

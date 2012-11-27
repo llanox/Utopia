@@ -37,7 +37,7 @@ public class MessageEvent implements Comparable<MessageEvent>, Serializable,
 	private String executorName;
 	@Column(name = "receiver_name")
 	private String receiverName;
-	@Transient
+	@Transient()
 	private Object source;
 	@Column(name = "game_name")
 	private String gameName;
@@ -46,7 +46,7 @@ public class MessageEvent implements Comparable<MessageEvent>, Serializable,
 	private Date exactDate;
 	@Column(name = "game_elapsed_time")
 	private long gameElapsedTime;
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name = "player_id", insertable = false, updatable = false, nullable = false)
 	private Player affectedPlayer;
 
@@ -97,7 +97,7 @@ public class MessageEvent implements Comparable<MessageEvent>, Serializable,
 		return (this.msgType);
 	}
 
-	@Override
+	@Override()
 	public Long getId() {
 
 		return (this.id);
@@ -213,7 +213,7 @@ public class MessageEvent implements Comparable<MessageEvent>, Serializable,
 		return (this.gameName);
 	}
 
-	@Override
+	@Override()
 	public void updateWith(Object o) {
 		MessageEvent event = (MessageEvent) o;
 

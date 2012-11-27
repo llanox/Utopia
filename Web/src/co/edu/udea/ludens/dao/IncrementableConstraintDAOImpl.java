@@ -12,18 +12,18 @@ public class IncrementableConstraintDAOImpl extends ObjectDBDAO implements
 
 	private Logger logger = Logger.getLogger(getClass());
 
-	@Override
+	@Override()
 	public List<IncrementableConstraint> findAllResourceConstraints() {
 		throw new RuntimeException("you must implement that method .....");
 	}
 
-	@Override
+	@Override()
 	public List<IncrementableConstraint> findAllResourceConstraints(
 			String incrementable) {
 		throw new RuntimeException("you must implement that method .....");
 	}
 
-	@Override
+	@Override()
 	public Object saveOrUpdate(Object o) {
 		IncrementableConstraint cr = (IncrementableConstraint) o;
 		logger.info("merging incrementable");
