@@ -20,7 +20,7 @@ public class IncrementableConstraint implements Serializable, Updateable {
 	private int initialValue;
 	@ManyToOne()
 	private Element constrainedElement;
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	//@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Incrementable restrictedIncrementable;
 	@Column(name = "constrained_level")

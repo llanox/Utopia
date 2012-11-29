@@ -30,7 +30,7 @@ public class Incrementable implements Serializable, Updateable {
 	@ManyToOne(cascade = { CascadeType.MERGE })
 	//@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
 	private Game game;
-	@OneToMany(mappedBy = "restrictedIncrementable", cascade = { CascadeType.MERGE })
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "restrictedIncrementable", cascade = { CascadeType.MERGE })
 	//@OneToMany(fetch = FetchType.EAGER, mappedBy = "restrictedIncrementable", cascade = { CascadeType.MERGE })
 	@Column(name = "constraints")
 	private List<IncrementableConstraint> constraints = new ArrayList<IncrementableConstraint>();

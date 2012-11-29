@@ -15,7 +15,7 @@
       http://www.springframework.org/schema/task
       http://www.springframework.org/schema/task/spring-task-3.0.xsd      
       http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
-      http://www.springframework.org/schema/jee ">
+      http://www.springframework.org/schema/jee" >
 
 	<context:annotation-config />
 	<context:component-scan base-package="co.edu.udea.ludens.domain" />
@@ -30,6 +30,53 @@
 
 	<!-- Scheduler -->
 	<task:scheduler id="productionScheduler" pool-size="10" ></task:scheduler>
+
+
+
+	<!-- NEW -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+	 	factory-bean="emf" factory-method="getSessionFactory" >
+<!--
+	 	<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+-->
+	 </bean>
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" > 
+	    <property name="driverClassName" value="com.mysql.jdbc.Driver" /> 
+	    <property name="url" value="jdbc:mysql://localhost:3306/Utopia" /> 
+	    <property name="username" value="root" /> 
+	    <property name="password" value="r00t" />
+	</bean>
+<!--
+	<bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
+		<property name="persistenceUnitName" value="UtopiaPU" ></property>
+		<property name="dataSource" value="dataSource" ></property>
+		<property name="jpaVendorAdapter" >
+			<bean 
+	          class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+	            <property name="showSql" value="true" />
+	            <property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect" />
+	        </bean>
+		</property>
+	</bean>
+-->	
+	<bean id="myTxManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	
+	<bean id="jpaTemplate" class="org.springframework.orm.jpa.JpaTemplate"> 
+	    <property name="entityManagerFactory" ref="emf" />
+	</bean>
+	
+	<bean id="jpaTransactionManager"
+	     class="org.springframework.orm.jpa.JpaTransactionManager" >
+	    <property name="entityManagerFactory" ref="emf" />
+	</bean>
+	<!-- END -->
+
+
 
 	<!-- Add JPA support -->
 
@@ -53,15 +100,17 @@
 				</prop>
 				<prop key="hibernate.connection.username" >root</prop>
 				<prop key="hibernate.connection.password" >r00t</prop>
-				<!-- <prop key="hibernate.hbm2ddl.auto" >create-drop</prop> -->
 			</props>
 		</property>
 	</bean>
 
+
 	<!-- Add Transaction support -->
+<!--
 	<bean id="myTxManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="emf" ></property>
 	</bean>
+-->
 
 	<!-- Warning!! that bean name HAS BEEN hardcoded in ConstantsLudens file -->
 	<bean name="firstRunConfiguration"
@@ -70,7 +119,7 @@
 	</bean>
 
 	<bean name="serviceLocator" class="co.edu.udea.ludens.services.ServiceLocator"
-		scope="prototype">
+		scope="prototype" >
 		<lookup-method name="getElementProcess" bean="elementProcess" />
 		<lookup-method name="getGameProcess" bean="gameProcess" />
 		<lookup-method name="getTradeProcess" bean="tradeProcess" />

@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 
 	private Logger logger = Logger.getLogger(getClass());
 
-	@Autowired
+	@Autowired()
 	private UserDAO userDao;
 
 	public void setUserDao(UserDAO userDao) {
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 		return (this.userDao);
 	}
 
-	@Override
+	@Override()
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public User save(User user) {
 		user = (User) userDao.saveOrUpdate(user);
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
-	@Override
+	@Override()
 	public List<User> findAllUsers() {
 		List<User> users = new ArrayList<User>();
 
@@ -47,16 +47,18 @@ public class UserServiceImpl implements UserService {
 		return (users);
 	}
 
-	@Override
+	@Override()
 	public User validateUser(String login, String password) {
 		User user = userDao.findUserByLogin(login);
 		logger.info("Found User -->" + user);
-		if (user == null)
+		if (user == null) {
+
 			return null;
+		}
 
 		String userPassw = user.getPassword();
 
-		if (userPassw == null || !userPassw.equalsIgnoreCase(password)) {
+		if ((userPassw == null) || !(userPassw.equalsIgnoreCase(password))) {
 
 			return null;
 		}
@@ -64,20 +66,20 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
-	@Override
+	@Override()
 	public User findUser(String login) {
 		User user = userDao.findUserByLogin(login);
 
 		return user;
 	}
 
-	@Override
+	@Override()
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public void delete(User user) {
 		userDao.delete(user);
 	}
 
-	@Override
+	@Override()
 	public List<User> findUserByRole(boolean playing, EnumUserRole role) {
 		List<User> users = userDao.findUsersBy(playing, role);
 

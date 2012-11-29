@@ -18,7 +18,7 @@ public class UserDAOImpl extends ObjectDBDAO implements UserDAO {
 		List<User> result = (List<User>) (findObjectByAttribute(User.class,
 				"login", login));
 
-		if (result != null && !result.isEmpty()) {
+		if ((result != null) && !(result.isEmpty())) {
 			user = result.get(0);
 		}
 

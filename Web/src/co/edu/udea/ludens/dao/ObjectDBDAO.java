@@ -56,7 +56,7 @@ public class ObjectDBDAO implements DBDAO {
 
 		if (paramsLength % 2 != 0) {
 
-			throw new DatabaseError("Número incorrecto de parámetros: "
+			throw new DatabaseError("N�mero incorrecto de parámetros: "
 					+ paramsLength);
 		}
 

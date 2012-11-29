@@ -35,37 +35,30 @@ public class PlayerServiceImpl implements PlayerService {
 
 	private Logger logger = Logger.getLogger(getClass());
 
-	@Override
+	@Override()
 	public Player findPlayer(String userName) {
 		Player player = playerDao.findPlayerByUserName(userName);
 
 		return player;
 	}
 
-	/**
-	 * @param playerDao
-	 *            the playerDao to set
-	 */
 	public void setPlayerDao(PlayerDAO playerDao) {
 		this.playerDao = playerDao;
 	}
 
-	/**
-	 * @return the playerDao
-	 */
 	public PlayerDAO getPlayerDao() {
 
 		return (this.playerDao);
 	}
 
-	@Override
+	@Override()
 	public List<Player> findAllPlayersByGameName(String gameName) {
 		List<Player> players = playerDao.findAllPlayersByGameName(gameName);
 
 		return players;
 	}
 
-	@Override
+	@Override()
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public Player save(Player player) {
 		playerDao.saveOrUpdate(player);
@@ -73,52 +66,37 @@ public class PlayerServiceImpl implements PlayerService {
 		return (player);
 	}
 
-	/**
-	 * @param gameDao
-	 *            the gameDao to set
-	 */
 	public void setGameDao(GameDAO gameDao) {
 		this.gameDao = gameDao;
 	}
 
-	/**
-	 * @return the gameDao
-	 */
 	public GameDAO getGameDao() {
 
 		return (this.gameDao);
 	}
 
-	@Override
+	@Override()
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public void delete(Player player) {
 		playerDao.delete(player);
-
 	}
 
-	@Override
+	@Override()
 	public List<Player> findAllPlayers() {
 
 		return (playerDao.findAllPlayers());
 	}
 
-	/**
-	 * @param userDao
-	 *            the userDao to set
-	 */
 	public void setUserDao(UserDAO userDao) {
 		this.userDao = userDao;
 	}
 
-	/**
-	 * @return the userDao
-	 */
 	public UserDAO getUserDao() {
 
 		return (this.userDao);
 	}
 
-	@Override
+	@Override()
 	public List<Player> findAllPlayersByGameName(boolean participatingInGame,
 			String gameName) {
 		List<Player> players = playerDao.findAllPlayersByGameName(
@@ -127,7 +105,7 @@ public class PlayerServiceImpl implements PlayerService {
 		return players;
 	}
 
-	@Override
+	@Override()
 	public boolean meetReqToGettingStart(Player player) {
 		List<Element> elements = new ArrayList<Element>();
 
@@ -157,7 +135,7 @@ public class PlayerServiceImpl implements PlayerService {
 		return false;
 	}
 
-	@Override
+	@Override()
 	public Element getElementPlayerByName(List<Element> elementList, String name) {
 		for (Element element : elementList) {
 			if (element.getIncrementable().getName().equals(name)) {
@@ -169,7 +147,7 @@ public class PlayerServiceImpl implements PlayerService {
 		return null;
 	}
 
-	@Override
+	@Override()
 	public void checkOutResources(List<IncrementableConstraint> levelResources,
 			Element element, Player player) throws LudensException {
 		boolean checked = true;
@@ -196,7 +174,7 @@ public class PlayerServiceImpl implements PlayerService {
 
 	}
 
-	@Override
+	@Override()
 	public List<IncrementableConstraint> getIncrementableConstraintByLevel(
 			List<IncrementableConstraint> levelConstraints, Integer newLevel) {
 		List<IncrementableConstraint> list = new ArrayList<IncrementableConstraint>();
@@ -210,7 +188,7 @@ public class PlayerServiceImpl implements PlayerService {
 		return (list);
 	}
 
-	@Override
+	@Override()
 	public List<Element> getElementsByName(List<Element> elements, String name) {
 		List<Element> list = new ArrayList<Element>();
 
