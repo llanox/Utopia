@@ -65,6 +65,7 @@ public class PanelIndicator extends javax.swing.JPanel {
 
         return (this.lbNameContent);
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lbIcon;
     private javax.swing.JLabel lbNameContent;

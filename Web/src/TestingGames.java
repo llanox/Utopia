@@ -32,18 +32,18 @@ public class TestingGames {
 		game1.setStatus(EnumGameStatus.PAUSED);
 		game1.setUpperThreshold(2000L);
 
-		Game game2 = new Game();
-		game2.setDuration(1000L);
-		game2.setEndTime(new Date());
-		game2.setLowerThreshold(500L);
-		game2.setName("Game #2");
-		game2.setProductionTime(1500L);
-		game2.setStartTime(new Date());
-		game2.setStatus(EnumGameStatus.PAUSED);
-		game2.setUpperThreshold(2000L);
+//		Game game2 = new Game();
+//		game2.setDuration(1000L);
+//		game2.setEndTime(new Date());
+//		game2.setLowerThreshold(500L);
+//		game2.setName("Game #2");
+//		game2.setProductionTime(1500L);
+//		game2.setStartTime(new Date());
+//		game2.setStatus(EnumGameStatus.PAUSED);
+//		game2.setUpperThreshold(2000L);
 
 		gameService.save(game1);
-		gameService.save(game2);
+//		gameService.save(game2);
 
 		List<Game> games = gameService.findAllGames();
 		for (Game game : games) {
@@ -51,7 +51,7 @@ public class TestingGames {
 					+ game.getId() + " Status: " + game.getStatus());
 		}
 
-		gameService.delete(game2);
+//		gameService.delete(game2);
 
 		Game game = gameService.findGameByName("Game #1");
 		System.out.println("Name: " + game.getName() + " ID: " + game.getId()

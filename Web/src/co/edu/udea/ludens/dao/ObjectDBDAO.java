@@ -42,9 +42,7 @@ public class ObjectDBDAO implements DBDAO {
 
 	@Override()
 	public void delete(Object o) {
-		Object found = entityManager.find(o.getClass(),
-				((Updateable) o).getId());
-
+		Object found = entityManager.find(o.getClass(),	((Updateable) o).getId());
 		entityManager.remove(found);
 	}
 

@@ -54,9 +54,10 @@
 									value="Salir" action="#{authenticationController.logOutAction}" />
 							</li>
 						</ul>
-					Bienvenido a Utopia <strong> #{ludensUtilBean.softwareVersion} </strong>!! <strong><em><a href="#">	#{userSession.user.name} (#{userSession.user.login}) </a>
-						</em>
-						</strong>
+						Bienvenido a Utopia <strong>
+							#{ludensUtilBean.softwareVersion} </strong>!! <strong><em><a
+								href="#"> #{userSession.user.name}
+									(#{userSession.user.login}) </a> </em> </strong>
 					</div>
 
 					<div id="mid">
@@ -64,38 +65,42 @@
 
 
 						<ul class="tabs">
-						
+
 							<li><ice:commandLink inmediate="true" id="linkTab1"
 									value="Juego"
 									actionListener="#{authenticationController.changeTab}">
 									<f:attribute name="tabName" value="gameSetUpView" />
-							</ice:commandLink></li>
-						
+								</ice:commandLink>
+							</li>
+
 							<li><ice:commandLink inmediate="true" id="linkTab2"
 									value="Usuarios"
 									actionListener="#{authenticationController.changeTab}">
 									<f:attribute name="tabName" value="userSetUpView" />
-							</ice:commandLink></li>
+								</ice:commandLink>
+							</li>
 
-					
-							
+
+
 							<li><ice:commandLink inmediate="true" id="linkTab3"
 									value="Estadísticas"
 									actionListener="#{authenticationController.changeTab}">
 									<f:attribute name="tabName" value="statisticsView" />
-								</ice:commandLink></li>
-							
-					
+								</ice:commandLink>
+							</li>
+
+
 
 						</ul>
 
 						<div style="clear: both;"></div>
 
-						<div id="wrap" style="text-align: left; margin: 0px auto; padding: 0px; border: 0; width: 100%;">
+						<div id="wrap"
+							style="text-align: left; margin: 0px auto; padding: 0px; border: 0; width: 100%;">
 							<ui:include src="#{userSession.actualTab}" />
 						</div>
 
-						
+
 
 					</div>
 					<!-- mid -->

@@ -1,9 +1,5 @@
 package co.edu.udea.ludens.applet.gui;
 
-/*
- * To change this template, choose Tools | Templates and open the template in
- * the editor.
- */
 import co.edu.udea.ludens.applet.listeners.ElementListener;
 import co.edu.udea.ludens.applet.listeners.MapEventListener;
 import co.edu.udea.ludens.applet.restful.UtopiaRestClient;
@@ -25,8 +21,8 @@ import javax.swing.JApplet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class MapDashboard extends JApplet implements Updatable, ElementListener, MessageListener, MapEventListener {
-
+public class MapDashboard extends JApplet implements Updatable, ElementListener,
+        MessageListener, MapEventListener {
     public static final int LEVEL_MAXIMUM = 16;
     public static final String FILE_PREFIX = "not_";
     public static final String RESOURCES_PATH = "/co/edu/udea/ludens/applet/resources/";
@@ -41,7 +37,7 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
     private boolean stopped = false;
     private Thread worker;
 
-    @Override
+    @Override()
     public synchronized void init() {
         java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
 
@@ -309,7 +305,7 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
         worker.start();
     }
 
-    @Override
+    @Override()
     public void start() {
         // Activate the playfield
         playfield.setPause(false);
@@ -318,7 +314,7 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
         System.out.println("Starting-Resumming");
     }
 
-    @Override
+    @Override()
     public void stop() {
         if (playfield != null) {
             playfield.stop();
@@ -326,65 +322,51 @@ public class MapDashboard extends JApplet implements Updatable, ElementListener,
         mapPanel.setVisible(false);
         System.out.println("Stopping");
         stopped = true;
-
     }
 
-    @Override
+    @Override()
     public synchronized void changeElements(ElementEvent event) {
-
-
         if (EnumDataType.FACTOR == event.getDataType()) {
-
             System.out.println("updating factors");
             container.updateOrCreateFactorIndicator(event.getResults(), mapPanel.getTbFactors());
             levelContainer.updateElements(event.getResults(), event.getDataType());
-
         } else if (EnumDataType.MATERIAL == event.getDataType()) {
-
-
             System.out.println("updating materials");
             container.updateOrCreateMaterialIndicator(event.getResults(), mapPanel.getTbMaterials());
             levelContainer.updateElements(event.getResults(), event.getDataType());
-
-
         } else if (EnumDataType.POPULATION == event.getDataType()) {
             System.out.println("updating population");
-
             Object el = event.getResults().get(0);
+
             container.updateOrCreatePopulationIndicator((Population) el, indicatorsMarquee);
-
         } else if (EnumDataType.NOTIFICATIONS == event.getDataType()) {
-
             System.out.println("updating notification");
             container.updateOrCreateMessageEvents(event.getResults(), indicatorsMarquee);
-
         }
-
-
-
     }
 
+    @Override()
     public synchronized void notifyMsg(MessageEvent event) {
     }
 
+    @Override()
     public synchronized void eventHappening() {
         System.out.println("eventHappening");
 //        factorsMarquee.resumeScrolling();
 //        materialsMarquee.resumeScrolling();
     }
 
+    @Override()
     public synchronized void updatingProcess() {
         System.out.println("Updating process ....");
         client.fetchAllElements();
     }
 
+    @Override()
     public boolean isStopped() {
         return stopped;
     }
 
-    /**
-     * @param stopped the stopped to set
-     */
     public void setStopped(boolean stopped) {
         this.stopped = stopped;
     }

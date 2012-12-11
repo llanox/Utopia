@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.udea.ludens.domain.Player;
 
-@Repository
+@Repository()
 public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 	public Logger logger = Logger.getLogger(this.getClass());
 

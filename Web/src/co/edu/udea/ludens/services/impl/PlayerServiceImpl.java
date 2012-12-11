@@ -15,22 +15,23 @@ import co.edu.udea.ludens.dao.UserDAO;
 import co.edu.udea.ludens.domain.Element;
 import co.edu.udea.ludens.domain.IncrementableConstraint;
 import co.edu.udea.ludens.domain.Player;
+import co.edu.udea.ludens.domain.User;
 import co.edu.udea.ludens.enums.EnumMsgs;
 import co.edu.udea.ludens.exceptions.LudensException;
 import co.edu.udea.ludens.services.PlayerService;
 import co.edu.udea.ludens.util.UtopiaUtil;
 
-@Service
+@Service()
 @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = true)
 public class PlayerServiceImpl implements PlayerService {
 
-	@Autowired
+	@Autowired()
 	private PlayerDAO playerDao;
 
-	@Autowired
+	@Autowired()
 	private GameDAO gameDao;
 
-	@Autowired
+	@Autowired()
 	private UserDAO userDao;
 
 	private Logger logger = Logger.getLogger(getClass());
@@ -199,5 +200,21 @@ public class PlayerServiceImpl implements PlayerService {
 		}
 
 		return (list);
+	}
+
+	@Override()
+	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
+	public void releasePlayersGame(String gameName) {
+		List<Player> players = this.playerDao
+				.findAllPlayersByGameName(gameName);
+
+		User user = null;
+		for (Player player : players) {
+			user = player.getUser();
+			user.setParticipatingInGame(Boolean.FALSE);
+			this.userDao.saveOrUpdate(user);
+
+			this.playerDao.delete(player);
+		}
 	}
 }

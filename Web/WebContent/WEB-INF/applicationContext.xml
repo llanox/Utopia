@@ -17,8 +17,11 @@
 	<!-- Include context files from different layers -->
 	<!-- ******************************************************************** -->
 
-	<import resource="Utopia-security-context.xml" ></import>
-	<import resource="Utopia-service-context.xml" ></import>
-	<import resource="Utopia-dao-context.xml" ></import>
-	<import resource="Utopia-web-context.xml" ></import>
+	<import resource="Utopia-security-context.xml"></import>
+
+	<import resource="Utopia-service-context.xml"></import>
+
+	<import resource="Utopia-dao-context.xml"></import>
+
+	<import resource="Utopia-web-context.xml"></import>
 </beans>

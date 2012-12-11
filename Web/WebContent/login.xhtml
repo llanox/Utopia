@@ -1,88 +1,59 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:ice="http://www.icesoft.com/icefaces/component">
-<head>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ice="http://www.icesoft.com/icefaces/component" >
 
+	<head>
+		<title>Utopia Game</title>
+	
+		<!-- Site Specific CSS -->
+		<ice:outputStyle href="./sensation_data/theme.css" />
+		<ice:outputStyle href="./sensation_data/style_002.css" />
+		<ice:outputStyle href="./sensation_data/style.css" />
+		<ice:outputStyle href="./sensation_data/facebox.css" />
+	</head>
 
-<title>Utopia Game </title>
-
-	    <!-- Site Specific CSS -->
-    <ice:outputStyle href="./sensation_data/theme.css" />
-	<ice:outputStyle href="./sensation_data/style_002.css" />
-    <ice:outputStyle href="./sensation_data/style.css" />
-    <ice:outputStyle href="./sensation_data/facebox.css" />
-
-
-
-</head>
-
-
-<body>
-
-<ice:form >
-
-
+	<body>
+		<ice:form>
 			<div class="container_12">
-
 				<div class="grid_6 prefix_3 suffix_3">
-
 					<div class="main login" style="width: 40%; padding: 20px;">
+						<div class="content-box" >
 
-						<div class="content-box">
-
-							<div class="content-header">
-
-								<h3>
-									Ingreso a UTOPIA
-								</h3>
-
+							<div class="content-header" >
+								<h3>Ingreso a UTOPIA</h3>
 							</div>
 
+							<p>Bienvenid@ a Utopia:</p>
 
+							<div class="lileft" >
+								<label> Usuario </label>
 
-							<p>
-								Bienvenid@ a Utopia:
+								<ice:inputText id="txtUsuario1" required="true"
+									value="#{authenticationController.usuario}" />
+							</div>
+
+							<div class="liright" >
+								<label> Password </label>
+
+								<ice:inputSecret
+									action="#{authenticationController.validateAction}"
+									id="txtPassword" redisplay="true" required="true"
+									value="#{authenticationController.password}" />
+							</div>
+
+							<p class="link" >
+								<ice:commandButton
+									action="#{authenticationController.validateAction}"
+									id="btnEntrar" value="Ingresar" >
+								</ice:commandButton>
 							</p>
 
-							<div class="lileft">
-								<label>
-									Usuario
-								</label>
-																	
-								    <ice:inputText id="txtUsuario1" required="true" value="#{authenticationController.usuario}"/>
-								
-								
-							</div>
-
-							<div class="liright">
-								<label>
-									Password
-								</label>
-								
-								
-							    <ice:inputSecret action="#{authenticationController.validateAction}" id="txtPassword" redisplay="true" required="true" value="#{authenticationController.password}" />
-								
-							</div>
-
-                    <p class="link">
-                        <ice:commandButton action="#{authenticationController.validateAction}" id="btnEntrar"  value="Ingresar" > </ice:commandButton>
-                    	
-                    </p>
-					
-
 							<div class="clear"></div>
-
 						</div>
-
 					</div>
-
 				</div>
-
 			</div>
-</ice:form>
-
-</body>
-
-
+		</ice:form>
+	</body>
 </ui:composition>

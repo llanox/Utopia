@@ -39,8 +39,7 @@ public class Game implements Serializable, Updateable {
 	//@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
 	//		CascadeType.MERGE })
 	private List<Incrementable> defaultIncrementables = new ArrayList<Incrementable>();
-	@OneToMany(cascade = { CascadeType.PERSIST,
-			CascadeType.MERGE })
+	@OneToMany(cascade = { CascadeType.PERSIST,	CascadeType.MERGE })	 
 	//@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,
 	//		CascadeType.MERGE })
 	private List<Player> players = new ArrayList<Player>();

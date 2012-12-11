@@ -85,14 +85,16 @@ public class GameServiceImpl implements GameService {
 	@Override()
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public void delete(Game game) {
-		List<Player> players = game.getPlayers();
+//		List<Player> players = game.getPlayers();
 
-		for (Player player : players) {
-			User user = userService.findUser(player.getUser().getLogin());
-			user.setParticipatingInGame(false);
-			playerService.delete(player);
-			userService.save(user);
-		}
+       playerService.releasePlayersGame(game.getName());
+		
+//		for (Player player : players) {
+//			User user = userService.findUser(player.getUser().getLogin());
+//			user.setParticipatingInGame(false);
+//			playerService.delete(player);
+//			userService.save(user);
+//		}
 		this.gameDao.delete(game);
 	}
 

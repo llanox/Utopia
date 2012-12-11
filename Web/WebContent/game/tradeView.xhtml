@@ -4,121 +4,115 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ice="http://www.icesoft.com/icefaces/component"
-	xmlns:ice-cc="http://www.icesoft.com/icefaces-composite-comps">
+	xmlns:ice-cc="http://www.icesoft.com/icefaces-composite-comps" >
 
-<head>
+	<head>
+		<ice:outputStyle href="../xmlhttp/css/rime/rime.css" id="outputStyle1" />
+		<ice:outputStyle href="../xmlhttp/css/game/trade.css" id="outputStyle2" />
+	</head>
 
-<ice:outputStyle href="../xmlhttp/css/rime/rime.css" id="outputStyle1" />
-<ice:outputStyle href="../xmlhttp/css/game/trade.css" id="outputStyle2" />
-</head>
-<body>
+	<body>
+		<div id="trade" class="tab_content" >
 
-	<div id="trade" class="tab_content">
+			<h4 id="title_resources" style="color: #222222; background-color: #C0DEED;
+				-moz-border-radius: 5px 5px 5px 5px; border: 2px solid #C0DEED; width: 100%" >
+				Intercambio Comercial</h4>
+	
+			<div id="content" style="height: 700px" >
+				<div id="indicadores" >
+					<div id="sendRequest" style="width: 95%; background-color: #DDEEF6;
+						-moz-border-radius: 5px 5px 5px 5px; border: 8px solid #C0DEED" >
 
+						<span> Intercambiar </span>
 
+						<ice:inputText style="width:40px;border:1px solid #AAAAAA"
+							id="iptQuantityToTrade"
+							value="#{tradeController.quantityFromSender}" />
 
-		<h4 id="title_resources"
-			style="color: #222222; background-color: #C0DEED; -moz-border-radius: 5px 5px 5px 5px; border: 2px solid #C0DEED; width: 100%">
-			Intercambio Comercial</h4>
+						<span> unds de </span>
+	
+						<ice:selectOneMenu style="width:120px;border:1px solid #AAAAAA"
+							id="somResourceToTrade" value="#{tradeController.elFromSender}"
+							partialSubmit="true" >
 
-		<div id="content" style="height: 700px">
+							<f:selectItems id="slctResource"
+								value="#{tradeController.elementItems}" />
+						</ice:selectOneMenu>
+	
+						<span> por </span>
 
-			<div id="indicadores">
+						<ice:inputText style="width:40px;border:1px solid #AAAAAA"
+							id="iptQuantityToReceive"
+							value="#{tradeController.quantityFromReceiver}" />
 
-				<div id="sendRequest"
-					style="width: 95%; background-color: #DDEEF6; -moz-border-radius: 5px 5px 5px 5px; border: 8px solid #C0DEED">
+						<span> unds de </span>
+	
+						<ice:selectOneMenu style="width:120px;border:1px solid #AAAAAA"
+							id="somResourcesToReceive"
+							value="#{tradeController.elFromReceiver}" partialSubmit="true" >
 
+							<f:selectItems id="slctResource"
+								value="#{tradeController.elementItems}" />
+						</ice:selectOneMenu>	
 
-					<span> Intercambiar </span>
-					<ice:inputText style="width:40px;border:1px solid #AAAAAA"
-						id="iptQuantityToTrade"
-						value="#{tradeController.quantityFromSender}" />
-					<span> unds de </span>
+						<ice:commandButton style="width:100px" id="btnSendRequest"
+							actionListener="#{tradeController.postOffer}"
+							value="Enviar Solicitud" />
+					</div>
 
-					<ice:selectOneMenu style="width:120px;border:1px solid #AAAAAA"
-						id="somResourceToTrade" value="#{tradeController.elFromSender}"
-						partialSubmit="true">
-						<f:selectItems id="slctResource"
-							value="#{tradeController.elementItems}" />
-					</ice:selectOneMenu>
+					<div style="overflow: auto; height: 700px;" >
+						<ice:panelSeries id="psRequests" var="inter"
+							value="#{tradeController.interchangeRequests}" >
 
-					<span> por </span>
-					<ice:inputText style="width:40px;border:1px solid #AAAAAA"
-						id="iptQuantityToReceive"
-						value="#{tradeController.quantityFromReceiver}" />
-					<span> unds de </span>
+							<div id="panelRequest#{inter.interchange.id}" style="position: relative;
+								margin-top: 1em; border-width: 1px; -moz-border-radius: 5px 5px 5px 5px;
+								background: none repeat scroll 0 0 #F5F5F5;
+								border-color: #E7E7E7 #F5F5F5 #F5F5F5; border: 2px solid #E7E7E7;
+								width: 95%;" >
 
+								<img style="position: relative; margin-left: 1em;"
+									src="./sensation_data/basket.png" > </img>
+								
+								<strong>Intercambio # #{inter.interchange.id} </strong> - #{inter.message}
 
-					<ice:selectOneMenu style="width:120px;border:1px solid #AAAAAA"
-						id="somResourcesToReceive"
-						value="#{tradeController.elFromReceiver}" partialSubmit="true">
-						<f:selectItems id="slctResource"
-							value="#{tradeController.elementItems}" />
-					</ice:selectOneMenu>
+								<ice:commandButton
+									style="width:100px;position: relative; margin-bottom:1em; margin-left: 1em;
+									margin-top: 1em; border-width: 1px; -moz-border-radius: 5px 5px 5px 5px;
+									background: none repeat scroll 0 0 #F5F5F5; border-color: #E7E7E7 #F5F5F5 #F5F5F5;
+									border: 2px solid #E7E7E7"
+									rendered="#{inter.viewers == 'others'}" id="btnAccept"
+									actionListener="#{inter.acceptOffer}" value="Aceptar" >
 
+									<f:attribute name="player"
+										value="#{tradeController.userSession.user.login}" />
+								</ice:commandButton>
+	
+								<ice:commandButton
+									style="width:100px;position: relative; margin-bottom:1em;
+									margin-left: 1em; margin-top: 1em; border-width: 1px;
+									-moz-border-radius: 5px 5px 5px 5px; background: none repeat scroll 0 0 #F5F5F5;
+									border-color: #E7E7E7 #F5F5F5 #F5F5F5; border: 2px solid #E7E7E7"
+									rendered="#{inter.viewers == 'owner'}" id="btnCancel"
+									actionListener="#{inter.cancelOffer}" value="Cancelar" >
 
-
-
-
-					<ice:commandButton style="width:100px" id="btnSendRequest"
-						actionListener="#{tradeController.postOffer}"
-						value="Enviar Solicitud" />
-
+									<f:attribute name="player"
+										value="#{tradeController.userSession.user.login}" />
+								</ice:commandButton>
+							</div>
+						</ice:panelSeries>
+					</div>
 				</div>
-				<div style="overflow: auto; height: 700px;">
 
-					<ice:panelSeries id="psRequests" var="inter"
-						value="#{tradeController.interchangeRequests}">
+				<div id="notificaciones" >
+					<h4>Notificaciones</h4>
 
-						<div id="panelRequest#{inter.interchange.id}"
-							style="position: relative; margin-top: 1em; border-width: 1px; -moz-border-radius: 5px 5px 5px 5px; background: none repeat scroll 0 0 #F5F5F5; border-color: #E7E7E7 #F5F5F5 #F5F5F5; border: 2px solid #E7E7E7; width: 95%;">
-							
-							<img style="position: relative; margin-left: 1em;" src="./sensation_data/basket.png"> </img> <strong>
-								Intercambio # #{inter.interchange.id} </strong> - #{inter.message} 
+					<ice:panelSeries id="psMsgs" style="overflow:auto; height: 700px; width: 160px;"
+						var="message" value="#{messagesBean.messages}" >
 
-							<ice:commandButton style="width:100px;position: relative; margin-bottom:1em; margin-left: 1em; margin-top: 1em; border-width: 1px; -moz-border-radius: 5px 5px 5px 5px; background: none repeat scroll 0 0 #F5F5F5; border-color: #E7E7E7 #F5F5F5 #F5F5F5; border: 2px solid #E7E7E7"
-								rendered="#{inter.viewers == 'others'}" id="btnAccept"
-								actionListener="#{inter.acceptOffer}" value="Aceptar">
-								<f:attribute name="player"
-									value="#{tradeController.userSession.user.login}" />
-							</ice:commandButton>
-
-							<ice:commandButton style="width:100px;position: relative; margin-bottom:1em; margin-left: 1em; margin-top: 1em; border-width: 1px; -moz-border-radius: 5px 5px 5px 5px; background: none repeat scroll 0 0 #F5F5F5; border-color: #E7E7E7 #F5F5F5 #F5F5F5; border: 2px solid #E7E7E7"
-								rendered="#{inter.viewers == 'owner'}" id="btnCancel"
-								actionListener="#{inter.cancelOffer}" value="Cancelar">
-								<f:attribute name="player"
-									value="#{tradeController.userSession.user.login}" />
-							</ice:commandButton>
-
-						</div>
-
-					</ice:panelSeries>
-
+						<div class="#{message.msgType}">#{message.msg}</div>
+					</ice:panelSeries>	
 				</div>
-
-			</div>
-
-			<div id="notificaciones">
-
-				<h4>Notificaciones</h4>
-				<ice:panelSeries id="psMsgs" style="overflow:auto;height: 700px; width: 160px;" var="message"	value="#{messagesBean.messages}">
-
-					<div class="#{message.msgType}">#{message.msg}</div>
-				</ice:panelSeries>
-
-			</div>
-
-
-
-		</div>
-
-
-
-
-
-
-
-	</div>
-
-</body>
+			</div>	
+		</div>	
+	</body>
 </html>

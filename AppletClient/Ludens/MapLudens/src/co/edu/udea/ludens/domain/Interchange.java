@@ -22,6 +22,7 @@ public class Interchange implements Serializable, Updateable {
     public Interchange() {
     }
 
+    @Override()
     public Long getId() {
 
         return (this.id);

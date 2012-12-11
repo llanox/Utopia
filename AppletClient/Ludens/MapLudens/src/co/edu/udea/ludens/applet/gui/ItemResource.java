@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 
 public class ItemResource extends JPanel {
-
     private JLabel resourceImage;
     private JLabel resourceName;
     private JLabel resourceQuantity;

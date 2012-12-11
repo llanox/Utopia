@@ -4,49 +4,37 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ice="http://www.icesoft.com/icefaces/component"
-	xmlns:ice-cc="http://www.icesoft.com/icefaces-composite-comps">
+	xmlns:ice-cc="http://www.icesoft.com/icefaces-composite-comps" >
 
-<head>
+	<head>
+		<ice:outputStyle href="../xmlhttp/css/rime/rime.css" id="outputStyle1" />
+		<ice:outputStyle href="../xmlhttp/css/game/game.css" id="outputStyle2" />
+	</head>
 
-<ice:outputStyle href="../xmlhttp/css/rime/rime.css" id="outputStyle1" />
-<ice:outputStyle href="../xmlhttp/css/game/game.css" id="outputStyle2" />
-</head>
-
-
-<body>
-
-	<ice:panelGrid id="pnlSettingUPGame"
-		rendered="#{gameController.settingGame}" width="100%">
+	<body>
+		<ice:panelGrid id="pnlSettingUPGame"
+			rendered="#{gameController.settingGame}" width="100%" >
 
 		<div id="panelFactors" style="width: 100%">
-
 			<ice:panelGrid columns="2" border="0">
-
 				<ice:commandButton id="btnListGames"
 					actionListener="#{gameController.listGames}"
 					style="top: 90%; position: relative" value="Listar Juegos" />
-
 			</ice:panelGrid>
-
-
-
 		</div>
 
-
 		<h4 id="title_elements"
-			style="color: #222222; background-color: #4c9acb; -moz-border-radius: 5px 5px 5px 5px; border: 2px solid #4c9acb; width: 100%">Elementos
+			style="color: #222222; background-color: #4c9acb;
+			 -moz-border-radius: 5px 5px 5px 5px;
+			  border: 2px solid #4c9acb; width: 100%">Elementos
 		</h4>
 
 		<ice:panelGrid id="pnlElementsManager"
-			rendered="#{incrementableController.listingElements}">
-
-
+			rendered="#{incrementableController.listingElements}" >
 
 			<ice:panelGrid id="pnlNewIncrementable" columns="2"
 				rendered="#{incrementableController.editingElement}" border="0"
-				width="100%">
-
-
+				width="100%" >
 
 				<ice:outputLabel style="width:250px;" id="oplblIncrementableName"
 					value="Nombre:" />
@@ -54,24 +42,18 @@
 					value="#{incrementableController.actualIncrementable.name}" />
 
 				<!--  </ice:panelGrid> -->
-
 				<ice:outputLabel style="width:250px;"
 					id="lblIncrementableDescription" value="Descripción:" />
 				<ice:inputTextarea cols="40" rows="4" style="width:200px;"
-					id="iptIncrementableName"
+					id="iptIncrementabledDescription"
 					value="#{incrementableController.actualIncrementable.description}" />
 
-
-
 				<!--  <ice:panelGrid  columns="2" border="0"  >  -->
-
 				<ice:outputLabel style="width:250px;" id="lblIncrementableType"
 					value="Tipo:" />
-
-
 				<ice:selectOneMenu style="width:200px;border:1px solid #AAAAAA"
 					valueChangeListener="#{incrementableController.changeType}"
-					id="somIncrementableTypes" partialSubmit="true">
+					id="somIncrementableTypes" partialSubmit="true" >
 					<f:selectItems id="slctTypes"
 						value="#{incrementableController.incrementableTypes}" />
 				</ice:selectOneMenu>
@@ -79,8 +61,7 @@
 				<ice:outputLabel style="width:250px;" id="lblIncrements"
 					value="Incrementos:" />
 
-				<ice:panelGrid columns="2" border="0">
-
+				<ice:panelGrid columns="2" border="0" >
 					<ice:outputLabel style="width:250px;" id="oplblInitialValue"
 						value="Valor Inicial (unds)" />
 					<ice:inputText style="width:40px;" id="iptInitialValue"
@@ -92,7 +73,6 @@
 					<ice:inputText style="width:40px;" id="iptInitialValueRateOfChange"
 						value="#{incrementableController.actualIncrementable.productionIncrementRate}"
 						partialSubmit="true" />
-
 
 					<ice:outputLabel style="width:250px;"
 						id="oplblInitialUpgradingTime"
@@ -107,76 +87,72 @@
 						id="iptInitialUpgradingTimeRateOfChange"
 						value="#{incrementableController.actualIncrementable.levelIncrementDelayRate}"
 						partialSubmit="true" />
-
 				</ice:panelGrid>
 
 				<ice:outputLabel style="width:250px;" id="lblConstraints"
 					value="Restricciones:" />
-				<ice:panelGrid columns="2" border="0">
 
-
+				<ice:panelGrid columns="2" border="0" >
 					<ice:panelSeries id="psConstraints"
 						style="background-color: AliceBlue; height: 200px; overflow: auto;"
 						var="incrementableConstraint"
 						value="#{incrementableController.actualIncrementable.constraints}">
 
-						<ice:panelGrid>
+						<ice:panelGrid></ice:panelGrid>
 
-						</ice:panelGrid>
-
-						<ice:panelGrid columns="2">
+						<ice:panelGrid columns="2" >
 							<ice:outputLabel id="optlbMaterialName" style="width:60px;"
-								value="Material:">
+								value="Material:" >
 							</ice:outputLabel>
+
 							<ice:outputLabel id="optlbMaterialNameValue" style="width:60px;"
-								value="#{incrementableConstraint.elementName}">
+								value="#{incrementableConstraint.elementName}" >
 							</ice:outputLabel>
 
 							<ice:outputLabel id="optlbConstraintInitialValue"
-								style="width:60px;" value="Valor inicial:">
+								style="width:60px;" value="Valor inicial:" >
 							</ice:outputLabel>
+
 							<ice:inputText style="width:40px;" id="iptConstraintInitialValue"
 								value="#{incrementableConstraint.initialValue}"
 								partialSubmit="true" />
+
 							<ice:outputLabel id="optlbConstraintIncrementRate"
-								value="Tasa incremento:">
+								value="Tasa incremento:" >
 							</ice:outputLabel>
+
 							<ice:inputText style="width:40px;"
 								id="iptConstraintIncrementRate"
 								value="#{incrementableConstraint.incrementRate}"
 								partialSubmit="true" />
 						</ice:panelGrid>
-
 					</ice:panelSeries>
-
-
 				</ice:panelGrid>
 
 				<ice:outputLabel style="width:250px;" id="lblIncrementableImage"
 					value="Imagen:" />
+
 				<ice:inputFile style="width:800px;" fileNamePattern=".+\.(png|jpg)"
 					id="inpFIncrementableImage"
 					actionListener="#{incrementableController.uploadActionListener}"
 					submitOnUpload="preAndPostUpload">
 				</ice:inputFile>
+
 				<ice:message for="inpFIncrementableImage" />
 
-
-				<ice:panelGrid columns="2">
+				<ice:panelGrid columns="2" >
 					<ice:commandButton id="btnSave"
 						actionListener="#{incrementableController.saveIncrementable}"
 						style="top: 90%; position: relative" value="Guardar " />
+
 					<ice:commandButton id="btnCancel"
 						actionListener="#{incrementableController.cancelEditing}"
 						style="top: 90%; position: relative" value="Cancelar " />
 				</ice:panelGrid>
-
 			</ice:panelGrid>
 
-
 			<ice:panelGrid id="pnlTableElements"
-				rendered="#{!incrementableController.editingElement}">
-
+				rendered="#{!incrementableController.editingElement}" >
 				<div>
 					<ice:commandButton id="btnNewElement"
 						disabled="#{incrementableController.settingUpConstraints}"
@@ -197,12 +173,12 @@
 					<ice:commandButton id="btnDeleteAllConstraints"
 						rendered="#{incrementableController.settingUpConstraints}"
 						actionListener="#{incrementableController.setupConstraints}"
-						style="top: 90%; position: relative" value="Limpiar Restricciones">
+						style="top: 90%; position: relative" value="Limpiar Restricciones" >
+
 						<f:setPropertyActionListener
 							target="#{incrementableController.action}"
 							value="action_deleteallconstraints" />
 					</ice:commandButton>
-
 				</div>
 
 				<ice:dataTable
@@ -210,45 +186,37 @@
 					headerClass="icelist-header" id="incrementablesTable"
 					rowClasses="rowClass1,rowClass2" rows="20"
 					value="#{incrementableController.incrementables}"
-					var="incrementable" width="100%">
+					var="incrementable" width="100%" >
 
 					<ice:column>
-
-						<f:facet name="header">
+						<f:facet name="header" >
 							<ice:outputText value="Nombre" />
 						</f:facet>
 						<ice:outputText style="text-align:center "
 							value="#{incrementable.name}" />
-
 					</ice:column>
 
 					<ice:column>
-
-						<f:facet name="header">
+						<f:facet name="header" >
 							<ice:outputText value="Descripción" />
 						</f:facet>
 						<ice:outputText style="text-align:center "
 							value="#{incrementable.description}" />
-
 					</ice:column>
 
 					<ice:column>
-
-						<f:facet name="header">
+						<f:facet name="header" >
 							<ice:outputText value="Tipo" />
 						</f:facet>
 						<ice:outputText style="text-align:center "
 							value="#{incrementable.type.type}" />
-
 					</ice:column>
 
 					<ice:column>
-
-						<f:facet name="header">
+						<f:facet name="header" >
 							<ice:outputText value="Imagen" />
 						</f:facet>
 						<img src="../upload/#{incrementable.imageUrl}" alt="Imagen" />
-
 					</ice:column>
 
 
@@ -259,27 +227,24 @@
 						<ice:commandButton id="btnEditElement"
 							actionListener="#{incrementableController.editingIncrementable}"
 							style="top: 90%; position: relative" value="Editar" />
+
 						<ice:commandButton id="btnDelete"
 							actionListener="#{incrementableController.deleteIncrementable}"
 							style="top: 90%; position: relative" value="Eliminar" />
-
 					</ice:column>
-
-
 				</ice:dataTable>
 
-				<div style="width: 500px; margin: 0 auto;">
-
-
+				<div style="width: 500px; margin: 0 auto;" >
 					<ice:dataPaginator rendered="true" for="incrementablesTable"
 						id="dataPaginator2" paginatorMaxPages="15"
 						rowsCountVar="rowsCount"
 						displayedRowsCountVar="displayedRowsCount"
 						firstRowIndexVar="firstRowIndex" lastRowIndexVar="lastRowIndex"
-						pageCountVar="pageCount" pageIndexVar="pageIndex">
+						pageCountVar="pageCount" pageIndexVar="pageIndex" >
 
 						<ice:outputFormat styleClass="standard"
 							value="{0} elementos en total, mostrando tan solo {1} en esta página. Página {4} / {5}.">
+
 							<f:param value="#{rowsCount}" />
 							<f:param value="#{displayedRowsCount}" />
 							<f:param value="#{firstRowIndex}" />
@@ -292,22 +257,27 @@
 							<ice:graphicImage id="graphicImage7"
 								url="../xmlhttp/css/rime/css-images/arrow-first.gif" />
 						</f:facet>
+
 						<f:facet name="last">
 							<ice:graphicImage id="graphicImage8"
 								url="../xmlhttp/css/rime/css-images/arrow-last.gif" />
 						</f:facet>
+
 						<f:facet name="previous">
 							<ice:graphicImage id="graphicImage9"
 								url="../xmlhttp/css/rime/css-images/arrow-previous.gif" />
 						</f:facet>
+
 						<f:facet name="next">
 							<ice:graphicImage id="graphicImage10"
 								url="../xmlhttp/css/rime/css-images/arrow-next.gif" />
 						</f:facet>
+
 						<f:facet name="fastforward">
 							<ice:graphicImage id="graphicImage11"
 								url="../xmlhttp/css/rime/css-images/arrow-ff.gif" />
 						</f:facet>
+
 						<f:facet name="fastrewind">
 							<ice:graphicImage id="graphicImage12"
 								url="../xmlhttp/css/rime/css-images/arrow-fr.gif" />
@@ -315,40 +285,25 @@
 					</ice:dataPaginator>
 				</div>
 			</ice:panelGrid>
-
 		</ice:panelGrid>
 
-
 		<ice:panelGrid id="pnlIncrementableImageManager" style="width: 100%;"
-			rendered="#{!incrementableController.listingElements}">
-
-
+			rendered="#{!incrementableController.listingElements}" >
 			<ice:outputLabel
-				style="color: #222222; background-color: #4c9acb; -moz-border-radius: 5px 5px 5px 5px; border: 2px solid #4c9acb; width: 100%"
+				style="color: #222222; background-color: #4c9acb;
+				 -moz-border-radius: 5px 5px 5px 5px; border: 2px solid #4c9acb; width: 100%"
 				id="lblElementNameValue"
 				value="#{incrementableController.actualIncrementable.name}" />
 
-
 			<ice:panelGrid id="pnlNewIncrementableImage"
 				rendered="#{incrementableController.addingIncrementableImage}"
-				columns="2" border="0" width="100%">
-
-
-
-
-
-
-
-
+				columns="2" border="0" width="100%" >
 
 				<ice:commandButton id="btnCancelAddImage"
 					actionListener="#{incrementableController.cancelAddImage}"
 					style="top: 90%; position: relative" value="Cancelar " />
 
-
 			</ice:panelGrid>
-
-
 
 			<!-- <ice:panelGrid id="pnlListIncrementableImage" rendered="#{!incrementableController.addingIncrementableImage}"> -->
 			<!--  <ice:panelGrid columns="2">   -->
@@ -359,13 +314,12 @@
 			<!--   <ice:dataTable id="imagesTable" binding="#{incrementableController.imagesIncrementableTable}"  headerClass="icelist-header" rowClasses="rowClass1,rowClass2" rows="20"  value="#{incrementableController.incrementableImages}" var="incrementableImage" width="85%"> -->
 
 			<ice:column>
-
 				<f:facet name="header">
 					<ice:outputText value="Nivel" />
 				</f:facet>
+
 				<ice:outputText style="text-align:center "
 					value="#{incrementableImage.level}" />
-
 			</ice:column>
 
 			<!--    <ice:column> -->
@@ -444,11 +398,7 @@
 
 
 			<!--  </ice:panelGrid> -->
-
+			</ice:panelGrid>
 		</ice:panelGrid>
-
-
-	</ice:panelGrid>
-
-</body>
+	</body>
 </html>

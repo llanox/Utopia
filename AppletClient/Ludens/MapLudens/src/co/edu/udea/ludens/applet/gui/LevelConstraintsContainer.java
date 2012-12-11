@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.udea.ludens.applet.gui;
 
 import co.edu.udea.ludens.domain.Element;
@@ -195,7 +191,7 @@ class LevelConstraintsContainer {
 
     public class KeyComparator implements Comparator<IncrementableConstraint> {
 
-        @Override
+        @Override()
         public int compare(IncrementableConstraint o1, IncrementableConstraint o2) {
 
             return (o1.getElementName().compareTo(o2.getElementName()));

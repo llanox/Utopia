@@ -69,19 +69,19 @@ public class MapEventProcessor implements MouseListener, ActionListener, WindowL
         notifyEvent();
     }
 
-    @Override
+    @Override()
     public void mouseReleased(MouseEvent e) {
     }
 
-    @Override
+    @Override()
     public void mouseEntered(MouseEvent e) {
     }
 
-    @Override
+    @Override()
     public void mouseExited(MouseEvent e) {
     }
 
-    @Override
+    @Override()
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();
 
@@ -95,7 +95,8 @@ public class MapEventProcessor implements MouseListener, ActionListener, WindowL
 
     private void upLevel(final String element) {
         Runnable restRequest = new Runnable() {
-            @Override
+
+            @Override()
             public void run() {
                 restClient.upLevel(element);
             }
@@ -103,47 +104,41 @@ public class MapEventProcessor implements MouseListener, ActionListener, WindowL
         SwingUtilities.invokeLater(restRequest);
     }
 
-    @Override
+    @Override()
     public void windowOpened(WindowEvent e) {
     }
 
-    @Override
+    @Override()
     public void windowClosed(WindowEvent e) {
         dialog.setVisible(false);
     }
 
-    @Override
+    @Override()
     public void windowIconified(WindowEvent e) {
     }
 
-    @Override
+    @Override()
     public void windowDeiconified(WindowEvent e) {
     }
 
-    @Override
+    @Override()
     public void windowActivated(WindowEvent e) {
     }
 
-    @Override
+    @Override()
     public void windowClosing(WindowEvent paramWindowEvent) {
         dialog.setVisible(false);
     }
 
-    @Override
+    @Override()
     public void windowDeactivated(WindowEvent e) {
     }
 
-    /**
-     * @return the restClient
-     */
     public UtopiaRestClient getRestClient() {
-        
+
         return (this.restClient);
     }
 
-    /**
-     * @param restClient the restClient to set
-     */
     public void setRestClient(UtopiaRestClient restClient) {
         this.restClient = restClient;
     }

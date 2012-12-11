@@ -6,7 +6,6 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public class ElementTableModel extends AbstractTableModel {
-
     String[] columnNames;
     List<Object> elements = new ArrayList<Object>();
 
@@ -15,13 +14,13 @@ public class ElementTableModel extends AbstractTableModel {
         this.elements = elements;
     }
 
-    @Override
+    @Override()
     public String getColumnName(int col) {
 
         return (this.columnNames[col]);
     }
 
-    @Override
+    @Override()
     public int getRowCount() {
         if (this.elements == null) {
             
@@ -31,13 +30,13 @@ public class ElementTableModel extends AbstractTableModel {
         return (this.elements.size());
     }
 
-    @Override
+    @Override()
     public int getColumnCount() {
 
         return (this.columnNames.length);
     }
 
-    @Override
+    @Override()
     public Object getValueAt(int row, int col) {
         if (elements == null) {
 
@@ -62,7 +61,7 @@ public class ElementTableModel extends AbstractTableModel {
         return null;
     }
 
-    @Override
+    @Override()
     public Class<?> getColumnClass(int column) {
         if (0 < this.getRowCount()) {
 

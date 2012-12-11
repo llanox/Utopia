@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.udea.ludens.applet.gui;
 
 import co.edu.udea.ludens.domain.Element;
@@ -17,10 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
-/**
- *
- * @author juanga
- */
 public class IndicatorContainer {
 
     private HashMap<String, JComponent> indicatorMap = new HashMap<String, JComponent>();
@@ -28,7 +20,7 @@ public class IndicatorContainer {
 
     public void updateOrCreateFactorIndicator(List<Object> data, JComponent panel) {
         if (data == null) {
-            
+
             return;
         }
 
@@ -46,10 +38,11 @@ public class IndicatorContainer {
     private void updateLevelNotification(Element el) {
         Image notification = MapDashboard.imagesMap.get(MapDashboard.FILE_PREFIX + el.getLevel());
         Sprite spNotification = MapDashboard.spritesMap.get(el.getIncrementable().getName());
-        
+
         if (notification == null) {
             notification = MapDashboard.imagesMap.get(MapDashboard.FILE_PREFIX);
         }
+
         if (spNotification != null) {
             spNotification.setImage(notification);
         }
@@ -57,6 +50,7 @@ public class IndicatorContainer {
 
     public void updateOrCreateMaterialIndicator(List<Object> data, JComponent panel) {
         if (data == null) {
+
             return;
         }
 
@@ -73,7 +67,7 @@ public class IndicatorContainer {
 
     public void updateOrCreatePopulationIndicator(Population el, JPanel panel) {
         if (el == null) {
-            
+
             return;
         }
 
@@ -103,7 +97,7 @@ public class IndicatorContainer {
 
     void updateOrCreateMessageEvents(List<Object> data, JPanel indicatorsMarquee) {
         if (data == null) {
-            
+
             return;
         }
 

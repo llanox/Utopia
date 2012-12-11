@@ -1,27 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * MapDashboardPanel.java
- *
- *
- */
 package co.edu.udea.ludens.applet.gui;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
-/**
- *
- * @author juanga
- */
 public class MapDashboardPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form MapDashboardPanel
-     */
     public MapDashboardPanel() {
         initComponents();
         tbFactors.setDefaultRenderer(String.class, new LabelRenderer());

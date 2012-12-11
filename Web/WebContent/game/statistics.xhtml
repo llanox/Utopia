@@ -1,260 +1,286 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ice="http://www.icesoft.com/icefaces/component"
-    xmlns:ice-cc="http://www.icesoft.com/icefaces-composite-comps">
-	
-	<head>
-	
-         <ice:outputStyle href="../xmlhttp/css/rime/rime.css" id="outputStyle1" />   
-	     <ice:outputStyle href="../xmlhttp/css/game/game.css" id="outputStyle2" /> 
+	xmlns:ice-cc="http://www.icesoft.com/icefaces-composite-comps" >
+
+	<head>	
+		<ice:outputStyle href="../xmlhttp/css/rime/rime.css" id="outputStyle1" />
+		<ice:outputStyle href="../xmlhttp/css/game/game.css" id="outputStyle2" />
 	</head>
 
+	<body>	
+		<ice:form>
+			<div id="statistics" class="tab_content" >
+				<div>
+					<h4 id="title_elements" style="color: #222222; background-color: #f5b604;
+						-moz-border-radius: 5px 5px 5px 5px; border: 2px solid #f5b604;
+						width: 100%">Estadísticas
+					</h4>
 
-	<body>
-     
-      <ice:form>            
-                  <div id="statistics" class="tab_content" >                                       
-                             
-                               
-                         <div>
-                  <h4 id="title_elements"
-					style="color: #222222; background-color: #f5b604; -moz-border-radius: 5px 5px 5px 5px; border: 2px solid #f5b604; width: 100%">Estadísticas
-				</h4> 
-                         
-                         <h4 id="title_reports"
-			           style="color: #222222; background-color: #a0c90a; -moz-border-radius: 5px 5px 5px 5px; border: 2px solid #a0c90a; width: 100%"> Reportes</h4>
-            
-            
-                                  
-                          <ice:dataTable  headerClass="icelist-header" id="playersTable"    rowClasses="rowClass1,rowClass2" rows="20" style="cursor:pointer" value="#{reportController.playersStatus}" var="player" width="25%">
-                              
-                              <ice:column id="colm1Pl">
-                                  <f:facet name="header">
-                                     <ice:outputText id="out1Pl"   style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold" value="Login"/>
-                                  </f:facet>
-                                  <ice:outputText id="out2Pl"  style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal; text-align:center" value="#{player.login}"/>
-                                         
-                              </ice:column>
-                             
-                              <ice:column id="colm2Pl">
-                                     <f:facet name="header">
-                                      <ice:outputText id="out3Pl"  style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold" value="Promedio"/>
-                                     </f:facet>
-                                   <ice:outputText id="out4Pl"  style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;text-align:center" value="#{player.average}"/>
-                              </ice:column>
-                              
-                                  <ice:column id="colm3Pl">
-                                     <f:facet name="header">
-                                      <ice:outputText id="out5Pl"  style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;width: 20px" value="Online"/>
-                                     </f:facet>
-                                                                     
-                                   	<ice:graphicImage rendered="#{player.online}" style="position: relative; margin-left: 1em; width: 20px" url="./sensation_data/online_player.png"/>
-                                   	<ice:graphicImage rendered="#{!player.online}" style="position: relative; margin-left: 1em; width: 20px" url="./sensation_data/offline_player.png"/>
-                              </ice:column>
-                        
-                          </ice:dataTable>
-          
-          
-           
+					<h4 id="title_reports" style="color: #222222; background-color: #a0c90a;
+						-moz-border-radius: 5px 5px 5px 5px; border: 2px solid #a0c90a; width: 100%">
+						Reportes</h4>
 
-            
-      
-       <ul class="tabs">                       
-                        <li>
-                        <ice:outputText id="outExport"  style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold" value="Exportar eventos a:"></ice:outputText>
-                        </li>
-                        
-                        <li>
-                        <ice:dataExporter alt="Formato Excel" id="exporterToXls" for="tableReport"  label="Excel" image="../sensation_data/excel_icon_s.png" type="excel"></ice:dataExporter>
-                        </li>
-                        
-                        <li>                        
-                        <ice:dataExporter alt="Formato CSV" id="exporterToCSV" for="tableReport"    label="Csv" image="../sensation_data/csv_icon_s.png" type="csv"> </ice:dataExporter>
-                        </li>     					
-      
-         </ul>
-         
-        <br class="clear" />  
-                         
-                         <ice:dataTable  headerClass="icelist-header" id="tableReport"
-                                        rowClasses="rowClass1,rowClass2" rows="20" style="cursor:pointer" value="#{reportController.events}" var="event" width="100%">
-                                        <ice:column id="colm1">
-                                            <f:facet name="header">
-                                                <ice:outputText id="out1"   style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;" value="Cod"/>
-                                            </f:facet>
-                                            <ice:outputText id="out2"
-                                                style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal; text-align:center" value="#{event.id}"/>
-                                         
-                                        </ice:column>
-                                        <ice:column id="colm2">
-                                            <f:facet name="header">
-                                                <ice:outputText id="out3"
-                                                    style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold" value="Tipo de Evento"/>
-                                            </f:facet>
-                                            <ice:outputText id="out4"
-                                                style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal" value="#{event.eventType}"/>
-                                        </ice:column>
-                                        <ice:column id="colm3">
-                                            <f:facet name="header">
-                                                <ice:outputText id="out4"
-                                                    style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold" value="Fecha"/>
-                                            </f:facet>
-                                            <ice:outputText id="out5"
-                                                style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;text-align:center" value="#{event.exactDate}">
-                                                <f:convertDateTime dateStyle="short" timeZone="America/Bogota" type="both"/>
-                                            </ice:outputText>
-                                        </ice:column>
-                                        
-                                           <ice:column id="colm4">
-                                            <f:facet name="header">
-                                                <ice:outputText id="out6"
-                                                    style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold" value="Tiempo de Juego (ms)"/>
-                                            </f:facet>
-                                            <ice:outputText id="out7"
-                                                style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;text-align:center" value="#{event.gameElapsedTime}">
-                                               
-                                            </ice:outputText>
-                                        </ice:column>
-                                        
-                                        
-                                        <ice:column id="colm5">
-                                            <f:facet name="header">
-                                                <ice:outputText id="out8"
-                                                    style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold" value="Descripción"/>
-                                            </f:facet>
-                                            <ice:outputText id="out9"
-                                                style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal; text-align:center" value="#{event.msg}">
-                                                
-                                            </ice:outputText>
-                                        </ice:column>
-                                        <ice:column id="colm6">
-                                            <f:facet name="header">
-                                                <ice:outputText id="out10"
-                                                    style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold; width: 70px " value="Elemento 1"/>
-                                            </f:facet>
-                                            <center>
-                                                <ice:outputText id="out11"
-                                                    style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;width: 70px" value="#{event.affectedElement1}"/>
-                                            </center>
-                                            
-                                        </ice:column>
-                                        
-                                             <ice:column id="colm6b">
-                                            <f:facet name="header">
-                                                <ice:outputText id="out10b"
-                                                    style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold; width: 30px " value="Valor E1"/>
-                                            </f:facet>
-                                            <center>
-                                                <ice:outputText id="out11b"
-                                                    style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;width: 30px" value="#{event.element1Value}"/>
-                                            </center>
-                                            
-                                        </ice:column>
-                                        
-                                        
-                                        <ice:column id="colm7">
-                                            <f:facet name="header">
-                                                <ice:outputText id="out12"
-                                                    style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold; width: 30px " value="Elemento 2"/>
-                                            </f:facet>
-                                            <center>
-                                                <ice:outputText id="out13"
-                                                    style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;width: 30px" value="#{event.affectedElement2}"/>
-                                            </center>
-                                        </ice:column>
-                                        
-                                        <ice:column id="colm7b">
-                                            <f:facet name="header">
-                                                <ice:outputText id="out12b"
-                                                    style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold; width: 30px " value="Valor E2"/>
-                                            </f:facet>
-                                            <center>
-                                                <ice:outputText id="out13"
-                                                    style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;width: 30px" value="#{event.element2Value}"/>
-                                            </center>
-                                        </ice:column>
-                                        
-                                           <ice:column id="colm8">
-                                            <f:facet name="header">
-                                                <ice:outputText id="out14"
-                                                    style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold; width: 70px " value="Ejecutor"/>
-                                            </f:facet>
-                                            <center>
-                                                <ice:outputText id="out15"
-                                                    style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;width: 70px" value="#{event.executorName}"/>
-                                            </center>
-                                        </ice:column>
-                                        
-                                        
-                                        <ice:column id="colm9">
-                                            <f:facet name="header">
-                                                <ice:outputText id="out16"
-                                                    style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold; width: 70px " value="Contraparte"/>
-                                            </f:facet>
-                                            <center>
-                                                <ice:outputText id="out17"
-                                                    style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;width: 70px" value="#{event.receiverName}"/>
-                                            </center>
-                                        </ice:column>
-                                        
-                                 
-                                    </ice:dataTable>
-                                  
-                                  <div style="width:500px; margin: 0 auto;" >
-                                        <ice:dataPaginator  for="tableReport" id="dataPaginator2" paginatorMaxPages="15"
-                                             rowsCountVar="rowsCount"
-            								 displayedRowsCountVar="displayedRowsCount"
-            								 firstRowIndexVar="firstRowIndex"
-            								 lastRowIndexVar="lastRowIndex"
-            								 pageCountVar="pageCount"
-                                             pageIndexVar="pageIndex"                                     
-                                        
-                                        >
-                                        
-                                        <ice:outputFormat
-                						styleClass="standard"	value="{0} eventos en total, mostrando tan solo {1} en esta página. Página {4} / {5}.">
-            							<f:param value="#{rowsCount}"/>
-            							<f:param value="#{displayedRowsCount}"/>
-            							<f:param value="#{firstRowIndex}"/>
-            							<f:param value="#{lastRowIndex}"/>
-            							<f:param value="#{pageIndex}"/>
-            							<f:param value="#{pageCount}"/>
-        								</ice:outputFormat>
-                                        
-                                        <f:facet name="first">
-                                            <ice:graphicImage id="graphicImage7" url="../xmlhttp/css/rime/css-images/arrow-first.gif"/>
-                                        </f:facet>
-                                        <f:facet name="last">
-                                            <ice:graphicImage id="graphicImage8" url="../xmlhttp/css/rime/css-images/arrow-last.gif"/>
-                                        </f:facet>
-                                        <f:facet name="previous">
-                                            <ice:graphicImage id="graphicImage9" url="../xmlhttp/css/rime/css-images/arrow-previous.gif"/>
-                                        </f:facet>
-                                        <f:facet name="next">
-                                            <ice:graphicImage id="graphicImage10" url="../xmlhttp/css/rime/css-images/arrow-next.gif"/>
-                                        </f:facet>
-                                        <f:facet name="fastforward">
-                                            <ice:graphicImage id="graphicImage11" url="../xmlhttp/css/rime/css-images/arrow-ff.gif"/>
-                                        </f:facet>
-                                        <f:facet name="fastrewind">
-                                            <ice:graphicImage id="graphicImage12" url="../xmlhttp/css/rime/css-images/arrow-fr.gif"/>
-                                        </f:facet>
-                                    </ice:dataPaginator>
-                                    
-                                   </div>
-                      
-                      
-                      
-                      
-    				           
-                         </div>                     
-         
-				 </div>               
+					<ice:dataTable headerClass="icelist-header" id="playersTable"
+						rowClasses="rowClass1,rowClass2" rows="20" style="cursor:pointer"
+						value="#{reportController.playersStatus}" var="player" width="25%">
+	
+						<ice:column id="colm1Pl">
+							<f:facet name="header">
+								<ice:outputText id="out1Pl"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold"
+									value="Login" />
+							</f:facet>
 
-		</ice:form>	
-				
-</body>
- </html>
+							<ice:outputText id="out2Pl"
+								style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal; text-align:center"
+								value="#{player.login}" />	
+						</ice:column>
+
+						<ice:column id="colm2Pl">
+							<f:facet name="header">
+								<ice:outputText id="out3Pl"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold"
+									value="Promedio" />
+							</f:facet>
+
+							<ice:outputText id="out4Pl"
+								style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;text-align:center"
+								value="#{player.average}" />
+						</ice:column>
+	
+						<ice:column id="colm3Pl">
+							<f:facet name="header">
+								<ice:outputText id="out5Pl"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;width: 20px"
+									value="Online" />
+							</f:facet>
+	
+							<ice:graphicImage rendered="#{player.online}"
+								style="position: relative; margin-left: 1em; width: 20px"
+								url="./sensation_data/online_player.png" />
+
+							<ice:graphicImage rendered="#{!player.online}"
+								style="position: relative; margin-left: 1em; width: 20px"
+								url="./sensation_data/offline_player.png" />
+						</ice:column>	
+					</ice:dataTable>
+
+					<ul class="tabs">
+						<li><ice:outputText id="outExport"
+								style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold"
+								value="Exportar eventos a:"></ice:outputText>
+						</li>
+	
+						<li><ice:dataExporter alt="Formato Excel" id="exporterToXls"
+								for="tableReport" label="Excel"
+								image="../sensation_data/excel_icon_s.png" type="excel"></ice:dataExporter>
+						</li>
+	
+						<li><ice:dataExporter alt="Formato CSV" id="exporterToCSV"
+								for="tableReport" label="Csv"
+								image="../sensation_data/csv_icon_s.png" type="csv">
+							</ice:dataExporter>
+						</li>
+					</ul>
+	
+					<br class="clear" />
+	
+					<ice:dataTable headerClass="icelist-header" id="tableReport"
+						rowClasses="rowClass1,rowClass2" rows="20" style="cursor:pointer"
+						value="#{reportController.events}" var="event" width="100%">
+						<ice:column id="colm1">
+							<f:facet name="header">
+								<ice:outputText id="out1"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;"
+									value="Cod" />
+							</f:facet>
+							<ice:outputText id="out2"
+								style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal; text-align:center"
+								value="#{event.id}" />
+	
+						</ice:column>
+						<ice:column id="colm2">
+							<f:facet name="header">
+								<ice:outputText id="out3"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold"
+									value="Tipo de Evento" />
+							</f:facet>
+							<ice:outputText id="out4"
+								style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal"
+								value="#{event.eventType}" />
+						</ice:column>
+						<ice:column id="colm3">
+							<f:facet name="header">
+								<ice:outputText id="out4"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold"
+									value="Fecha" />
+							</f:facet>
+							<ice:outputText id="out5"
+								style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;text-align:center"
+								value="#{event.exactDate}">
+								<f:convertDateTime dateStyle="short" timeZone="America/Bogota"
+									type="both" />
+							</ice:outputText>
+						</ice:column>
+	
+						<ice:column id="colm4">
+							<f:facet name="header">
+								<ice:outputText id="out6"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold"
+									value="Tiempo de Juego (ms)" />
+							</f:facet>
+							<ice:outputText id="out7"
+								style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;text-align:center"
+								value="#{event.gameElapsedTime}">
+	
+							</ice:outputText>
+						</ice:column>
+	
+	
+						<ice:column id="colm5">
+							<f:facet name="header">
+								<ice:outputText id="out8"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold"
+									value="Descripción" />
+							</f:facet>
+							<ice:outputText id="out9"
+								style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal; text-align:center"
+								value="#{event.msg}">
+	
+							</ice:outputText>
+						</ice:column>
+						<ice:column id="colm6">
+							<f:facet name="header">
+								<ice:outputText id="out10"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold; width: 70px "
+									value="Elemento 1" />
+							</f:facet>
+							<center>
+								<ice:outputText id="out11"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;width: 70px"
+									value="#{event.affectedElement1}" />
+							</center>
+	
+						</ice:column>
+	
+						<ice:column id="colm6b">
+							<f:facet name="header">
+								<ice:outputText id="out10b"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold; width: 30px "
+									value="Valor E1" />
+							</f:facet>
+							<center>
+								<ice:outputText id="out11b"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;width: 30px"
+									value="#{event.element1Value}" />
+							</center>
+	
+						</ice:column>
+	
+	
+						<ice:column id="colm7">
+							<f:facet name="header">
+								<ice:outputText id="out12"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold; width: 30px "
+									value="Elemento 2" />
+							</f:facet>
+							<center>
+								<ice:outputText id="out13"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;width: 30px"
+									value="#{event.affectedElement2}" />
+							</center>
+						</ice:column>
+	
+						<ice:column id="colm7b">
+							<f:facet name="header">
+								<ice:outputText id="out12b"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold; width: 30px "
+									value="Valor E2" />
+							</f:facet>
+							<center>
+								<ice:outputText id="out13"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;width: 30px"
+									value="#{event.element2Value}" />
+							</center>
+						</ice:column>
+	
+						<ice:column id="colm8">
+							<f:facet name="header">
+								<ice:outputText id="out14"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold; width: 70px "
+									value="Ejecutor" />
+							</f:facet>
+							<center>
+								<ice:outputText id="out15"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;width: 70px"
+									value="#{event.executorName}" />
+							</center>
+						</ice:column>
+	
+	
+						<ice:column id="colm9">
+							<f:facet name="header">
+								<ice:outputText id="out16"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold; width: 70px "
+									value="Contraparte" />
+							</f:facet>
+							<center>
+								<ice:outputText id="out17"
+									style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;width: 70px"
+									value="#{event.receiverName}" />
+							</center>
+						</ice:column>
+					</ice:dataTable>
+
+					<div style="width: 500px; margin: 0 auto;">
+						<ice:dataPaginator for="tableReport" id="dataPaginator2"
+							paginatorMaxPages="15" rowsCountVar="rowsCount"
+							displayedRowsCountVar="displayedRowsCount"
+							firstRowIndexVar="firstRowIndex" lastRowIndexVar="lastRowIndex"
+							pageCountVar="pageCount" pageIndexVar="pageIndex">
+	
+							<ice:outputFormat styleClass="standard"
+								value="{0} eventos en total, mostrando tan solo {1} en esta página. Página {4} / {5}.">
+								<f:param value="#{rowsCount}" />
+								<f:param value="#{displayedRowsCount}" />
+								<f:param value="#{firstRowIndex}" />
+								<f:param value="#{lastRowIndex}" />
+								<f:param value="#{pageIndex}" />
+								<f:param value="#{pageCount}" />
+							</ice:outputFormat>
+	
+							<f:facet name="first">
+								<ice:graphicImage id="graphicImage7"
+									url="../xmlhttp/css/rime/css-images/arrow-first.gif" />
+							</f:facet>
+							<f:facet name="last">
+								<ice:graphicImage id="graphicImage8"
+									url="../xmlhttp/css/rime/css-images/arrow-last.gif" />
+							</f:facet>
+							<f:facet name="previous">
+								<ice:graphicImage id="graphicImage9"
+									url="../xmlhttp/css/rime/css-images/arrow-previous.gif" />
+							</f:facet>
+							<f:facet name="next">
+								<ice:graphicImage id="graphicImage10"
+									url="../xmlhttp/css/rime/css-images/arrow-next.gif" />
+							</f:facet>
+							<f:facet name="fastforward">
+								<ice:graphicImage id="graphicImage11"
+									url="../xmlhttp/css/rime/css-images/arrow-ff.gif" />
+							</f:facet>
+							<f:facet name="fastrewind">
+								<ice:graphicImage id="graphicImage12"
+									url="../xmlhttp/css/rime/css-images/arrow-fr.gif" />
+							</f:facet>
+						</ice:dataPaginator>
+					</div>
+				</div>
+			</div>
+		</ice:form>
+	</body>
+</html>

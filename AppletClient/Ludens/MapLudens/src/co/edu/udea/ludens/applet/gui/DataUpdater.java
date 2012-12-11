@@ -4,7 +4,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DataUpdater extends Thread {
-
     Updatable target;
     private int delay = 1000;
 
@@ -13,7 +12,7 @@ public class DataUpdater extends Thread {
         this.delay = delay;
     }
 
-    @Override
+    @Override()
     public void run() {
         while (true) {
             if (!target.isStopped()) {

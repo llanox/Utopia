@@ -34,4 +34,6 @@ public interface PlayerService {
 	
 	// Hecho por mi...
 	public List<Element> getElementsByName(List<Element> elements, String name);
+
+	public void releasePlayersGame(String gameName);
 }
