@@ -9,13 +9,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.udea.ludens.dao.ElementDAO;
 import co.edu.udea.ludens.dao.GameDAO;
 import co.edu.udea.ludens.dao.PlayerDAO;
 import co.edu.udea.ludens.dao.UserDAO;
 import co.edu.udea.ludens.domain.Element;
 import co.edu.udea.ludens.domain.IncrementableConstraint;
 import co.edu.udea.ludens.domain.Player;
+import co.edu.udea.ludens.domain.PlayerStatus;
 import co.edu.udea.ludens.domain.User;
+import co.edu.udea.ludens.enums.EnumElementType;
 import co.edu.udea.ludens.enums.EnumMsgs;
 import co.edu.udea.ludens.exceptions.LudensException;
 import co.edu.udea.ludens.services.PlayerService;
@@ -33,6 +36,9 @@ public class PlayerServiceImpl implements PlayerService {
 
 	@Autowired()
 	private UserDAO userDao;
+	
+	@Autowired()
+	private ElementDAO elementDao;
 
 	private Logger logger = Logger.getLogger(getClass());
 
@@ -204,9 +210,8 @@ public class PlayerServiceImpl implements PlayerService {
 
 	@Override()
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
-	public void releasePlayersGame(String gameName) {
-		List<Player> players = this.playerDao
-				.findAllPlayersByGameName(gameName);
+	public void releaseGamePlayer(String gameName) {
+		List<Player> players = this.playerDao.findAllPlayersByGameName(gameName);
 
 		User user = null;
 		for (Player player : players) {
@@ -216,5 +221,26 @@ public class PlayerServiceImpl implements PlayerService {
 
 			this.playerDao.delete(player);
 		}
+	}
+
+	@Override
+	public PlayerStatus generatePlayerStatus(Player player) {
+		PlayerStatus playerStatus = new PlayerStatus();
+		List<Element> factors =elementDao.findElementByType(EnumElementType.FACTOR, player.getUser().getLogin()) ;
+		int total = 0;
+		int average = 0;
+
+		for (Element el : factors) {
+			total = el.getCalculatedValue() + total;
+		}
+
+		if (factors.size() > 0)
+			average = total / factors.size();
+
+		playerStatus.setLogin(player.getUser().getLogin());
+		playerStatus.setOnline(player.getUser().isOnline());
+		playerStatus.setAverage(average);
+
+		return playerStatus;
 	}
 }

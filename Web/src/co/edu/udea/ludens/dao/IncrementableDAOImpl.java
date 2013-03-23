@@ -47,12 +47,12 @@ public class IncrementableDAOImpl extends ObjectDBDAO implements
 
 	@Override()
 	@SuppressWarnings("unchecked")
-	public List<Incrementable> findAllIncrementable(String game) {
+	public List<Incrementable> findAllIncrementable(String gameName) {
 		// List<Incrementable> incrementables = (List<Incrementable>)
 		// findObjectByAttribute(
 		// Incrementable.class, "game.name", game);
 		List<Incrementable> incrementables = (List<Incrementable>) findObjectByAttributeAndFetch(
-				Incrementable.class, "game.name", game, "game");
+				Incrementable.class, "game.name", gameName, "game");
 
 		return incrementables;
 	}
@@ -61,8 +61,7 @@ public class IncrementableDAOImpl extends ObjectDBDAO implements
 	@SuppressWarnings("unchecked")
 	public List<Incrementable> findAllByTypeAndGame(String gameName,
 			EnumElementType type) {
-		List<Incrementable> incrementables = (List<Incrementable>) findObjectByAttribute(
-				Incrementable.class, "type", type.name(), "game.name", gameName);
+		List<Incrementable> incrementables = (List<Incrementable>) findObjectByAttribute(Incrementable.class, "type", type, "game.name", gameName);
 
 		if (incrementables != null) {
 

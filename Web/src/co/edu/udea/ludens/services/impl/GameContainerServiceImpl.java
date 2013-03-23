@@ -120,19 +120,11 @@ public class GameContainerServiceImpl implements GameContainerService {
 	}
 
 	public void startGame(Game game) throws LudensException {
-		if (game.getStatus() == EnumGameStatus.NO_STARTED) {
-			logger.debug("starting game ");
-			game.setStatus(EnumGameStatus.STARTED);
-		}
+	
 
-		if (game.getStatus() == EnumGameStatus.STARTED
-				|| game.getStatus() == EnumGameStatus.PAUSED) {
-			logger.debug("restarting game ");
-			game.setStatus(EnumGameStatus.STARTED);
-		}
-
+	
 		if (game.getStatus() == EnumGameStatus.FINISHED) {
-			throw new LudensException("GAME OVER :-(");
+			throw new LudensException("GAME FINISHED :-(");
 		}
 
 		GameProcess gameProcess = startGameProcess(game);
@@ -149,8 +141,7 @@ public class GameContainerServiceImpl implements GameContainerService {
 
 	private GameProcess startGameProcess(Game game) {
 		GameProcess process = null;
-		process = (GameProcess) processHolderService.findProcessById(
-				GameProcess.class, game.getName());
+		process = (GameProcess) processHolderService.findProcessById(GameProcess.class, game.getName());
 
 		if (process != null)
 			return process;
@@ -160,6 +151,7 @@ public class GameContainerServiceImpl implements GameContainerService {
 
 		process.setGame(game);
 		process.startGame();
+		
 
 		return process;
 	}

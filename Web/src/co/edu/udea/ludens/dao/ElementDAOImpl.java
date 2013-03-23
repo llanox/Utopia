@@ -26,9 +26,7 @@ public class ElementDAOImpl extends ObjectDBDAO implements ElementDAO {
 	@Override()
 	@SuppressWarnings("unchecked")
 	public List<Element> findElementByType(EnumElementType type, String login) {
-		List<Element> elements = (List<Element>) findObjectByAttribute(
-				Element.class, "incrementable.type", type, "player.user.login",
-				login);
+		List<Element> elements = (List<Element>) findObjectByAttribute(	Element.class, "incrementable.type", type, "player.user.login",	login);
 
 		return elements;
 	}

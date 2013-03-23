@@ -45,8 +45,7 @@ public class EventProcessImpl implements EventProcess {
 		if (uevt == null)
 			return;
 
-		List<Player> players = playerService.findAllPlayersByGameName(game
-				.getName());
+		List<Player> players = playerService.findAllPlayersByGameName(game.getName());
 
 		for (Player player : players) {
 

@@ -95,6 +95,10 @@
 
 	<bean name="elementDao" class="co.edu.udea.ludens.dao.ElementDAOImpl" >
 	</bean>
+	
+    <bean name="unexpectedEventDao" class="co.edu.udea.ludens.dao.UnexpectedEventDAOImpl" >
+	</bean>
+	
 
 	<bean name="eventProcess" class="co.edu.udea.ludens.services.impl.EventProcessImpl"
 		scope="prototype">

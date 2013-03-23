@@ -160,7 +160,7 @@ public class IncrementableServiceImpl implements IncrementableService {
 			Incrementable incr) {
 		for (IncrementableConstraint lc : constraints) {
 			if (incr.getName().equalsIgnoreCase(lc.getElementName())) {
-				logger.info("SÃ­ esta " + incr.getName());
+				logger.info("Sí­ esta " + incr.getName());
 
 				return true;
 			}

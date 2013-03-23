@@ -27,6 +27,10 @@ public class UnexpectedEvent implements Serializable, Updateable {
 	private String message;
 	@Column(name = "good_event")
 	private boolean goodEvent;
+	@ManyToOne(cascade = { CascadeType.MERGE })
+	private Game game;
+
+
 
 	public UnexpectedEvent() {
 	}
@@ -105,5 +109,13 @@ public class UnexpectedEvent implements Serializable, Updateable {
 		this.quantity = event.quantity;
 		this.message = event.message;
 		this.goodEvent = event.goodEvent;
+	}
+	
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
 	}
 }

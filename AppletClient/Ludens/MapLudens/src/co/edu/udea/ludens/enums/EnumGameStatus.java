@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 public enum EnumGameStatus implements Serializable {
 
-    PLAYING("Activo"), FINISHED("Finalizado"), NO_STARTED("No inicializado");
+	NO_STARTED("No inicializado"),
+	STARTED("Inicializado"),     
+    PAUSED("Pausado"),
+    FINISHED("Finalizado");
+	 
     private String status;
 
     private EnumGameStatus(String status) {

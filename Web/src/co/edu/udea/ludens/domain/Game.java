@@ -34,8 +34,7 @@ public class Game implements Serializable, Updateable {
 	private Date startTime;
 	@Column(name = "status")
 	private EnumGameStatus status = EnumGameStatus.NO_STARTED;
-	@OneToMany(cascade = { CascadeType.PERSIST,
-			CascadeType.MERGE })
+	@OneToMany(cascade = { CascadeType.PERSIST,	CascadeType.MERGE })
 	//@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
 	//		CascadeType.MERGE })
 	private List<Incrementable> defaultIncrementables = new ArrayList<Incrementable>();

@@ -105,25 +105,7 @@ public class UtopiaUtil {
 		element.setActualUpgradingTime(delayTime);
 	}
 
-	public static PlayerStatus generatePlayerStatus(Player player) {
-		PlayerStatus playerStatus = new PlayerStatus();
-		List<Element> factors = player.getDevelopmentFactors();
-		int total = 0;
-		int average = 0;
 
-		for (Element el : factors) {
-			total = el.getCalculatedValue() + total;
-		}
-
-		if (factors.size() > 0)
-			average = total / factors.size();
-
-		playerStatus.setLogin(player.getUser().getLogin());
-		playerStatus.setOnline(player.getUser().isOnline());
-		playerStatus.setAverage(average);
-
-		return playerStatus;
-	}
 
 	public static void calculateCoverage(Element element, Player player) {
 		double capacity = element.getQuantity();

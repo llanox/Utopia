@@ -87,7 +87,7 @@ public class ReportController implements MessageListener, UserSessionListener {
 		PlayerStatus playerStatus = null;
 
 		for (Player player : players) {
-			playerStatus = UtopiaUtil.generatePlayerStatus(player);
+			playerStatus = playerService.generatePlayerStatus(player);
 			playersStatus.add(playerStatus);
 		}
 		Collections.sort(playersStatus);

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.udea.ludens.dao.ElementDAO;
 import co.edu.udea.ludens.dao.GameDAO;
+import co.edu.udea.ludens.dao.IncrementableDAO;
 import co.edu.udea.ludens.dao.PlayerDAO;
 import co.edu.udea.ludens.domain.Element;
 import co.edu.udea.ludens.domain.Game;
@@ -32,6 +33,9 @@ public class ElementServiceImpl implements ElementService {
 
 	@Autowired
 	private ElementDAO elementDao;
+	
+	@Autowired
+	private IncrementableDAO incrementableDao;
 
 	@Autowired
 	private PlayerDAO playerDao;
@@ -64,9 +68,8 @@ public class ElementServiceImpl implements ElementService {
 	}
 
 	@Override
-	public Set<Element> getFactors(String login) {
-		Set<Element> elements = new HashSet<Element>();
-
+	public List<Element> getFactors(String login) {
+		List<Element> elements = elementDao.findElementByType(EnumElementType.FACTOR, login);
 		return elements;
 	}
 
@@ -139,11 +142,15 @@ public class ElementServiceImpl implements ElementService {
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void createElementsForEachPlayer(Game game) {
-		List<Player> players = game.getPlayers();
+		// List<Player> players = game.getPlayers();
+		List<Player> players = playerDao.findAllPlayersByGameName(game.getName());
 		logger.debug("creating elements for : " + players.size());
-
+		List<Incrementable> incrementables = incrementableDao.findAllIncrementable(game.getName());		
 		for (Player pa : players) {
-			for (Incrementable inc : game.getDefaultIncrementables()) {
+			
+			
+			
+			for (Incrementable inc : incrementables) {
 				Element element = new Element();
 
 				if (EnumElementType.FACTOR == inc.getType()) {
@@ -164,7 +171,7 @@ public class ElementServiceImpl implements ElementService {
 						List<Element> developmentFactors = new ArrayList<Element>();
 						pa.setDevelopmentFactors(developmentFactors);
 					}
-					//pa.getDevelopmentFactors().put(inc.getName(), element);
+					// pa.getDevelopmentFactors().put(inc.getName(), element);
 					pa.getDevelopmentFactors().add(element);
 					continue;
 				}
@@ -183,7 +190,7 @@ public class ElementServiceImpl implements ElementService {
 						List<Element> materials = new ArrayList<Element>();
 						pa.setMaterials(materials);
 					}
-					//pa.getMaterials().put(inc.getName(), element);
+					// pa.getMaterials().put(inc.getName(), element);
 					pa.getMaterials().add(element);
 					continue;
 				}
@@ -244,6 +251,6 @@ public class ElementServiceImpl implements ElementService {
 
 	@Override
 	public void checkOutResources(List<IncrementableConstraint> ctrs,
-			Element element, Player player) {		
+			Element element, Player player) {
 	}
 }

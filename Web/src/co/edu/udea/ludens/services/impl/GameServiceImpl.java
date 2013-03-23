@@ -1,5 +1,6 @@
 package co.edu.udea.ludens.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -9,7 +10,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.udea.ludens.dao.GameDAO;
+import co.edu.udea.ludens.dao.IncrementableDAO;
 import co.edu.udea.ludens.dao.PlayerDAO;
+import co.edu.udea.ludens.dao.UnexpectedEventDAO;
 import co.edu.udea.ludens.domain.Game;
 import co.edu.udea.ludens.domain.Incrementable;
 import co.edu.udea.ludens.domain.Player;
@@ -28,7 +31,7 @@ import co.edu.udea.ludens.util.GameRequirement;
 import co.edu.udea.ludens.util.UtopiaUtil;
 
 @Service
-@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = true)
+@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 public class GameServiceImpl implements GameService {
 	private Logger logger = Logger.getLogger(GameServiceImpl.class);
 
@@ -37,9 +40,17 @@ public class GameServiceImpl implements GameService {
 
 	@Autowired
 	private PlayerDAO playerDao;
+	
+	@Autowired
+	private IncrementableDAO incrementableDao;
+	
+	@Autowired
+	private UnexpectedEventDAO unexpectedEventsDao;
 
 	@Autowired
 	private UserService userService;
+	
+
 
 	@Autowired
 	private PlayerService playerService;
@@ -85,17 +96,8 @@ public class GameServiceImpl implements GameService {
 	@Override()
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public void delete(Game game) {
-//		List<Player> players = game.getPlayers();
-
-       playerService.releasePlayersGame(game.getName());
-		
-//		for (Player player : players) {
-//			User user = userService.findUser(player.getUser().getLogin());
-//			user.setParticipatingInGame(false);
-//			playerService.delete(player);
-//			userService.save(user);
-//		}
-		this.gameDao.delete(game);
+       playerService.releaseGamePlayer(game.getName());		
+	   this.gameDao.delete(game);
 	}
 
 	@Override()
@@ -201,13 +203,10 @@ public class GameServiceImpl implements GameService {
 		public void verify(Game game) {
 
 			int counter = 0;
-			List<Incrementable> incrementables = game
-					.getDefaultIncrementables();
-
-			logger.info("incrementables --> " + incrementables);
-
-			if (incrementables == null) {
-				throw new InvalidNumberOfMaterialsException("No hay materiales");
+			List<Incrementable> incrementables = incrementableDao.findAllByTypeAndGame(game.getName(),EnumElementType.MATERIAL);
+			
+			if (incrementables == null || incrementables.isEmpty()) {
+				throw new InvalidNumberOfMaterialsException("No hay materiales definidos para el juego "+game.getName());
 			}
 
 			for (Incrementable material : incrementables) {
@@ -219,7 +218,7 @@ public class GameServiceImpl implements GameService {
 				throw new InvalidNumberOfMaterialsException("Se tiene "
 						+ counter + " materiales y se debe tener al menos "
 						+ ALEAST_N_MATERIALS
-						+ " materiales definidos en el juego");
+						+ " materiales definidos en el juego "+ game.getName());
 			}
 		}
 	}
@@ -231,8 +230,7 @@ public class GameServiceImpl implements GameService {
 		public void verify(Game game) {
 
 			int counter = 0;
-			List<Incrementable> incrementables = game
-					.getDefaultIncrementables();
+			List<Incrementable> incrementables = incrementableDao.findAllByTypeAndGame(game.getName(),EnumElementType.FACTOR);
 
 			if (incrementables == null) {
 				throw new InvalidNumberOfFactorsException(
@@ -258,12 +256,10 @@ public class GameServiceImpl implements GameService {
 		@Override()
 		public void verify(Game game) {
 			int counter = 0;
-			List<Incrementable> incrementables = game
-					.getDefaultIncrementables();
+			List<Incrementable> incrementables = incrementableDao.findAllByTypeAndGame(game.getName(),EnumElementType.POPULATION);
 
 			if (incrementables == null) {
-				throw new ThereisnotPopulationException(
-						"No hay poblaciÃ³n definida");
+				throw new ThereisnotPopulationException("No hay población definida");
 			}
 
 			for (Incrementable material : incrementables) {
@@ -272,18 +268,22 @@ public class GameServiceImpl implements GameService {
 			}
 
 			if (counter < ALEAST_N_POPULATIONS) {
-				throw new ThereisnotPopulationException(
-						"Se debe tener al menos " + ALEAST_N_POPULATIONS
-								+ " poblaciÃ³n definida en el juego");
+				throw new ThereisnotPopulationException("Se debe tener al menos " + ALEAST_N_POPULATIONS+ " población definida en el juego");
 			}
 		}
 	}
 
 	@Override()
-	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = true)
+	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = false)
 	public void generateUnexpectedEvents(Game game) {
-		List<Incrementable> incrementables = game.getDefaultIncrementables();
-		List<UnexpectedEvent> unexpectedEvents = game.getUnexpectedEvents();
+		
+		List<Incrementable> incrementables =incrementableDao.findAllIncrementable(game.getName());		
+		
+		List<UnexpectedEvent> unexpectedEvents = unexpectedEventsDao.findAllUnexpectedEvents(game.getName());
+		
+		if (!unexpectedEvents.isEmpty()) {
+			return;
+		}		
 
 		logger.info("Unexpected events generated " + unexpectedEvents);
 
@@ -292,26 +292,24 @@ public class GameServiceImpl implements GameService {
 			logger.debug("Generating unexpected event for incrementable... "
 					+ incr.getName());
 
-			if (incr.getType() == EnumElementType.FACTOR
-					|| incr.getType() == EnumElementType.MATERIAL) {
+			if (incr.getType() == EnumElementType.FACTOR || incr.getType() == EnumElementType.MATERIAL) {
 				UnexpectedEvent good = new UnexpectedEvent();
 				UnexpectedEvent bad = new UnexpectedEvent();
+				
+				good.setGame(game);
+				bad.setGame(game);
 
 				good.setElementName(incr.getName());
-				int quantity = UtopiaUtil.generateNumberBetweenRange(
-						LudensConstants.LOWER_THRESHOLD,
+				int quantity = UtopiaUtil.generateNumberBetweenRange(LudensConstants.LOWER_THRESHOLD,
 						LudensConstants.UPPER_THRESHOLD);
 				good.setQuantity(quantity);
-				good.setMessage("Evento Fortuito: " + incr.getName()
-						+ " ha sido afectado positivamente en un "
-						+ good.getQuantity() + " % ");
+				good.setMessage("Evento Fortuito: " + incr.getName()+ " ha sido afectado positivamente en un "+ good.getQuantity() + " % ");
 				logger.debug("Evento Fortuito: " + incr.getName()
 						+ " ha sido afectado positivamente en un "
 						+ good.getQuantity() + " % ");
 
 				bad.setElementName(incr.getName());
-				logger.debug("Evento Fortuito: " + incr.getName()
-						+ " ha sido afectado negativamente en un "
+				logger.debug("Evento Fortuito: " + incr.getName()		+ " ha sido afectado negativamente en un "
 						+ good.getQuantity() + " % ");
 				bad.setMessage("Evento Fortuito: " + incr.getName()
 						+ " ha sido afectado negativamente en un "
@@ -323,8 +321,12 @@ public class GameServiceImpl implements GameService {
 
 				unexpectedEvents.add(bad);
 				unexpectedEvents.add(good);
+				
 			}
 		}
+		
+		game.setUnexpectedEvents(unexpectedEvents);
+		gameDao.saveOrUpdate(game);
 	}
 
 	@Override()

@@ -16,7 +16,7 @@ public interface ElementService {
 
 	public Set<Element> getAllElements(String idUser);
 
-	public Set<Element> getFactors(String playerName);
+	public List<Element> getFactors(String playerName);
 
 	public Set<Element> getMaterials(String playerName);
 

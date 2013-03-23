@@ -68,14 +68,17 @@ public class ObjectDBDAO implements DBDAO {
 			if (parameters[i + 1] instanceof Boolean) {
 				sb.append("o." + parameters[i] + " = :"
 						+ removeDot(parameters[i]));
-			} else {
-				sb.append("o." + parameters[i] + " LIKE :"
-						+ removeDot(parameters[i]));
+			} else if(parameters[i + 1] instanceof Enum) {
+				
+				sb.append("o." + parameters[i] + " LIKE :"+ removeDot(parameters[i]));
+			}else{
+
+				sb.append("o." + parameters[i] + " LIKE :"+ removeDot(parameters[i]));
+				
 			}
 		}
 		logger.info("Clausules: " + sb.toString());
-		logger.info("SQL : " + "FROM " + clazz.getSimpleName() + " AS o"
-				+ sb.toString());
+		logger.info("SQL : " + "FROM " + clazz.getSimpleName() + " AS o"+ sb.toString());
 
 		Query query = this.entityManager.createQuery("FROM "
 				+ clazz.getSimpleName() + " AS o" + sb.toString());

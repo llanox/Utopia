@@ -14,6 +14,7 @@ import co.edu.udea.ludens.domain.Element;
 import co.edu.udea.ludens.domain.Game;
 import co.edu.udea.ludens.domain.Player;
 import co.edu.udea.ludens.enums.EnumElementType;
+import co.edu.udea.ludens.enums.EnumGameStatus;
 import co.edu.udea.ludens.services.ElementProcess;
 import co.edu.udea.ludens.services.ElementService;
 import co.edu.udea.ludens.services.EventProcess;
@@ -103,12 +104,22 @@ public class GameProcessImpl implements GameProcess {
 	@Override
 	public void startGame() {
 		logger.info("Game (starting Game)...." + game);
-
-		gameService.meetRequirements(game);
-		gameService.generateUnexpectedEvents(game);
-		elementService.createElementsForEachPlayer(game);
-		calculateStartAndFinishTime(game);
+        
+		if(game.getStatus() == EnumGameStatus.NO_STARTED){
+			
+			gameService.meetRequirements(game);
+			gameService.generateUnexpectedEvents(game);
+			elementService.createElementsForEachPlayer(game);
+			calculateStartAndFinishTime(game);
+		}
+		
+		game.setStatus(EnumGameStatus.STARTED);
+		gameService.save(game);
+				
 		createAdditionalProcesses();
+	
+		
+		
 	}
 
 	private void calculateStartAndFinishTime(Game game) {
@@ -133,8 +144,7 @@ public class GameProcessImpl implements GameProcess {
 
 	public void createAdditionalProcesses() {
 		if (game != null) {
-			List<Player> players = playerService.findAllPlayersByGameName(true,
-					game.getName());
+			List<Player> players = playerService.findAllPlayersByGameName(true,	game.getName());
 
 			tradeProcess = serviceLocator.createTradeProcess();
 			tradeProcess.setGame(game);
@@ -148,8 +158,7 @@ public class GameProcessImpl implements GameProcess {
 						.createElementProcess();
 				elementProcess.setPlayer(player);
 
-				mapElementProcess.put(player.getUser().getLogin(),
-						elementProcess);
+				mapElementProcess.put(player.getUser().getLogin(),elementProcess);
 
 			}
 			setEventProcess(serviceLocator.createEventProcess());

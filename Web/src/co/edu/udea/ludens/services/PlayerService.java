@@ -5,6 +5,7 @@ import java.util.List;
 import co.edu.udea.ludens.domain.Element;
 import co.edu.udea.ludens.domain.IncrementableConstraint;
 import co.edu.udea.ludens.domain.Player;
+import co.edu.udea.ludens.domain.PlayerStatus;
 import co.edu.udea.ludens.exceptions.LudensException;
 
 public interface PlayerService {
@@ -35,5 +36,7 @@ public interface PlayerService {
 	// Hecho por mi...
 	public List<Element> getElementsByName(List<Element> elements, String name);
 
-	public void releasePlayersGame(String gameName);
+	public void releaseGamePlayer(String gameName);
+
+	public PlayerStatus generatePlayerStatus(Player player);
 }

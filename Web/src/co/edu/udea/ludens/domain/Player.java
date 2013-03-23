@@ -16,7 +16,8 @@ public class Player implements Serializable, Updateable {
 	@GeneratedValue()
 	@Column(name = "id")
 	private long id;
-	@Column(name = "population")
+	
+	@OneToOne(cascade = { CascadeType.PERSIST,CascadeType.MERGE })
 	private Element population;
 	@Unique()
 	@OneToOne(cascade = { CascadeType.PERSIST,

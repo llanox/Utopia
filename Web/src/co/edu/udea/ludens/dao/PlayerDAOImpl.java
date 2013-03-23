@@ -37,8 +37,7 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 		// entityManager.getCriteriaBuilder().createQuery();
 		// TypedQuery<Game> q2 = entityManager.createQuery(SQL, clazz);
 
-		List<Player> players = (List<Player>) this.findObjectByAttribute(
-				Player.class, "game.name", gameName);
+		List<Player> players = (List<Player>) this.findObjectByAttribute(Player.class, "game.name", gameName);
 
 		return players;
 	}
@@ -69,7 +68,7 @@ public class PlayerDAOImpl extends ObjectDBDAO implements PlayerDAO {
 		// entityManager.getCriteriaBuilder().createQuery();
 		// TypedQuery<Player> q2 = entityManager.createQuery(SQL, clazz);
 
-		return players;
+		return (players);
 	}
 
 	// @Override()

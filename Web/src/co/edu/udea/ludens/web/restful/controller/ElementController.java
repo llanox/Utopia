@@ -55,8 +55,8 @@ public class ElementController {
 	@RequestMapping(value = "/factors/{login}", headers = "Accept=*/*", method = RequestMethod.GET)
 	public @ResponseBody
 	List<Element> getAllFactors(@PathVariable String login) {
-		Set<Element> elements = elementService.getFactors(login);
-		List<Element> listaElements = new ArrayList<Element>(elements);
+		List<Element> listaElements = elementService.getFactors(login);
+		 
 
 		return listaElements;
 	}
