@@ -50,8 +50,7 @@ public class TradeController implements TradeListener {
 	public void postOffer(ActionEvent ae) {
 		logger.info("postOffer ....");
 
-		GameProcess gameProcess = (GameProcess) processHolderService
-				.findProcessById(GameProcess.class, userSession.getActualGame());
+		GameProcess gameProcess = (GameProcess) processHolderService.findProcessById(GameProcess.class, userSession.getActualGame());
 		TradeProcess tradeProcess = gameProcess.getTradeProcess();
 		String offerSender = userSession.getUser().getLogin();
 

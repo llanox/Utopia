@@ -9,8 +9,7 @@ import co.edu.udea.ludens.services.GameProcess;
 import co.edu.udea.ludens.services.Process;
 import co.edu.udea.ludens.services.ProcessHolderService;
 
-@Service("processHolderService")
-@Scope("singleton")
+
 public class ProcessHolderServiceImpl implements ProcessHolderService {
 
 	private HashMap<String, Process> gameProcesses = new HashMap<String, Process>();

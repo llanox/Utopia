@@ -147,7 +147,7 @@ public class GameContainerServiceImpl implements GameContainerService {
 			return process;
 
 		process = serviceLocator.createGameProcess();
-		processHolderService.putProcess(game.getId().toString(), process);
+		processHolderService.putProcess(game.getName(), process);
 
 		process.setGame(game);
 		process.startGame();

@@ -68,6 +68,11 @@
 		class="co.edu.udea.ludens.services.impl.FirstRunConfigurationImpl"
 		scope="singleton" >
 	</bean>
+	
+	<bean name="processHolderService"
+		class="co.edu.udea.ludens.services.impl.ProcessHolderServiceImpl"
+		scope="singleton" >
+	</bean>
 
 	<bean name="serviceLocator" class="co.edu.udea.ludens.services.ServiceLocator"
 		scope="prototype" >
