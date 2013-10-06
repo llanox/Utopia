@@ -30,7 +30,7 @@ public class TestAppCtx {
 
 	@Before
 	public void preparing() {
-		String url = "//media/Data/DropBox/Dropbox/Projects/Web/Utopia2/Utopia/WebContent/WEB-INF/applicationContext.xml";
+		String url = "//home/llanox/git/llanox/Utopia/WebUtopia2/Utopia/WebContent/WEB-INF/applicationContext.xml";
 		ApplicationContext appContext = new FileSystemXmlApplicationContext(url);
 		systemContainer = appContext.getBean("systemContainer",
 				SystemContainer.class);
